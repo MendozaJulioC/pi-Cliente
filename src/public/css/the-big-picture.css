@@ -1,0 +1,12 @@
+/*!
+ * Start Bootstrap - The Big Picture (https://startbootstrap.com/template-overviews/the-big-picture)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-the-big-picture/blob/master/LICENSE)
+*/
+body {
+ 
+  background-image: url('/img/medellin1.jpg' );
+  background-size: cover;
+  color: white; 
+ 
+}
