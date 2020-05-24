@@ -2,10 +2,7 @@ var express = require('express');
 var app = express();
 const fetch = require('node-fetch');
 
-
-
-
-let totalcomuna;
+let totalcomuna, total_alonso;
 
 const getTotalesComuna= async(req, res, next)=>{
     try{
@@ -17,7 +14,6 @@ const getTotalesComuna= async(req, res, next)=>{
 }catch(e){ console.log(e);}
 next();
 }
-
 
 const getCuatrienio = async (req, res) =>{
     try{
@@ -36,7 +32,6 @@ const getCuatrienio = async (req, res) =>{
             }) 
         })
     }catch(e){ console.log(e);}
-
 }
 
 const getDetalleComuna = async(req, res)=>{
@@ -56,9 +51,17 @@ const getDetalleComuna = async(req, res)=>{
 
 const getAlonso = async (req, res)=>{
     try {
-        res.render('./cuatrienios/alonso.html',{
-            title: "2008-2011"
-        });
+        fetch('http://localhost:4000/api/cuatrienios/alonso')
+        .then(res=>res.json())
+        .then(datos=>{
+            console.log(datos.data)
+            res.render('./cuatrienios/alonso.html',{
+            title: "2008-2011",
+            total_alonso: datos.data
+         })
+
+        })
+
         
     } catch (error) {
         console.log("Error getAlonso: ", error)
@@ -86,7 +89,6 @@ const getFico = async (req, res)=>{
         console.log("Error getFico: ", error)
     }
 }
-
 
 
 

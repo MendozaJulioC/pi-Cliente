@@ -122,7 +122,7 @@
               <tbody style="font-size: 11px; text-align:right; height: min-content;">
                 <td style="text-align: center;" scope="row"><%= dato.cod_comuna %>  </td> 
                 <td style="text-align: left;"><%=  dato.nom_comuna %> </td> 
-                <td ><%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.total2008_2011)) %></td>
+                <td ><%=  new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.total2008_2011)) %></td>
                 <td><%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.total2011_2015)) %></td>
                 <td><%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.total2016_2019)) %></td>   
                 <td>
@@ -169,7 +169,8 @@
                       <thead class="thead-inverse">
                         <tr>
                           <th>Cuatrienio</th>
-                          <th>Localizada</th>
+                          <th>Inversión Localizada</th>
+                          <th>Inversión Ciudad</th>
                           <th>Presupuesto Participativo</th>
                         </tr>
                         </thead>
@@ -177,16 +178,19 @@
                         <tr>
                           <td>2008-2011</td>
                           <td id="localizada1"></td>
+                          <td id="ciudad1"></td>
                           <td id="pp1"> </td>
                         </tr>
                         <tr>
                           <td>2012-2015</td>
                           <td id="localizada2"> </td>
+                          <td id="ciudad2"></td>
                           <td id="pp2"> </td>
                       </tr>
                       <tr>
                         <td>2016-2019</td>
                         <td id="localizada3"> </td>
+                        <td id="ciudad3"></td>
                         <td id="pp3"> </td>
                     </tr>
                         </tbody>

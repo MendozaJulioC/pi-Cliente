@@ -14,9 +14,8 @@ function servCuatrienios(){
  fetch('http://localhost:4000/api/cuatrienios')
   .then(res =>res.json())
   .then(datos=>{
-
     // valores para la gráfica
-   const grfAlonso =(parseInt(datos.data[0].alonso));
+    const grfAlonso =(parseInt(datos.data[0].alonso));
     const grfAnibal = (parseInt(datos.data[0].anibal));
     const grfFico = (parseInt(datos.data[0].fico));
 
@@ -230,10 +229,13 @@ function servTotales(){
 
 function detallecomuna(comuna, nomcomuna){
     let localizada1 = document.getElementById('localizada1')
+    let ciudad1 = document.getElementById('ciudad1')
     let pp1 = document.getElementById('pp1')
     let localizada2 = document.getElementById('localizada2')
+    let ciudad2 = document.getElementById('ciudad2')
     let pp2 = document.getElementById('pp2')
     let localizada3 = document.getElementById('localizada3')
+    let ciudad3 = document.getElementById('ciudad3')
     let pp3 = document.getElementById('pp3')
 
     fetch('http://localhost:4000/api/cuatrienios/detalle/'+ comuna)
@@ -242,12 +244,15 @@ function detallecomuna(comuna, nomcomuna){
         console.log(datos.data)
         console.log(datos.data[0].cod_comuna)
         localizada1.innerHTML= formatter.format(parseInt(datos.data[0].localizada2008_2011))
+        ciudad1.innerHTML= formatter.format(Math.round(datos.data[0].percapita2008_2011))
         pp1.innerHTML=formatter.format(parseInt(datos.data[0].pp2008_2011))
 
         localizada2.innerHTML= formatter.format(parseInt(datos.data[0].localizada2012_2015))
+        ciudad2.innerHTML= formatter.format(parseInt(datos.data[0].percapita2012_2015))
         pp2.innerHTML=formatter.format(parseInt(datos.data[0].pp2012_2015))
 
         localizada3.innerHTML= formatter.format(parseInt(datos.data[0].localizada2016_2019))
+        ciudad3.innerHTML= formatter.format(parseInt(datos.data[0].percapita2016_2019))
         pp3.innerHTML=formatter.format(parseInt(datos.data[0].pp2016_2019))
         am4core.useTheme(am4themes_animated);
         // Themes end
@@ -281,10 +286,23 @@ function detallecomuna(comuna, nomcomuna){
                 "valueField": "Localizada"
             },
             {
+                "balloonColor": "#B7EEB5",
                 "balloonText": "[[title]] de [[Cuatrienio]]:[[value]]",
                 "columnWidth": 0.79,
                 "fillAlphas": 1,
                 "id": "AmGraph-2",
+                "labelText": "[[value]]",
+                "tabIndex": -5,
+                "title": "Inversión Ciudad",
+                "type": "column",
+                "labelRotation": -90,
+                "valueField": "Ciudad"
+            },
+            {
+                "balloonText": "[[title]] de [[Cuatrienio]]:[[value]]",
+                "columnWidth": 0.79,
+                "fillAlphas": 1,
+                "id": "AmGraph-3",
                 "labelText": "[[value]]",
                 "title": "Presupuesto Participativo",
                 "type": "column",
@@ -323,16 +341,19 @@ function detallecomuna(comuna, nomcomuna){
             {
                 "Cuatrienio": "2008-2011",
                 "Localizada": Math.round((parseInt(datos.data[0].localizada2008_2011)/1000000)) ,
+                "Ciudad":Math.round((parseInt(datos.data[0].percapita2008_2011)/1000000)) ,
                 "PP": Math.round((parseInt(datos.data[0].pp2008_2011)/1000000))
             },
             {
                 "Cuatrienio": "2012-2015",
                 "Localizada": Math.round((parseInt(datos.data[0].localizada2012_2015)/1000000)),
+                "Ciudad":Math.round((parseInt(datos.data[0].percapita2012_2015)/1000000)) ,
                 "PP": Math.round(parseInt(datos.data[0].pp2012_2015)/1000000)
             },
             {
                 "Cuatrienio": "2016-2019",
                 "Localizada":Math.round((parseInt(datos.data[0].localizada2016_2019)/1000000)),
+                "Ciudad":Math.round((parseInt(datos.data[0].percapita2016_2019)/1000000)) ,
                 "PP": Math.round((parseInt(datos.data[0].pp2016_2019)/1000000))
             }
             ]
