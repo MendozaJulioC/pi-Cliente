@@ -11,7 +11,7 @@ const { getHome, getCuatrienio,
 
 
 router.get('/', getHome);
-router.get('/cuatrienios', [getTotalesComuna, getCuatrienio,]);
+router.get('/cuatrienios', [getTotalesComuna, getCuatrienio]);
 router.get('/cuatrienios/alonso', getAlonso);
 router.get('/cuatrienios/anibal', getAnibal);
 router.get('/cuatrienios/fico', getFico);

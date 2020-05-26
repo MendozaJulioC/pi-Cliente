@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "style": "node_modules/bootstrap/dist/css/boostrap.css",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "start": "cross-env NODE_ENV=production  node src/index.js"
   },
@@ -19,6 +20,7 @@
     "ejs": "^3.0.2",
     "express": "^4.17.1",
     "fs-extra": "^9.0.0",
+    "jquery": "^3.5.1",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "node-fetch": "^2.6.0",

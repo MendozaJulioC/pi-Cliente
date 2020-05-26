@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 const fetch = require('node-fetch');
 
-let totalcomuna, total_alonso;
+let totalcomuna, total_alonso, total_anibal, total_fico;
 
 const getTotalesComuna= async(req, res, next)=>{
     try{
@@ -54,40 +54,52 @@ const getAlonso = async (req, res)=>{
         fetch('http://localhost:4000/api/cuatrienios/alonso')
         .then(res=>res.json())
         .then(datos=>{
-            console.log(datos.data)
+            //console.log(datos.data)
             res.render('./cuatrienios/alonso.html',{
             title: "2008-2011",
             total_alonso: datos.data
          })
-
         })
-
-        
+ 
     } catch (error) {
         console.log("Error getAlonso: ", error)
     }
 }
 
-const getAnibal = async (req, res)=>{
-    try {
+const getAnibal = async (req, res, next)=>{
+ try {
+    fetch('http://localhost:4000/api/cuatrienios/anibal')
+    .then(res=>res.json())
+    .then(datos=>{
+        //console.log(datos.data)
         res.render('./cuatrienios/anibal.html',{
-            title: "2012-2015"
-        });
-        
-    } catch (error) {
-        console.log("Error getAnibal: ", error)
-    }
+            title: "2012-2015",
+            total_anibal: datos.data
+     })
+
+    })
+       
+ } catch (error) {
+     console.log("Error getAnibal : ",error)
+ } 
 }
 
 const getFico = async (req, res)=>{
     try {
-        res.render('./cuatrienios/fico.html',{
-            title: "2016-2019"
-        });
-        
-    } catch (error) {
-        console.log("Error getFico: ", error)
-    }
+        fetch('http://localhost:4000/api/cuatrienios/fico')
+        .then(res=>res.json())
+        .then(datos=>{
+            //console.log(datos.data)
+            res.render('./cuatrienios/fico.html',{
+                title: "2012-2015",
+                total_fico: datos.data
+         })
+    
+        })
+           
+     } catch (error) {
+         console.log(error)
+     }
 }
 
 
