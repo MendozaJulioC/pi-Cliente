@@ -1,0 +1,467 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 1,
+        "nom_comuna": "El Popular",
+        "localizada2008_2011": 379688247480,
+        "percapita2008_2011": "144335729086.7997296061926471",
+        "pp2008_2011": 29680503556,
+        "total_alonso": "553704480122.7997296061926471",
+        "imgUrl": "/img/comuna1.jpeg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.54594039916992,
+          6.300966287777967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 2,
+        "nom_comuna": "Santa Cruz",
+        "localizada2008_2011": 252759292875,
+        "percapita2008_2011": "122619276803.5106293374958569",
+        "pp2008_2011": 26984004074,
+        "total_alonso": "402362573752.5106293374958569",
+        "imgUrl": "/img/comuna2.jpeg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.55572509765625,
+          6.301862065044569
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 3,
+        "nom_comuna": "Manrique",
+        "localizada2008_2011": 369503235135,
+        "percapita2008_2011": "176321188300.3643967839502035",
+        "pp2008_2011": 27026925130,
+        "total_alonso": "572851348565.3643967839502035",
+         "imgUrl": "/img/comuna3.jpeg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.54860115051268,
+          6.279893748400458
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 4,
+        "nom_comuna": "Aranjuez",
+        "localizada2008_2011": 425818737868,
+        "percapita2008_2011": "182399163444.6126582397912837",
+        "pp2008_2011": 25453293698,
+        "total_alonso": "633671195010.6126582397912837",
+         "imgUrl": "/img/comuna4.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.56267738342285,
+          6.280746904231838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 5,
+        "nom_comuna": "Castilla",
+        "localizada2008_2011": 253742550484,
+        "percapita2008_2011": "166806349519.4216880331311801",
+        "pp2008_2011": 21022624803,
+        "total_alonso": "441571524806.4216880331311801",
+          "imgUrl": "/img/comuna5.jpeg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.56954383850098,
+          6.294141267368473
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 6,
+        "nom_comuna": "Doce de Octubre",
+        "localizada2008_2011": 368734350154,
+        "percapita2008_2011": "216600378029.9382939645002540",
+        "pp2008_2011": 26070501797,
+        "total_alonso": "611405229980.9382939645002540",
+          "imgUrl": "/img/comuna6.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.57984352111815,
+          6.298321603016926
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 7,
+        "nom_comuna": "Robledo",
+        "localizada2008_2011": 379615511291,
+        "percapita2008_2011": "185658029411.4765550365510521",
+        "pp2008_2011": 25377310858,
+        "total_alonso": "590650851560.4765550365510521",
+          "imgUrl": "/img/comuna7.jpeg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.5862808227539,
+          6.277248956439737
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 8,
+        "nom_comuna": "Villa Hermosa",
+        "localizada2008_2011": 515708370502,
+        "percapita2008_2011": "152742639288.7026379668236342",
+        "pp2008_2011": 24149145944,
+        "total_alonso": "692600155734.7026379668236342",
+          "imgUrl": "/img/comuna8.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.55194854736328,
+          6.252506704546019
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 9,
+        "nom_comuna": "Buenos Aires",
+        "localizada2008_2011": 385265877082,
+        "percapita2008_2011": "153866996654.4265655251185108",
+        "pp2008_2011": 21299247856,
+        "total_alonso": "560432121592.4265655251185108",
+          "imgUrl": "/img/comuna9.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.55761337280273,
+          6.233906585541586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 10,
+        "nom_comuna": "La Candelaria",
+        "localizada2008_2011": 357829066413,
+        "percapita2008_2011": "96962884877.6264511805441663",
+        "pp2008_2011": 15483960950,
+        "total_alonso": "470275912240.6264511805441663",
+          "imgUrl": "/img/comuna10.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.57254791259766,
+          6.248070038918255
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 11,
+        "nom_comuna": "Laureles-Estadio",
+        "localizada2008_2011": 205280365769,
+        "percapita2008_2011": "137425755034.3986871050717248",
+        "pp2008_2011": 13069579121,
+        "total_alonso": "355775699924.3986871050717248",
+          "imgUrl": "/img/comuna11.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.59040069580078,
+          6.2485819637954245
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 12,
+        "nom_comuna": "La América",
+        "localizada2008_2011": 141135309477,
+        "percapita2008_2011": "107191408498.3897633007840763",
+        "pp2008_2011": 15480186577,
+        "total_alonso": "263806904552.3897633007840763",
+          "imgUrl": "/img/comuna12.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.60602188110352,
+          6.250629658295597
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 13,
+        "nom_comuna": "San Javier",
+        "localizada2008_2011": 373833969706,
+        "percapita2008_2011": "152205897080.2059243863373044",
+        "pp2008_2011": 25322885712,
+        "total_alonso": "551362752498.2059243863373044",
+          "imgUrl": "/img/comuna13.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.62224388122557,
+          6.25660205479493
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 14,
+        "nom_comuna": "El Poblado",
+        "localizada2008_2011": 204907536968,
+        "percapita2008_2011": "136663895842.6262962707767839",
+        "pp2008_2011": 13155295123,
+        "total_alonso": "354726727933.6262962707767839",
+          "imgUrl": "/img/comuna54.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.56465148925781,
+          6.202762708708841
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 15,
+        "nom_comuna": "Guayabal",
+        "localizada2008_2011": 196172213822,
+        "percapita2008_2011": "103533608632.6327849974216193",
+        "pp2008_2011": 17281612864,
+        "total_alonso": "316987435318.6327849974216193",
+          "imgUrl": "/img/comuna15.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.5859375,
+          6.215647111556412
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 16,
+        "nom_comuna": "Belén",
+        "localizada2008_2011": 230755251014,
+        "percapita2008_2011": "220147914197.3879062089970750",
+        "pp2008_2011": 16929451345,
+        "total_alonso": "467832616556.3879062089970750",
+          "imgUrl": "/img/comuna16.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.60181617736816,
+          6.2315175315898435
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 50,
+        "nom_comuna": "San Sebastian de Palmitas",
+        "localizada2008_2011": 89608514389,
+        "percapita2008_2011": "4893655674.09377360707522102",
+        "pp2008_2011": 7138617158,
+        "total_alonso": "101640787221.09377360707522102",
+          "imgUrl": "/img/comuna50.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.69271087646484,
+          6.340890855468203
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 60,
+        "nom_comuna": "San Cristóbal",
+        "localizada2008_2011": 265919703651,
+        "percapita2008_2011": "63795189887.6523677947130760",
+        "pp2008_2011": 13532181828,
+        "total_alonso": "343247075366.6523677947130760",
+          "imgUrl": "/img/comuna60.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.62816619873045,
+          6.282538526926375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 70,
+        "nom_comuna": "Altavista",
+        "localizada2008_2011": "89858773528",
+        "percapita2008_2011": "32618287736.3199580279262748",
+        "pp2008_2011": "10819473159",
+        "total_alonso": "133296534423.3199580279262748",
+          "imgUrl": "/img/comuna70.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6298828125,
+          6.219742749707098
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 80,
+        "nom_comuna": "San Antonio de Prado",
+        "localizada2008_2011": 194764538824,
+        "percapita2008_2011": "87282396941.8377213031162808",
+        "pp2008_2011": 16029519858,
+        "total_alonso": "298076455623.8377213031162808",
+          "imgUrl": "/img/comuna80.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.65803527832031,
+          6.18288086020269
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "marker",
+        "cod_comuna": 90,
+        "nom_comuna": "Santa Elena",
+        "localizada2008_2011": 101116155790,
+        "percapita2008_2011": "15885229743.57566980871213177",
+        "pp2008_2011": 7356055764,
+        "total_alonso": "124357441297.57566980871213177",
+          "imgUrl": "/img/comuna90.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.51761627197266,
+          6.247728755388598
+        ]
+      }
+    }
+  ]
+}

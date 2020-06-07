@@ -16,8 +16,6 @@
 </head>
 
 <!--barra de menu superior-->
-
-
 </div>
  
  <!--Navigation-->
@@ -31,7 +29,8 @@
         <div class="card-header">
           <div class="card-header">
             <h6 class="text-muted" style="text-align: center; font-size: 30px;line-height: 20px;font-weight: 600;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><p style="align-items: center;"> <img src="/img/logo.png" style="width: 25%;" alt=""></p>Inversión Pública Total Cuatrienios</h6>
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><p style="align-items: center;">
+             <img src="/img/logo.png" style="width: 25%;" alt=""></p>Inversión Pública Total Cuatrienios</h6>
           
         </div>
           <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 47px;font-weight: 600;color: #73879C;
@@ -54,6 +53,7 @@
                 <p class="card-text"><small class="text-muted"> <i class="fa fa-user"></i> <a href="/cuatrienios/alonso">
                       Alonso Salazar </a></small></p>
               </div>
+
             </div>
             <div class="card border-light">
               <div class="card-body">
@@ -63,7 +63,8 @@
                   </span>
                   2012- 2015</h5>
                 <h3 
-                  id="anibal" class="card-text total" style="color: #73879C;"><%= new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(Anibal)/1000000) %></h3>
+                  id="anibal" class="card-text total" style="color: #73879C;">
+                  <%= new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(Anibal)/1000000) %></h3>
                 <i class="fab fa-buromobelexperte"></i>
                 <p class="card-text"><small class="text-muted"> <i class="fa fa-user"></i> <a href="/cuatrienios/anibal">
                       Aníbal Gaviria </a></small></p>
@@ -87,7 +88,8 @@
         
         </div>
         <div class="card-footer text-muted">
-          <p class="text-muted"  style="font-style: oblique; font-size: 10px;text-align:left;"> <b>Fuente: </b> Alcaldía de Medellin - Departamento Administrativo de Planeación (Cifras en millones de pesos)</p></p> 
+          <p class="text-muted"  style="font-style: oblique; font-size: 10px;text-align:left;"> 
+            <b>Fuente: </b> Alcaldía de Medellin - Departamento Administrativo de Planeación (Cifras en millones de pesos)</p></p> 
   
         </div>
     </section>
@@ -119,6 +121,7 @@
                 </tr>
               </thead>
               <% totalComuna.forEach(function(dato){ %>
+                <% if (dato.cod_comuna <=90){%>
               <tbody style="font-size: 11px; text-align:right; height: min-content;">
                 <td style="text-align: center;" scope="row"><%= dato.cod_comuna %>  </td> 
                 <td style="text-align: left;"><%=  dato.nom_comuna %> </td> 
@@ -132,7 +135,8 @@
                   <!-- </form>-->  
                   </div>
                 </td>
-              </tbody>     
+              </tbody>  
+                <%}%>
               <% }); %>
               <tfoot>
                   <tr>
@@ -221,7 +225,7 @@
 <br><br><br>
 </body>
 <%- include ('../partials/scriptsHome.html')%>
-<script src="services/CuatrienioService.js"></script>
+<script src="graph/CuatrienioService.js"></script>
 <script src="js/htmltoexcel.js"></script>
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
