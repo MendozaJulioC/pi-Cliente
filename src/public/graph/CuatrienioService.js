@@ -1,8 +1,3 @@
-//const fetch = require ('node-fetch
-
-
-
-
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -161,8 +156,6 @@ function servTotales() {
     fetch('http://localhost:4000/api/totales')
         .then(res => res.json())
         .then(datos => {
-
-
             am4core.useTheme(am4themes_animated);
             // Themes end
             var chart = am4core.create("chartdiv2", am4charts.XYChart);
@@ -192,8 +185,6 @@ function servTotales() {
                     }).format(parseInt(datos.data[i].inversion_total) / 1000000)
                 });
             }
-
-
             chart.data = data;
             var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
             categoryAxis.renderer.grid.template.location = 0;
@@ -204,16 +195,13 @@ function servTotales() {
             categoryAxis.renderer.labels.template.rotation = -90;
             categoryAxis.renderer.labels.template.horizontalCenter = "left";
             categoryAxis.renderer.labels.template.location = 0.5;
-
             categoryAxis.renderer.labels.template.adapter.add("dx", function (dx, target) {
                 return -target.maxRight / 2;
             })
-
             var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
             valueAxis.tooltip.disabled = true;
             valueAxis.renderer.ticks.template.disabled = true;
             valueAxis.renderer.axisFills.template.disabled = true;
-
             var series = chart.series.push(new am4charts.ColumnSeries());
             series.dataFields.categoryX = "category";
             series.dataFields.valueY = "value";
@@ -224,18 +212,11 @@ function servTotales() {
             series.strokeDashArray = "1,3";
             series.columns.template.width = 0.01;
             series.tooltip.pointerOrientation = "horizontal";
-
             var bullet = series.bullets.create(am4charts.CircleBullet);
-
             chart.cursor = new am4charts.XYCursor();
-
             chart.scrollbarX = new am4core.Scrollbar();
             chart.scrollbarY = new am4core.Scrollbar();
-
-
-
         })
-
 }
 
 function detallecomuna(comuna, nomcomuna) {
@@ -369,7 +350,6 @@ function detallecomuna(comuna, nomcomuna) {
 }
 
 function totalAlonso() {
-
     fetch('http://localhost:4000/api/cuatrienios/alonso/total')
         .then(res => res.json())
         .then(datos => {
@@ -377,93 +357,76 @@ function totalAlonso() {
             const Localizada = (parseInt(datos.data[0].total_localizada_alonso) / 1000000);
             const Ciudad = (parseInt(datos.data[0].total_inversión_ciudad) / 1000000);
             const PP = (parseInt(datos.data[0].ppalonso) / 1000000);
-
+            
             am4core.useTheme(am4themes_animated);
             // Themes end
-
             var chart = am4core.create("chartdiv_total2008_2011", am4charts.PieChart);
             chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
             chart.data = [{
-                    country: "Localizada",
+                    comuna: "Localizada",
                     value: Math.round(Localizada)
                 },
                 {
-                    country: "Ciudad",
+                    comuna: "Ciudad",
                     value: Math.round(Ciudad)
                 },
                 {
-                    country: "PP",
+                    comuna: "PP",
                     value: Math.round(PP)
                 }
-
             ];
             chart.radius = am4core.percent(70);
             chart.innerRadius = am4core.percent(40);
             chart.startAngle = 180;
             chart.endAngle = 360;
-
             var series = chart.series.push(new am4charts.PieSeries());
             series.dataFields.value = "value";
-            series.dataFields.category = "country";
-
+            series.dataFields.category = "comuna";
             series.slices.template.cornerRadius = 10;
             series.slices.template.innerCornerRadius = 7;
             series.slices.template.draggable = true;
             series.slices.template.inert = true;
             series.alignLabels = false;
-
             series.hiddenState.properties.startAngle = 90;
             series.hiddenState.properties.endAngle = 90;
-
             chart.legend = new am4charts.Legend();
 
-
         });
+
     // Initialize the map and assign it to a variable for later use
     var map = L.map('map', {
         // Set latitude and longitude of the map center (required)
         center: [6.2982733, -75.5459204],
         // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-        zoom: 12
+        zoom: 12,
+        tileSize: 512,
     });
-
     // Create a Tile Layer and add it to the map
-    var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png').addTo(map);
+    var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2518/-75.5636">maps.stamen.com</a> contributors'
+    }).addTo(map);
 
-    var myIcon = L.icon({
-        iconUrl: '/img/placemoney.png',
-        iconSize: [30, 30]
-
-    });
     const geojson_url = "https://opendata.arcgis.com/datasets/283d1d14584641c9971edbd2f695e502_6.geojson";
     fetch(geojson_url)
         .then(res => res.json())
         .then(data => {
-            let geojsonlayer = L.geoJson(data).addTo(map)
+            let geojsonlayer = L.geoJson(data, {  
+            }).bindPopup(function (layer) {
+                return layer.feature.properties.NOMBRE;
+            }).addTo(map)
             map.fitBounds(geojsonlayer.getBounds())
         })
-
-
-    //var marker1 = L.marker([6.295596, -75.543217], {icon: myIcon}).addTo(map);
-    // var marker2 = L.marker([6.306220, -75.553265], {icon: myIcon}).addTo(map);
-
-
-
-    map.on('click', e => {
+        //var marker1 = L.marker([6.295596, -75.543217], {icon: myIcon}).addTo(map);
+        // var marker2 = L.marker([6.306220, -75.553265], {icon: myIcon}).addTo(map);
+          map.on('click', e => {
         //marker1.bindPopup(hola(1)).openPopup();
         // marker2.bindPopup(hola(2)).openPopup();
-    })
-
-
+     })
     let pointMarker = L.icon({
         iconUrl: '/img/placemoney.png',
         iconSize: [30, 30],
         shape: "square",
-        popupAnchor: [-3, -76],
-     
-
-
+        popupAnchor: [-3, -76]
     })
     const geojson_url2 = "/GeoJson/map_med_alonso.geojson";
     fetch(geojson_url2)
@@ -471,16 +434,14 @@ function totalAlonso() {
         .then(data => {
             let geojsonlayer2 = L.geoJson(data, {
                 onEachFeature: function (feature, layer) {
-
-
-                    let popupContent2 = `                        
-              
+                    let popupContent2 = `                       
                         <div class="card" style="width: 18rem;">
                         <img src="` + feature.properties.imgUrl+ `" class="card-img-top" alt="...">
                         <div class="card-body">
                         <h5 class="card-title">` + feature.properties.nom_comuna + `</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Comuna ` + feature.properties.cod_comuna + `</h6>
                         <p class="card-text">
+                        <p  class="text-muted"  ;">Ejecución Presupuestal 2008-2011</p>
                         <table class="table table-hover table-inverse table-responsive">
                         <tbody>
                                 <tr>
@@ -516,50 +477,113 @@ function totalAlonso() {
                         </p>
                         </div>
                         </div>`
-
                     layer.bindPopup(popupContent2)
                     layer.setIcon(pointMarker)
                 }
-
             }).addTo(map)
             map.fitBounds(geojsonlayer2.getBounds())
+        })
+        L.Control.Watermark = L.Control.extend({
+            onAdd: function(map) {
+                var img = L.DomUtil.create('img');
+                img.src = '/img/logo.png';
+                img.style.width = '100px';
+                return img;
+            },
+            onRemove: function(map) {
+                // Nothing to do here
+            }
+        });
+        L.control.watermark = function(opts) {
+            return new L.Control.Watermark(opts);
+        }
+        L.control.watermark({ position: 'bottomleft' }).addTo(map);
+
+
+    var data=[];
+
+    fetch('http://localhost:4000/api/cuatrienios/alonso')
+        .then(res => res.json())
+        .then(datos => {
+         
+        let tam = datos.data.length;
+        for(var i =0; i<(tam) ;i++   ){
+                
+            if(datos.data[i].cod_comuna<=90){
+             
+             data.push({
+            "comuna": datos.data[i].nom_comuna,
+            "total":(parseInt(datos.data[i].total_alonso)),
+            "color": colorHEX()
+              });
+            }
+   
+
+        }
+            
+            var chart = AmCharts.makeChart('chartdiv_comunas_2008_2011', {
+                "theme": "none",
+                "type": "serial",
+                "startDuration": 2,
+
+                "dataProvider": data,
+                "valueAxes": [{
+                    "position": "left",
+                    "axisAlpha":0,
+                    "gridAlpha":0
+                }],
+                "graphs": [{
+                    "balloonText": "[[category]]: <b>[[value]]</b>",
+                    "colorField": "color",
+                    "fillAlphas": 0.85,
+                    "lineAlpha": 0.1,
+                    "type": "column",
+                    "topRadius":1,
+                    "valueField": "total"
+                }],
+                "depth3D": 40,
+              "angle": 30,
+                "chartCursor": {
+                    "categoryBalloonEnabled": false,
+                    "cursorAlpha": 0,
+                    "zoomable": false
+                },
+                "categoryField": "comuna",
+                "categoryAxis": {
+                    "labelRotation": 90,
+                    "gridPosition": "start",
+                    "axisAlpha":0,
+                    "gridAlpha":0
+            
+                },
+                "export": {
+                    "enabled": false
+                 },
+                 "titles": [
+                    {
+                        "id": "Title-1",
+                        "size": 15,
+                        "text": "Total Inversión Pública Acumulada 2008-2011"
+                    }
+                ],
+            
+            }, 0);
+
+
 
         })
-
 }
 
-
-function hola(comuna) {
-
-    popupContent2 = `                        
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">Santa Cruz</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Comuna 2</h6>
-        <p class="card-text">
-        <table class="table table-hover table-inverse table-responsive">
-        <tbody>
-                <tr>
-                <td>Inversión Localizada</td>
-                <td scope="row">379,688,247,480.00</td>
-                </tr>
-                <tr>
-                <td>Inversión Ciudad</td>
-                <td>144,335,729,086.00</td>
-                </tr>
-                <tr>
-                <td>Ppto. Participativo</td>
-                <td>29,680,503,556.00</td>
-                </tr>
-                <tr>
-                <td>Total Inversión Cuatrienio</td>
-                <td>1</td>
-                </tr>
-            </tbody>
-        </table>
-        </p>
-    </div>
-</div>`
-    return popupContent2
-
+function generarLetra(){
+	var letras = ["a","b","c","d","e","f","0","1","2","3","4","5","6","7","8","9"];
+	var numero = (Math.random()*15).toFixed(0);
+	return letras[numero];
+}
+	
+function colorHEX(){
+	var coolor = "";
+	for(var i=0;i<6;i++){
+		coolor = coolor + generarLetra() ;
+	}
+	return "#" + coolor;
 }

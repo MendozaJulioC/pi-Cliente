@@ -60,14 +60,11 @@ const getTotalAlonso = async (req, res, next) => {
             .then(datos => {
                 //console.log(datos.data)
                 totales_alonso = datos.data
-
             })
-
     } catch (error) {
         console.log("Error getTotalAlonso: ", error)
     }
     next();
-
 }
 const getAlonso = async (req, res) => {
     try {
@@ -87,7 +84,6 @@ const getAlonso = async (req, res) => {
                     total_alonso: datos.data
                 })
             })
-
     } catch (error) {
         console.log("Error getAlonso: ", error)
     }
@@ -132,6 +128,7 @@ const getAnibal = async (req, res) => {
         console.log("Error getAnibal : ", error)
     }
 }
+
 const getTotalFico = async (req, res, next) => {
 
     try {
@@ -146,6 +143,7 @@ const getTotalFico = async (req, res, next) => {
     }
     next();
 }
+
 const getFico = async (req, res) => {
     try {
         fetch('http://localhost:4000/api/cuatrienios/fico')
@@ -168,6 +166,7 @@ const getFico = async (req, res) => {
         console.log(error)
     }
 }
+
 const getHome = async (req, res) => {
     try {
         res.render('./home/index.html', {

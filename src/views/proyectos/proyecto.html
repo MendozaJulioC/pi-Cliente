@@ -1,4 +1,473 @@
 
-<%- include ('../partials/head.html') %>
-<%- include ('../partials/navigation.html')%>
-<%- include ('../partials/scriptsHome.html')%>
+
+
+<html>
+  <head>
+ 
+  </head>
+  <body>
+    <nav class="main-menu">
+        <ul>
+            <li>
+                <a href="http://justinfarrow.com">
+                    <i class="fa fa-home fa-2x"></i>
+                    <span class="nav-text">
+                        Dashboard
+                    </span>
+                </a>
+              
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                    <i class="fa fa-laptop fa-2x"></i>
+                    <span class="nav-text">
+                        Stars Components
+                    </span>
+                </a>
+                
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                   <i class="fa fa-list fa-2x"></i>
+                    <span class="nav-text">
+                        Forms
+                    </span>
+                </a>
+                
+            </li>
+            <li class="has-subnav">
+                <a href="#">
+                   <i class="fa fa-folder-open fa-2x"></i>
+                    <span class="nav-text">
+                        Pages
+                    </span>
+                </a>
+               
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <span class="nav-text">
+                        Graphs and Statistics
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-font fa-2x"></i>
+                    <span class="nav-text">
+                       Quotes
+                    </span>
+                </a>
+            </li>
+            <li>
+               <a href="#">
+                   <i class="fa fa-table fa-2x"></i>
+                    <span class="nav-text">
+                        Tables
+                    </span>
+                </a>
+            </li>
+            <li>
+               <a href="#">
+                    <i class="fa fa-map-marker fa-2x"></i>
+                    <span class="nav-text">
+                        Maps
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                   <i class="fa fa-info fa-2x"></i>
+                    <span class="nav-text">
+                        Documentation
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="logout">
+            <li>
+               <a href="#">
+                     <i class="fa fa-power-off fa-2x"></i>
+                    <span class="nav-text">
+                        Logout
+                    </span>
+                </a>
+            </li>  
+        </ul>
+</nav>
+    
+    <div class="area">
+
+        <div  id="container">
+         
+            
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta name="description" content="chart created using amCharts live editor" />
+              <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
+              <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+              crossorigin=""/>
+              <title> <%= title %> </title>
+              <%- include ('../partials/head.html') %>
+            </head>
+            <!--Navigation-->
+            
+            <body onload="totalAlonso()">
+
+                <div id="container" class="row">
+
+                      <div class="col-xl-6">
+                        <section class="cardcontainer card border-light mt-2">
+                            <div class="card border-light">
+                                <div class="card-body">
+
+
+                                    <div id="map" style=" width: 100%; height: 1170px; "></div>
+                                </div>
+                            
+                            </div>
+
+                        </section>
+
+                     
+
+                      </div>
+
+                      <div class="col-xl-6">
+                        
+
+                        <section class="cardcontainer card border-light mt-2">
+                            <div class="card-deck">
+                              <div class="card text-center">
+                                <div class="card border-light">
+                                   <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+                                  <div class="card-body">
+                                    <div id="chartdiv_comunas_2008_2011" style=" width: 90%; height: 350px; "></div>
+                                  </div>
+                                 <!--fin de la sección de la gráfica-->
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+
+                          <section class="cardcontainer card border-light mt-2">
+                            <div class="card border-light">
+                                <div class="card-body">
+
+
+                                    <div id="chartdiv_total2008_2011" style="width: 100%; height: 350px; background-color: #FFFFFF;"> </div>
+                                </div>
+                            
+                            </div>
+
+                        </section>
+
+                          <section class="cardcontainer card border-light mt-2">
+                            <div class="row col-xl-12">
+
+                                <div class="col-xl-6">
+
+                                
+                                        <div class="card text-center">
+                                            <div class="card border-light">
+                                                <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+                                                <div class="card-body">
+                                                    <div style=" width: 100%; height: 350px; ">hola1</div>
+                                                </div>
+                                                <!--fin de la sección de la gráfica-->
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                   
+                                </div>
+                                <div class="col-xl-6">
+
+                                 
+                                        <div class="card text-center">
+                                            <div class="card border-light">
+                                                <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+                                                <div class="card-body">
+                                                    <div style=" width: 100%; height: 350px; ">hola2</div>
+                                                </div>
+                                                <!--fin de la sección de la gráfica-->
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                  
+                                </div>
+                            </div>
+                          
+                    
+                        
+                       
+                          </section>
+
+                         
+
+                      
+                         
+                    </div>
+                         
+                </div>
+                   
+        </div>
+                
+            
+              <!-- Modal -->
+               <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog modal-lg" role="document">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <h5 class="modal-title" id="exampleModalLabel"> </h5>
+                  
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                       </button>
+                      
+                     </div>
+                     <div class="modal-body">
+                      <h6 class="card-subtitle text-muted">Cuatrienio 2008-2011</h6>
+                       <div class="container mt-lg-4">
+            
+                         <section class="cardcontainer mt-4">
+                           <div class="container mt-lg-3" style="  width: 100%; height: 400px; font-size: 11px" id="chartdivmodal2"></div>
+                         </section>
+            
+                        <section class="cardcontainer mt-4">
+                          <div class="table-responsive">
+                            <table id="tblexportDataModal" class="table table-hover  table-striped">
+                              <thead style="text-align: center;"class="thead-inverse">
+                                <tr>
+                                  <th>Cuatrienio</th>
+                                  <th>Inversión Localizada</th>
+                                  <th>Inversión Ciudad</th>
+                                  <th>Presupuesto Participativo</th>
+                                  <th>Total Cuatrienio Comuna</th>
+                                </tr>
+                              </thead>
+                              <tbody style="font-size: 11px; text-align:right; height: min-content;">
+                                <tr>
+                                  <td>2008-2011</td>
+                                  <td id="localizada1"></td>
+                                  <td id="ciudad1"></td>
+                                  <td id="pp1"> </td>
+                                  <td id="total1"> </td>
+                                </tr>
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <th colspan="4" style="font-size: 10px;text-align:left;">
+                                    <p class="text-muted" style="font-style: oblique;"> <b>Fuente: </b> Alcaldía de Medellin -
+                                      Departamento Administrativo de Planeación</p>
+                                  </th>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+                        </section>
+            
+                       </div>
+                       <div class="modal-footer">
+                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                         <button type="button" class="btn btn-outline-info"
+                           onclick="exportToExcel('tblexportDataModal', 'DetalleCuatrienioComuna')">
+                           <span style="font-size: 12px; color: rgb(54, 114, 94);">
+                             <i class="fa fa-file-excel-o"></i> Exportar
+                         </button>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+                    
+              </div>
+            
+            
+              <%- include ('../partials/navigation.html')%>
+            </body>
+            <%- include ('../partials/scriptsHome.html')%>
+            <script src="/graph/CuatrienioService.js"></script>
+            <script src="/graph/graphAlonso.js"></script>
+            <script src="/js/htmltoexcel.js"></script>
+            <script src="https://www.amcharts.com/lib/4/core.js"></script>
+            <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+            <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+            <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
+             <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+             <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+             <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+             <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+             <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+             <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+             <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+            </html>
+
+
+
+  </div>
+  
+  
+
+
+        
+  </body>
+    </html>
+
+
+    <style>
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+
+
+body{
+  background:#f0f0f0;
+  line-height:normal;
+  font-size: 12px+5;
+	overflow-Y:scroll;
+  font-family: 'Roboto Condensed', "Helvetica Neue",Helvetica,Arial,sans-serif;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+
+.fa-2x {
+font-size: 2em;
+}
+.fa {
+position: relative;
+display: table-cell;
+width: 60px;
+height: 36px;
+text-align: center;
+vertical-align: middle;
+font-size:20px;
+}
+
+
+.main-menu:hover,nav.main-menu.expanded {
+width:250px;
+overflow:visible;
+}
+
+.main-menu {
+background:#212121;
+border-right:1px solid #e5e5e5;
+position:absolute;
+top:0;
+bottom:0;
+height:100%;
+left:0;
+width:60px;
+overflow:hidden;
+-webkit-transition:width .05s linear;
+transition:width .05s linear;
+-webkit-transform:translateZ(0) scale(1,1);
+z-index:1000;
+}
+
+.main-menu>ul {
+margin:7px 0;
+}
+
+.main-menu li {
+position:relative;
+display:block;
+width:250px;
+}
+
+.main-menu li>a {
+position:relative;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+color:#999;
+ font-family: arial;
+font-size: 14px;
+text-decoration:none;
+-webkit-transform:translateZ(0) scale(1,1);
+-webkit-transition:all .1s linear;
+transition:all .1s linear;
+  
+}
+
+.main-menu .nav-icon {
+position:relative;
+display:table-cell;
+width:60px;
+height:36px;
+text-align:center;
+vertical-align:middle;
+font-size:18px;
+}
+
+.main-menu .nav-text {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+width:190px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+position:absolute;
+left:0;
+bottom:0;
+}
+
+.no-touch .scrollable.hover {
+overflow-y:hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+overflow-y:auto;
+overflow:visible;
+}
+
+a:hover,a:focus {
+text-decoration:none;
+}
+
+nav {
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+-o-user-select:none;
+user-select:none;
+}
+
+nav ul,nav li {
+outline:0;
+margin:0;
+padding:0;
+}
+.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
+color:#fff;
+background-color:#5fa2db;
+}
+
+#container{
+    padding-left: 125px;
+    padding-right: 10px;}
+
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+    src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+    </style>

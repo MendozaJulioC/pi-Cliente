@@ -4,39 +4,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="chart created using amCharts live editor" />
+  <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
   <title> <%= title %> </title>
   <%- include ('../partials/head.html') %>
-  <link rel="stylesheet" type="text/html" href="css/css.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
-
-
 <!--Navigation-->
-
 <%- include ('../partials/navigation.html')%>
-
-
-<body>
+<body onload="totalAnibal()">
   <div class="container mt-3">
-    <div class="card-header">
+
+    <!--Card con datos iniciales en encabezado-->
+    <div class="card-header shadow p-3 mb-5 bg-white rounded">
       <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 600;color: #73879C;
         font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
         <p style="align-items: center;"> <img src="/img/logo.png" style="width: 20%;" alt=""></p>Total Inversión Pública
         Municipio de Medellín
       </h6>
       <p class="text-muted" style="text-align: center;font-size: 18px;line-height: 18px;font-weight: 600;color: #73879C;
-        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">2008-2011 </p>
+        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">2012-2015 </p>
       <h4 class="text-muted" style="text-align: center;font-size: 28px;line-height: 28px;font-weight: 600;color: #73879C;
         font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
         <%= new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(total)) %> </h4>
     </div>
-    <section>
-      <div class="card text-center">
+
+    <section class="shadow p-3 mb-5 bg-white rounded">
+      <div class="card text-center ">
         <div class="card-body">
-          <div class="card-deck">
-            <div class="card border-light">
-              <div class="card-body">
+          <div class="card-deck ">
+           
+            <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
+              <div class="card-body ">
                 <h5 class="card-title cardheader" style="color: #73879C;">
                   <span style="font-size: 20px; color: rgb(54, 114, 94);"> <i class="fa fa-map-marker"></i></span>
                   Inversión Localizada
@@ -46,8 +47,10 @@
                 </h3>
               </div>
             </div>
-            <div class="card border-light">
-              <div class="card-body">
+
+
+            <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
+              <div class="card-body ">
                 <h5 class="card-title cardheader" style="color: #73879C;">
                   <span style="font-size: 20px; color:red;"><i class="fa fa-fort-awesome"></i></span>
                   Inversión de Ciudad
@@ -57,12 +60,14 @@
                 </h3>
               </div>
             </div>
-            <div class="card border-light">
+
+
+            <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
               <div class="card-body">
-                <h5 class="card-title cardheader" style="color: #73879C;">
+                <h6 class="card-title cardheader" style="color: #73879C;">
                   <span style="font-size: 20px; color: rgb(80, 145, 241);"> <i class="fa fa-users"></i></span>
                   Presupuesto Participativo
-                </h5>
+                </h6>
                 <h3 style="color: #73879C;" id="fico" class="card-text total">
                   <%= new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(inverPP)/1000000) %>
                 </h3>
@@ -76,91 +81,231 @@
       </div>
     </section>
 
+      <div class="card-footer text-muted">
+        <p class="text-muted" style="font-style: oblique; font-size: 10px;text-align:left;"> <b>Fuente: </b> Alcaldía de
+          Medellin - Departamento Administrativo de Planeación (Cifras en millones de pesos)</p>
+        </p>
+      </div>
+   
 
+    <!--fin card presentacion datos iniciales totales de la inversión-->
+    <!--sección con gráfica y definiciones-->
+    <section class="cardcontainer mt-4">
+      <div class="card-deck">
+        <div class="card text-center">
+          <div class="card border-light">
+             <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+            <div class="card-body">
+              <div id="chartdiv_total2012_2015" style="width: 100%; height: 350px; background-color: #FFFFFF;"> </div>
+            </div>
+           <!--fin de la sección de la gráfica-->
+          </div>
+           <!--llamado de las definiciones de los tipos de inversión-->
+           <%- include ('../partials/definiciones.html') %>
+        </div>
+      </div>
+    </section>
 
-    <div class="card-footer text-muted">
-      <p class="text-muted" style="font-style: oblique; font-size: 10px;text-align:left;"> <b>Fuente: </b> Alcaldía de
-        Medellin - Departamento Administrativo de Planeación (Cifras en millones de pesos)</p>
-      </p>
-    </div>
-  </div>
-  <section class="container mt-5">
-    <div class="container mt-lg-4">
-      <div class="table-responsive">
-        <table id="tblexportData" class="table table-hover" style="text-align:center;">
-          <thead class="thead-inverse">
-            <tr>
-              <th colspan="6" style="text-align: center;">Municipio de Medellín
-                <p>Total Inversión Pública Acumulada por Cuatrienio <br>2012-2015<br>
-                  <p class="text-muted" style="font-size: smaller;">Cifras en pesos</p>
-                </p>
-              </th>
-            </tr>
+    <!--sección mapa geoinversión cuatrienio por comunas y corregimientos-->
+    <section class="cardcontainer mt-4">
+      <div id="map" style=" width: 100%; height: 750px; "></div>
+    </section>
 
-            <tr style="background-color: rgb(0,154,178); color: white;">
-              <th>Comuna</th>
-              <th>Nombre</th>
-              <th>Inversión Localizada</th>
-              <th>Inversión Ciudad</th>
-              <th>Inversión Presupuesto Participativo</th>
-              <th>Más</th>
-            </tr>
-          </thead>
-          <% total_anibal.forEach(function(dato){ %>
-          <tbody style="font-size: 11px; text-align:right; height: min-content;">
-            <td style="text-align: center;" scope="row"><%= dato.cod_comuna %> </td>
-            <td style="text-align: left;"><%=  dato.nom_comuna %> </td>
-            <td>
-              <%=  new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.localizada2012_2015)) %>
-            </td>
-            <td>
-              <%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.percapita2012_2015)) %>
-            </td>
-            <td>
-              <%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.pp2012_2015)) %>
-            </td>
-            <td>
-              <div class="form-check">
-                <!--  <form action="/cuatrienios/detalle/<%= dato.cod_comuna %>" method="get">-->
-                <button type="submit" onclick="detallecomuna('<%= dato.cod_comuna %>', '<%= dato.nom_comuna %>')"
-                  class="btn btn-outline-info btn-sm">+</button>
-                <!-- </form>-->
-              </div>
-            </td>
-          </tbody>
-          <% }); %>
-          <tfoot>
-            <tr>
-              <th colspan="5" style="font-size: 10px;text-align:left;">
-                <p class="text-muted" style="font-style: oblique;"> <b>Fuente: </b> Alcaldía de Medellin - Departamento
-                  Administrativo de Planeación</p>
-                </p>
-              </th>
-              <th>
-                <button onclick="exportToExcel('tblexportData', 'Total2012-2015')"> <span
-                    style="font-size: 12px; color: rgb(54, 114, 94);"><i class="fa fa-file-excel-o"></i> Export</button>
-
-              </th>
-            </tr>
-          </tfoot>
-        </table>
+  <!--sección -->
+  <section class="cardcontainer mt-4">
+    <div class="card-deck">
+      <div class="card text-center">
+        <div class="card border-light">
+           <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+          <div class="card-body">
+            <div id="chartdiv_comunas_2012_2015" style=" width: 100%; height: 500px; "></div>
+          </div>
+         <!--fin de la sección de la gráfica-->
+        </div>
       </div>
     </div>
-    <br><br> <br><br>
-
   </section>
+
+    
+     <!--Tabla con los datos por comuna y tipos de inversión totales por comuna-->
+    <section class="cardcontainer mt-4">
+  
+        <div class="card">
+            <div class="container mt-lg-4">
+              <div class="table-responsive">
+                <table id="tblexportData" class="table table-hover" style="text-align:center;">
+                  <thead class="thead-inverse">
+                    <tr>
+                      <th colspan="7" style="text-align: center;">Municipio de Medellín
+                        <p>Total Inversión Pública Acumulada por Cuatrienio <br>2012-2015<br>
+                          <p class="text-muted" style="font-size: smaller;">Cifras en pesos</p>
+                        </p>
+                      </th>
+                    </tr>
+                    <tr style="background-color: rgb(0,154,178); color: white;">
+                      <th>Comuna</th>
+                      <th>Nombre</th>
+                      <th>Inversión Localizada</th>
+                      <th>Inversión Ciudad</th>
+                      <th>Presupuesto Participativo</th>
+                      <th>Total cuatrienio</th>
+                      <th>Más</th>
+                    </tr>
+                  </thead>
+                  <% total_anibal.forEach(function(dato){ %>
+                    <% if (dato.cod_comuna !=97){%>
+                  <tbody style="font-size: 11px; text-align:right; height: min-content;">
+                    <td style="text-align: center;" scope="row"><%= dato.cod_comuna %> </td>
+                    <td style="text-align: left;"><%=  dato.nom_comuna %> </td>
+                    <td style="text-align: center;">
+                      <% let total =(parseInt(dato.localizada2012_2015)+ parseInt(dato.percapita2012_2015)+parseInt(dato.pp2012_2015))%>
+                      <%=  new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.localizada2012_2015)) %>
+                    </td>
+                    <td style="text-align: center;">
+                      <%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.percapita2012_2015)) %>
+                    </td>
+                    <td style="text-align: center;">
+                      <%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(parseInt(dato.pp2012_2015)) %>
+                    </td>
+                    <td style="text-align: center;">
+                      <%=   new Intl.NumberFormat('en-US', {style:'currency', currency:'USD'}).format(total) %>
+                    </td>
+                    <td>
+                      <div style="text-align: center;" class="form-check">
+                        <!--  <form action="/cuatrienios/detalle/<%= dato.cod_comuna %>" method="get">-->
+                        <button type="submit" onclick="anibalcomuna('<%= dato.cod_comuna %>', '<%= dato.nom_comuna %>')"
+                          class="btn btn-outline-info btn-sm"><i class="fa fa-map-marker"></i></button>
+                        <!-- </form>-->
+                      </div>
+                    </td>
+                  </tbody>
+                  <%}%>
+                  <% }); %>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5" style="font-size: 10px;text-align:left;">
+                        <p class="text-muted" style="font-style: oblique;"> <b>Fuente: </b> Alcaldía de Medellin -
+                          Departamento Administrativo de Planeación</p>
+                        </p>
+                      </th>
+                      <th>
+                        <button onclick="exportToExcel('tblexportData', 'Total2012-2015')"> <span
+                            style="font-size: 12px; color: rgb(54, 114, 94);"><i class="fa fa-file-excel-o"></i>
+                            Export</button>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+        </div>
+    </section>
+    <section class="cardcontsiner mt-4">
+
+
+    <!--tabla con información por dependencias-->
+  
+
+
+
+    </section>
+  </div>  
+
+
+  <section class="cardcontainer mt-4"><div><br><br></div></section>
+
+
+
+
+
+  <!-- Modal -->
+   <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel"> </h5>
+      
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+          
+         </div>
+         <div class="modal-body">
+          <h6 class="card-subtitle text-muted">Cuatrienio 2012-2015</h6>
+           <div class="container mt-lg-4">
+
+             <section class="cardcontainer mt-4">
+               <div class="container mt-lg-3" style="  width: 100%; height: 750px; font-size	: 11px" id="chartdivmodal2"></div>
+             </section>
+
+            <section class="cardcontainer mt-4">
+              <div class="table-responsive">
+                <table id="tblexportDataModal" class="table table-hover  table-striped">
+                  <thead style="text-align: center;"class="thead-inverse">
+                    <tr>
+                      <th>Cuatrienio</th>
+                      <th>Inversión Localizada</th>
+                      <th>Inversión Ciudad</th>
+                      <th>Presupuesto Participativo</th>
+                      <th>Total Cuatrienio Comuna</th>
+                    </tr>
+                  </thead>
+                  <tbody style="font-size: 11px; text-align:right; height: min-content;">
+                    <tr>
+                      <td>2012-2015</td>
+                      <td id="localizada1"></td>
+                      <td id="ciudad1"></td>
+                      <td id="pp1"> </td>
+                      <td id="total1"> </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="4" style="font-size: 10px;text-align:left;">
+                        <p class="text-muted" style="font-style: oblique;"> <b>Fuente: </b> Alcaldía de Medellin -
+                          Departamento Administrativo de Planeación</p>
+                      </th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </section>
+
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+             <button type="button" class="btn btn-outline-info"
+               onclick="exportToExcel('tblexportDataModal', 'DetalleCuatrienioComuna')">
+               <span style="font-size: 12px; color: rgb(54, 114, 94);">
+                 <i class="fa fa-file-excel-o"></i> Exportar
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+        
   </div>
+
+
+
 </body>
-
 <%- include ('../partials/scriptsHome.html')%>
+<script src="/graph/CuatrienioService.js"></script>
+<script src="/graph/graphAnibal.js"></script>
 <script src="/js/htmltoexcel.js"></script>
-
-
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+ <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+ <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+ <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+ <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+ <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+ <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 </html>
 
 
-
-
-
-
-Home.html')%>
