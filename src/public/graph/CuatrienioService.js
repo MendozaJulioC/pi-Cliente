@@ -421,15 +421,16 @@ function totalAlonso() {
           map.on('click', e => {
         //marker1.bindPopup(hola(1)).openPopup();
         // marker2.bindPopup(hola(2)).openPopup();
-     })
-    let pointMarker = L.icon({
-        iconUrl: '/img/placemoney.png',
-        iconSize: [30, 30],
-        shape: "square",
-        popupAnchor: [-3, -76]
-    })
-    const geojson_url2 = "/GeoJson/map_med_alonso.geojson";
-    fetch(geojson_url2)
+        })
+        let pointMarker = L.icon({
+            iconUrl: '/img/placemoney.png',
+            iconSize: [30, 30],
+            shape: "square",
+            popupAnchor: [-3, -76]
+        })
+
+        const geojson_url2 = "/GeoJson/map_med_alonso.geojson";
+        fetch(geojson_url2)
         .then(res => res.json())
         .then(data => {
             let geojsonlayer2 = L.geoJson(data, {

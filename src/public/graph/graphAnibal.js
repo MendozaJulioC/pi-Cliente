@@ -70,7 +70,7 @@ function totalAnibal() {
           map.on('click', e => {
         //marker1.bindPopup(hola(1)).openPopup();
         // marker2.bindPopup(hola(2)).openPopup();
-     })
+        })
     let pointMarker = L.icon({
         iconUrl: '/img/placemoney.png',
         iconSize: [30, 30],
@@ -150,7 +150,6 @@ function totalAnibal() {
 
 
     var data=[];
-
     fetch('http://localhost:4000/api/cuatrienios/anibal')
         .then(res => res.json())
         .then(datos => {
