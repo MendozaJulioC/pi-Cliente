@@ -1,11 +1,5 @@
 
 
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2
-})
-
 function  alonsocomuna(comuna, nomcomuna){
     let localizada1 = document.getElementById('localizada1')
     let ciudad1 = document.getElementById('ciudad1')
@@ -20,13 +14,6 @@ function  alonsocomuna(comuna, nomcomuna){
             ciudad1.innerHTML = formatter.format(Math.round(datos.data[0].percapita2008_2011))
             pp1.innerHTML = formatter.format(parseInt(datos.data[0].pp2008_2011))
             total1.innerHTML= formatter.format(parseInt(datos.data[0].pp2008_2011)+   Math.round(datos.data[0].percapita2008_2011) + Math.round(datos.data[0].localizada2008_2011)  )
-            /*localizada2.innerHTML = formatter.format(parseInt(datos.data[0].localizada2012_2015))
-            ciudad2.innerHTML = formatter.format(parseInt(datos.data[0].percapita2012_2015))
-            pp2.innerHTML = formatter.format(parseInt(datos.data[0].pp2012_2015))
-
-            localizada3.innerHTML = formatter.format(parseInt(datos.data[0].localizada2016_2019))
-            ciudad3.innerHTML = formatter.format(parseInt(datos.data[0].percapita2016_2019))
-            pp3.innerHTML = formatter.format(parseInt(datos.data[0].pp2016_2019))*/
 
             $('#exampleModal').modal('show');
             $(".modal-title").text("Inversión por Dependencias en "+nomcomuna);
@@ -63,11 +50,7 @@ var data=[]
     });
 
    }
- 
-  
-
     var chart = AmCharts.makeChart( "chartdivmodal2", {
-
       "type": "serial",
       "theme": "light",
       "rotate": true,

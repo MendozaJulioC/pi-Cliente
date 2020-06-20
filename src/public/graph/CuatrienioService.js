@@ -185,6 +185,7 @@ function servTotales() {
                     }).format(parseInt(datos.data[i].inversion_total) / 1000000)
                 });
             }
+          
             chart.data = data;
             var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
             categoryAxis.renderer.grid.template.location = 0;
@@ -506,22 +507,19 @@ function totalAlonso() {
     fetch('http://localhost:4000/api/cuatrienios/alonso')
         .then(res => res.json())
         .then(datos => {
-         
-        let tam = datos.data.length;
-        for(var i =0; i<(tam) ;i++   ){
-                
-            if(datos.data[i].cod_comuna<=90){
-             
-             data.push({
-            "comuna": datos.data[i].nom_comuna,
-            "total":(parseInt(datos.data[i].total_alonso)),
-            "color": colorHEX()
-              });
-            }
-   
 
-        }
-            
+            let tam = datos.data.length;
+            for (var i = 0; i < (tam); i++) {
+
+                if (datos.data[i].cod_comuna <= 90) {
+
+                    data.push({
+                        "comuna": datos.data[i].nom_comuna,
+                        "total": (parseInt(datos.data[i].total_alonso)),
+                        "color": colorHEX()
+                    });
+                }
+            }
             var chart = AmCharts.makeChart('chartdiv_comunas_2008_2011', {
                 "theme": "none",
                 "type": "serial",
@@ -530,8 +528,8 @@ function totalAlonso() {
                 "dataProvider": data,
                 "valueAxes": [{
                     "position": "left",
-                    "axisAlpha":0,
-                    "gridAlpha":0
+                    "axisAlpha": 0,
+                    "gridAlpha": 0
                 }],
                 "graphs": [{
                     "balloonText": "[[category]]: <b>[[value]]</b>",
@@ -539,11 +537,11 @@ function totalAlonso() {
                     "fillAlphas": 0.85,
                     "lineAlpha": 0.1,
                     "type": "column",
-                    "topRadius":1,
+                    "topRadius": 1,
                     "valueField": "total"
                 }],
                 "depth3D": 40,
-              "angle": 30,
+                "angle": 30,
                 "chartCursor": {
                     "categoryBalloonEnabled": false,
                     "cursorAlpha": 0,
@@ -553,27 +551,21 @@ function totalAlonso() {
                 "categoryAxis": {
                     "labelRotation": 90,
                     "gridPosition": "start",
-                    "axisAlpha":0,
-                    "gridAlpha":0
-            
+                    "axisAlpha": 0,
+                    "gridAlpha": 0
+
                 },
                 "export": {
                     "enabled": false
-                 },
-                 "titles": [
-                    {
-                        "id": "Title-1",
-                        "size": 15,
-                        "text": "Total Inversión Pública Acumulada 2008-2011"
-                    }
-                ],
-            
+                },
+                "titles": [{
+                    "id": "Title-1",
+                    "size": 15,
+                    "text": "Total Inversión Pública Acumulada 2008-2011"
+                }],
             }, 0);
-
-
-
         })
-}
+        }
 
 function generarLetra(){
 	var letras = ["a","b","c","d","e","f","0","1","2","3","4","5","6","7","8","9"];

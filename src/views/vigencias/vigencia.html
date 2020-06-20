@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="/css/css.css">
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
-  
-
-  
-  
     <title> <%= title %> </title>
     <%- include ('../partials/head.html') %>
   </head>
@@ -69,6 +65,7 @@
                     class="fa fa-calendar" style="color:#FFFFFF; width:60px; height:20px; font-size: small;"
                     aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
               </div>
+
             </div>
           </div>
         </div>
@@ -83,15 +80,14 @@
 
         
         <div class="form-group col-xl-6 ">
-
           <div class="card text-center ">
             <div class="card-body">
               <div class="card-deck ">
                 <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
                   <div class="card-body ">
                     <h3 class="card-title cardheader" style="color: #73879C;">Inversión Localizada</h3>
-                    <h5  id="inverLocalizada" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h5>
-                    <button type="button" class="btn btn-outline-info mr-2">
+                    <h6  id="inverLocalizada" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
+                    <button type="button" class="btn btn-outline-info mr-2" onclick="modalGraphLocalizada()">
                       <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     </button>       
                   </div>
@@ -99,32 +95,28 @@
                 <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
                   <div class="card-body ">
                     <h3 class="card-title cardheader" style="color: #73879C;">Inversión de Ciudad</h3>
-                    <h5 id="inverCiudad"  style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h5>
+                    <h6 id="inverCiudad"  style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
                     <button type="button" class="btn btn-outline-info mr-2">
                       <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     </button>  
                   </div>
                 </div>
-
               </div>
-
-
               <div class="card-deck ">
                 <div class="card border-light  shadow-sm p-3 mb-4 bg-white rounded">
                   <div class="card-body ">
                 
                     <h3 class="card-title cardheader" style="color: #73879C;">Presupuesto Participativo</h3>
-                    <h5 id="pp" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h5>
+                    <h6 id="pp" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
                     <button type="button" class="btn btn-outline-info mr-2">
                       <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     </button>  
                   </div>
-                  
                 </div>
                 <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
                   <div class="card-body ">
                       <h3 class="card-title cardheader" style="color: #73879C;"> Fortalecimiento Institucional</h3>
-                    <h5 id="fortInst" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h5>
+                    <h6 id="fortInst" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
                     <button type="button" class="btn btn-outline-info mr-2">
                       <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     </button>  
@@ -133,13 +125,13 @@
               </div>
             </div>
           </div>
-
+          <!--Gráfica total de inversión por comunas y corregimientos principal-->
           <div class="col-xl-12 shadow p-3 mb-5 bg-white rounded">
             <section class="cardcontainer card border-light mt-2">
               <div class="card-deck">
                 <div class="card text-center">
                   <div class="card border-light">
-                    <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+                
                     <div class="card-body">
                       <div id="chartdiv_comunas_vigencia" style=" width: 90%; height: 340px; "></div>
                     </div>
@@ -152,28 +144,7 @@
               <div class="card border-light">
                 <div class="card-body">
 
-                 colocar la grafica por total inversión de cada dependnedica
-                </div>
-
-              </div>
-
-            </section>
-
-            <section class="cardcontainer card border-light mt-2">
-              <div class="row col-xl-12">
-                <div class="col-xl-6">
                   <div class="card text-center card border-light">
-                    <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
-                    <div class="card-body">
-                      <div id="chartdiv_total2008_2011" style="width: 100%; height: 300px; background-color: #FFFFFF;">
-                       esta puede ir arriba mostrando la grafica semidona con los % de casda inversión
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-6">
-
-                 <div class="card text-center card border-light">
                     <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
                     <div class="card-body">
                         <div class="table-responsive-sm">
@@ -191,17 +162,20 @@
                               <th style="text-align: center;" scope="col">Total</th>
                             </tr>
                           </thead>
-                          <tbody id="resultado">
-                         
-                          
-                          </tbody>
+                          <tbody id="resultado"></tbody>
                         </table>
                         </div>
                     </div>
                   </div>
                 </div>
+
               </div>
+
             </section>
+
+          
+
+
           </div>
         </div>
 
@@ -210,9 +184,32 @@
           <section class="cardcontainer card border-light mt-2">
             <div class="card border-light">
               <div class="card-body">
-                <div id="map" style=" width: 100%; height: 790px; "></div>
+                <div id="map" style=" width: 100%; height: 795px; "></div>
               </div>
             </div>
+            <div class="card border-light">
+              <div class="card-body">
+                <div id="chartdiv" style=" width: 100%; height: 706px; ">
+                
+                  <section class="cardcontainer card border-light mt-2">
+                    <div class="row col-xl-12">
+                      <div class="col-xl-12">
+                        <div class="card text-center card border-light">
+                          <!--Inicia sección con la gráfica de los tres tipos de inversión pública en el cuatrienio-->
+                          <div class="card-body">
+                            <div id="chartdiv_total_dep_vigencia" style="width: 100%; height: 300px; background-color: #FFFFFF;">
+                          
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--<div class="col-xl-6">hola2</div> -->
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          
           </section>
         </div>
 
@@ -232,11 +229,22 @@
 
 
 
+
   <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
   <script src="https://www.amcharts.com/lib/3/serial.js"></script>
   <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
   <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
   <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+
+
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+
+
 
 
   <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
