@@ -376,6 +376,9 @@ function totalAlonso() {
                     value: Math.round(PP)
                 }
             ];
+            var title = chart.titles.create();
+            title.text = "[bold font-size: 20]Porcentaje por el tipo de Inversión Territorial 2019[/]\nsource: USPDM";
+            title.textAlign = "middle";
             chart.radius = am4core.percent(70);
             chart.innerRadius = am4core.percent(40);
             chart.startAngle = 180;

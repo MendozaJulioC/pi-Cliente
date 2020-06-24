@@ -1,6 +1,6 @@
-function buscar_vigencia(){
+async function buscar_vigencia(){
     var vigencia_query = document.getElementById('inputGroupSelect04').value
-    
+    /**funcion */
     try {
         let inverTotal= document.getElementById('totalVIgencia');
         let vigencia = document.getElementById('vigencia');
@@ -16,9 +16,60 @@ function buscar_vigencia(){
            localizada.innerHTML=formatter.format(Math.round(datos.data[0].total_localizada))
            ciudad.innerHTML= formatter.format(Math.round(datos.data[0].total_ciudad))
            pp.innerHTML= formatter.format(Math.round(datos.data[0].inversion_pp))
+
+
+           am4core.useTheme(am4themes_material);
+           am4core.useTheme(am4themes_animated);
+           // Themes end
+           var chart = am4core.create("chartMainVigencia", am4charts.PieChart);
+           chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+           chart.data = [
+             {
+               tipoInver: "Localizada",
+               value: Math.round(datos.data[0].total_localizada)
+             },
+             {
+               tipoInver: "Ciudad",
+               value: Math.round(datos.data[0].total_ciudad)
+             },
+             {
+               tipoInver: "PP",
+               value: Math.round(datos.data[0].inversion_pp)
+             }
+           ];
+           var title = chart.titles.create();
+           title.text = "[bold font-size: 20]Porcentaje por el tipo de Inversión Territorial "+ vigencia_query+"[/]\nsource: USPDM";
+           title.textAlign = "middle";
+           chart.radius = am4core.percent(70);
+           chart.innerRadius = am4core.percent(40);
+           chart.startAngle = 180;
+           chart.endAngle = 360;  
+           
+           var series = chart.series.push(new am4charts.PieSeries());
+           series.dataFields.value = "value";
+           series.dataFields.category = "tipoInver";
+           
+           series.slices.template.cornerRadius = 10;
+           series.slices.template.innerCornerRadius = 7;
+           series.slices.template.draggable = true;
+           series.slices.template.inert = true;
+           series.alignLabels = false;
+           
+           series.hiddenState.properties.startAngle = 90;
+           series.hiddenState.properties.endAngle = 90;
+           
+           chart.legend = new am4charts.Legend();
+
+
+
        })
        .catch(error=>{ console.log(error)})
-     } catch (error) {}
+    } catch (error) {}
+    fortInstValor(vigencia_query)
+}
+
+async function fortInstValor(vigencia_query){
+    /**funcion */
      try {
         fetch('http://localhost:4000/api/vigencias/fortalecimiento/'+vigencia_query)
         .then(res=> res.json())
@@ -27,7 +78,13 @@ function buscar_vigencia(){
         })
     } catch (error) {   }
 
-    try {
+    vigencias(vigencia_query)
+
+}
+  
+async function  vigencias(vigencia_query){
+
+ try {
         var data=[];let tabla='';
         fetch('http://localhost:4000/api/vigencias/total-comuna/'+vigencia_query)
         .then(res=>res.json())
@@ -67,9 +124,10 @@ function buscar_vigencia(){
             "startDuration": 1,
             "graphs": [ {
               "balloonText": "[[category]]: <b>[[value]]</b>",
-              "fillAlphas": 0.8,
+              "fillAlphas": 1,
               "lineAlpha": 0.2,
               "type": "column",
+              "fillColors":"#FFDC15",
               "valueField": "total"
             } ],
             "chartCursor": {
@@ -92,13 +150,14 @@ function buscar_vigencia(){
         })
     } catch (error) {}
 
+ mapa(vigencia_query)
+}
 
-    var container = L.DomUtil.get('map');
+async function mapa(vigencia_query){
+  var container = L.DomUtil.get('map');
     if(container != null){
       container._leaflet_id = null;
     }
-      
-  // Initialize the map and assign it to a variable for later use
     var map = L.map('map', {
       // Set latitude and longitude of the map center (required)
       center: [6.2982733, -75.5459204],
@@ -112,176 +171,183 @@ function buscar_vigencia(){
       attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2518/-75.5636">maps.stamen.com</a> contributors'
     }).addTo(map);
 
+    // Initialize the map and assign it to a variable for later use
+   
     /*
       map.on('click', e => {
         //marker1.bindPopup(hola(1)).openPopup();
         // marker2.bindPopup(hola(2)).openPopup();
         })
     */
-    const geojson_url = "/GeoJson/Limite_Comuna_Corregimiento.geojson";
-    fetch(geojson_url)
-    .then(res => res.json())
-    .then(data => {
-      let geojsonlayer = L.geoJson(data, {style: style2,
-        onEachFeature: function (feature, layer) {
-          switch (parseInt(vigencia_query)) {
-            case 2019:
-              var localizada = feature.properties.inver_localizada_2019;
-              var ciudad = feature.properties.inver_ciudad_2019;
-              var pp = feature.properties.inver_pp_2019;
-              var total = feature.properties.Vigencia2019;
-              break;
-            case 2018:
-              var localizada = feature.properties.inver_localizada_2018;
-              var ciudad = feature.properties.inver_ciudad_2018;
-              var pp = feature.properties.inver_pp_2018;
-              var total = feature.properties.Vigencia2018;
-             
-              break;
-            case 2017:
-              var localizada = feature.properties.inver_localizada_2017;
-              var ciudad = feature.properties.inver_ciudad_2017;
-              var pp = feature.properties.inver_pp_2017;
-              var total = feature.properties.Vigencia2017;
-              break;
-            case 2016:
-              var localizada = feature.properties.inver_localizada_2016;
-              var ciudad = feature.properties.inver_ciudad_2016;
-              var pp = feature.properties.inver_pp_2016;
-              var total = feature.properties.Vigencia2016;
-              break;
-            case 2015:
-              var localizada = feature.properties.inver_localizada_2015;
-              var ciudad = feature.properties.inver_ciudad_2015;
-              var pp = feature.properties.inver_pp_2015;
-              var total = feature.properties.Vigencia2015;
-              break;
-            case 2014:
-              var localizada = feature.properties.inver_localizada_2014;
-              var ciudad = feature.properties.inver_ciudad_2014;
-              var pp = feature.properties.inver_pp_2014;
-              var total = feature.properties.Vigencia2014;
-              break;
-            case 2013:
-              var localizada = feature.properties.inver_localizada_2013;
-              var ciudad = feature.properties.inver_ciudad_2013;
-              var pp = feature.properties.inver_pp_2013;
-              var total = feature.properties.Vigencia2013;
-              break;
-            case 2012:
-              var localizada = feature.properties.inver_localizada_2012;
-              var ciudad = feature.properties.inver_ciudad_2012;
-              var pp = feature.properties.inver_pp_2012;
-              var total = feature.properties.Vigencia2012;
-              break;
-            case 2011:
-              var localizada = feature.properties.inver_localizada_2011;
-              var ciudad = feature.properties.inver_ciudad_2011;
-              var pp = feature.properties.inver_pp_2011;
-              var total = feature.properties.Vigencia2011;
-              break;
-            case 2010:
-              var localizada = feature.properties.inver_localizada_2010;
-              var ciudad = feature.properties.inver_ciudad_2010;
-              var pp = feature.properties.inver_pp_2010;
-              var total = feature.properties.Vigencia2010;
-              break;
-            case 2009:
-              var localizada = feature.properties.inver_localizada_2009;
-              var ciudad = feature.properties.inver_ciudad_2009;
-              var pp = feature.properties.inver_pp_2009;
-              var total = feature.properties.Vigencia2009;
-              break;
-            case 2008:
-              var localizada = feature.properties.inver_localizada_2008;
-              var ciudad = feature.properties.inver_ciudad_2008;
-              var pp = feature.properties.inver_pp_2008;
-              var total = feature.properties.Vigencia2008;
-              break;
-          }
-          let popupContent2 = `                       
-          <div class="card" style="width: 18rem;">
-                  <!-aquí podemos colocar una imagen-->     
-            <div class="card-body">
-              <h5 class="card-title">` + feature.properties.NOMBRE + `</h5>
-              <h6 class="card-subtitle mb-2 text-muted">` + feature.properties.IDENTIFICACION+ `</h6>
-              <p class="card-text">
-              <p  class="text-muted"  ;">Ejecución Presupuestal `+vigencia_query+`</p>
-              <table class="table table-hover table-inverse table-responsive">
-                <tbody>
-                  <tr>
-                    <td>Inversión Localizada</td>
-                    <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(localizada)) + `</td>
-                  </tr>
-                  <tr>
-                  <td>Inversión Ciudad</td>
-                  <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(ciudad)) + `</td>
-                </tr>
-                <tr>
-                <td>Inversión Presupuesto Participativo</td>
-                <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(pp)) + `</td>
-              </tr>
-                  <tr>
-                      <td>Total Inversión Cuatrienio</td>
-                      <td>`+ new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(total)) +` </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>`              
-          layer.bindPopup(popupContent2)
-        }
-      } ).addTo(map)
-      map.fitBounds(geojsonlayer.getBounds())
+   const geojson_url = "/GeoJson/Limite_Comuna_Corregimiento.geojson";
+   fetch(geojson_url)
+   .then(res => res.json())
+   .then(data => {
+     let geojsonlayer = L.geoJson(data, {style: style2,
+       onEachFeature: function (feature, layer) {
+         switch (parseInt(vigencia_query)) {
+           case 2019:
+             var localizada = feature.properties.inver_localizada_2019;
+             var ciudad = feature.properties.inver_ciudad_2019;
+             var pp = feature.properties.inver_pp_2019;
+             var total = feature.properties.Vigencia2019;
+             break;
+           case 2018:
+             var localizada = feature.properties.inver_localizada_2018;
+             var ciudad = feature.properties.inver_ciudad_2018;
+             var pp = feature.properties.inver_pp_2018;
+             var total = feature.properties.Vigencia2018;
+            
+             break;
+           case 2017:
+             var localizada = feature.properties.inver_localizada_2017;
+             var ciudad = feature.properties.inver_ciudad_2017;
+             var pp = feature.properties.inver_pp_2017;
+             var total = feature.properties.Vigencia2017;
+             break;
+           case 2016:
+             var localizada = feature.properties.inver_localizada_2016;
+             var ciudad = feature.properties.inver_ciudad_2016;
+             var pp = feature.properties.inver_pp_2016;
+             var total = feature.properties.Vigencia2016;
+             break;
+           case 2015:
+             var localizada = feature.properties.inver_localizada_2015;
+             var ciudad = feature.properties.inver_ciudad_2015;
+             var pp = feature.properties.inver_pp_2015;
+             var total = feature.properties.Vigencia2015;
+             break;
+           case 2014:
+             var localizada = feature.properties.inver_localizada_2014;
+             var ciudad = feature.properties.inver_ciudad_2014;
+             var pp = feature.properties.inver_pp_2014;
+             var total = feature.properties.Vigencia2014;
+             break;
+           case 2013:
+             var localizada = feature.properties.inver_localizada_2013;
+             var ciudad = feature.properties.inver_ciudad_2013;
+             var pp = feature.properties.inver_pp_2013;
+             var total = feature.properties.Vigencia2013;
+             break;
+           case 2012:
+             var localizada = feature.properties.inver_localizada_2012;
+             var ciudad = feature.properties.inver_ciudad_2012;
+             var pp = feature.properties.inver_pp_2012;
+             var total = feature.properties.Vigencia2012;
+             break;
+           case 2011:
+             var localizada = feature.properties.inver_localizada_2011;
+             var ciudad = feature.properties.inver_ciudad_2011;
+             var pp = feature.properties.inver_pp_2011;
+             var total = feature.properties.Vigencia2011;
+             break;
+           case 2010:
+             var localizada = feature.properties.inver_localizada_2010;
+             var ciudad = feature.properties.inver_ciudad_2010;
+             var pp = feature.properties.inver_pp_2010;
+             var total = feature.properties.Vigencia2010;
+             break;
+           case 2009:
+             var localizada = feature.properties.inver_localizada_2009;
+             var ciudad = feature.properties.inver_ciudad_2009;
+             var pp = feature.properties.inver_pp_2009;
+             var total = feature.properties.Vigencia2009;
+             break;
+           case 2008:
+             var localizada = feature.properties.inver_localizada_2008;
+             var ciudad = feature.properties.inver_ciudad_2008;
+             var pp = feature.properties.inver_pp_2008;
+             var total = feature.properties.Vigencia2008;
+             break;
+         }
+         let popupContent2 = `                       
+         <div class="card" style="width: 18rem;">
+                 <!-aquí podemos colocar una imagen-->     
+           <div class="card-body">
+             <h5 class="card-title">` + feature.properties.NOMBRE + `</h5>
+             <h6 class="card-subtitle mb-2 text-muted">` + feature.properties.IDENTIFICACION+ `</h6>
+             <p class="card-text">
+             <p  class="text-muted"  ;">Ejecución Presupuestal `+vigencia_query+`</p>
+             <table class="table table-hover table-inverse table-responsive">
+               <tbody>
+                 <tr>
+                   <td>Inversión Localizada</td>
+                   <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(localizada)) + `</td>
+                 </tr>
+                 <tr>
+                 <td>Inversión Ciudad</td>
+                 <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(ciudad)) + `</td>
+               </tr>
+               <tr>
+               <td>Inversión Presupuesto Participativo</td>
+               <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(pp)) + `</td>
+             </tr>
+                 <tr>
+                     <td>Total Inversión</td>
+                     <td>`+ new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(total)) +` </td>
+                 </tr>
+               </tbody>
+             </table>
+           </div>
+         </div>`              
+         layer.bindPopup(popupContent2)
+       }
+     } ).addTo(map)
+     map.fitBounds(geojsonlayer.getBounds())
 
-      var info = L.control();
-      info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info');
-        this.update();
-        return this._div;
-      };
-      info.update = function () {
-          this._div.innerHTML = '<p><b>'+vigencia_query+'</b></p>';
-      };
-      info.addTo(map);
-      var legend = L.control({position: 'bottomright'});
-      legend.onAdd = function (map) {
-      var div = L.DomUtil.create('div', 'info legend'),
-      grades = [0, 100000000000, 150000000000, 200000000000, 250000000000, 250000000000, 300000000000, 400000000000],
-      labels = [];
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-              '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-        return div;
-      };
-      legend.addTo(map);
-      L.Control.Watermark = L.Control.extend({
-        onAdd: function(map) {
-        var img = L.DomUtil.create('img');
-        img.src = '/img/logo.png';
-        img.style.width = '100px';
-        return img;
-        },
-        onRemove: function(map) {
-          // Nothing to do here
-        }
-      });
-      L.control.watermark = function(opts) {
-        return new L.Control.Watermark(opts);
-      }
-      L.control.watermark({ position: 'bottomleft' }).addTo(map);
-    })
+     var info = L.control();
+     info.onAdd = function (map) {
+       this._div = L.DomUtil.create('div', 'info');
+       this.update();
+       return this._div;
+     };
+     info.update = function () {
+         this._div.innerHTML = '<p><b>'+vigencia_query+'</b></p>';
+     };
+     info.addTo(map);
+     var legend = L.control({position: 'bottomright'});
+     legend.onAdd = function (map) {
+     var div = L.DomUtil.create('div', 'info legend'),
+     grades = [0, 100000000000, 150000000000, 200000000000, 250000000000, 250000000000, 300000000000, 400000000000],
+     labels = [];
+       // loop through our density intervals and generate a label with a colored square for each interval
+       for (var i = 0; i < grades.length; i++) {
+           div.innerHTML +=
+             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+       }
+       return div;
+     };
+     legend.addTo(map);
+     L.Control.Watermark = L.Control.extend({
+       onAdd: function(map) {
+       var img = L.DomUtil.create('img');
+       img.src = '/img/logo.png';
+       img.style.width = '100px';
+       return img;
+       },
+       onRemove: function(map) {
+         // Nothing to do here
+       }
+     });
+     L.control.watermark = function(opts) {
+       return new L.Control.Watermark(opts);
+     }
+     L.control.watermark({ position: 'bottomleft' }).addTo(map);
+   })
 
-    var datadep=[];
+  pintagrafica(vigencia_query)
+
+}
+   
+async function pintagrafica(vigencia_query){
+  var datadep=[];
   fetch('http://localhost:4000/api/vigencias/dependencias/'+vigencia_query)
   .then(res=> res.json())
       .then(datos=>{
 
         let tam = datos.data.length;
-     
+        document.getElementById('headderTableDepVigencia').innerHTML=`<b>Inversión por Dependencias en la Vigencia `+ datos.data[0].ano +`</b>`
         for(var i =0; i<(tam) ;i++   ){
             datadep.push({
               "dependencias": datos.data[i].nombre_dep,
@@ -293,10 +359,7 @@ function buscar_vigencia(){
           "type": "serial",
           "theme": "light",
           "rotate": true,
-          "titles": [{
-            "text": "Inversión Dependencias "+datos.data[0].ano,
-            "size": 12
-        }],
+         
           "dataProvider": datadep,
           "gridAboveGraphs": true,
           "startDuration": 1,
@@ -325,8 +388,7 @@ function buscar_vigencia(){
         
         } );
       })
-    
-}
+}   
 
 function getColor2(d) {
   return d > 400000000000  ? '#005a32' :
@@ -339,7 +401,7 @@ function getColor2(d) {
                              '#f7fcf5' ;
 }
 
-function style2(feature) {
+ function style2(feature) {
   var vigencia_query = document.getElementById('inputGroupSelect04').value
   
   var total=0;
@@ -403,7 +465,7 @@ function style2(feature) {
   };
 }
 
-function highlightFeature(e) {
+ function highlightFeature(e) {
   var layer = e.target;
   layer.setStyle({
       weight: 5,
