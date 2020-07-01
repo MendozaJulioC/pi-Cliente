@@ -1,4 +1,281 @@
 
-<%- include ('../partials/head.html') %>
-<%- include ('../partials/navigation.html')%>
-<%- include ('../partials/scriptsHome.html')%>
+
+<!DOCTYPE html>
+<html lang="es">
+  <head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/css.css">
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <title> <%= title %> </title>
+    <%- include ('../partials/head.html') %>
+  </head>
+
+<body onload="vigencia()">
+      <div id="container" class="row mb-auto">
+        <!--encabezado-->
+        <div class="form-group col-xl-12">
+          <div class="card shadow p-2 mb-1 bg-white rounded">
+            <div class="card-body ">
+              <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                <p style="align-items: center;"> <img src="/img/logo.png" style="width: 5%;" alt=""></p>Total
+                Inversión Pública Municipio de Medellín
+              </h6>
+              <p class="text-muted" style="text-align: center;font-size: 18px;line-height: 18px;font-weight: 600;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Comunas y Corregimientos
+              </p>
+              <h6 id="comuna" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Nombre de la Comuna
+              </h6>
+              <h4 id="totalVIgencia"class="text-muted" style="text-align: center;font-size: 28px;line-height: 28px;font-weight: 600;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+              </h4>
+              </h4>
+              
+              <h6 id="vigencia" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <!--seleccion del territorio consultar http://localhost:4000/api/totales y traer solo años-->
+        <div class="form-group col-xl-6">
+          <div class="card shadow p-3 bg-white rounded">
+            <div class="input-group col-12">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" style="background: #EE7518;color:#FFFFFF; font-size: x-small;" for="inputGroupSelect01">Comunas y Corregimientos</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01">
+                      <option selected>Seleccione...</option>
+                      <option value="1">01-Popular</option>
+                      <option value="2">02-Santa Cruz</option>
+                      <option value="3">03-Manrique</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-info btn-block" style="font-size: xx-small;" type="button"> <i
+                            class="fa fa-calendar" style="color:#FFFFFF; width:60px; height:20px; font-size: small;"
+                            aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+                      </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+
+        <!---->
+        <div class="form-group col-xl-6 ">
+            <div class="card shadow p-3 bg-white rounded">
+                <div class="input-group col-12">
+                    
+                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" style="background: #B4358B; color:#FFFFFF;" for="inputGroupSelect01">Vigencia</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect02">
+                          <option selected>Seleccione...</option>
+                          <option value="2008">2008</option>    
+                          <option value="2009">2009</option>
+                          <option value="2010">2010</option>
+                        </select>
+                        
+                        <div class="input-group-append">
+                            <button class="btn btn-info btn-block" style="font-size: xx-small;background-color: #009AB2;" type="button"> <i
+                                class="fa fa-calendar" style="color:#FFFFFF; width:60px; height:20px; font-size: small;"
+                                aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+                          </div>
+                      </div>
+    
+    
+        
+    
+                </div>
+              </div>
+        </div>
+
+        <!--tarjetas de datos generales de los tipos de inversion-->
+        <div class="form-group col-xl-6 mb-5">
+          <div class="card text-center ">
+            <div class="card-body">
+              <div class="card-deck ">
+                <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
+                  <div class="card-body ">
+                    <h3 class="card-title cardheader" style="color: #73879C;">Inversión Localizada</h3>
+                    <h6  id="inverLocalizada" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
+                    <button type="button" class="btn btn-outline-info mr-2" onclick="modalGraphLocalizada()">
+                      <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    </button>       
+                  </div>
+                </div>
+                <div class="card border-light shadow-sm p-3 mb-4 bg-white rounded">
+                  <div class="card-body ">
+                    <h3 class="card-title cardheader" style="color: #73879C;">Inversión de Ciudad</h3>
+                    <h6 id="inverCiudad"  style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
+                    <button type="button" class="btn btn-outline-info mr-2" onclick="modalGraphCiudad()">
+                      <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    </button>  
+                  </div>
+                </div>
+                <div class="card-deck ">
+                    <div class="card border-light  shadow-sm p-3 mb-4 bg-white rounded">
+                      <div class="card-body ">
+                    
+                        <h3 class="card-title cardheader" style="color: #73879C;">Presupuesto Participativo</h3>
+                        <h6 id="pp" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+                        <button type="button" class="btn btn-outline-info mr-2"onclick="modalGraphPP()">
+                          <i class="fa fa-bar-chart fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                        </button>  
+                      </div>
+                    </div>
+               
+                  </div>
+              </div>
+              
+              <div id="chartMainVigencia" style="width: 100%; height: 350px; background-color: #FFFFFF;"> </div>
+            </div>
+          </div>
+
+
+        
+        </div>
+
+        <!--mapa chrolopet-->
+        <div class="col-xl-6 shadow mb-auto bg-white rounded">
+          <section class="cardcontainer card border-light">
+            <div class="card border-light">
+              <div class="card-body">
+                <div id="map" style=" width: 100%; height: 764px; "></div>
+              </div>
+            </div>
+          </section>
+
+       
+        </div>
+
+      </div>
+
+
+
+
+    <!-- Modal: ventana de tiempo-->
+    <div class="modal fade bd-example-modal-xl"  id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> </h5>
+     
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+         
+        </div>
+        <div class="modal-body">
+         <h6 id="actualVigencia" class="card-subtitle text-muted">Vigencia</h6>
+          <div class="container mt-lg-4">
+
+            <section class="cardcontainer mt-4">
+              <div class="container mt-lg-3" style="  width: 100%; height: 500px; font-size	: 11px" id="chartModalVigencia"></div>
+            </section>
+
+           <section class="cardcontainer mt-4">
+             <div class="table-responsive">
+               <table id="tblexportDataModal" class="table table-hover table-sm table-striped">
+                 <thead style="text-align: center;"class="thead-inverse">
+                   <tr>
+                     <th>Vigencia</th>
+                     <th>Comuna</th>
+                     <th>Nombre Comuna</th>
+                     <th>Inversión Localizada</th>
+                    
+                   </tr>
+                 </thead>
+                 <tbody id="resultInverLocalizada" style=" height: min-content;"></tbody>
+                 <tfoot>
+                   <tr>
+                     <th colspan="4" style="font-size: 10px;text-align:left;">
+                       <p class="text-muted" style="font-style: oblique;"> <b>Fuente: </b> Alcaldía de Medellin -
+                         Departamento Administrativo de Planeación</p>
+                     </th>
+                   </tr>
+                 </tfoot>
+               </table>
+             </div>
+           </section>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+            <button type="button" class="btn btn-outline-success "><i class="fa fa-file-excel-o fa-1x" style="width:65px; height: 20px;" aria-hidden="true"><span style="font-size: 12px; color: rgb(54, 114, 94);">  Exportar</i></button>     
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+
+<!--modal play time-->
+    <div class="modal fade bd-play-modal-xl"  id="playModal" tabindex="-1" role="dialog" aria-labelledby="playModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="playModalLabel"> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div id="chartdivPlay" style="width: 100%; height: 500px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <%- include ('../partials/navigation.html')%>
+</body>
+  <%- include ('../partials/scriptsHome.html')%>
+  <script src="/js/htmltoexcel.js"></script>
+  <script src="/js/cargaVigencia.js"></script>
+  <script src="/js/dateoVigencia.js"></script>
+  <script src="/js/transversal.js" ></script>
+
+  <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+  <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+  <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+  <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+
+
+
+
+
+
+  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+

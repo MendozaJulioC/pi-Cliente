@@ -83,7 +83,6 @@ async function fortInstValor(vigencia_query){
 }
   
 async function  vigencias(vigencia_query){
-
  try {
         var data=[];let tabla='';
         fetch('http://localhost:4000/api/vigencias/total-comuna/'+vigencia_query)
@@ -348,7 +347,7 @@ async function pintagrafica(vigencia_query){
 
         let tam = datos.data.length;
         document.getElementById('headderTableDepVigencia').innerHTML=`<b>Inversión por Dependencias en la Vigencia `+ datos.data[0].ano +`</b>`
-        for(var i =0; i<(tam) ;i++   ){
+        for(let i =0; i<(tam) ;i++   ){
             datadep.push({
               "dependencias": datos.data[i].nombre_dep,
               "total":(parseInt(datos.data[i].inversion))
@@ -403,55 +402,43 @@ function getColor2(d) {
 
  function style2(feature) {
   var vigencia_query = document.getElementById('inputGroupSelect04').value
-  
   var total=0;
   switch (parseInt(vigencia_query)) {
     case 2019:
     total = feature.properties.Vigencia2019;
       break;
     case 2018:
-    
      total = feature.properties.Vigencia2018;
       break;
     case 2017:
-      
     total = feature.properties.Vigencia2017;
       break;
     case 2016:
-     
      total = feature.properties.Vigencia2016;
       break;
     case 2015:
-    
       total = feature.properties.Vigencia2015;
       break;
     case 2014:
-    
        total = feature.properties.Vigencia2014;
       break;
     case 2013:
-    
      total = feature.properties.Vigencia2013;
       break;
     case 2012:
-    
       total = feature.properties.Vigencia2012;
       break;
     case 2011:
-      
        total = feature.properties.Vigencia2011;
       break;
     case 2010:
-      
      total = feature.properties.Vigencia2010;
       break;
     case 2009:
-   
        total = feature.properties.Vigencia2009;
       break;
     case 2008:
-     
-    total = feature.properties.Vigencia2008;
+      total = feature.properties.Vigencia2008;
       break;
   }
 

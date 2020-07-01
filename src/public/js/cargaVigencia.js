@@ -64,22 +64,6 @@ const vigencia= async(req,res)=>{
         chart.legend = new am4charts.Legend();
         
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     })
     
   }catch (error) {console.log(error)}
@@ -264,7 +248,9 @@ const mapaVogencia = async (req, res) => {
       info.addTo(map);
       var legend = L.control({
         position: 'bottomright'
+        
       });
+
       legend.onAdd = function (map) {
         var div = L.DomUtil.create('div', 'info legend'),
           grades = [0, 100000000000, 150000000000, 200000000000, 250000000000, 250000000000, 300000000000, 400000000000],
@@ -278,23 +264,21 @@ const mapaVogencia = async (req, res) => {
         return div;
       };
       legend.addTo(map);
+
       L.Control.Watermark = L.Control.extend({
-        onAdd: function (map) {
+          onAdd: function (map) {
           var img = L.DomUtil.create('img');
           img.src = '/img/logo.png';
           img.style.width = '100px';
           return img;
         },
-        onRemove: function (map) {
-          // Nothing to do here
+        onRemove: function (map) {// Nothing to do here
         }
       });
       L.control.watermark = function (opts) {
         return new L.Control.Watermark(opts);
       }
-      L.control.watermark({
-        position: 'bottomleft'
-      }).addTo(map);
+      L.control.watermark({position: 'bottomleft'}).addTo(map);
     })
 
     tablaVigencia();
