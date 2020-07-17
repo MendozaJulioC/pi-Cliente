@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const EventEmitter = require('events');
-
 const favicon = require('serve-favicon');
 const path = require('path');
 

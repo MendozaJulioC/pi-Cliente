@@ -422,7 +422,7 @@ function totalAlonso() {
         })
         //var marker1 = L.marker([6.295596, -75.543217], {icon: myIcon}).addTo(map);
         // var marker2 = L.marker([6.306220, -75.553265], {icon: myIcon}).addTo(map);
-          map.on('click', e => {
+        map.on('click', e => {
         //marker1.bindPopup(hola(1)).openPopup();
         // marker2.bindPopup(hola(2)).openPopup();
         })

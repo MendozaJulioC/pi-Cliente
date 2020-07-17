@@ -36,7 +36,7 @@ tr:nth-child(even){background-color: rgb(203, 211, 212)}
 
 
   @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-  }
+  
 
   @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
@@ -169,10 +169,10 @@ tr:nth-child(even){background-color: rgb(203, 211, 212)}
   }
 
   #container {
-    padding-left: 20px;
-    padding-right: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
     padding-top: 5px;
-    padding-bottom: 20px;
+    padding-bottom: 2px;
   }
 
   @font-face {

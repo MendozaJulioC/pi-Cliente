@@ -182,6 +182,7 @@ async function mapa(vigencia_query){
    fetch(geojson_url)
    .then(res => res.json())
    .then(data => {
+
      let geojsonlayer = L.geoJson(data, {style: style2,
        onEachFeature: function (feature, layer) {
          switch (parseInt(vigencia_query)) {
@@ -292,6 +293,7 @@ async function mapa(vigencia_query){
          layer.bindPopup(popupContent2)
        }
      } ).addTo(map)
+     
      map.fitBounds(geojsonlayer.getBounds())
 
      var info = L.control();
@@ -303,6 +305,7 @@ async function mapa(vigencia_query){
      info.update = function () {
          this._div.innerHTML = '<p><b>'+vigencia_query+'</b></p>';
      };
+
      info.addTo(map);
      var legend = L.control({position: 'bottomright'});
      legend.onAdd = function (map) {
