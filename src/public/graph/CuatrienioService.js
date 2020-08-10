@@ -5,7 +5,7 @@ const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2
 })
 
-function servCuatrienios() {
+async function servCuatrienios() {
     const alonso = document.getElementById('alonso');
     const anibal = document.getElementById('anibal');
     const fico = document.getElementById('fico');
@@ -151,7 +151,7 @@ function servCuatrienios() {
         });
 }
 
-function servTotales() {
+async function servTotales() {
 
     fetch('http://localhost:4000/api/totales')
         .then(res => res.json())
@@ -220,7 +220,7 @@ function servTotales() {
         })
 }
 
-function detallecomuna(comuna, nomcomuna) {
+async function detallecomuna(comuna, nomcomuna) {
     let localizada1 = document.getElementById('localizada1')
     let ciudad1 = document.getElementById('ciudad1')
     let pp1 = document.getElementById('pp1')
@@ -350,7 +350,7 @@ function detallecomuna(comuna, nomcomuna) {
         })
 }
 
-function totalAlonso() {
+async function totalAlonso() {
     fetch('http://localhost:4000/api/cuatrienios/alonso/total')
         .then(res => res.json())
         .then(datos => {
@@ -484,6 +484,8 @@ function totalAlonso() {
                         </div>`
                     layer.bindPopup(popupContent2)
                     layer.setIcon(pointMarker)
+                  
+			.addTo(map);
                 }
             }).addTo(map)
             map.fitBounds(geojsonlayer2.getBounds())

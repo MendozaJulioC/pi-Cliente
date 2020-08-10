@@ -63,7 +63,6 @@ function buscaComuna(){
             headers:{
                 'Content-Type': 'application/json'
             }
-        
          }).then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then(response => {
@@ -73,22 +72,17 @@ function buscaComuna(){
             document.getElementById('inverLocalizada').innerHTML=formatter.format(Math.round(response.data[0].inver_localizada));
             document.getElementById('inverCiudad').innerHTML=formatter.format(Math.round(response.data[0].inver_ciudad));
             document.getElementById('pp').innerHTML=formatter.format(Math.round(response.data[0].inver_pp));
-        
             nombreComuna=response.data[0].nom_comuna;
             EstaVigencia= response.data[0].ano;
             LocalizadaInver=formatter.format(Math.round(response.data[0].inver_localizada));
             CiudadInver=formatter.format(Math.round(response.data[0].inver_ciudad));
             PPInverver=formatter.format(Math.round(response.data[0].inver_pp));
             VigenciaTotal=formatter.format(Math.round(response.data[0].inver_total));
-
-
             am4core.useTheme(am4themes_dataviz);
             am4core.useTheme(am4themes_animated);
             // Themes end
-            
             var chart = am4core.create("chartComunaVigencia", am4charts.PieChart);
             chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-            
             chart.data = [
               {
                 dep: "Localizada",
@@ -102,7 +96,6 @@ function buscaComuna(){
                 dep: "Pp",
                 value: (Math.round(response.data[0].inver_pp))
               },
-             
             ];
             chart.radius = am4core.percent(70);
             chart.innerRadius = am4core.percent(40);
@@ -118,22 +111,13 @@ function buscaComuna(){
             series.alignLabels = false;
             series.hiddenState.properties.startAngle = 50;
             series.hiddenState.properties.endAngle = 10;
-            
             chart.legend = new am4charts.Legend();
-            
-        
             ComunaDepVigencia()
-          
-            
-        
-
         });
     }else{
         document.getElementById('inputGroupSelectTerritorio').value=0;
         document.getElementById('inputGroupSelectVigencia').value=0;
-        document.getElementById('inputGroupSelectVigencia').disabled= true;
-
-        
+        document.getElementById('inputGroupSelectVigencia').disabled= true;   
     }
 
 }

@@ -194,15 +194,7 @@ const getComunas = async (req, res) => {
         console.log(e);
     }
 }
-const getDependencia = async (req, res) => {
-    try {
-        res.render('./dependencias/dependencia.html', {
-            title: "Dependencias"
-        })
-    } catch (e) {
-        console.log(e);
-    }
-}
+
 const getProyectos = async (req, res) => {
     try {
         res.render('./proyectos/proyecto.html', {
@@ -231,7 +223,7 @@ module.exports = {
     getTotalesComuna,
     getVigencias,
     getComunas,
-    getDependencia,
+   
     getProyectos,
     getContacto,
     getDetalleComuna,

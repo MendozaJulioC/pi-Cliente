@@ -1,4 +1,4 @@
-function totalAnibal() {
+async function totalAnibal() {
     fetch('http://localhost:4000/api/cuatrienios/anibal/total')
         .then(res => res.json())
         .then(datos => {
@@ -221,7 +221,7 @@ function totalAnibal() {
         })
 }
 
-function  anibalcomuna(comuna, nomcomuna){
+async function  anibalcomuna(comuna, nomcomuna){
     let localizada1 = document.getElementById('localizada1')
     let ciudad1 = document.getElementById('ciudad1')
     let pp1 = document.getElementById('pp1')
@@ -252,7 +252,7 @@ function  anibalcomuna(comuna, nomcomuna){
 
 }
 
-function depComuna(vigencia1, vigencia2, comuna, nomcomuna) {
+async function depComuna(vigencia1, vigencia2, comuna, nomcomuna) {
     var parametros = {
         "vigencia1": vigencia1,
         "vigencia2": vigencia2,

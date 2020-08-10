@@ -3,6 +3,9 @@
 
 <%- include ('../partials/head.html') %>
 <link rel="stylesheet" href="css/the-big-picture.css">
+<link rel="stylesheet" href="css/prueba.css">
+
+
 <body >
   <!-- Navigation -->
  <%- include ('../partials/navigation.html')%>
@@ -10,18 +13,131 @@
 
   <!-- Page Content -->
   <section>
-    <div class="container">
+   
+
+    <section class="hero-unit container">
       <div class="row">
-        <div class="col-lg-10">
-          <h1 style=" color:yellow" class="mt-5">geoInverApp</h1>
-          <p style="text-align:justify; font-family: 'Merriweather', serif;font-size:large;">
-            La georreferenciación de la Inversión pública, es uno de los instrumentos mediante el cual se realiza el seguimiento al Plan de Desarrollo Municipal, mediante el cual se muestra la ubicación de la inversión social en cada una de las subdivisiones territoriales, teniendo en consideración que dentro de la división político administrativa de Colombia emanada de la Constitución Nacional, el Municipio de Medellín como ente territorial, cuenta con una composición urbana de 16 Comunas y su territorio rural lo conforman 5 corregimientos.
-          </p>
+        <div class="large-12 columns">
+          <hgroup>
+            <h1>Información y Evaluación Estratégica</h1>
+            <h3>Portal Monitoreo Indicadores de Ciudad</h3>
+          </hgroup>
+    
+    
+          <ul class="small-block-grid-2 medium-block-grid-4 flip-cards">
+            <li ontouchstart="this.classList.toggle('hover');">
+              <div class="large button card-front">
+                <a href="#">Inversión Territorio</a>
+                <i class="fa fa-map-marker card-icon"></i>
+              </div>
+              <div class="panel card-back">
+                <i class="fa fa-map-marker card-icon"></i>
+                <div class="hub-info">
+                  <a href="http://localhost:5000/cuatrienios">Inversión Por Territorio</a>
+                  <p style="font-size: small;">Find coding gists, cheatsheets, plugins, themes, resources, and tutorials.</p>
+                </div>
+                <small class="clear">
+                  <a href="http://localhost:5000/cuatrienios" class="btn btn-outline-success btn-sm">Ingresar</a>
+                </small>
+              
+              </div>
+            </li>
+    
+            <li ontouchstart="this.classList.toggle('hover');">
+              <div class="large button card-front">
+                <a href="http://www.aaronsnowberger.com">Plan Inidicativo</a>
+                <i class="fa fa-pencil-square-o card-icon"></i>
+              </div>
+    
+              <div class="panel card-back">
+                <i class="fa fa-pencil-square-o card-icon"></i>
+                <div class="hub-info">
+                  <a href="http://www.aaronsnowberger.com">AaronSnowberger.com</a>
+                  <p>Take a look at my graphic design portfolio and contact me for design work.</p>
+                </div>
+                <small class="clear">Updated Saturdays.</small>
+              </div>
+            </li>
+    
+            <li ontouchstart="this.classList.toggle('hover');">
+              <div class="large button card-front">
+                <a href="">Plan de Acción</a>
+                <i class="fa fa-paper-plane-o card-icon"></i>
+              </div>
+    
+              <div class="panel card-back">
+                <i class="fa fa-paper-plane-o card-icon"></i>
+                <div class="hub-info">
+                  <a href="">Udemy.com</a>
+                  <p>Join classes about Computers, Technology, Coding, Design, and Language Learning.</p>
+                </div>
+                <small class="clear">Updated Mondays.</small>
+              </div>
+            </li>
+            <li ontouchstart="this.classList.toggle('hover');">
+              <div class="large button card-front">
+                <a href="http://www.aicfchurch.org">Obra Física </a>
+                <i class="fa fa-building-o card-icon"></i>
+              </div>
+    
+              <div class="panel card-back">
+                <i class="fa fa-building-o card-icon"></i>
+                <div class="hub-info">
+                  <a href="http://www.aicfchurch.org">AICFChurch.org</a>
+                  <p>Listen to sermon podcasts or download church graphic design resources.</p>
+                </div>
+                <small class="clear">Updated the 4th Sunday.</small>
+              </div>
+            </li>
+            <li ontouchstart="this.classList.toggle('hover');">
+              <div class="large button card-front">
+                <a href="">OPP</a>
+                <i class="fa fa-map-o card-icon"></i>
+              </div>
+    
+              <div class="panel card-back">
+                <i class="fa fa-map-o card-icon"></i>
+                <div class="hub-info">
+                  <a href="">KeysToAGoodLife.com</a>
+                  <p>Find resources about business, family, exercise, and other various topics.</p>
+                </div>
+                <small class="clear">Updated monthly.</small>
+              </div>
+            </li>
+    
+            <li ontouchstart="this.classList.toggle('hover');">
+              <div class="large button card-front">
+                <a href="http://www.keytokorean.com">POT</a>
+                <i class="fa fa-globe card-icon" ></i>
+              </div>
+    
+              <div class="panel card-back">
+                <i class="fa fa-globe card-icon" ></i>
+                <div class="hub-info">
+                  <a href="http://www.keytokorean.com">KeyToKorean.com</a>
+                  <p>Take your Korean from "foreign" to fluent with vocab lists and grammar guides.</p>
+                </div>
+                <small class="clear">Updated MWF.</small>
+              </div>
+            </li>
+    
+            
+    
+          </ul>
         </div>
+    
+
+    
       </div>
-    </div>
+    </section>
   </section>
   <!-- Bootstrap core JavaScript -->
+  <!-- Top Menu bar Navigation -->
+
+<!-- Hero Unit -->
+
 </body>
 <%- include ('../partials/scriptsHome.html') %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
 </html>

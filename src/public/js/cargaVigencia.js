@@ -186,18 +186,18 @@ const mapaVogencia = async (req, res) => {
         style: style,
         onEachFeature: function (feature, layer) {
           let popupContent2 = `                       
-        <div class="card" style="width: 18rem;">
+             <div class="card" style="width: 18rem;">
                  <!-aquí podemos colocar una imagen-->     
-          <div class="card-body">
-            <h5 class="card-title">` + feature.properties.NOMBRE + `</h5>
-            <h6 class="card-subtitle mb-2 text-muted">` + feature.properties.IDENTIFICACION + `</h6>
-            <p class="card-text">
-            <p  class="text-muted"  ;">Ejecución Presupuestal 2019</p>
-            <table class="table table-hover table-inverse table-responsive">
-              <tbody>
-                <tr>
-                  <td>Inversión Localizada</td>
-                  <td>` + new Intl.NumberFormat('en-US', {
+               <div class="card-body">
+                  <h5 class="card-title">` + feature.properties.NOMBRE + `</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">` + feature.properties.IDENTIFICACION + `</h6>
+                  <p class="card-text">
+                  <p  class="text-muted"  ;">Ejecución Presupuestal 2019</p>
+                  <table class="table table-hover table-inverse table-responsive">
+                    <tbody>
+                      <tr>
+                        <td>Inversión Localizada</td>
+                      <td>` + new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD'
           }).format(parseInt(feature.properties.inver_localizada_2019)) + `</td>
@@ -283,9 +283,6 @@ const mapaVogencia = async (req, res) => {
 
     tablaVigencia();
 }
- 
-
-
 
 const tablaVigencia = async(req, res)=>{
   try {
@@ -295,15 +292,16 @@ const tablaVigencia = async(req, res)=>{
           .then(datos=>{
 
             let tam = datos.data.length;
-            document.getElementById('headderTableDepVigencia').innerHTML=`<b>Inversión por Dependencias en la Vigencia `+ datos.data[0].ano +`</b>`
+            document.getElementById('headderTableDepVigencia').innerHTML=`<b>Inversión por Dependencias en la Vigencia `+ 2019 +`</b>`
         
             for(var i =0; i<(tam) ;i++   ){
                 datadep.push({
-                  "dependencias": datos.data[i].nombre_dep,
-                  "total":(parseInt(datos.data[i].inversion))
+                  "dependencias": datos.data[i].nom_cortp,
+                  "total":(parseInt(datos.data[i].total))
                 });
-              
+                
             }
+         
             var chart = AmCharts.makeChart( "chartdiv", {
               "type": "serial",
               "theme": "light",

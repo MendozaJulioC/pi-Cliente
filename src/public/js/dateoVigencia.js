@@ -110,7 +110,7 @@ async function  vigencias(vigencia_query){
             "type": "serial",
             "theme": "dark",
             "titles": [{
-              "text": "Total de Inversión por Comunas y Corregimientos "+datos.data[0].ano,
+              "text": "Total de Inversión por Comunas y Corregimientos "+vigencia_query,
               "size": 15
           }],
             "dataProvider":data,
@@ -349,13 +349,12 @@ async function pintagrafica(vigencia_query){
       .then(datos=>{
 
         let tam = datos.data.length;
-        document.getElementById('headderTableDepVigencia').innerHTML=`<b>Inversión por Dependencias en la Vigencia `+ datos.data[0].ano +`</b>`
+        document.getElementById('headderTableDepVigencia').innerHTML=`<b>Inversión por Dependencias en la Vigencia `+ vigencia_query +`</b>`
         for(let i =0; i<(tam) ;i++   ){
-            datadep.push({
-              "dependencias": datos.data[i].nombre_dep,
-              "total":(parseInt(datos.data[i].inversion))
-            });
-          
+          datadep.push({
+            "dependencias": datos.data[i].nom_cortp,
+            "total":(parseInt(datos.data[i].total))
+          });
         }
         var chart = AmCharts.makeChart( "chartdiv", {
           "type": "serial",

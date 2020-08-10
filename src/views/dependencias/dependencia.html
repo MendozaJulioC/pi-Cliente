@@ -1,4 +1,278 @@
 
-<%- include ('../partials/head.html') %>
-<%- include ('../partials/navigation.html')%>
-<%- include ('../partials/scriptsHome.html')%>
+
+
+<!DOCTYPE html>
+<html lang="es">
+  <head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/css.css">
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <title> <%= title %> </title>
+    <%- include ('../partials/head.html') %>
+  </head>
+
+<body onload="mapadep()" >
+  <div id="container"  >
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+       
+    <div class="card shadow p-2 mb-1 bg-white rounded form-group col-xl-12">
+      <div class="card-body ">
+        <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+          <p style="align-items: center;"> <img src="/img/logo.png" style="width: 10%;" alt=""></p>
+          Total Inversión Pública Municipio de Medellín
+        </h6>
+        <p class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
+        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Comunas y Corregimientos
+        </p>
+        <h2 id="nom_dep" class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 600;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+        </h2>
+        <h4 id="totaDependenciaVigencia"class="text-muted" style="text-align: center;font-size: 28px;line-height: 28px;font-weight: 600;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+        </h4>
+        <h6 id="vigencia" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+        </h6>
+      </div>
+   </div>    
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!--tarjetas de datos generales de los tipos de inversion-->
+     <div class="card text-center shadow bg-light-gray rounded mb-0">
+        <div class="card-deck ">
+          <div class="card-body ">
+            <div class="input-group mb-2 col-12 col-12-mobilep input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text" style="background-color: #B4358B;color:white" for="inputGroupSelect01">Dependencias</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelectDependencia" >
+                <option value=0 >Seleccione...</option>
+                <% dependencias.forEach(function(dependencia){ %>
+                  <option value=<%= dependencia.cod_dep %>><%= dependencia.nombre_dep%> </option>
+                <% }); %>
+              </select>
+            </div>
+          </div>
+        
+          <div class="card-body ">
+            <div class="input-group  col-12 col-12-mobilep">
+              <button id="btnConsulta" type="button" class="btn btn-info btn-block " onclick="queryDep()" >
+                <i class="fa fa-search fa-2x" style=" width:20px; height:20px; font-size: initial;" aria-hidden="true" ></i><b>Consultar Dependencia </b>
+              </button>
+            </div>                   
+          </div>
+      
+        </div>
+      </div>
+      
+      
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!--tarjetas de datos generales de los tipos de inversion-->
+        <div id="chartdiv" class="card text-center shadow mt-2 mb-1"></div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <div class="card-deck text-center mt-2 mb-2">
+            <div class="card text-center shadow bg-light-gray rounded mb-0">
+                <div class="card-body ">
+                  <div class="input-group  col-12 col-12-mobilep">
+                    <div class="input-group-prepend" >
+                      <label class="input-group-text" style="background-color: #FFDC15  ;color:white" for="inputGroupSelect01">Vigencia</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelectVigencia" >
+                      <option selected value=0>Seleccione..</option>
+                      <option value=2019>2019</option>
+                      <option value=2018>2018</option>
+                      <option value=2017>2017</option>
+                      <option value=2016>2016</option>
+                      <option value=2015>2015</option>
+                      <option value=2014>2014</option>
+                      <option value=2013>2013</option>
+                      <option value=2012>2012</option>
+                      <option value=2011>2011</option>
+                      <option value=2010>2010</option>
+                      <option value=2009>2009</option>
+                      <option value=2008>2008</option>
+                    </select>
+                   <div class="input-group  col-6 col-12-mobilep">
+                    <button id="btnConsulta" type="button" class="btn btn-success btn-block" onclick="queryDepVig()"  >
+                      <i class="fa fa-search fa-2x" style=" width:20px; height:20px; font-size: initial;" aria-hidden="true" ></i><b>Consultar Territorio </b>
+                    </button>
+                  </div>                   
+                  </div>
+
+                 
+                </div>
+
+                
+                
+                <div class="card-body ">
+                  <div id="chartdivComunas"class="input-group  col-12 col-12-mobilep" style="width: 100%;
+                  height: 700px; font-size	: 11px;">
+                 
+                  </div>                   
+                </div>
+                
+           
+           
+          </div>
+          <div class="card border-light shadow-sm p-3 mb-1 bg-white rounded">
+            <div class="card-header" id="nombrecomuna"> </div>
+            <div class="card-body" id="map"style="width: 100%; height: 450px;" ></div>
+          </div>
+        </div>
+          
+        <div class="card-body">
+          <div class="card-deck ">
+            <div class="card border-light shadow-sm p-3 mb-2 bg-white rounded">
+              <div class="card-body ">
+                <h6 class="card-title cardheader" style="color: #73879C;">Inversión Localizada</h6>
+                <h6  id="inverLocalizada" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
+                </div>
+              </div>
+              <div class="card border-light shadow-sm p-3 mb-2 bg-white rounded">
+                <div class="card-body ">
+                  <h6 class="card-title cardheader" style="color: #73879C;">Inversión de Ciudad</h6>
+                  <h6 id="inverCiudad"  style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b> </b></h6>
+                 
+                </div>
+              </div>
+              <div class="card border-light  shadow-sm p-3 mb-2 bg-white rounded">
+                <div class="card-body ">
+                  <h6 class="card-title cardheader" style="color: #73879C;">Presupuesto Participativo</h6>
+                  <h6 id="pp" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+                
+                </div>
+              </div>
+              <div class="card border-light  shadow-sm p-3 mb-2 bg-white rounded">
+                <div class="card-body ">
+                  <h6 class="card-title cardheader" style="color: #73879C;">Fortalecimiento Institucional</h6>
+                  <h6 id="pp" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+  <div class="card-deck text-center mt-2 mb-2">
+    <div class="card border-light shadow-sm p-3 mb-1 bg-white rounded">
+      <div class="card-body " id="chartComVigDep" style="width: 100%; height: 750px;"></div>
+    </div>
+
+  </div>
+  <div class="card border-light shadow-sm p-3 mb-3 bg-white rounded">
+    <div class="card-body"  style="width: 100%; height: 750px;" >
+      <div class="table-responsive-sm">
+         <table class="table table-sm table-hover table-inverse table-responsive-md">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Cod_Dep</th>
+            <th>Dependencia</th>
+            <th>Cod_BPIN</th>
+            <th>Nombre del Proyecto</th>
+            <th>Inversión</th>
+            <th>*espp</th>
+          </tr>
+        </thead>
+        <tbody id="reportxproyect"></tbody>
+        <tfoot>
+          <tr>
+            <th >Cod_Dep</th>
+            <th>Dependencia</th>
+          <th>Cod_BPIN</th>
+          <th>Nombre del Proyecto</th>
+          <th>Inversión</th>
+          <th>*espp</th>
+          </tr>
+         <tr>
+           <td colspan="6">espp: 1: Proyectos de presupuesto participativo. 0:Proyectos de iniciativa de la Administración Municipal</td>
+         </tr>
+
+        </tfoot>
+    </table>
+      </div>
+     <div>
+        <nav aria-label="Page navigation example">
+         <ul class="pagination justify-content-center" id="page_num">
+        
+
+        <li class="page-item">
+          <a class="page-link"  aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li>
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+     </div>
+    
+    </div>
+  </div>
+</div>
+          
+<div class="card-body ">
+  <div class="col-12 col-12-mobilep form-group input-group justify-content-center" role="group">
+    <button type="button" class="btn btn-outline-info mr-2" ><i class="fa fa-sellsy fa-1x" style="width: 20px; height: 20px;"></i></button>
+    <button type="button" class="btn btn-outline-danger mr-2"> <i class="fa fa-file-pdf-o fa-1x" style="width: 20px; height: 20px;"></i></button>
+    <button type="button" class="btn btn-outline-success mr-2"><i class="fa fa-file-excel-o fa-1x" style="width: 20px; height: 20px;" aria-hidden="true"></i></button>   
+  </div>
+</div>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+</div>
+        
+
+
+
+    <%- include ('../partials/navigation.html')%>
+</body>
+  <%- include ('../partials/scriptsHome.html')%>
+  <script src="/js/htmltoexcel.js"></script>
+  <script src="/js/cargaDep.js"></script>
+
+
+  <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+  <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+  <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+  <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+  <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+
+
+
+
+  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+
+
+  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+
