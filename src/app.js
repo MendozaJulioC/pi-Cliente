@@ -8,7 +8,7 @@ const path = require('path');
 
 //settings
 const app = express();
-app.set('port',process.env.port||5500)
+app.set('port',process.env.port)
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors());
