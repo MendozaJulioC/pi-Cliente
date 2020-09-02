@@ -215,10 +215,27 @@ const getContacto = async (req, res) => {
 }
 
 
+const getDash= async (req, res)=>{
+    try {
+        res.render('./dash/dash.html', {
+            title: "Tablero de Control"
+        })
+    } catch (e) {
+        console.log(e);
+    }
+
+
+}
+
 
 
 module.exports = {
     getHome,
+    getDash,
+
+
+
+
     getCuatrienio,
     getTotalesComuna,
     getVigencias,

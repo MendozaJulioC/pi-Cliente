@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= title %> </title>
+    <%- include ('../partials/head.html') %>
+    <link rel="stylesheet" href="css/carddash.css">
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+</head>
+
+
+<%- include ('../partials/navplapp.html') %>
+
+<nav class="main-menu">
+  <ul>
+      <li>
+          <a href="http://justinfarrow.com">
+              <i class="fa fa-home fa-2x"></i>
+              <span class="nav-text">
+                  Dashboard
+              </span>
+          </a>
+        
+          
+      </li>
+      <li class="has-subnav">
+          <a href="#">
+              <i class="fa fa-laptop fa-2x"></i>
+              <span class="nav-text">
+                  Stars Components
+              </span>
+          </a>
+          
+      </li>
+      <li class="has-subnav">
+          <a href="#">
+             <i class="fa fa-list fa-2x"></i>
+              <span class="nav-text">
+                  Forms
+              </span>
+          </a>
+          
+      </li>
+      <li class="has-subnav">
+          <a href="#">
+             <i class="fa fa-folder-open fa-2x"></i>
+              <span class="nav-text">
+                  Pages
+              </span>
+          </a>
+         
+      </li>
+      <li>
+          <a href="#">
+              <i class="fa fa-bar-chart-o fa-2x"></i>
+              <span class="nav-text">
+                  Graphs and Statistics
+              </span>
+          </a>
+      </li>
+      <li>
+          <a href="#">
+              <i class="fa fa-font fa-2x"></i>
+              <span class="nav-text">
+                 Quotes
+              </span>
+          </a>
+      </li>
+      <li>
+         <a href="#">
+             <i class="fa fa-table fa-2x"></i>
+              <span class="nav-text">
+                  Tables
+              </span>
+          </a>
+      </li>
+      <li>
+         <a href="#">
+              <i class="fa fa-map-marker fa-2x"></i>
+              <span class="nav-text">
+                  Maps
+              </span>
+          </a>
+      </li>
+      <li>
+          <a href="#">
+             <i class="fa fa-info fa-2x"></i>
+              <span class="nav-text">
+                  Documentation
+              </span>
+          </a>
+      </li>
+  </ul>
+
+  <ul class="logout">
+      <li>
+         <a href="#">
+               <i class="fa fa-power-off fa-2x"></i>
+              <span class="nav-text">
+                  Logout
+              </span>
+          </a>
+      </li>  
+  </ul>
+</nav>
+
+
+<body onload="graphlineas()">
+
+   <div class="container mt-2  mb-2"  > 
+
+    <div class="card-deck">
+
+        <div class="card">
+          <div class="about">
+            <h2>Medellín Futuro</h2>
+            <p class="lead">Plan de Desarrollo 2020-2023</p>
+            <p>
+              <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
+                <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+            </p>
+
+            <div class="legends">
+                <h4 class="text-muted" style="text-align: center;font-size: 14px;line-height: 10px;font-weight: 150;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Ejecutado Plan Indicativo
+               </h4>
+            </div>
+
+          </div>
+          <div id="canvas" style="height: 350px;  width:100%;"></div>
+           
+              <h5 class="text-muted" style="text-align: center;font-size: 14px;line-height: 10px;font-weight: 150;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Ejecutado Plan de Acción
+              </h5>
+              <div id="canvas-pa1" style="height: 350px;  width:100%;"></div>
+        </div>
+
+
+
+
+
+
+
+       <div class="card mb-2">
+          <!-- Custom information -->
+          <div class="about">
+            <h3>Reactivación Económica y Valle del Software</h3>
+            <p class="lead">Línea Estratégica 1.</p>
+            <table class="table table-sm table-responsive-lg table- table-striped table-hover">
+              <thead class="thead-inverse" style="font-size: smaller;">
+                <tr>
+                  <th>Indicadores</th>
+                  <th>Componentes</th>
+                  <th>Programas</th>
+                </tr>
+                </thead>
+                <tbody style="font-size: smaller;">
+                  <tr>
+                    <td scope="row">120</td>
+                    <td>5</td>
+                    <td>16</td>
+                  </tr>
+                </tbody>
+            </table>
+
+             
+           
+          </div>
+          <div class="card-body" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+            <strong> Propósito:  </strong> <br>
+            La Reactivación Económica y el Valle del Software conforman una estrategia de
+            desarrollo económico con el objetivo de gestionar a partir de la educación, la innovación y
+            el emprendimiento nuevas oportunidades, aprovechando nuestras necesidades y
+            fortalezas para potenciar, sofisticar y diversificar la economía de la ciudad a través de la
+            apertura de nuevos escenarios y la generación de miles de empleos, en áreas asociadas a
+            la economía digital y la Cuarta Revolución Industrial.
+            <br>
+            <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
+              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
+            </button>
+          </div>
+
+          <div  id="canvas1" style="height: 270px;width: 100%;"></div>
+      
+        
+         
+       </div>
+
+        <div class="card mb-2">
+          <!-- Custom information -->
+          <div class="about">
+            <h3>Transformación Educativa y Cultural</h3>
+            <p class="lead">Línea Estratégica 2.</p>
+              <table class="table table-sm table-responsive-lg table- table-striped table-hover">
+              <thead class="thead-inverse" style="font-size: smaller;">
+                <tr>
+                  <th>Indicadores</th>
+                  <th>Componentes</th>
+                  <th>Programas</th>
+                </tr>
+                </thead>
+                <tbody style="font-size: smaller;">
+                  <tr>
+                    <td scope="row">129</td>
+                    <td>8</td>
+                    <td>22</td>
+                  </tr>
+                </tbody>
+            </table>
+            <p>
+              <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
+                <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+            </p>  
+          </div>
+          <!-- Canvas for Chart.js -->
+          <p>
+            <div  id="canvas2" style="height: 200px;width: 100%;"></div>
+      </p>
+       </div>
+    </div>
+    <div class="card-deck">
+     <div class="card">
+                    <!-- Custom information -->
+                    <div class="about">
+                    <h3>Medellín me Cuida</h3>
+                    <p class="lead">Línea Estratégica 3.</p>
+                   <table class="table table-sm table-responsive-lg table- table-striped table-hover">
+              <thead class="thead-inverse" style="font-size: smaller;">
+        
+                <tr>
+                  <th>Indicadores</th>
+                  <th>Componentes</th>
+                  <th>Programas</th>
+                </tr>
+                </thead>
+                <tbody style="font-size: smaller;">
+                  <tr>
+                    <td scope="row">129</td>
+                    <td>8</td>
+                    <td>22</td>
+                  </tr>
+                
+                </tbody>
+            </table>
+
+            <p>
+              <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
+                <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+            </p>   
+                    </div>
+                    
+                    <!-- Canvas for Chart.js -->
+                    <div  id="canvas3" style="height: 270px;width: 100%;"></div>
+
+                    <!-- Custom Axis -->
+                </div>
+
+
+                <div class="card">
+                    <!-- Custom information -->
+                    <div class="about">
+                      <h3>Ecociudad</h3>
+                      <p class="lead">Línea Estratégica 4.</p>
+                      <table class="table table-sm table-responsive-lg table- table-striped table-hover">
+                        <thead class="thead-inverse" style="font-size: smaller;">
+                  
+                          <tr>
+                            <th>Indicadores</th>
+                            <th>Componentes</th>
+                            <th>Programas</th>
+                          </tr>
+                          </thead>
+                          <tbody style="font-size: smaller;">
+                            <tr>
+                              <td scope="row">129</td>
+                              <td>8</td>
+                              <td>22</td>
+                            </tr>
+                          
+                          </tbody>
+                      </table>
+          
+                      <p>
+                        <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
+                          <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+                      </p>   
+                    </div>
+                    
+                    <!-- Canvas for Chart.js -->
+                    <div  id="canvas4" style="height: 270px;width: 100%;"></div>
+                    <!-- Custom Axis -->
+                  </div>
+                  <div class="card">
+                    <!-- Custom information -->
+                    <div class="about">
+                      <h3>Gobernanza y Gobernabilidad.</h3>
+                      <p class="lead">Línea Estratégica 5.</p>
+                      <table class="table table-sm table-responsive-lg table- table-striped table-hover">
+                        <thead class="thead-inverse" style="font-size: smaller;">
+                  
+                          <tr>
+                            <th>Indicadores</th>
+                            <th>Componentes</th>
+                            <th>Programas</th>
+                          </tr>
+                          </thead>
+                          <tbody style="font-size: smaller;">
+                            <tr>
+                              <td scope="row">129</td>
+                              <td>8</td>
+                              <td>22</td>
+                            </tr>
+                          
+                          </tbody>
+                      </table>
+          
+                      <p>
+                        <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
+                          <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i></button>
+                      </p>   
+                    </div>
+     
+                    <!-- Canvas for Chart.js -->
+                    <div  id="canvas5" style="height: 270px;width: 100%;"></div>
+                
+                    <!-- Custom Axis -->
+                    <div class="axis"></div>
+                  </div>
+                
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+ 
+</body>
+</html>
+<%- include ('../partials/scriptsHome.html')%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="/graph/dashgraph.js"></script>
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
