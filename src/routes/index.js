@@ -2,20 +2,21 @@ const { Router} = require('express');
 const router = Router();
 
 
-const { getHome,getDash,
+const { getHome,getDash,getGeneral,getContacto} = require('../controllers/index.controllers');
+    router.get('/', getHome);
+    router.get('/dash', getDash)
+    router.get('/general', getGeneral)
+    router.get('/contacto', getContacto); 
     
-    
-        getCuatrienio, getTotalesComuna, getVigencias,getComunas,
-        getProyectos, getContacto, getAlonso, getAnibal, 
-        getFico, getTotalAlonso, getTotalAnibal, getTotalFico
 
 
-    } = require('../controllers/index.controllers');
+
+  /*  
 const {getDependencia}= require('../controllers/taskTools');
 
 
 // en términos de cutarienio
-router.get('/', getHome);
+
 router.get('/cuatrienios', [getTotalesComuna, getCuatrienio]);
 router.get('/cuatrienios/alonso', [getTotalAlonso,getAlonso]);
 router.get('/cuatrienios/anibal', [getTotalAnibal, getAnibal]);
@@ -32,21 +33,15 @@ router.get('/proyectos', getProyectos);
 //otras opciones
 
 
-router.get('/contacto', getContacto); 
-
-
-router.get('/dash', getDash)
-
 
 
 
 //router.get('/cuatrienios/detalle/:cod_comuna', getDetalleComuna)
-/** tareas específicas */
+
 const getTotales = require('../controllers/task1');
 router.get('/totales', getTotales);
 
-
-
+*/
 
 
 

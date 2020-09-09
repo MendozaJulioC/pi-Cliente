@@ -227,11 +227,21 @@ const getDash= async (req, res)=>{
 
 }
 
+const getGeneral = async(req, res)=>{
+    try {
+        res.render('./generalpdm/generalspdm.html', {
+            title: "Información General"
+        })
+    } catch (e) {
+        console.log(e);
+    }   
+}
 
 
 module.exports = {
     getHome,
     getDash,
+    getGeneral,
 
 
 

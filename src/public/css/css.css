@@ -16,6 +16,8 @@ th, td {
 td{
   font-size: 12px;
 }
+
+
 tr:nth-child(even){background-color: rgb(203, 211, 212)}
 
 #cardheader{

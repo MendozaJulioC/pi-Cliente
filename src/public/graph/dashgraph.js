@@ -7,6 +7,7 @@ async function graphlineas(){
           numbersuffix: "%",
           gaugefillmix: "{dark-20},{light+70},{dark-10}",
           theme: "fusion"
+          
         },
         colorrange: {
           color: [
@@ -68,8 +69,11 @@ async   function graphLine2(){
             {
             minvalue: "0",
             maxvalue: "45",
+
+           
             label: "Bajo",
-            code: "#F2726F"
+            code: "#F2726F",
+            
             },
             {
             minvalue: "45",
@@ -101,6 +105,7 @@ async   function graphLine2(){
         width: "100%",
         height: "60%",
         dataFormat: "json",
+      
         dataSource
         }).render();
     });
@@ -284,17 +289,17 @@ async function graphPDM(){
             {
               minvalue: "0",
               maxvalue: "50",
-              code: "#F2726F"
+              code: "#B4358B"
             },
             {
               minvalue: "50",
               maxvalue: "75",
-              code: "#FFC533"
+              code: "#FFDC15"
             },
             {
               minvalue: "75",
               maxvalue: "100",
-              code: "#62B58F"
+              code: "#00853E"
             }
           ]
         },
@@ -318,97 +323,10 @@ async function graphPDM(){
         }).render();
       });
       
-      graphInversion()
+      graphPDA() 
 }
 
-async function graphInversion(){
-    const dataSource = {
-        chart: {
-         
-          theme: "fusion",
-          ticksonright: "1",
-          plottooltext: "Total: <b>$datavalue</b>",
-          targettooltext: "Target: $targetValue",
-          numbersuffix: "%",
-        },
-        colorrange: {
-          color: [
-            {
-              minvalue: "0",
-              maxvalue: "25",
-              code: "#F2726F"
-            },
-            {
-              minvalue: "25",
-              maxvalue: "55",
-              code: "#FFC533"
-            },
-            {
-              minvalue: "55",
-              maxvalue: "100",
-              code: "#62B58F"
-            }
-          ]
-        },
-        value: "55",
-    
-      };
-      
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "vbullet",
-          renderAt: "chart-container",
-          width: "100%",
-          height: "80%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-      
-graphPA()
 
-}
-
-async function graphPA(){
-
-
-    const dataSource = {
-        chart: {
-          caption: "Ejecución Financiera",
-          yaxisname: "Millones de Pesos",
-          aligncaptionwithcanvas: "0",
-          plottooltext: "<b>$dataValue</b>",
-          theme: "fusion"
-        },
-        data: [
-          {
-            label: "Ppto. Inicial",
-            value: "4469452000000"
-          },
-          {
-            label: "PPto. Ajustado",
-            value: "5579022000000"
-          },
-          {
-            label: "Ordenado",
-            value: "4915670000000"
-          }
-        ]
-      };
-      
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "bar2d",
-          renderAt: "chart-pa",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-      
-      graphPDA()
-}
 
 async function graphPDA(){
   const dataSource = {
@@ -426,17 +344,17 @@ async function graphPDA(){
           {
             minvalue: "0",
             maxvalue: "50",
-            code: "#F2726F"
+            code: "#B4358B"
           },
           {
             minvalue: "50",
             maxvalue: "75",
-            code: "#FFC533"
+            code: "#FFDC15"
           },
           {
             minvalue: "75",
             maxvalue: "100",
-            code: "#62B58F"
+            code: "#00853E"
           }
         ]
       },
@@ -462,3 +380,4 @@ async function graphPDA(){
     
     
 }
+

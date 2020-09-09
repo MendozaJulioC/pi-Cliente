@@ -152,6 +152,8 @@ async function  vigencias(vigencia_query){
  mapa(vigencia_query)
 }
 
+
+
 async function mapa(vigencia_query){
   var container = L.DomUtil.get('map');
     if(container != null){
