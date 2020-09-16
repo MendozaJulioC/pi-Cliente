@@ -34,7 +34,7 @@ async function graphlineas(){
         pointers: {
           pointer: [
             {
-              value: "35"
+              value: "0"
             }
           ]
         }
@@ -62,7 +62,8 @@ async   function graphLine2(){
         
         numbersuffix: "%",
         gaugefillmix: "{dark-20},{light+70},{dark-10}",
-        theme: "fusion"
+        theme: "fusion",
+       
         },
         colorrange: {
         color: [
@@ -92,7 +93,7 @@ async   function graphLine2(){
         pointers: {
         pointer: [
             {
-            value: "40"
+            value: "0"
             }
         ]
         }
@@ -147,7 +148,7 @@ async   function graphLine3(){
         pointers: {
           pointer: [
             {
-              value: "56"
+              value: "0"
             }
           ]
         }
@@ -200,7 +201,7 @@ async function  graphLine4(){
         pointers: {
           pointer: [
             {
-              value: "38"
+              value: "0"
             }
           ]
         }
@@ -253,7 +254,7 @@ async function   graphLine5(){
         pointers: {
           pointer: [
             {
-              value: "90"
+              value: "0"
             }
           ]
         }
@@ -274,6 +275,7 @@ async function   graphLine5(){
 }
   
 async function graphPDM(){
+  //aqui un fetch para consultar el porcentaje de ejecución del pdm
     const dataSource = {
         chart: {
        
@@ -306,7 +308,7 @@ async function graphPDM(){
         dials: {
           dial: [
             {
-              value: "81"
+              value: "0"// aqui colocar el dato recibido de la consulta
             }
           ]
         }
@@ -361,7 +363,7 @@ async function graphPDA(){
       dials: {
         dial: [
           {
-            value: "50"
+            value: "0"
           }
         ]
       }

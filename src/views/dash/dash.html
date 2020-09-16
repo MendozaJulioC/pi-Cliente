@@ -10,41 +10,21 @@
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 </head>
-
-
 <%- include ('../partials/menuplapp.html') %>
-
-
-
-
 <body onload="graphlineas()">
-
    <div class="container mt-3  mb-2"  > 
-
     <div class="card-deck">
-
         <div class="card">
           <div class="about">
             <h2>Medellín Futuro</h2>
             <p class="lead">Plan de Desarrollo 2020-2023</p>
-            <p>
               <a class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"  href="/general"> 
-                <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true"> Consultar</i></a>
-            </p>
-
-            <div class="legends">
-                <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 10px;font-weight: 150;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Ejecución Plan Indicativo
-               </h4>
-            </div>
-
+                <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true"> Consultar</i>
+              </a>
           </div>
-          <div id="canvas" style="height: 350px;  width:100%;"></div>
-            <h5 class="text-muted" style="text-align: center;font-size: 16px;line-height: 10px;font-weight: 150;color: #009AB2;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Ejecución Financiera Plan de Acción
-            </h5>
-            
-            <div id="canvas-pa1" style="height: 350px;  width:100%;"></div>
+          <br>
+          <h4 class="text-muted text12">Avance Cuatrienial</h4>
+          <div id="canvas" style="height: 370px;  width:100%;"></div>
         </div>
 
        <div class="card">
@@ -69,8 +49,7 @@
                 </tbody>
             </table>
           </div>
-          <div class="card-body" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: #73879C;
-          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+          <div class="card-body text12" >
             <strong> Propósito:  </strong> <br>
             La Reactivación Económica y el Valle del Software conforman una estrategia de
             desarrollo económico con el objetivo de gestionar a partir de la educación, la innovación y
@@ -83,7 +62,7 @@
               <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
             </button>
           </div>
-          <div  id="canvas1" style="height: 275px;width: 100%;"></div>
+          <div  id="canvas1" style="height: 270px;width: 100%;"></div>
        </div>
 
         <div class="card mb-2">
@@ -108,19 +87,18 @@
                 </tbody>
             </table>
           </div>
-          <div class="card-body" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+          <div class="card-body text12">
             <strong> Propósito:  </strong> <br>
             Garantizar una educación de calidad como derecho que moviliza la transformación humana, económica, política, ambiental y social
             de Medellín Futuro, articulada a un proyecto cultural de ciudad fundado en los derechos culturales, que fortalezca el potencial 
             creativo de sus ciudadanos, salvaguarde sus patrimonios y memorias y contribuya a hacer de Medellín una ciudad más solidaria, participativa 
             y en paz. 
-            <br> <br><br>
+            <br> <br>
                   <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
                     <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
                   </button>
             </div>
-            <div  id="canvas2" style="height: 275px;width: 100%;"></div>
+            <div  id="canvas2" style="height: 270px;width: 100%;"></div>
         </div>
           <!-- Canvas for Chart.js -->
         
@@ -151,8 +129,7 @@
             </tbody>
           </table> 
         </div>
-        <div class="card-body" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: #73879C;
-          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+        <div class="card-body text12">
           <strong> Propósito:  </strong> <br>
           Promover, crear, renovar y garantizar las condiciones básicas sociales y culturales que les permitan a los ciudadanos de Medellín en sus diferentes 
           cursos de vida tener las capacidades para desarrollar su potencial humano e individual y contribuir desde sus posibilidades a la creación de entornos
@@ -190,8 +167,7 @@
             </tbody>
           </table>
         </div>
-        <div class="card-body" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: #73879C;
-          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+        <div class="card-body text12" >
           <strong> Propósito:  </strong> <br>
           Establecer las bases de la transición ecológica para direccionar a Medellín a un futuro de sostenibilidad, donde se garantice
           el pleno disfrute del derecho a la ciudad, la habitabilidad digna de sus habitantes y la integración funcional y armoniosa de la 
@@ -202,7 +178,7 @@
           </button>
         </div>            
         <!-- Canvas for Chart.js -->
-        <div  id="canvas4" style="height: 275px;width: 100%;"></div>
+        <div  id="canvas4" style="height: 270px;width: 100%;"></div>
       </div>
 
       <div class="card">
@@ -227,27 +203,33 @@
             </tbody>
           </table>
           </div>
-          <div class="card-body" style="text-align: center;font-size: 13px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+          <div class="card-body text12">
             <strong> Propósito:  </strong> <br>
-            El propósito de la Línea es generar las condiciones y capacidades institucionales, políticas y ciudadanas para el fortalecimiento de lo público,
-             generando sinergia entre el gobierno y la ciudadanía. Buscamos el diálogo abierto desde los diferentes saberes, la concertación entre los 
-             diferentes actores y la construcción colectiva de procesos ciudadanos de paz territorial, desde el conocimiento colectivo del territorio, 
-             la instalación  de capacidades locales e institucionales para la gestión y protección de lo público, el uso del dato y la información como 
-             activo público que otorga valor y la articulación intra e interinstitucional y territorial.
-            <br>
+            <textarea  style="border:0cm" class="text12" name="" id="" cols="45" rows="10">
+              El propósito de la Línea es generar las condiciones y capacidades institucionales, políticas y ciudadanas para el fortalecimiento de lo público,
+              generando sinergia entre el gobierno y la ciudadanía. Buscamos el diálogo abierto desde los diferentes saberes, la concertación entre los 
+              diferentes actores y la construcción colectiva de procesos ciudadanos de paz territorial, desde el conocimiento colectivo del territorio, 
+              la instalación  de capacidades locales e institucionales para la gestión y protección de lo público, el uso del dato y la información como 
+              activo público que otorga valor y la articulación intra e interinstitucional y territorial.
+
+
+            </textarea>
+          
+            
             <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
               <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
             </button>
           </div>  
           <!-- Canvas for Chart.js -->
-          <div  id="canvas5" style="height: 275px;width: 100%;"></div>
+          <div  id="canvas5" style="height: 270px;width: 100%;"></div>
       </div>
                 
 
     </div>
 
+  
 
+  
 
 
 </div>
@@ -258,12 +240,20 @@
  
 </body>
 </html>
+
 <%- include ('../partials/scriptsHome.html')%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 <script src="/graph/dashgraph.js"></script>
 
 <script src="/js/dateo.js"></script>
-
+<script type="text/javascript">
+  function stopEnterKey(evt) {
+      var evt = (evt) ? evt : ((event) ? event : null);
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+      if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
+  }
+  document.onkeypress = stopEnterKey;
+</script>
 
 
 

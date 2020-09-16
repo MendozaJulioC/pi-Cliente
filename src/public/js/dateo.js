@@ -10,6 +10,8 @@ async function dateomain(){
     graphCompL4()
     graphCompL5()
     papptoejecxdep()
+    columnGeo()
+    strategicprojects()
    
 }
 
@@ -43,7 +45,7 @@ async function graphInversion(){
             }
           ]
         },
-        value: "55",
+        value: "24",
     
       };
       
@@ -81,17 +83,17 @@ async function graphBarPA(){
         data: [
           {
             label: "Ppto. Inicial",
-            value: "4469452000000",
+            value: 100000,
             color: "#EE7518"  //Custom Color
           },
           {
             label: "PPto. Ajustado",
-            value: "5579022000000",
+            value: 9000,
             color: "#009AB2"
           },
           {
             label: "Ordenado",
-            value: "4915670000000",
+            value: 9500,
             color : "#00853E"
           }
         ]
@@ -120,32 +122,33 @@ async function graphInicial(){
           numbersuffix:"%",
           theme: "fusion",
           xaxisname: "PDM 2020- 2023",
-          yaxisname: "% ejecución alcanzada",
+          yaxisname: "% Ejecución Alcanzada",
           exportEnabled: "1",
-          exportFileName:"AvancexLinea"
+          exportFileName:"AvancexLinea",
+          plottooltext: "<div id='divTable'><table id='dataTable' width='300px'><tr class=''><th>Línea</th><td>$label</td></tr><tr><th>$yAxisName</th><td>$value%</td></tr><tr><th>% Proyectado</th><td>$value%</td></tr></table></div>",
         
 
         },
         data: [
             {
               label: "Reactivación Económica y Valle del Software",
-              value: 10
-            },
-            {
-              label: "Transformación Educativa y Cultural",
               value: 20
             },
             {
+              label: "Transformación Educativa y Cultural",
+              value: 10
+            },
+            {
               label: "Medellín me Cuida",
-              value: 18
+              value: 30
             },
             {
               label: "Ecociudad",
-              value: 15
+              value: 10
             },
             {
               label: "Gobernanza y Gobernabilidad",
-              value: 11
+              value: 60
             }
           ]
         };
@@ -177,23 +180,23 @@ async function graphCompL1(){
         data: [
           {
             label: "Talento Humano y Empleo",
-            value: 29
+            value: 10
           },
           {
             label: "Ciencia, Tecnología, Innovación y Emprendimiento: CTI + E",
-            value: 26
+            value: 20
           },
           {
             label: "Productividad, competitividad e internacionalización",
-            value: 18
+            value: 50
           },
           {
             label: "Información, datos y generación de valor público",
-            value: 14
+            value: 90
           },
           {
             label: "Inglés para Valle del Software",
-            value: 15
+            value: 20
           }
         ]
       };
@@ -225,33 +228,33 @@ async function graphCompL2(){
         data: [
           {
             label: "Buen Comienzo",
-            value: 29
+            value: 0
           },
           {
             label: "Transformación Curricular para la Cuarta revolución Industrial",
-            value: 26
+            value: 0
           },
           {
             label: "Educación para todos y todas",
-            value: 18
+            value: 0
           },
           {
             label: "Maestros/as: Líderes de Futuro",
-            value: 14
+            value: 0
           },
           {
             label: "Infraestructura y ambientes de aprendizaje",
-            value: 12
+            value: 0
           }
           ,
           {
             label: "Cultura, arte y memoria",
-            value: 11
+            value: 0
           }
           ,
           {
             label: "Cultura ciudadana",
-            value: 18
+            value: 0
           }
         ]
       };
@@ -283,19 +286,19 @@ async function graphCompL3(){
       data: [
         {
           label: "Comunidades, cuerpos y mentes saludables",
-          value: 29
+          value: 0
         },
         {
           label: "Juventudes",
-          value: 26
+          value: 0
         },  
         {
           label: "Mujeres",
-          value: 18
+          value: 0
         },
         {
           label: "Maestros/as: Líderes de Futuro",
-          value: 14
+          value: 0
         }
       ]
     };
@@ -327,24 +330,24 @@ async function graphCompL4(){
       data: [
         {
           label: "Movilidad sostenible e inteligente",
-          value: 29
+          value: 0
         },
         {
           label: "Servicios públicos, energías alternativas y aprovechamiento de residuos sólidos",
-          value: 26
+          value: 0
         },  
         {
           label: "MujerConservación y protección de todas las formas de vidaes",
-          value: 18
+          value: 0
         },
         {
           label: "Urbanismo ecológico",
-          value: 14
+          value: 0
         }
         ,
         {
           label: "Corregimientos y Desarrollo rural sostenible",
-          value: 34
+          value: 0
         }
       ]
     };
@@ -376,29 +379,29 @@ async function graphCompL5(){
       data: [
         {
           label: "Gobierno Transparente",
-          value: 29
+          value: 0
         },
         {
           label: "Paz, víctimas y justicia",
-          value: 26
+          value: 0
         },  
         {
           label: "Seguridades",
-          value: 18
+          value: 0
         },
         {
           label: "Participación",
-          value: 14
+          value: 0
         }
         ,
         {
           label: "Planeación, articulación y fortalecimiento territorial",
-          value: 14
+          value: 0
         }
         ,
         {
           label: "Comunicaciones",
-          value: 34
+          value: 0
         }
       ]
     };
@@ -434,181 +437,172 @@ async function detalleppto(){
     "data": [
       {
         "label": "Ordenado",
-        "value": 4915670,
+        "value": 1000,
         "color": "#00853E"
       },
       {
         "label": "Compromisos",
-        "value": 190174,
+        "value": 800,
         "color":"#EE7518"
       },
       {
         "label": "Disponible",
-        "value": 472789,
+        "value": 200,
         "color": "#009FE3"
       }
     ]
   };
   
-           FusionCharts.ready(function() {
-              const myChart = new FusionCharts({
-                 type: "doughnut2d",
-                 renderAt: "chart-detalleppto",
-                 width: "100%",
-                 height: "380",
-                 dataFormat: "json",
-                 dataSource
-              }).render();
-           }
-  
-           )
+  FusionCharts.ready(function() {
+    const myChart = new FusionCharts({
+      type: "doughnut2d",
+      renderAt: "chart-detalleppto",
+      width: "100%",
+      height: "380",
+      dataFormat: "json",
+      dataSource
+     }).render();
+    }
+  )
 };
 
 async function papptoejecxdep(){
   const dataSource = {
     chart: {
-      caption: "Presupuesto",
-      subcaption: "Comportamiento por Dependencias",
+      caption: "Ejecución Financiera por Dependencias",
+      subcaption: "2020",
       xaxisname: "Dependencias",
-      yaxisname: "Presupuesto",
+      yaxisname: "cifas en pesos",
       drawcrossline: "1",
-      plottooltext: "<b>$seriesName</b> Total in $label de <b>$$dataValue</b>",
+      plottooltext: "<b>$seriesName</b> expense in $label was <b>$$dataValue</b>",
       theme: "zune",
-      showvalues: "1",
-     
-      numberprefix: "$",
-    placevaluesinside: "0",
-
+      showvalues: "0"
     },
     categories: [
       {
         category: [
           {
-            "label": "Privada"
+            label: "Privada"
           },
           {
-            "label": "Comunicaciones"
+            label: "Comunicaciones"
           },
           {
-            "label": "Eval y Control"
+            label: "Eval y Control"
           },
           {
-            "label": "Hacienda"
+            label: "Hacienda"
           },
           {
-            "label": "Germany"
+            label: "Sec. Seguridad"
           },
           {
-            "label": "General"
+            label: "G. Hum. y Serv.a la Ciud."
           },
           {
-            "label": "G. Hum. y Serv.a la Ciud."
+            label: "Suministros y Servicios"
           },
           {
-            "label": "Suministros y Servicios"
+            label: "Educación"
           },
           {
-            "label": "Educación"
+            label: "Part Ciudadana"
           },
           {
-            "label": "Part Ciudadana"
+            label: "Cultura Ciudadana"
           },
           {
-            "label": "Cultura Ciudadana"
+            label: "Salud"
           },
           {
-            "label": "Salud"
+            label: "Mujeres"
           }
         ]
       }
     ],
     dataset: [
       {
-        seriesname: "Ppto. Ajustado",
+        seriesname: "Ajustado",
         data: [
           {
-            value: "17000"
+            value: 0
           },
           {
-            value: "16000"
+            value: 0
           },
           {
-            value: "15000"
+            value: 0
           },
           {
-            value: "14500"
+            value: 0
           },
           {
-            value: "14000"
+            value: 0
           },
           {
-            value: "13500"
+            value: 0
           },
           {
-            value: "13000"
+            value: 0
           },
           {
-            value: "12500"
+            value: 0
           },
           {
-            value: "12500"
+            value: 0
           },
           {
-            value: "12000"
+            value: 0
           },
           {
-            value: "11500"
+            value: 0
           },
           {
-            value: "13500"
+            value: 0
           }
         ]
       },
       {
-        seriesname: "Ppto. Ejecutado",
-        showvalues:"1",
+        seriesname: "Ejecutado",
         data: [
           {
-            value: "17000"
+            value: 0
           },
           {
-            value: "16300"
+            value: 0
           },
           {
-            value: "14900"
+            value: 0
           },
           {
-            value: "14300"
+            value: 0
           },
           {
-            value: "13400"
+            value: 0
           },
           {
-            value: "13100"
+            value: 0
           },
           {
-            value: "13700"
+            value: 0
           },
           {
-            value: "12100"
+            value: 0
           },
           {
-            value: "12000"
+            value: 0
           },
           {
-            value: "11100"
+            value: 0
           },
           {
-            value: "10900"
+            value: 0
           },
           {
-            value: "13500"
+            value: 0
           }
         ]
       }
-     
-        
-      
     ]
   };
   
@@ -619,10 +613,10 @@ async function papptoejecxdep(){
       width: "100%",
       height: "100%",
       dataFormat: "json",
-      showvalues: "1",
       dataSource
     }).render();
   });
+  
   paxmetafisica()
 };
   
@@ -704,64 +698,64 @@ async function paxmetafisica(){
         "seriesname": "% Financiero",
         "data": [
           {
-            "value": "90"
+            "value": 0
           },
           {
-            "value": "70"
+            "value": 0
           },
           {
-            "value": "67"
+            "value": 0
           },
           {
-            "value": "55"
+            "value": 0
           },
           {
-            "value": "42"
+            "value": 0
           },
           {
-            "value": "42"
+            "value": 0
           },
           {
-            "value": "41"
+            "value": 0
           },
           {
-            "value": "29"
+            "value": 0
           },
           {
-            "value": "28"
+            "value": 0
           },
           {
-            "value": "22"
+            "value": 0
           },
           {
-            "value": "21"
+            "value": 0
           },
           {
-            "value": "19"
+            "value": 0
           },
           {
-            "value": "19"
+            "value": 0
           },
           {
-            "value": "18"
+            "value": 0
           },
           {
-            "value": "17"
+            "value": 0
           },
           {
-            "value": "15"
+            "value": 0
           },
           {
-            "value": "13"
+            "value": 0
           },
           {
-            "value": "11"
+            "value": 0
           },
           {
-            "value": "11"
+            "value": 0
           },
           {
-            "value": "10"
+            "value": 0
           }
         ]
       },
@@ -769,87 +763,297 @@ async function paxmetafisica(){
         "seriesname": "% Físico",
         "data": [
           {
-            "value": "24"
+            "value": 0
           },
           {
-            "value": "70"
+            "value": 0
           },
           {
-            "value": "67"
+            "value": 0
           },
           {
-            "value": "55"
+            "value": 0
           },
           {
-            "value": "42"
+            "value": 0
           },
           {
-            "value": "42"
+            "value": 0
           },
           {
-            "value": "41"
+            "value": 0
           },
           {
-            "value": "29"
+            "value": 0
           },
           {
-            "value": "28"
+            "value": 0
           },
           {
-            "value": "22"
+            "value": 0
           },
           {
-            "value": "21"
+            "value": 0
           },
           {
-            "value": "19"
+            "value": 0
           },
           {
-            "value": "19"
+            "value": 0
           },
           {
-            "value": "18"
+            "value": 0
           },
           {
-            "value": "17"
+            "value": 0
           },
           {
-            "value": "15"
+            "value": 0
           },
           {
-            "value": "13"
+            "value": 0
           },
           {
-            "value": "11"
+            "value": 0
           },
           {
-            "value": "11"
+            "value": 0
           },
           {
-            "value": "10"
+            "value": 0
           }
         ]
       }
     ]
   };
   
-           FusionCharts.ready(function() {
-              const myChart = new FusionCharts({
-                 type: "scrollcolumn2d",
-                 renderAt: "chart-paxmetafisica",
-                 width: "100%",
-                 height: "100%",
-                 dataFormat: "json",
-                 dataSource
-              }).render();
-           }
- 
-           )
+  FusionCharts.ready(function() {
+    const myChart = new FusionCharts({
+      type: "scrollcolumn2d",
+      renderAt: "chart-paxmetafisica",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  }
+ )
+
 };
 
 
+async function strategicprojects(){
+  const dataSource = {
+    chart: {
+      caption: "Programas y proyectos estratégicos Medellín Futuro",
+      yaxisname: "PDM 2020-2023",
+      aligncaptionwithcanvas: "1",
+      plottooltext: "<b>$dataValue</b> Avance",
+      numbersuffix: "%",
+      theme: "zune"
+    },
+    data: [
+      {
+        label: "Metro de la 80",
+        value: "41"
+      },
+      {
+        label: "Plan estratégico de tecnologías para la seguridad",
+        value: "39"
+      },
+      {
+        label: "Un billón para la reactivación económica y el valle del software",
+        value: "38"
+      },
+      {
+        label: "Refugio de vida silvestre",
+        value: "32"
+      },
+      {
+        label: " Red neutra y red mesh",
+        value: "26"
+      },
+      {
+        label: "Parques del norte",
+        value: "25"
+      },
+      {
+        label: "Transformación educativa",
+        value: "25"
+      },
+      {
+        label: "Fortalecimiento de la infraestructura de salud",
+        value: "24"
+      },
+      {
+        label: "Estrategia Medellín me cuida: social y salud",
+        value: "23"
+      },
+      {
+        label: "Seguridad alimentaria y hambre cero",
+        value: "22"
+      },
+      {
+        label: "Sistema municipal de cuidados",
+        value: "76"
+      },
+      {
+        label: "Bienes de capital físico para mujeres",
+        value: "16"
+      },
+      {
+        label: "Estudios de una nueva Línea del Metro con tramos subterráneos",
+        value: "15"
+      },
+      {
+        label: "Parque biblioteca pública Zona Nororiental",
+        value: "13"
+      },
+      {
+        label: "Complejo cultural de Ciudad del Río",
+        value: "12"
+      },
+      {
+        label: "Medellín caminable y pedaleable",
+        value: "11"
+      },
+      {
+        label: "Ciencia futuro",
+        value: "10"
+      }
+    ]
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bar2d",
+      renderAt: "chart-projectstrategic",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+}
 
 
+
+
+
+async function columnGeo(){
+  const dataSource = {
+    chart: {
+      caption: "Inversión Pública por Comunas y Corregimientos",
+      subcaption: "corte",
+      xaxisname: "Territorio",
+      yaxisname: "cifras en millones de pesos",
+      //numbersuffix: "$",
+      numberprefix: "$",
+      theme: "zune",
+      labeldisplay: "ROTATE",
+    },
+    data: [
+      {
+        label: "Popular",
+        value: "290"
+      },
+      {
+        label: "Santa Cruz",
+        value: "260"  
+      },
+      {
+        label: "Manrique",
+        value: "180"
+      },
+      {
+        label: "Aranjuez",
+        value: "140"
+      },
+      {
+        label: "Castilla",
+        value: "115"
+      },
+      {
+        label: "Doce de Octubre",
+        value: "100"
+      },
+      {
+        label: "Robledo",
+        value: "30"
+      },
+      {
+        label: "Villa Hermosa",
+        value: "30"
+      },
+      {
+        label: "Buenos Aires",
+        value: "180"
+      },
+      {
+        label: "La Candelaria",
+        value: "180"
+      },
+      {
+        label: "Laureles Estadio",
+        value: "180"
+      },
+      
+      {
+        label: "La América",
+        value: "180"
+      },
+      {
+        label: "San Javier",
+        value: "180"
+      },
+      {
+        label: "El Poblado",
+        value: "180"
+      },
+      {
+        label: "Guayabal",
+        value: "180"
+      },
+      {
+        label: "Belén",
+        value: "180"
+      },
+      {
+        label: "Palmitas",
+        value: "180"
+      },
+      {
+        label: "San Cristóbal",
+        value: "180"
+      },
+      {
+        label: "Altavista",
+        value: "180"
+      },
+      {
+        label: "San Antonio",
+        value: "180"
+      },
+      {
+        label: "Santa Elena",
+        value: "180"
+      }
+    ]
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "column2d",
+      renderAt: "chart-geo",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+}
 
 const mapaVogencia = async (req, res) => {
   // Initialize the map and assign it to a variable for later use
@@ -974,12 +1178,9 @@ const mapaVogencia = async (req, res) => {
       }
       L.control.watermark({position: 'bottomleft'}).addTo(map);
     })
-
+    
    
 }
-
-
-
 
 function getColor(d) {
   return d > 400000000000  ? '#005a32' :

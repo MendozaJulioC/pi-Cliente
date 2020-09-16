@@ -11,11 +11,11 @@
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/dash">Dash Inicial <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/dash">Dash<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Líneas
+            PDM
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Reactivación Económica y Valle del Software</a>
@@ -30,28 +30,168 @@
               <a class="dropdown-item" href="#">Indicadores</a>
             </div>
           </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/proyectos">Componentes</a>
-        </li>
-       
-        <li class="nav-item">
-            <a class="nav-link" href="#">Programas</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#" tabindex="-1" >Proyectos Estratégicos</a>
           </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/proyectos">Obra Física</a>
+        </li>
+  
         <li class="nav-item">
           <a class="nav-link" href="#" tabindex="-1" >Indicadores</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" tabindex="-1" >Dependencias</a>
         </li>
+        
+      <!-- 
+        <li class="nav-item">
+          <a class="nav-link" href="/contacto" tabindex="-1" >Contacto</a>
+        </li>
+      --> 
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <a class="nav-link" href="/contacto" tabindex="-1" >Contacto</a>
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Indicador</button>
+    
+        <input id="indicadorquery" class="form-control mr-sm-2" type="search" placeholder="Código del Indicador" aria-label="Search">
       </form>
+      <button  onclick="q_Indicador()" class="btn btn-outline-success my-2 my-sm-0" >Indicador</button>
+     
+      
     </div>
   </nav>
 
 
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">  
+          <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container mt-lg-4">
+              <form>
+                <div class="form-row">
+                  
+                  <div class="form-group col-md-2">
+                    <label style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="cod_linea">Código Línea</label>
+                    <input type="text" class="form-control" id="cod_linea">
+                  </div>
+                  <div class="form-group col-md-10">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="cod_linea">Línea</label>
+                    <input type="text" class="form-control" id="nom_linea">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label style="text-align: left;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="cod_componente">Código Componente</label>
+                    <input type="text" class="form-control" id="cod_componente">
+                  </div>
+                  <div class="form-group col-md-10">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="nom_componente">Componente</label>
+                    <input type="text" class="form-control" id="nom_componente">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label style="text-align: left;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="cod_programa">Código Programa</label>
+                    <input type="text" class="form-control" id="cod_programa">
+                  </div>
+                  <div class="form-group col-md-10">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="nom_programa">Programa</label>
+                    <input type="text" class="form-control" id="nom_programa">
+                  </div>
+                </div>
 
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label style="text-align: left;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="cod_indicador">Código Indicador</label>
+                    <input type="text" class="form-control" id="cod_indicador">
+                  </div>
+                  <div class="form-group col-md-10">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="nom_indicador">Indicador</label>
+                    <input type="text" class="form-control" id="nom_indicador">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label style="text-align: left;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="tipo_ind">Tipo Indicador</label>
+                    <input type="text" class="form-control" id="tipo_ind">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="lb_ind">Línea base</label>
+                    <input type="text" class="form-control" id="lb_ind">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="meta_plan">Meta Plan</label>
+                    <input type="text" class="form-control" id="meta_plan">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label style="text-align: left;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="unidad">Unidad</label>
+                    <input type="text" class="form-control" id="unidad">
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="sentido">Sentido</label>
+                    <input type="text" class="form-control" id="sentido">
+                  </div>
+                </div>
+                <div class="form-row">
+                  
+                  
+                  <div class="form-group col-md-12">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="responsable_plan">Dependencias Responsables</label>
+                    <input type="text" class="form-control" id="responsable_plan">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-2">
+                    <label style="text-align: left;font-size: 14px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="cod_responsable_reporte">Código Dependencia</label>
+                    <input type="text" class="form-control" id="cod_responsable_reporte">
+                  </div>
+                  <div class="form-group col-md-10">
+                    <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" for="nombre_dep">Dependencia Responsable del Reporte</label>
+                    <input type="text" class="form-control" id="nombre_dep">
+                  </div>
+                </div>  
+              </form>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+           
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+ 
 
+  <script src="/js/searchindicador.js"></script>
+  <script type="text/javascript">
+    function stopEnterKey(evt) {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if ((evt.keyCode == 13) && (node.type == "search")) { return false; }
+    }
+    document.onkeypress = stopEnterKey;
+  </script>
