@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/0.2.1/jquery.velocity.min.js"></script>
+    <link rel="stylesheet" href="./css/estructura.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/5.0.2/css/foundation.css">
+    <%- include ('../partials/head.html') %>
+</head>
+<%- include ('../partials/menuplapp.html')%>
+<body>
+   
+<div class="container">
+
+    <div class="row mt-5"> 
+        <div class="col-lg-12  mt-5 shadow-lg p-3 mb-3 bg-white rounded"> 
+           
+            <h1 class="text18">Estructura Plan de Desarrollo</h1>
+            <div class="tree ex3  shadow-lg ">
+                <!--primera linea-->
+                <div>
+                    <input id="n-1" type="checkbox">
+                    <label class="title" for="n-1"><spam><button onclick="linea(1)" class="btn-sm btn-light badge badge-primary" style="height: 20px;font-size: xx-small;">+</button ></spam>  1. Reactivación Económica y Valle del Software</label>
+                    <div class="sub">
+                        <div>
+                            <input id="n-1-1" type="checkbox">
+                            <label for="n-1-1"><spam><button onclick="componente('1.1')" class="btn-sm btn-light badge badge-primary" style="height: 20px;font-size: xx-small;">+</button></spam>  Componente 1.1. Talento Humano y Empleo</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('1.1.1')" href="#link">Programa    1.1.1 Reentrenamiento y formación masiva en la industria 4.0</a>
+                                <a class="texto_a" onclick="prg('1.1.2')" href="#link">Programa    1.1.2 Inserción laboral </a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-1-2" type="checkbox">
+                            <label for="n-1-2"> <spam> <button onclick="componente('1.2')" class="btn-sm btn-light badge badge-primary" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 1.2 Ciencia, Tecnología, Innovación y Emprendimiento: CTI + E</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('1.2.1')" href="#link">programa    1.2.1 Centros del Valle del Software</a>
+                                <a class="texto_a" onclick="prg('1.2.2')" href="#link">programa    1.2.2 Economía creativa</a>
+                                <a class="texto_a" onclick="prg('1.2.3')" href="#link">programa    1.2.3 Investigación, innovación y retos de ciudad</a>
+                                <a class="texto_a" onclick="prg('1.2.4')" href="#link">programa    1.2.4 Cultura digital</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-1-3" type="checkbox">
+                            <label for="n-1-3"><spam> <button onclick="componente('1.3')" class="btn-sm btn-light badge badge-primary" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 1.3 Productividad, competitividad e internacionalización</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('1.3.1')" href="#link">programa    1.3.1 Transformación digital de la economía </a>
+                                <a class="texto_a" onclick="prg('1.3.2')" href="#link">programa    1.3.2 Internacionalización empresarial</a>
+                                <a class="texto_a" onclick="prg('1.3.3')" href="#link">programa    1.3.3 Muévete a Medellín</a>
+                                <a class="texto_a" onclick="prg('1.3.4')" href="#link">programa    1.3.4 Reactivación y transformación del sector turístico Pos-COVID-19</a>
+                                <a class="texto_a" onclick="prg('1.3.5')" href="#link">programa    1.3.5 Dinamización economías tradicionales</a>
+                                <a class="texto_a" onclick="prg('1.3.6')" href="#link">programa    1.3.6 Financiación e inversión para el desarrollo y la innovación</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-1-4" type="checkbox">
+                            <label for="n-1-4"> <spam> <button onclick="componente('1.4')" class="btn-sm btn-light badge badge-primary" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 1.4 Información, datos y generación de valor público</label>
+                           
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('1.4.1')" href="#link">programa    1.4.1 Gobierno digital </a>
+                                <a class="texto_a" onclick="prg('1.4.2')" href="#link">programa    1.4.2 Ciudad inteligente</a>
+                                <a class="texto_a" onclick="prg('1.4.3')" href="#link">programa    1.4.3 Gobernanza de datos</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-1-5" type="checkbox">
+                            <label for="n-1-5"> <spam> <button onclick="componente('1.5')" class="btn-sm btn-light badge badge-primary" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 1.5 Inglés para Valle del Software</label>
+                            <div class="sub mb-4">
+                                <a class="texto_a" onclick="prg('1.5.1')" href="#link">programa    1.5.1 Semilla bilingüe para Valle del Software</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--segunda linea-->
+                <div>
+                    <input id="n-2" type="checkbox">
+                    <label class="title"  for="n-2"><spam> <button onclick="linea(2)" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam> 2. Transformación Educativa y Cultural</label>
+                    <div class="sub">
+                        <div>
+                            <input id="n-2-1" type="checkbox">
+                            <label for="n-2-1"> <spam> <button onclick="componente('2.1')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 2.1 Buen Comienzo</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.1.1')" href="#link">Programa   2.1.1 Buen Comienzo 1000 días para mejores familias</a>
+                                <a class="texto_a" onclick="prg('2.1.2')" href="#link">Programa   2.1.2 Buen comienzo para una escuela pertinente y oportuna</a>
+                                <a class="texto_a" onclick="prg('2.1.3')" href="#link">Programa   2.1.3 Un buen comienzo para la nutrición</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-2" type="checkbox">
+                            <label for="n-2-2"> <spam> <button onclick="componente('2.2')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 2.2 Transformación Curricular para la Cuarta revolución Industrial</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.2.1')" href="#link">Programa   2.2.1 Resignificación de los Proyectos Educativos Institucionales PEI</a>
+                                <a class="texto_a" onclick="prg('2.2.2')" href="#link">Programa   2.2.2 Pertinencia, calidad y habilidades para la educación del futuro</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-3" type="checkbox">
+                            <label for="n-2-3">     <spam> <button onclick="componente('2.3')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 2.3 Educación para todos y todas</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.3.1')" href="#link">Programa   2.3.1 A clase vamos todos y todas</a>
+                                <a class="texto_a" onclick="prg('2.3.2')" href="#link">Programa   2.3.2 Educación diversa</a>
+                                <a class="texto_a" onclick="prg('2.3.3')" href="#link">Programa   2.3.3 Aula segura y amigable</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-4" type="checkbox">
+                            <label for="n-2-4"> <spam> <button onclick="componente('2.4')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam>    Componente 2.4 Maestros/as: Líderes de Futuro</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.4.1')" href="#link">Programa   2.4.1 Docentes cualificados para el Medellín Futuro</a>
+                                <a class="texto_a" onclick="prg('2.4.2')" href="#link">Programa   2.4.2 Bienestar Docente</a>
+                                <a class="texto_a" onclick="prg('2.4.3')" href="#link">Programa   2.4.3 Innovación pedagógica para nuevas capacidades</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-5" type="checkbox">
+                            <label for="n-2-5">  <spam> <button onclick="componente('2.5')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam>   Componente 2.5 Infraestructura y ambientes de aprendizaje</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.5.1')" href="#link">Programa   2.5.1 Infraestructura para una Ciudad Universitaria</a>
+                                <a class="texto_a" onclick="prg('2.5.2')" href="#link">Programa   2.5.2 Ambientes escolares de calidad para Medellín Futuro</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-6" type="checkbox">
+                            <label for="n-2-6"><spam> <button onclick="componente('2.6')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 2.6 Investigación, creación y apropiación de saberes</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.6.1')" href="#link">Programa   2.6.1 Medellín ciudad de la ciencia y el conocimiento</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-7" type="checkbox">
+                            <label for="n-2-7"><spam> <button onclick="componente('2.7')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 2.7 Cultura, arte y memoria</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('2.7.1')" href="#link">Programa   2.7.1 Institucionalidad de la cultura y las artes de Medellín</a>
+                                <a class="texto_a" onclick="prg('2.7.2')" href="#link">Programa   2.7.2 Medellín vive las artes y la cultura</a>
+                                <a class="texto_a" onclick="prg('2.7.3')" href="#link">Programa   2.7.3 Medellín territorio cultural</a>
+                                <a class="texto_a" onclick="prg('2.7.4')" href="#link">Programa   2.7.4 Patrimonio cultural, memoria e identidades</a>
+                                <a class="texto_a" onclick="prg('2.7.5')" href="#link">Programa   2.7.5 Infraestructura y equipamientos culturales</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-2-8" type="checkbox">
+                            <label for="n-2-8"><spam> <button onclick="componente('2.8')" class="btn-sm btn-light badge badge-success" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 2.8 Cultura ciudadana</label>
+                            <div class="sub mb-4">
+                                <a class="texto_a" onclick="prg('2.8.1')" href="#link">Programa   2.8.1 Ciudadanos de Futuro: cívicos, pacíficos y solidarios</a>
+                                <a class="texto_a" onclick="prg('2.8.2')" href="#link">Programa   2.8.2 Cultura centro</a>
+                                <a class="texto_a" onclick="prg('2.8.3')" href="#link">Programa   2.8.3 Transformación de patrones culturales para la igualdad de género</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--tercera linea-->
+                <div>
+                    <input id="n-3" type="checkbox">
+                    <label class="title"   for="n-3"><spam> <button onclick="linea(3)" class="btn-sm btn-light badge badge-warning" style="height: 20px;font-size: xx-small;">+</button ></spam>    3. Medellín me Cuida</label>
+                    <div class="sub">
+                        <div>
+                            <input id="n-3-1" type="checkbox">
+                            <label  for="n-3-1"> <spam> <button onclick="componente('3.1')" class="btn-sm btn-light badge badge-warning" style="height: 20px;font-size: xx-small;">+</button ></spam>   Componente 3.1 Comunidades, cuerpos y mentes saludables</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('3.1.1')" href="#link">Programa   3.1.1 Medellín me cuida: Salud</a>
+                                <a class="texto_a" onclick="prg('3.1.2')" href="#link">Programa   3.1.2 Tecnologías en salud, gestión de información y del conocimiento</a>
+                                <a class="texto_a" onclick="prg('3.1.3')" href="#link">Programa   3.1.3 Vigilancia en salud</a>
+                                <a class="texto_a" onclick="prg('3.1.4')" href="#link">Programa   3.1.4 Salud ambiental</a>
+                                <a class="texto_a" onclick="prg('3.1.5')" href="#link">Programa   3.1.5 Infraestructura, equipamientos y acceso a los servicios de salud</a>
+                                <a class="texto_a" onclick="prg('3.1.6')" href="#link">Programa   3.1.6 Medellín vive el deporte, la recreación y la actividad física</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-3-2" type="checkbox">
+                            <label for="n-3-2"><spam> <button onclick="componente('3.2')" class="btn-sm btn-light badge badge-warning" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 3.2 Juventudes</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('3.2.1')" href="#link">Programa   3.2.1 Salud pública juvenil</a>
+                                <a class="texto_a" onclick="prg('3.2.2')" href="#link">Programa   3.2.2 Juventud que teje vida</a>
+                                <a class="texto_a" onclick="prg('3.3.3')" href="#link">Programa   3.2.3 El futuro se parece a nosotros</a>
+                                <a class="texto_a" onclick="prg('3.2.4')" href="#link">Programa   3.2.4 Hábitat Joven</a>
+                                <a class="texto_a" onclick="prg('3.2.5')" href="#link">Programa   3.2.5 Jóvenes en el Valle del Software</a>
+                                <a class="texto_a" onclick="prg('3.2.5')" href="#link">Programa   3.2.6 Incidencia y organización juvenil</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-3-3" type="checkbox">
+                            <label for="n-3-3"><spam> <button onclick="componente('3.3')" class="btn-sm btn-light badge badge-warning" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 3.3 Mujeres</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('3.3.1')" href="#link">Programa   3.3.1 Condiciones de vida dignas y equitativas para las mujeres</a>
+                                <a class="texto_a" onclick="prg('3.3.2')" href="#link">Programa   3.3.2 Liderazgo y empoderamiento femenino</a>
+                                <a class="texto_a" onclick="prg('3.3.3')" href="#link">Programa   3.3.3 Seguridad, vida libre de violencias y protección integral para las mujeres</a>
+                                <a class="texto_a" onclick="prg('3.3.4')" href="#link">Programa   3.3.4 Autonomía económica para las mujeres y su incorporación en el Valle del software</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-3-4" type="checkbox">
+                            <label for="n-3-4"><spam> <button onclick="componente('3.4')" class="btn-sm btn-light badge badge-warning" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 3.4 Recuperemos lo Social</label>
+                            <div class="sub mb-4">
+                                <a class="texto_a" onclick="prg('3.4.1')" href="#link">Programa   3.4.1 Canasta básica de derechos</a>
+                                <a class="texto_a" onclick="prg('3.4.2')" href="#link">Programa   3.4.2 Medellín cuida y reconoce a sus grupos poblacionales</a>
+                                <a class="texto_a" onclick="prg('3.4.3')" href="#link">Programa   3.4.3 Medellín me cuida- Gestores Familia</a>
+                                <a class="texto_a" onclick="prg('3.4.4')" href="#link">Programa   3.4.4 Tecnología social</a>
+                                <a class="texto_a" onclick="prg('3.4.5')" href="#link">Programa   3.4.5 Acciones de fortalecimiento social para el cuidado y la protección</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--cuarta linea-->
+                <div>
+                    <input id="n-4" type="checkbox">
+                    <label class="title"  for="n-4"><spam> <button onclick="linea(4)" class="btn-sm btn-light badge badge-info" style="height: 20px;font-size: xx-small;">+</button ></spam> 4. Ecociudad</label>
+                    <div class="sub">
+                        <div>
+                            <input id="n-4-1" type="checkbox">
+                            <label for="n-4-1">  <spam> <button onclick="componente('4.1')" class="btn-sm btn-light badge badge-info" style="height: 20px;font-size: xx-small;">+</button ></spam>  Componente 4.1 Movilidad sostenible e inteligente</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('4.1.1')" href="#link">Programa   4.1.1 Movilidad con tecnologías más limpias y nuevas tendencias</a>
+                                <a class="texto_a" onclick="prg('4.1.2')" href="#link">Programa   4.1.2 Medellín caminable y pedaleable</a>
+                                <a class="texto_a" onclick="prg('4.1.3')" href="#link">Programa   4.1.3 Movilidad segura e inteligente con innovación y tecnología</a>
+                                <a class="texto_a" onclick="prg('4.1.4')" href="#link">Programa   4.1.4 Infraestructura para la movilidad sostenible e incluyente</a>
+                                <a class="texto_a" onclick="prg('4.1.5')" href="#link">Programa   4.1.5 Transformación cultural para la movilidad sostenible y segura</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-4-2" type="checkbox">
+                            <label for="n-4-2">   <spam> <button onclick="componente('4.2')" class="btn-sm btn-light badge badge-info" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 4.2 Servicios públicos, energías alternativas y aprovechamiento de residuos sólidos</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('4.2.1')" href="#link">Programa   4.2.1 Ahorro, consumo racional y gestión de servicios públicos</a>
+                                <a class="texto_a" onclick="prg('4.2.2')" href="#link">Programa   4.2.2 Economía Circular y Gestión de residuos sólidos</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-4-3" type="checkbox">
+                            <label for="n-4-3">  <spam> <button onclick="componente('4.3')" class="btn-sm btn-light badge badge-info" style="height: 20px;font-size: xx-small;">+</button ></spam>  Componente 4.3 Conservación y protección de todas las formas de vida</label>
+                          
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('4.3.1')" href="#link">Programa   4.3.1 Protección y gestión de la biodiversidad</a>
+                                <a class="texto_a" onclick="prg('4.3.2')" href="#link">Programa   4.3.2 Protección de la vida animal</a>
+                                <a class="texto_a" onclick="prg('4.3.3')" href="#link">Programa   4.3.3 Educación y sostenibilidad ambiental</a>
+                                <a class="texto_a" onclick="prg('4.3.4')" href="#link">Programa   4.3.4 Gestión Integral del sistema hidrográfico</a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <input id="n-4-4" type="checkbox">
+                            <label for="n-4-4">  <spam> <button onclick="componente('4.4')" class="btn-sm btn-light badge badge-info" style="height: 20px;font-size: xx-small;">+</button ></spam>  Componente 4.4 Urbanismo ecológico</label>
+                          
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('4.4.1')" href="#link">Programa   4.4.1 Renovación urbana integral, transformación territorial y protección a moradores</a>
+                                <a class="texto_a" onclick="prg('4.4.2')" href="#link">Programa   4.4.2 Espacio público para el disfrute colectivo y la sostenibilidad territorial</a>
+                                <a class="texto_a" onclick="prg('4.4.3')" href="#link">Programa   4.4.3 Centralidades y equipamientos para el desarrollo</a>
+                                <a class="texto_a" onclick="prg('4.4.4')" href="#link">Programa   4.4.4 Gestión del riesgo de desastres, del medio ambiente y adaptación al cambio climático</a>
+                                <a class="texto_a" onclick="prg('4.4.5')" href="#link">Programa   4.4.5 Vivienda, hábitat sostenible y mejoramiento integral de barrios</a>
+                                <a class="texto_a" onclick="prg('4.4.6')" href="#link">Programa   4.4.6 Gestión de la infraestructura verde</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-4-5" type="checkbox">
+                            <label for="n-4-5">  <spam> <button onclick="componente('4.5')" class="btn-sm btn-light badge badge-info" style="height: 20px;font-size: xx-small;">+</button ></spam>  Componente 4.5 Corregimientos y Desarrollo rural sostenible</label>
+                            <div class="sub mb-4">
+                                <a class="texto_a" onclick="prg('4.5.1')" href="#link">Programa   4.5.1 Desarrollo rural sostenible</a>
+                                <a class="texto_a" onclick="prg('4.5.2')" href="#link">Programa   4.5.2 Producción rural para el desarrollo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--quinta linea-->
+                <div>
+                    <input id="n-5" type="checkbox">
+                    <label class="title"  for="n-5"> <spam> <button onclick="linea(5)" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam>    5. Gobernanza y Gobernabilidad</label>
+                   
+                    <div class="sub">
+                        <div>
+                            <input id="n-5-1" type="checkbox">
+                            <label for="n-5-1"><spam> <button onclick="componente('5.1')" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam>  Componente 5.1 Gobierno Transparente</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('5.1.1')" href="#link">Programa   5.1.1 Talento humano para el buen gobierno</a>
+                                <a class="texto_a" onclick="prg('5.1.2')" href="#link">Programa   5.1.2 Gobierno abierto y cercano</a>
+                                <a class="texto_a" onclick="prg('5.1.3')" href="#link">Programa   5.1.3 Direccionamiento estratégico del conglomerado Público de Medellín</a>
+                                <a class="texto_a" onclick="prg('5.1.4')" href="#link">Programa   5.1.4 Liderazgo público y fortalecimiento de la gestión institucional</a>
+                                <a class="texto_a" onclick="prg('5.1.5')" href="#link">Programa   5.1.5 Gestión financiera, eficiente y sostenible</a>
+                                <a class="texto_a" onclick="prg('5.1.6')" href="#link">Programa   5.1.6 Direccionamiento Jurídico Público</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-5-2" type="checkbox">
+                            <label for="n-5-2"> <spam> <button onclick="componente('5.2')" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 5.2 Paz, víctimas y justicia</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('5.2.1')" href="#link">Programa   5.2.1 Institucionalidad para la paz y acceso a la justicia</a>
+                                <a class="texto_a" onclick="prg('5.2.2')" href="#link">Programa   5.2.2 Garantías diferenciales para las víctimas</a>
+                                <a class="texto_a" onclick="prg('5.2.3')" href="#link">Programa   5.2.3 Memoria histórica, construcción de paz y superación del conflicto</a>
+                                <a class="texto_a" onclick="prg('5.2.4')" href="#link">Programa   5.2.4 Promoción y protección de los Derechos Humanos</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-5-3" type="checkbox">
+                            <label for="n-5-3"><spam> <button onclick="componente('5.3')" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam> Componente 5.3 Seguridades</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('5.3.1')" href="#link">Programa   5.3.1 Planeación para la gestión local de la seguridad y la convivencia</a>
+                                <a class="texto_a" onclick="prg('5.3.2')" href="#link">Programa   5.3.2 Promoción de la convivencia ciudadana</a>
+                                <a class="texto_a" onclick="prg('5.3.3')" href="#link">Programa   5.3.3 Articulación y coordinación institucional para la seguridad territorial</a>
+                                <a class="texto_a" onclick="prg('5.3.4')" href="#link">Programa   5.3.4 Inteligencia, tecnología e infraestructura para la seguridad y la convivencia</a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <input id="n-5-4" type="checkbox">
+                            <label for="n-5-4">   <spam> <button onclick="componente('5.4')" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam>   Componente 5.4 Participación</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('5.4.1')" href="#link">Programa   5.4.1 Fortalecimiento de las organizaciones sociales y comunitarias para la participación</a>
+                                <a class="texto_a" onclick="prg('5.4.2')" href="#link">Programa   5.4.2 Promoción y profundización de la democracia</a>
+                                <a class="texto_a" onclick="prg('5.4.3')" href="#link">Programa   5.4.3 Gestión del conocimiento y la innovación social para la participación</a>
+                                <a class="texto_a" onclick="prg('5.4.4')" href="#link">Programa   5.4.4 Formación ciudadana para la participación</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-5-5" type="checkbox">
+                            <label for="n-5-5">   <spam> <button onclick="componente('5.5')" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam>   Componente 5.5 Planeación, articulación y fortalecimiento territorial</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('5.5.1')" href="#link">Programa   5.5.1 Planeación territorial para el Desarrollo</a>
+                                <a class="texto_a" onclick="prg('5.5.2')" href="#link">Programa   5.5.2 Planeación y presupuestos sensibles a la perspectiva de género</a>
+                                <a class="texto_a" onclick="prg('5.5.3')" href="#link">Programa   5.5.3 Información para la planeación</a>
+                                <a class="texto_a" onclick="prg('5.5.4')" href="#link">Programa   5.5.4 Sinergias territoriales para el futuro de Medellín</a>
+                                <a class="texto_a" onclick="prg('5.5.5')" href="#link">Programa   5.5.5 Alianzas territoriales para la gestión de la migración poblacional</a>
+                                <a class="texto_a" onclick="prg('5.5.6')" href="#link">Programa   5.5.6 Control territorial y gestión catastral</a>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="n-5-6" type="checkbox">
+                            <label for="n-5-6"><spam> <button onclick="componente('5.6')" class="btn-sm btn-light badge badge-danger" style="height: 20px;font-size: xx-small;">+</button ></spam>  Componente 5.6 Comunicaciones</label>
+                            <div class="sub">
+                                <a class="texto_a" onclick="prg('5.6.1')" href="#link">Programa   5.6.1 Procesos y medios comunitarios</a>
+                                <a class="texto_a" onclick="prg('5.6.2')" href="#link">Programa   5.6.2 Gobernanza y gestión estratégica de las comunicaciones</a>
+                                <a class="texto_a" onclick="prg('5.6.3')" href="#link">Programa   5.6.3 Gobernanza y Movilización para la participación</a>
+                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+   
+            </div>  
+            <div class="col-lg-12 mb-2 mt-1 shadow-lg p-3 mb-3 bg-white rounded" > 
+                <h1 class="text18"><spam id="totalindicadores"> </spam>  Indicadores <spam class="text18" id="nom"></spam></h1>
+                <div class="table-responsive " style=" overflow-y: auto;">
+                    <table  class="table table-sm table-responsive-sm table-hover"  >
+                        <thead >
+                          <tr>
+                            <th class="thindi">#</th>
+                            <th class="thindi">Cod_línea</th>
+                            <th class="thindi">Línea</th>
+                            <th class="thindi">Cod_compenente</th>
+                            <th class="thindi">Componente</th>
+                            <th class="thindi">Cod_Programa</th>
+                            <th class="thindi">Programa</th>
+                            <th class="thindi">Cod_Inidicador</th>
+                            <th class="thindi">Indicador</th>
+                            <th class="thindi">Tipo Indicador</th>
+                            <th class="thindi">Meta Plan</th>
+                            <th class="thindi">Unidad</th>
+                            <th class="thindi">Línea Base</th>
+                            <th class="thindi">Peso</th>
+                            <th class="thindi">Períocidad</th>
+                            <th class="thindi">Responsable Reporte</th>
+                            <th class="thindi">Avance Cuatrienio</th>
+                            <th class="thindi">Logro Acumulado</th>
+                            <th class="thindi">Ver</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tabla_indicadores">
+                        </tbody>
+                    </table>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+</body>
+
+
+<div class="modal fade bd-example-modal" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+      <div class="modal-content">
+   
+        <div class="modal-body " >
+          <div class="container mt-12" style="display: flex;align-items: center;justify-content: center;min-height: 10vh;">
+            <div class="spinner-grow text-light" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            <div class="spinner-grow spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              
+              <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-warning" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-info" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-danger" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="spinner-grow text-dark" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <strong> Medellín Futuro...</strong>
+               
+              </div>
+          
+        </div>
+        
+      </div>
+    </div>
+    </div>
+</div>
+<%- include ('../partials/indi-ficha.html')%>
+<%- include ('../partials/scriptsHome.html')%>
+<script src="/js/estructura.js"></script>
+<script src="/js/searchindicador.js"></script>
+</html>
+
+

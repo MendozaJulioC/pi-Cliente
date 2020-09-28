@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+        <link rel="stylesheet" href="/css/prueba.css">
+    
+        <%- include ('../partials/head.html') %>
+    </head>
+    <%- include ('../partials/menuplapp.html')%>
+    <body onload="indi()">
+        <div class="container mt-4 mb-2">
+            <div class="row">
+                <div class="col-sm-12 mt-5">
+                    <div class="card shadow-lg p-1 mb-3 bg-white rounded">
+                        <div class="card-body">     
+                            <h1 class="text-muted" style="text-align: center;">Transformación Educativa y Cultural</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                        <div class="card-body">
+                            <h4 class="text-muted text18" >Avance Cuatrienial Línea
+                                <spam>2020-2023</spam>
+                            </h4>
+                            <div class="mt-lg-3" id="avance-indicador" style="height: 250px;  width:100%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                        <div class="card-body">                   
+                            <h4 class="text-muted text18" >Cumplimiento Anual Línea
+                                <spam>2020</spam>
+                            </h4>
+                            <div class="mt-lg-3" id="cumplimiento-indicador" style="height: 250px;  width:100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-sm-12 ">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="row">
+                    <div class="card-body col-sm-6">
+                        <div class="mt-lg-3" id="history-indicador" style="height: 90px;  width:100%;"></div>
+                    </div>
+                    <div class="card-body col-sm-6"> 
+                        <div class="mt-lg-3" id="history-cumplimiento-indicador" style="height: 80px;  width:100%;"></div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            
+                <div class="col-sm-12 ">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card-body col-sm-12">
+                            <div class="table-responsive " style=" overflow-y: auto;">
+                                <table class="table table-striped able-sm table-responsive-lg  table-inverse table-hover ">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th class="encabezadoTabla">Total Indicadores</th>
+                                            <th class="encabezadoTabla">Componentes</th>
+                                            <th class="encabezadoTabla" >Programas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="filaCenter"   scope="row">120</td>
+                                            <td class="filaCenter" >123</td>
+                                            <td class="filaCenter" >12</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body ex1 col-sm-12">
+                        <div class="legends">
+                            <h4 class="text-muted text4Title">Propósito
+                            </h4>
+                            <p class="text14left">
+                                Garantizar una educación de calidad como derecho que moviliza la transformación humana, económica,
+                                política, ambiental y social de Medellín Futuro, articulada a un proyecto cultural de ciudad fundado 
+                                en los derechos culturales, que fortalezca el potencial creativo de sus ciudadanos, salvaguarde sus
+                                patrimonios y memorias y contribuya a hacer de Medellín una ciudad más solidaria, participativa y en paz.
+                                La educación se comprende como el eje que articula el desarrollo económico basado en la tecnología, 
+                                la innovación y el conocimiento –Valle del Software–; con una ciudad donde todos los espacios territoriales,
+                                tanto urbanos como rurales, se configuran como ambientes de aprendizaje – Ecociudad–, donde todos los habitantes
+                                se reconocen y respetan el vínculo social que los une; por lo que es posible convivir, comunicarse, hablar y 
+                                actuar juntos de forma pacífica y con confianza –Gobernanza y Gobernabilidad– para interactuar en una Medellín 
+                                con mejores personas, seres humanos con oportunidades para desplegar su sensibilidad, su creatividad y su
+                                capacidad innovadora, ciudadanos y profesionales, todos y todas educados.
+                            </p>
+                        </div>
+                            <img src="/img/medellinl1.jpeg" width="500" height="600" alt="" srcset="">
+                        </div>
+                    </div>
+                    
+                    <div class="card-body col-sm-6">
+                        <div class="table-responsive " style=" overflow-y: auto;">
+                            <table class="table table-striped able-sm table-responsive-lg  table-inverse table-hover " style="height: 90px;" width="704">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th class="encabezadoTabla">#</th>
+                                        <th class="encabezadoTabla">Cod_Dep</th>
+                                        <th class="encabezadoTabla">Dependencia</th>
+                                        <th class="encabezadoTabla">Indicadores</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td class="filaCenter" scope="row">1</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">2</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">3</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">4</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">5</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">6</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">7</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">8</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">9</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">10</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">11</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="filaCenter" scope="row">12</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                    <tr> <td class="filaCenter" scope="row">13</td>
+                                        <td class="filaCenter" scope="row">754</td>
+                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
+                                        <td class="filaCenter">8</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>  
+                </div>
+
+                </div>
+
+            </div>
+        
+        
+            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                <h5 class="text-muted text4Title">Comportamiento Componentes</h5><br>
+                <div  id="linea-componente" style="height: 270px;width: 100%;"></div>
+                <div class="table-responsive-sm">
+                    <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                        <thead>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.1</td>
+                        <td style="font-weight: 400; width: 395px;">Buen Comienzo</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">12</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.2</td>
+                        <td style="font-weight: 400; width: 395px;">Transformaci&oacute;n Curricular para la Cuarta revoluci&oacute;n Industrial</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">20</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.3</td>
+                        <td style="font-weight: 400; width: 395px;">Educaci&oacute;n para todos y todas</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">29</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.4</td>
+                        <td style="font-weight: 400; width: 395px;">Maestros/as: L&iacute;deres de Futuro</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">9</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.5</td>
+                        <td style="font-weight: 400; width: 395px;">Infraestructura y ambientes de aprendizaje</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">11</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.6</td>
+                        <td style="font-weight: 400; width: 395px;">Investigaci&oacute;n, creaci&oacute;n y apropiaci&oacute;n de saberes</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">8</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.7</td>
+                        <td style="font-weight: 400; width: 395px;">Cultura, arte y memoria</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">28</td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                        <td style="font-weight: 400; width: 23px; text-align: center;">2.8</td>
+                        <td style="font-weight: 400; width: 395px;">Cultura ciudadana</td>
+                        <td style="font-weight: 400; width: 18px; text-align: center;">12</td>
+                        <td></td>
+                        </tr>
+                        </tbody>
+                     </table>
+                   </div> 
+            </div>
+
+        
+            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                <h5 class="text-muted text4Title">Comportamiento Programas</h5>
+                <div  id="linea-programa" style="height: 270px;width: 100%;"></div>
+               
+                <div class="table-responsive-sm">
+                    <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                      <thead>
+                        <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                        <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                        <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                        <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="font-weight: 400; width: 44px; text-align: center;">1.1</td>
+                          <td style="font-weight: 400; width: 415px;">Talento Humano y Empleo</td>
+                          <td style="font-weight: 400; width: 21px; text-align: center;">20</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td style="font-weight: 400; width: 44px; text-align: center;">1.2</td>
+                          <td style="font-weight: 400; width: 415px;">Ciencia, Tecnolog&iacute;a, Innovaci&oacute;n y Emprendimiento: CTI + E</td>
+                          <td style="font-weight: 400; width: 21px; text-align: center;">33</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td style="font-weight: 400; width: 44px; text-align: center;">1.3</td>
+                          <td style="font-weight: 400; width: 415px;">Productividad, competitividad e internacionalizaci&oacute;n</td>
+                          <td style="font-weight: 400; width: 21px; text-align: center;">47</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td style="font-weight: 400; width: 44px; text-align: center;">1.4</td>
+                          <td style="font-weight: 400; width: 415px;">Informaci&oacute;n, datos y generaci&oacute;n de valor p&uacute;blico</td>
+                          <td style="font-weight: 400; width: 21px; text-align: center;">11</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td style="font-weight: 400; width: 44px; text-align: center;">1.5</td>
+                          <td style="font-weight: 400; width: 415px;">Ingl&eacute;s para Valle del Software</td>
+                          <td style="font-weight: 400; width: 21px; text-align: center;">9</td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+
+
+            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                <h5 class="text-muted text4Title">Indicadores</h5>
+                <form>
+                    <fieldset class="fieldset3 mb-3 ml-1 mt-1">
+                        <div class="table-responsive " style=" overflow-y: auto;">
+                            <table class="table table-striped able-sm table-responsive-lg  table-inverse table-hover " style="height: 90px;" width="704">
+                                <thead class="thead-inverse">
+                                    <thead class="thead-inverse">
+                                        <tr>
+                                            <th class="filaCenter">#</th>
+                                            <th class="filaCenter">Cod_línea</th>
+                                            <th class="filaCenter">Cod_compenente</th>
+                                            <th class="filaCenter">Cod_Programa</th>
+                                            <th class="filaCenter">Cod_Inidicador</th>
+                                            <th class="filaCenter">Indicador</th>
+                                            <th class="filaCenter">Tipo Indicador</th>
+                                            <th class="filaCenter">Meta Plan</th>
+                                            <th class="filaCenter">Unidad</th>
+                                            <th class="filaCenter">Línea Base</th>
+                                            <th class="filaCenter">Peso</th>
+                                            <th class="filaCenter">Responsable Reporte</th>
+                                            <th class="filaCenter">Avance Cuatrienio</th>
+                                            <th class="filaCenter">Logro Acumulado</th>
+                                            <th class="filaCenter">Ver</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaLeft">1.1</td>
+                                            <td class="filaCenter">1.1.1</td>
+                                            <td class="filaCenter" scope="row">1.1.1.1</td>
+                                            <td class="filaCenter" scope="row">Innovación y Negocios de Medellín</td>
+                                            <td class="filaLeft">Producto</td>
+                                            <td class="filaCenter">8</td>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaCenter" scope="row">754</td>
+                                            <td class="filaCenter">0.98</td>
+                                            <td class="filaCenter">8</td>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaCenter" scope="row">754</td>
+                                            <td class="filaLeft">+</td>
+                                         
+                                        </tr>
+                                        <tr>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaLeft">1.1</td>
+                                            <td class="filaCenter">1.1.1</td>
+                                            <td class="filaCenter" scope="row">1.1.1.1</td>
+                                            <td class="filaCenter" scope="row">Innovación y Negocios de Medellín</td>
+                                            <td class="filaLeft">Producto</td>
+                                            <td class="filaCenter">8</td>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaCenter" scope="row">754</td>
+                                            <td class="filaCenter">0.98</td>
+                                            <td class="filaCenter">8</td>
+                                            <td class="filaCenter" scope="row">1</td>
+                                            <td class="filaCenter" scope="row">754</td>
+                                            <td class="filaLeft">+</td>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+
+                
+                </form>
+            </div>
+            
+        </div>
+        
+        <%- include ('../partials/scriptsHome.html')%>
+        <script src="/js/searchindicador.js"></script>
+        <script src="/js/lineagraph.js"></script>
+        
+    </body>
+
+</html>
+
+
+

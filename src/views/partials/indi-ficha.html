@@ -1,0 +1,107 @@
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+<div class="modal fade bd-example-modal-lg" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+    
+        <div class="modal-body">
+            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                <h5  id="_nom_indicador2" class="text24Title"><strong></strong> </h5> 
+                <hr class="hrline">
+                <form>
+                    <div class="form-row">
+                        <div class="col-sm-6 card shadow-lg p-3 mb-2  bg-white rounded">
+                            <div class="card-body">
+                                <div class="mt-lg-3" id="chart1" style="height: 120px;  width:100%;"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 card shadow-lg p-3 mb-2 bg-white rounded">
+                            <div class="card-body">
+                                <div class="mt-lg-3" id="chart2" style="height: 120px;  width:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              
+                <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                    <form > 
+                        <div class="form-row"> 
+                          
+                            <fieldset class="fieldset1 col-md-12">
+                                <legend class="text16Title">Información</legend>      
+                                <hr>   
+                                <div class="form-row ml-2 mr-2">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-row">
+                                            <div class="table-responsive">
+                                                <table  class="table table-bordered table-sm table-responsive-sm table-hover"  >
+                                                    <thead>
+                                                      <tr>
+                                                        <th class="thindi">Cod_línea</th>
+                                                        <th class="thindi">Cod_compenente</th>
+                                                        <th class="thindi">Cod_Programa</th>
+                                                        <th class="thindi">Peso</th>
+                                                        <th class="thindi">Responsable Reporte</th>
+                                                        <th class="thindi">Meta Plan</th>
+                                                        <th class="thindi">Logro Acumulado</th>
+                                                        <th class="thindi">Avance Cuatrienio</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody id="indicador_query"></tbody>
+                                                </table>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <p class="text16Title"  for="objetivo">Definición</p>
+                                                <textarea class="form-control " style="font-size: small;" id="_definicion" rows="5"></textarea>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <p class="text16Title"  for="objetivo">Objetivo</p>
+                                                <textarea class="form-control " style="font-size: small;" id="_objetivo" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset> 
+        
+                    
+                            <fieldset class="fieldset1 col-md-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-row">
+                                            <div class="table-responsive">
+                                                <table  class="table table-bordered table-sm table-responsive-sm table-hover"  >
+                                                    <thead>
+                                                      <tr>
+                                                        <th class="thindi">Meta 2020</th>
+                                                    <th class="thindi">Logro 2020</th>
+                                                    <th class="thindi">Cumple 2020</th>
+                                                    <th class="thindi">Meta 2021</th>
+                                                    <th class="thindi">Logro 2021</th>
+                                                    <th class="thindi">Cumple 2021</th>
+                                                    <th class="thindi">Meta 2022</th>
+                                                    <th class="thindi">Logro 2022</th>
+                                                    <th class="thindi">Cumple 2022</th>
+                                                    <th class="thindi">Meta 2023</th>
+                                                    <th class="thindi">Logro 2023</th>
+                                                    <th class="thindi">Cumple 2023</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody id="indicador_logros"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+             
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Salir</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

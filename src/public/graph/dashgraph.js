@@ -325,10 +325,10 @@ async function graphPDM(){
         }).render();
       });
       
-      graphPDA() 
+     // graphPDA() 
 }
 
-
+/*
 
 async function graphPDA(){
   const dataSource = {
@@ -363,7 +363,7 @@ async function graphPDA(){
       dials: {
         dial: [
           {
-            value: "0"
+            value: "200"
           }
         ]
       }
@@ -383,3 +383,4 @@ async function graphPDA(){
     
 }
 
+*/

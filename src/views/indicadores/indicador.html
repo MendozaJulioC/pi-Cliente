@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+    <link rel="stylesheet" href="/css/prueba.css">
+  
+    <%- include ('../partials/head.html') %>
+</head>
+<%- include ('../partials/menuplapp.html')%>
+<body onload="indi()">
+    <div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="card-body">
+                        <div class="card-header shadow p-2 mb-4 bg-white rounded">
+                            <div class="input-group">
+                                <input list="browsers" class="form-control" name="browser" id="browser"
+                                    placeholder="Escriba el nombre del indicador"
+                                    style=" height: 40px ;font-size: x-small;">
+
+                                    <datalist  id="browsers" style="width: 300px;font-size: medium;"  > 
+                                        <% indicadores.forEach(function(indicador){ %>
+                                          <option value= "<%= indicador.nom_indicador %> "></option> 
+                                        <% }); %>
+                                      </datalist>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-info"
+                                        onclick="_getBuscaNombreIndicador()">Buscar</button>
+                                    <button type="button"
+                                        class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" onclick="_getBuscaNombreIndicador()">Buscar por el Nombre del Indicador</button>
+                                        <button class="dropdown-item" onclick="_getBuscaCodigoIndicador()">Por Código del Indicador</button>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <button class="dropdown-item" onclick="_clearBusca()">Limpiar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 id="nom_indicador1" class="text18 "></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="card-body">
+                        <h4 class="text-muted text18" >Avance Cuatrienial Indicador
+                            <spam>2020-2023</spam>
+                        </h4>
+                        <div class="mt-lg-3" id="avance-indicador" style="height: 250px;  width:100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+            <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                <div class="card-body">                   
+                    <h4 class="text-muted text18" >Cumplimiento Anual
+                        <spam>2020</spam>
+                    </h4>
+                    <div class="mt-lg-3" id="cumplimiento-indicador" style="height: 250px;  width:100%;"></div>
+                </div>
+            </div>
+            </div>
+        
+            <div class="col-sm-12 ">
+              <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                <div class="row">
+                  <div class="card-body col-sm-6">
+                    <div class="mt-lg-3" id="history-indicador" style="height: 90px;  width:100%;"></div>
+                  </div>
+                  <div class="card-body col-sm-6"> 
+                    <div class="mt-lg-3" id="history-cumplimiento-indicador" style="height: 80px;  width:100%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            <div class="col-sm-12 ">
+              <div class="row">
+                  <div class="card-body col-sm-4">
+                      <div class="legends">
+                          <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 13px;font-weight: 150;color: #73879C;
+                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Meta Plan
+                          </h4>
+                      </div>
+                      <h1 id="metaplan1"   style="text-align: center;font-size: 50px;line-height: 90px;font-weight: 190;color: #73879C;
+                      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                          <strong>  </strong>
+                      </h1>
+                  </div>
+
+                  <div class="card-body col-sm-4">
+
+                      <div class="legends">
+                          <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 13px;font-weight: 150;color: #73879C;
+                         font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Logro Acumulado
+                          </h4>
+                      </div>
+                      <h1 id="logroacumulado1" class="total" style="text-align: center;font-size: 50px;line-height: 90px;font-weight: 190;color: #73879C;
+                         font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                          <strong> </strong>
+                      </h1>
+                  </div>
+
+                  <div class="card-body col-sm-4">
+
+                      <div class="legends">
+                          <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 13px;font-weight: 150;color: #73879C;
+                      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">% Peso Indicador
+                          </h4>
+                      </div>
+                      <h1 id="peso-indicador" style="text-align: center;font-size: 50px;line-height: 90px;font-weight: 190;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                          <strong> </strong>
+                      </h1>
+                  </div>
+
+              </div>
+
+            </div>
+
+        </div>
+    
+    
+        <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+        <h5 class="text24">1. Información General</h5><br>
+        <h5  id="nom_indicador2" class="text18"><strong></strong> </h5> 
+        <hr class="hrline">
+        <form>
+            <fieldset class="fieldset2 col-md-12 mb-3 ml-1"> 
+                <legend class="legend1">En el Plan</legend>
+                <div class="form-row">
+            
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_linea">Código Línea</label>
+                        <input type="text" class="form-control" id="_cod_linea">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label class="textlabel2" for="nom_linea">Línea</label>
+                        <input type="text" class="form-control" id="_nom_linea">
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_componente">Código Componente</label>
+                        <input type="text" class="form-control" id="_cod_componente">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label class="textlabel2" for="nom_componente">Componente</label>
+                        <input type="text" class="form-control" id="_nom_componente">
+                    </div>
+                    </div>
+                    <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_programa">Código Programa</label>
+                        <input type="text" class="form-control" id="_cod_programa">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label class="textlabel2" for="nom_programa">Programa</label>
+                        <input type="text" class="form-control" id="_nom_programa">
+                    </div>
+                    </div>
+        
+                    <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_indicador">Código Indicador</label>
+                        <input type="text" class="form-control" id="_cod_indicador">
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label class="textlabel2" for="nom_indicador3">Indicador</label>
+                        <input type="text" class="form-control" id="_nom_indicador3">
+                    </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset class="fieldset3 col-md-12 mb-3 ml-1"> 
+                    <legend class="legend2">Definición</legend>
+                    <div class="form-row">
+                     
+                        <div class="form-group col-md-12">
+                          
+                            <textarea class="form-control" id="definicion" rows="5"></textarea>
+                        </div>
+        
+                        <div class="form-group col-md-12">
+                            <label class="textlabel2"  for="objetivo">Objetivo</label>
+                            <textarea class="form-control" id="objetivo" rows="3"></textarea>
+                        </div>
+        
+                    </div>
+
+                </fieldset>
+
+        </form>
+        </div>
+
+    
+        <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+            <h5 class="text24">2. Seguimiento</h5>
+            <form > 
+                <div class="form-row"> 
+                    <fieldset class="fieldset1 col-md-12 mb-3 ml-1">
+                                <legend class="legend1">General</legend>        
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label class="textlabel1" for="tipo_ind">Tipo Indicador</label>
+                                    <input type="text" class="form-control" id="_tipo_ind">
+                                </div>
+                                        
+                                <div class="form-group col-md-2">
+                                    <label class="textlabel1" for="meta_plan">Meta Plan</label>
+                                    <input type="text" class="form-control" id="_meta_plan">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="textlabel1"  for="unidad">Unidad</label>
+                                    <input type="text" class="form-control" name="_unidad" id="_unidad">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="textlabel1" for="sentido">Sentido</label>
+                                    <input type="text" class="form-control" id="_sentido">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="textlabel1" for="comportamiento">Comportamiento Deseado</label>
+                                    <input type="text" class="form-control" id="_comportamiento">
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <label class="textlabel1" for="fc">FC</label>
+                                    <input type="text" class="form-control" id="_fc">
+                                </div>
+
+                            </div>
+
+                    </fieldset>
+
+
+                    <fieldset class="fieldset1 col-md-6 ">
+                        <legend class="legend1">Línea base</legend>         
+                        <div class="form-row ml-2 mr-2">
+                            <div class="form-group col-md-6">
+                                <label class="textlabel1" for="lb">Línea Base</label>
+                                <input type="text" class="form-control" id="lb">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="textlabel1"  for="incluye_lb">Incluye LB</label>
+                                <input type="text" class="form-control" id="incluye_lb">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="textlabel1" for="vigenia_lb">Vigencia LB</label>
+                                <input type="text" class="form-control" id="vigenia_lb">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="textlabel1" for="tipo_lb">Tipo LB</label>
+                                <input type="text" class="form-control" id="tipo_lb">
+                            </div>
+                        </div>
+                        
+
+                        <fieldset class="fieldset2 col-md-12">
+                            <div class="form-row ml-2 mr-2">
+                                <div class="form-group col-md-6">
+                                    <label class="text12" for="peso">Peso</label>
+                                    <input type="text" class="form-control" id="peso">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="text12"  for="periocidad">Periocidad</label>
+                                    <input type="text" class="form-control" id="periocidad">
+                                </div>
+                            
+                            </div>
+                        </fieldset>
+
+
+
+                    </fieldset> 
+                        
+                    <fieldset class="fieldset1 col-md-6">
+                        <legend class="legend1">Fórmula y Variables</legend>         
+                        <div class="form-row ml-2 mr-2">
+                            <div class="form-group col-md-12">
+                                <label class="textlabel2"  for="formula_indicador">Fórmula del Indicador</label>
+                                <textarea class="form-control" id="formula_indicador" rows="3"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="textlabel2"  for="descripcion_variable">Descripción de las variables</label>
+                                <textarea class="form-control" id="descripcion_variable" rows="3"></textarea>
+                            </div>
+                        
+                        
+                        </div>
+                    </fieldset> 
+
+
+                    <fieldset class="fieldset1 col-md-6">
+                                <legend class="legend1">2020</legend>         
+                                <div class="form-row ml-2 mr-2">
+                                    <div class="form-group col-md-4">
+                                    <label class="textlabel1" for="meta_2020">Meta 2020</label>
+                                    <input type="text" class="form-control" id="meta_2020">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="textlabel1"  for="logro_2020">Logro 2020</label>
+                                        <input type="text" class="form-control" id="logro_2020">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="textlabel1" for="cumple_2020">Cumple 2020</label>
+                                        <input type="text" class="form-control" id="cumple_2020">
+                                    </div>
+                                
+                                </div>
+                    </fieldset> 
+                    <fieldset class="fieldset1 col-md-6">
+                        <legend class="legend1">2021</legend>         
+                        <div class="form-row ml-2 mr-2">
+                            <div class="form-group col-md-4">
+                            <label class="textlabel1" for="meta_2021">Meta 2021</label>
+                            <input type="text" class="form-control" id="meta_2021">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="textlabel1"  for="logro_2021">Logro 2021</label>
+                                <input type="text" class="form-control" id="logro_2021">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="textlabel1" for="cumple_2021">Cumple 2021</label>
+                                <input type="text" class="form-control" id="cumple_2021">
+                            </div>
+                        
+                        </div>
+                    </fieldset> 
+                    <fieldset class="fieldset1 col-md-6">
+                        <legend class="legend1">2022</legend>         
+                        <div class="form-row ml-2 mr-2">
+                            <div class="form-group col-md-4">
+                            <label class="textlabel1" for="meta_2022">Meta 2022</label>
+                            <input type="text" class="form-control" id="meta_2022">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="textlabel1"  for="logro_2022">Logro 2022</label>
+                                <input type="text" class="form-control" id="logro_2022">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="textlabel1" for="cumple_2022">Cumple 2022</label>
+                                <input type="text" class="form-control" id="cumple_2022">
+                            </div>
+                        
+                        </div>
+                    </fieldset> 
+                    <fieldset class="fieldset1 col-md-6">
+                        <legend class="legend1">2023</legend>         
+                        <div class="form-row ml-2 mr-2">
+                            <div class="form-group col-md-4">
+                            <label class="textlabel1" for="meta_2023">Meta 2023</label>
+                            <input type="text" class="form-control" id="meta_2023">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="textlabel1"  for="logro_2023">Logro 2023</label>
+                                <input type="text" class="form-control" id="logro_2023">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="textlabel1" for="cumple_2023">Cumple 2023</label>
+                                <input type="text" class="form-control" id="cumple_2023">
+                            </div>
+                        </div>
+                        </fieldset> 
+                </div>
+
+
+
+            </form>
+        </div>
+     
+
+        <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+            <h5 class="text24 text-muted">3. Responsables y Observaciones</h5>
+            <form>
+                <fieldset class="fieldset3 mb-3 ml-1 mt-1">
+                <legend class="legend1">Fuente</legend>
+                    <div class="form-row ml-2 mr-2">
+                        <div class="form-group col-md-12">
+                    
+                        <input type="text" class="form-control" id="fuente">
+                        </div>
+                    <div class="form-group col-md-12">
+                        <label class="textlabel1" for="tipo_fuente">Tipo de Fuente</label>
+                        <input type="text" class="form-control" id="tipo_fuente">
+                    </div>
+                </fieldset>
+
+                <fieldset class="fieldset2  mb-3 ml-1 mt-1">
+                    <legend class="legend2">Responsables</legend>
+                    <div class="form-row ml-2 mr-2">
+
+                        <div class="form-group col-md-12">
+                        <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Dependencias Responsables</label>
+                        <input type="text" class="form-control" id="_responsable_plan">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label style="text-align: left;font-size: 14px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" >Código Dependencia</label>
+                            <input type="text" class="form-control" id="_cod_responsable_reporte">
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Dependencia Responsable del Reporte</label>
+                            <input type="text" class="form-control" id="_nombre_dep">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Instrumento de Recolección</label>
+                            <input type="text" class="form-control" id="_instrumento_recoleccion">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color: rgb(28, 55, 85);
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" >Responsable del Reporte</label>
+                            <input type="text" class="form-control" id="_responsable_reporte">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="textlabel2"  for="observacriones">Observaciones</label>
+                            <textarea class="form-control"   id="_observaciones" rows="5"></textarea>
+                        </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+          
+         
+    </div>
+</body>
+<%- include ('../partials/scriptsHome.html')%>
+<script src="/js/searchindicador.js"></script>
+</html>
+
+
+
