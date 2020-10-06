@@ -150,6 +150,8 @@ async function _codigoIndicador(cod_indicador){
                 tabla +='<td style="text-align:center;font-size: 10px;">'+datos.data[0].peso+'</td>';
                 tabla +='<td style="text-align:center;font-size: 10px;">'+datos.data[0].nombre_dep+'</td>';
                 tabla +='<td style="text-align:center;font-size: 10px;">'+datos.data[0].meta_plan+'</td>';
+
+                tabla +='<td style="text-align:center;font-size: 10px;">'+datos.data[0].unidad+'</td>';
                 tabla +='<td style="text-align:center;font-size: 10px;">'+datos.data[0].avance_cuatrienio+'</td>';
                 tabla +='<td style="text-align:center;font-size: 10px;">'+datos.data[0].logro_acumulado+'</td>';
                 tabla +='<tr>';

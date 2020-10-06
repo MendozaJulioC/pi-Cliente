@@ -1,0 +1,118 @@
+
+    
+
+form fieldset { margin: 25px 0; border: none;}
+
+li{
+    list-style:none;
+  }
+ .jum{
+  font-size: 20px;line-height: 5px;
+  font-weight: 90;color:#042c55;
+  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;
+  text-shadow: 4px 4px 5px gray;
+  
+ }
+
+ .jumbotron-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.80;
+  }
+
+
+.text14left{
+    text-align: left;
+    font-size: 18px;line-height: 25px;
+    font-weight: 150;color:#042c55;
+    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;
+  }
+  .text24{
+    font-size: 20px;line-height: 5px;
+    font-weight: 90;color:#042c55;
+    font-weight: 50;
+    text-shadow: 1px 1px 1px gray;
+  }
+  .text12{
+    font-size: 12px;line-height: 12px;
+    font-weight: 90;color:#042c55;
+   
+    
+  }
+
+
+  th, td {
+    text-align: left;
+     padding: 1px;
+    
+   
+   }
+   td{
+     font-size: 12px;
+   }
+   th {background-color:#B4358B; color: white}
+   
+   tr:nth-child(even){background-color: rgb(203, 211, 212)}
+
+
+
+   .filaCenter .filaleft{
+    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;
+  }
+  
+  
+  .filaCenter{
+    text-align:left;font-size: 8px;
+    
+  }
+  .filaLeft{
+    text-align:left;font-size: 9px;
+  
+  
+  }
+  .encabezadoTabla{
+    text-align:left;font-size: 11px;
+    height: 10px;
+  }
+  
+
+  .divide{
+    border-bottom: 4px solid #177595;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
+
+  div.ex1 {
+    /* background-color: lightblue;*/
+    height: 400px;
+    width: 100%;  
+    overflow-y: auto;
+    overflow-x: auto;
+    }
+
+.responsive {
+width: 100%;
+max-width: 100%;
+height: auto;
+}
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background-color: #B4358B;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 8px;
+}
+      
+#myBtn:hover {
+    background-color: #EE7518;
+}

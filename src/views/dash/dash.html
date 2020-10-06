@@ -13,16 +13,14 @@
 <%- include ('../partials/menuplapp.html') %>
 <body onload="graphlineas()">
    <div class="container mt-5  mb-2" > 
-
     <div class="card-deck mt-5">
-   
         <div class="card">
           <div class="about">
             <h2>Medellín Futuro</h2>
             <p class="lead">Plan de Desarrollo 2020-2023</p>
-              <a class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"  href="/general"> 
-                <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true"> Consultar</i>
-              </a>
+            <a class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"  href="/general"> 
+              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true"> Consultar</i>
+            </a>
           </div>
           <br>
           <h4 class="text-muted text12">Avance Cuatrienial</h4>
@@ -96,9 +94,9 @@
             creativo de sus ciudadanos, salvaguarde sus patrimonios y memorias y contribuya a hacer de Medellín una ciudad más solidaria, participativa 
             y en paz. 
             <br> <br>
-                  <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
-                    <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
-                  </button>
+            <a class="btn btn-outline-info btn-block"  href="/linea-2"style="font-size: xx-small;" type="button"> 
+              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
+            </a>
             </div>
             <div  id="canvas2" style="height: 270px;width: 100%;"></div>
         </div>
@@ -138,9 +136,9 @@
            sociales y comunitarios saludables, seguros, creativos y sostenibles.
 
           <br> <br><br>
-                <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
-                  <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
-                </button>
+          <a class="btn btn-outline-info btn-block"  href="/linea-3"style="font-size: xx-small;" type="button"> 
+            <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
+          </a>
         </div>          
         <!-- Canvas for Chart -->
         <div  id="canvas3" style="height: 275px;width: 100%;"></div>
@@ -175,9 +173,9 @@
           el pleno disfrute del derecho a la ciudad, la habitabilidad digna de sus habitantes y la integración funcional y armoniosa de la 
           ruralidad mediante el reconocimiento y acceso a los derechos de los pobladores rurales.
           <br> <br><br><br>
-          <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
-            <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
-          </button>
+          <a class="btn btn-outline-info btn-block"  href="/linea-4"style="font-size: xx-small;" type="button"> 
+            <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
+          </a>
         </div>            
         <!-- Canvas for Chart.js -->
         <div  id="canvas4" style="height: 270px;width: 100%;"></div>
@@ -213,40 +211,22 @@
               diferentes actores y la construcción colectiva de procesos ciudadanos de paz territorial, desde el conocimiento colectivo del territorio, 
               la instalación  de capacidades locales e institucionales para la gestión y protección de lo público, el uso del dato y la información como 
               activo público que otorga valor y la articulación intra e interinstitucional y territorial.
-
-
             </textarea>
-          
-            
-            <button class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"> 
-              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" onclick=" buscar_vigencia()"> Consultar</i>
-            </button>
+            <a class="btn btn-outline-info btn-block"  href="/linea-5"style="font-size: xx-small;" type="button"> 
+              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
+            </a>
           </div>  
           <!-- Canvas for Chart.js -->
           <div  id="canvas5" style="height: 270px;width: 100%;"></div>
       </div>
-                
-
     </div>
-
-  
-
-  
-
-
 </div>
-
-
-
-
- 
 </body>
 </html>
 
 <%- include ('../partials/scriptsHome.html')%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 <script src="/graph/dashgraph.js"></script>
-
 <script src="/js/dateo.js"></script>
 <script type="text/javascript">
   function stopEnterKey(evt) {

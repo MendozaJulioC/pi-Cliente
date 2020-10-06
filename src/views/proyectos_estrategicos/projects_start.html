@@ -1,0 +1,86 @@
+
+<html lang="en">
+ 
+    
+
+<%- include ('../partials/head.html') %>
+<link rel="stylesheet" href="css/pe_home.css">
+<link rel="stylesheet" href="css/prueba.css">
+
+
+<body >
+
+    <section class="hero-unit container">
+      <div class="row">
+        <div class="col-md-12 ">
+          <hgroup>
+            <h1>Portal de consulta de los Proyectos Estratégicos</h1>
+            <h3>Monitoreo Indicadores del Plan de Desarrollo 2020-2023</h3>
+          </hgroup>
+            <div class="btn-group " role="group" aria-label="Basic example">
+              <a href="/" type="button" class="btn btn-outline-warning">Home</a>
+              <a href="/dash" type="button" class="btn btn-outline-warning">Dash</a>
+              <a href="/indicadores" type="button" class="btn btn-outline-warning">Indicadores</a>
+            </div>
+        </div>
+           
+        <form>
+    
+          
+            <div class="row"> 
+                <div class="col-md-10 custom-select">
+                    <select id="demo"  name="demo">
+                        <option value="0...">Seleccione el proyecto...</option>
+                        <option value="1">Metro de la 80</option>
+                        <option value="2">Plan estratégico de tecnologías para la seguridad: Inteligencia, tecnología e infraestructura para la seguridad y la convivencia</option>
+                        <option value="3">Un billón para la reactivación económica y el valle del software</option>
+                        <option value="4">Refugio de vida silvestre</option>
+                        <option value="5">Red neutra y red mesh</option>
+                        <option value="6">Parques del norte</option>
+                        <option value="7">Transformación educativa</option>
+                        <option value="8">Fortalecimiento de la infraestructura de salud</option>
+                        <option value="9">Estrategia Medellín me cuida: social y salud</option>
+                        <option value="10">Seguridad alimentaria y hambre cero</option>
+                        <option value="11">Sistema municipal de cuidados</option>
+                        <option value="12">Bienes de capital físico para mujeres</option>
+                        <option value="13">Estudios de una nueva Línea del Metro con tramos subterráneos</option>
+                        <option value="14">Parque biblioteca pública Zona Nororiental</option>
+                        <option value="15">Complejo cultural de Ciudad del Río</option>
+                        <option value="16">Medellín caminable y pedaleable</option>
+                        <option value="17">Ciencia futuro</option>
+                    </select>
+
+                   
+                </div>
+
+
+
+
+                <div class="col-md-2">
+                    <a class="btn btn-warning btn-block buttonpill" style="font: size 20px;" type="button" onclick="_openProject()" href="#"> 
+                        <i class="fa fa-pencil-square-o" style=" width:55px; height:34px; font-size:larger; align-self: end;"aria-hidden="true"><strong>Consultar </strong></i> 
+                    </a>
+                </div>
+               
+
+
+
+
+
+            </div>
+        </form>
+      </div>
+    </section>
+    <%- include ('../partials/scriptsHome.html') %>
+    <!-- JQuery -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
+    <script src="/js/estrategicos.js"></script>
+
+</body>
+
+</html>
+
+
+

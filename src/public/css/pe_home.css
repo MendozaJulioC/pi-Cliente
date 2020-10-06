@@ -1,0 +1,168 @@
+/*!
+ * Start Bootstrap - The Big Picture (https://startbootstrap.com/template-overviews/the-big-picture)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-the-big-picture/blob/master/LICENSE)
+*/
+body {
+ 
+    background-image: url('/img/medellinl1.jpeg' );
+    background-size: cover;
+    color: white; 
+    
+   
+  }
+
+    
+ul{
+  padding:0;
+  margin:0
+}
+li{
+  list-style:none;
+}
+form {
+  width: 1000px;
+  padding: 5px 40px 5px 5px;
+  display: block;
+  margin: 100px auto;
+  border-radius: 3px;
+  color: #000;
+}
+
+form fieldset { margin: 25px 0; border: none;}
+
+.select_wrapper {
+ 
+  line-height: 25px;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+}
+.select_wrapper span{
+  background: #f5f5f5 url("https://image.flaticon.com/icons/svg/118/118738.svg") no-repeat top 15px right 12px;
+background-size:15px;
+}
+.select_wrapper:hover { background: #fff url("https://image.flaticon.com/icons/svg/118/118738.svg") no-repeat top 15px right 12px; }
+
+.select_wrapper span {
+  display: block;
+  margin: 0;
+      padding: 5px 10px;
+    border-radius: 4px;
+transition:0.4s ease;
+     z-index: 9;
+    position: relative;
+}
+.select_wrapper.openSelect span {
+    display: block;
+    margin: 0;
+    transform: scale(1.04);
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+    -webkit-box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+    box-shadow: 0 15px 35px rgba(50, 50, 93, .1), 0 5px 15px rgba(0, 0, 0, .07);
+}
+.select_wrapper .select_inner {
+  background: #fff;
+ 
+  color: #687278;
+  display: none;
+  position: absolute;
+  left: 0;
+     top: 47px;
+    width: 100%;
+ 
+}
+
+.select_wrapper .select_inner li {
+  border-bottom: 1px solid #eee;
+  padding: 5px 15px;
+  transition:0.4s ease;
+}
+.select_wrapper .select_inner li:hover {
+    background: #B4358B;
+    color: #fff;
+}
+.select_wrapper .select_inner ul {     border-radius: 5px;
+  
+    background: #fff; }
+
+ .jum{
+  font-size: 80px;line-height: 25px;
+  font-weight: 150;color:#042c55;
+  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;
+  text-shadow: 2px 2px 5px gray;
+ }
+
+ 
+ .buttonpill{
+  background-color: #FFDC15;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+
+/* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color:#B4358B;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: #009FE3e3;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}

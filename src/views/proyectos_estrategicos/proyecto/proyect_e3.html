@@ -1,0 +1,356 @@
+<!<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+        <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+    
+    <link rel="stylesheet" href="/css/pe_estrategico.css">
+    <title><%= title %>  </title>
+</head>
+<%- include ('../../partials/head.html') %>
+
+<body>
+   <div class="container-fluid">
+  
+
+
+
+    <div class="jumbotron jumbotron-fluid jumbotron-image " style="background-image: url(/img/medellinl1.jpeg);  "   >
+        <div class="container ">
+            <h3 class="display-4 jum"><%= subtitle %> </h3>
+            <p class="lead text-white">Proyecto Estratégico</p>
+           
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <a href="/" type="button" class="btn btn-outline-warning"><i class="fa fa-home"></i>Home</a>
+                <a href="/dash" type="button" class="btn btn-outline-warning"><i class="fa fa-tachometer"></i>Dash</a>
+                <a href="/indicadores" type="button" class="btn btn-outline-warning"><i class="fa fa-bar-chart"></i>Indicadores</a>
+                <a href="/projects" type="button" class="btn btn-outline-success"><i class="fa fa-asterisk"></i>Menú</a>
+                <a href="/projects/estrategico/pe_4" type="button" class="btn btn-outline-success"><i class="fa fa-forward"></i>Siguiente</a>
+                
+              </div>
+        </div>
+    </div>
+ 
+    <div class="mt-2 shadow-sm p-3 mb-3 bg-white rounded">
+      <div class="row">
+
+        <div class="card-body shadow-sm col-md-3 mb-2" >
+            <div  id="avance-pe" style="height: 180px;width: 100%;"></div>
+        </div> 
+
+        <div class="card-body shadow-sm   col-md-3 mb-2" >
+            <div  id="cumple-pe" style="height: 180px;width: 100%;"></div>
+        </div> 
+
+        <div class="card-body shadow-sm col-md-3 mb-2" >
+            <div  id="ejecucion-pe" style="height: 180px;width: 100%;"></div>
+        </div> 
+
+        <div class="card-body shadow-sm col-md-3 mb-2" >
+            <div  id="history-indicadorEstrategico" style="height: 150px;width: 100%;"></div>
+        </div> 
+
+        <div class="card-body mt-2 col-md-12" ><hr class="divide"></div>  
+
+        <div class="card-body mt-2 col-md-3 mt-2 ex1" >
+            <img src="/img/Metrola80.jpeg" alt=""class="responsive"  >
+        </div> 
+
+        <div class="card-body mt-2 col-md-3 mt-3" >
+            <h4 class="text24"> Objetivos</h4>
+            <ul>
+                <i class="fa fa-pencil-square-o" style=" width:20px; height:10px; font-size:larger; align-self: end;"aria-hidden="true"> </i>
+                <li class="text14left">
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li> <br>
+                <i class="fa fa-pencil-square-o" style=" width:20px; height:10px; font-size:larger; align-self: end;"aria-hidden="true"> </i>
+                <li class="text14left">
+                    Incentivar el uso del transporte público sostenible a través de la generación de conectividad en sentido norte-sur y viceversa por el occidente de la ciudad.
+                </li>
+            </ul>
+        </div> 
+
+
+        <div class="card-body mt-2 col-md-6" >
+            <h4 class="text24"> Indicadores asociados</h4>
+            <div class="table-responsive " style=" overflow-y: auto;">
+                <table class="table table-striped able-sm table-responsive-lg  table-inverse table-hover ">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th class="encabezadoTabla">Cod</th>
+                            <th class="encabezadoTabla">Indicadores</th>
+                            <th class="encabezadoTabla">Unidad de Medida</th>
+                            <th class="encabezadoTabla" >Línea Base</th>
+                            <th class="encabezadoTabla" >Meta 2020-2023</th>
+                            <th class="encabezadoTabla" >Logro</th>
+                            <th class="encabezadoTabla" >Avance</th>
+                            <th class="encabezadoTabla" >Responsable</th>
+                            <th class="encabezadoTabla" >+</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="filaCenter" >4.1.4.7</td>
+                            <td class="filaCenter"  scope="row">Intercambios para el corredor Metro de la 80 construidos.</td>
+                            <td class="filaCenter" >Número</td>
+                            <td class="filaCenter" >0</td>
+                            <td class="filaCenter" >3</td>
+                            <td class="filaCenter" >0</td>
+                            <td class="filaCenter" >0</td>
+                            <td class="filaCenter" >Secretaría de Infraestructura Física</td>
+                            <td class="filaCenter" ><a name="" id="" class="btn btn-primary btn-sm" href="#" role="button">+</a></td>
+
+                        </tr>
+                        <tr>
+                            <td class="filaCenter" >4.1.1.1</td>
+                            <td class="filaCenter"  scope="row">Tramo 1 del sistema Metro de la 80 construido..</td>
+                            <td class="filaCenter" >Porcentaje</td>
+                            <td class="filaCenter" >0</td>
+                            <td class="filaCenter" >80</td>
+                            <td class="filaCenter" >0</td>
+                            <td class="filaCenter" >0</td>
+                            <td class="filaCenter" >Secretaría de Infraestructura Física</td>
+                            <td class="filaCenter" ><a name="" id="" class="btn btn-primary btn-sm" href="#" role="button  ">+</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+
+        <div class="card-body mt-2 col-md-12" ><hr class="divide"></div>    
+
+        <div class="card-body mt-2 col-md-3" >
+            <h4 class="text24"> Hitos</h4>
+            <hr>
+            <ul>
+              
+                <li class="text12">
+                    <span style="font-size: 1em; color: greenyellow;"><i class="fa fa-check"></i></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+                <li class="text12">
+                    <span style="font-size: 1em; color: greenyellow;"><i class="fa fa-check"></i></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+                <li class="text12">
+                    <span style="font-size: 1em; color: greenyellow;"><i class="fa fa-check"></i></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+                <li class="text12">
+                    <span style="font-size: 1em; color: greenyellow;"><i class="fa fa-check"></i></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+            </ul>
+        </div> 
+
+        <div class="card-body mt-2 col-md-6" >
+            <div  id="eficiencia-tiempo" style="height: 300px;width: 100%;"></div>   
+       </div> 
+
+        <div class="card-body mt-2 col-md-3" >
+            <h4 class="text24"> Riesgos</h4>
+            <hr>
+            <ul>
+              
+                <li class="text12">
+                    <span style="font-size: 1em; color: Tomato;"><i class="fa fa-times fa-1x"></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+                <li class="text12">
+                    <span style="font-size: 1em; color: Tomato;"><i class="fa fa-times fa-1x"></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+                <li class="text12">
+                    <span style="font-size: 1em; color: Tomato;"><i class="fa fa-times fa-1x"></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+                <li class="text12">
+                    <span style="font-size: 1em; color: Tomato;"><i class="fa fa-times fa-1x"></i></span> 
+                    Generar un nuevo corredor de transporte público masivo que soporte la demanda de la ciudad, aliviane la carga de los actuales corredores del SITVA y brinde conectividad a la zona occidental de la ciudad.
+                </li><br>
+
+            </ul>
+        </div> 
+
+        <div class="card-body mt-2 col-md-12" ><hr class="divide"></div>  
+
+        <div class="card-body mt-2 col-md-4" >
+            <div class="card border-0">  
+                <div id="chart-pa-pe" style="width: 100%; height: 300px;" class="col-md-6"></div>
+                <div class="card border-0">
+                    <div class="table-responsive-sm" >
+                        <table  class="table table-sm table-responsive-sm table-hover" width="100%" style="font-size: small;">
+                            <thead>
+                              <tr>
+                                <th colspan="2">Vigencia actual</th>
+                                <th id="corte_vigencia">Junio 30 de 2020</th>
+                              </tr>
+                              <tr>
+                                <th style="text-align: center;">Ppto. Inicial</th>
+                                <th style="text-align: center;">Ppto. Ajustado</th>
+                                <th style="text-align: center;">Ordenado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="text-align: right;" scope="row">$1.345.908</td>
+                                <td style="text-align:right;" >$234.567</td>
+                                <td style="text-align:right;">$345.987</td>
+                              </tr>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="3">Cifras en miilones de pesos</td>
+                              </tr>
+                            </tfoot>
+                        </table>
+                    </div>  
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4" style="  align-items: center;justify-content: center;">
+            <div class="card border-0">
+              <div class="table-responsive-sm" >
+                <table  class="table table-sm table-responsive-sm table-hover" width="100%" style="font-size: small;">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Proyecto: bpin 265478798564</th>
+                      <th id="corte_vigencia">Junio 30 de 2020</th>
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;">Ppto. Inicial</th>
+                      <th style="text-align: center;">Ppto. Ajustado</th>
+                      <th style="text-align: center;">Ordenado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: right;" scope="row">$1.345.908</td>
+                      <td style="text-align:right;" >$234.567</td>
+                      <td style="text-align:right;">$345.987</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3">Cifras en miilones de pesos</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>  
+              <p class="text14">Observaciones:2 </p> 
+              <p class="text12">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum sint vel, ab dolores voluptatum quas nesciunt praesentium
+                  inventore obcaecati tenetur cupiditate dolor voluptate, consequuntur necessitatibus accusamus vitae ipsam. Ab, facilis?
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eveniet voluptatibus earum tempore nulla saepe esse accusantium non iusto repellendus amet odit sed, perferendis consectetur nisi dolor minima, suscipit omnis.
+              </p>
+            </div>
+            <div class="card border-0">
+              <div class="table-responsive-sm" >
+                <table  class="table table-sm table-responsive-sm table-hover" width="100%" style="font-size: small;">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Proyecto: bpin 8797646544</th>
+                      <th id="corte_vigencia">Junio 30 de 2020</th>
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;">Ppto. Inicial</th>
+                      <th style="text-align: center;">Ppto. Ajustado</th>
+                      <th style="text-align: center;">Ordenado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align: right;" scope="row">$1.345.908</td>
+                      <td style="text-align:right;" >$234.567</td>
+                      <td style="text-align:right;">$345.987</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3">Cifras en miilones de pesos</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>  
+              <p class="text14">Observaciones:3 </p> 
+              <p class="text12">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum sint vel, ab dolores voluptatum quas nesciunt praesentium
+                  inventore obcaecati tenetur cupiditate dolor voluptate, consequuntur necessitatibus accusamus vitae ipsam. Ab, facilis?
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod ad quis quibusdam laborum nostrum fugit possimus! Id qui, beatae delectus alias, neque ipsam pariatur nesciunt eius animi, illum repudiandae optio!
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus dignissimos blanditiis, excepturi facilis eveniet perspiciatis explicabo minus a provident cumque laudantium, voluptatum minima deleniti perferendis possimus, natus sapiente ad! Modi?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum hic impedit quidem, tenetur libero ullam sint accusamus. Saepe possimus molestiae exercitationem modi beatae illum aut adipisci! Excepturi corrupti vero veritatis?
+              </p>
+            </div>
+        </div>
+
+        <div class="card-body  col-md-4" >
+            <div id="chart-detalleppto" style="width: 100%; height: 270px;" ></div>
+
+            <div class="table-responsive-sm mt-4" >
+                <table  class="table table-sm table-responsive-sm table-hover" width="100%" style="font-size: small;">
+                  <thead>
+                    <tr>
+                      <th colspan="3">Vigencia actual</th>
+                      <th id="corte_vigencia">Junio 30 de 2020</th>
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;">Ordenado</th>
+                      <th style="text-align: center;">Compromisos</th>
+                      <th style="text-align: center;">Disponible</th>
+                      <th style="text-align: center;">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody style="text-align: right;">
+                    <tr>
+                      <td style="text-align: right;" scope="row">$4.915.670</td>
+                      <td style="text-align: right;">$190.174</td>
+                      <td style="text-align: right;">$472.789</td>
+                      <td style="text-align: right;">$5.579.022</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">Cifras en miilones de pesos</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            
+        </div>
+    </div>
+
+    <button   onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    </div>
+</div>
+  <%- include ('../../partials/scriptsHome.html') %>
+  <script src="/js/estrategicos.js"></script>
+  <script>
+    //Get the button
+    var mybutton = document.getElementById("myBtn");
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+    </script>
+</body>
+</html>
