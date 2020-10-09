@@ -80,3 +80,15 @@ function inicial(){
     then close all select boxes: */
     document.addEventListener("click", closeAllSelect);
   }
+
+  async function _openProject(){
+    let combo = document.getElementById("demo");
+    let selected = combo.options[combo.selectedIndex].value;
+    if(selected>0){
+       //window.open('http://localhost:8000/projects/estrategico/pe_'+project)
+    location.href = 'projects/estrategico/pe_'+selected; 
+    }
+    
+}
+
+  inicial()

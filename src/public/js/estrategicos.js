@@ -1,4 +1,4 @@
-inicial()
+
 avance_pe()
 cumple_pe_anual()
 inversion_exec()
@@ -7,15 +7,7 @@ _graphHistoryIndicadorEstrategico()
 _detalleEjecPresupuesto()
 _detalleppto()
 
-async function _openProject(){
-    let combo = document.getElementById("demo");
-    let selected = combo.options[combo.selectedIndex].value;
-    if(selected>0){
-       //window.open('http://localhost:8000/projects/estrategico/pe_'+project)
-    location.href = 'projects/estrategico/pe_'+selected; 
-    }
-    
-}
+
 
 async function avance_pe(){
     const dataSource = {
