@@ -12,8 +12,26 @@ async function dateomain(){
     papptoejecxdep()
     columnGeo()
     strategicprojects()
+    _PDM()
    
 }
+
+async function _PDM(){
+
+  try {
+    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
+    .then(res=>res.json())
+    .then(datos=>{
+      document.getElementById('porcentaje-pdm').innerHTML=Math.ceil(datos.data[0].total_plan)+"%";
+      })
+  } catch (error) {
+    console.log('Error _avancePDM ',error )
+  }
+
+}
+
+
+
 
 async function graphInversion(){
     const dataSource = {
@@ -45,7 +63,7 @@ async function graphInversion(){
             }
           ]
         },
-        value: "24",
+        value: "0",
     
       };
       
@@ -66,7 +84,7 @@ async function graphInversion(){
 
 async function graphBarPA(){
 
-
+// tomar los valores de la geo
     const dataSource = {
         chart: {
           caption: "Ejecución Financiera",
@@ -83,17 +101,17 @@ async function graphBarPA(){
         data: [
           {
             label: "Ppto. Inicial",
-            value: 100000,
+            value: 0,
             color: "#EE7518"  //Custom Color
           },
           {
             label: "PPto. Ajustado",
-            value: 9000,
+            value: 0,
             color: "#009AB2"
           },
           {
             label: "Ordenado",
-            value: 9500,
+            value: 0,
             color : "#00853E"
           }
         ]
@@ -113,7 +131,22 @@ async function graphBarPA(){
 };
 
 async function graphInicial(){
-    const dataSource = {
+  try {
+    var dateo=[];
+    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-avance-lineas')
+    .then(res=>res.json())
+    .then(datos=>{
+          let tam = datos.data.length;
+          for(let i =0; i<tam;i++){
+            dateo.push({
+             "label" : datos.data[i].nom_linea,
+              "value": Math.ceil(datos.data[i].avance_linea)
+            })
+          }
+      
+
+
+ const dataSource = {
         chart: {
           caption: "% Avance ",
           yaxisname: "Medellín Futuro",
@@ -125,35 +158,18 @@ async function graphInicial(){
           yaxisname: "% Ejecución Alcanzada",
           exportEnabled: "1",
           exportFileName:"AvancexLinea",
-          plottooltext: "<div id='divTable'><table id='dataTable' width='300px'><tr class=''><th>Línea</th><td>$label</td></tr><tr><th>$yAxisName</th><td>$value%</td></tr><tr><th>% Proyectado</th><td>$value%</td></tr></table></div>",
+         
         
 
         },
-        data: [
-            {
-              label: "Reactivación Económica y Valle del Software",
-              value: 20
-            },
-            {
-              label: "Transformación Educativa y Cultural",
-              value: 10
-            },
-            {
-              label: "Medellín me Cuida",
-              value: 30
-            },
-            {
-              label: "Ecociudad",
-              value: 10
-            },
-            {
-              label: "Gobernanza y Gobernabilidad",
-              value: 60
-            }
-          ]
+        data: 
+          dateo
+        
+           
+          
         };
-      
-      FusionCharts.ready(function() {
+
+ FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "column2D",
           renderAt: "chart-inicial",
@@ -163,6 +179,21 @@ async function graphInicial(){
           dataSource
         }).render();
       });
+         
+      })
+     
+     
+     
+
+
+
+
+  } catch (error) {
+    console.log('Error graphInicial ', error)
+  }
+    
+      
+   
       
 };
 
@@ -180,23 +211,23 @@ async function graphCompL1(){
         data: [
           {
             label: "Talento Humano y Empleo",
-            value: 10
+            value: 0
           },
           {
             label: "Ciencia, Tecnología, Innovación y Emprendimiento: CTI + E",
-            value: 20
+            value: 0
           },
           {
             label: "Productividad, competitividad e internacionalización",
-            value: 50
+            value: 0
           },
           {
             label: "Información, datos y generación de valor público",
-            value: 90
+            value: 0
           },
           {
             label: "Inglés para Valle del Software",
-            value: 20
+            value: 0
           }
         ]
       };

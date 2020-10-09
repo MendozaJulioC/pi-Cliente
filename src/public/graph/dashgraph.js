@@ -316,7 +316,7 @@ async function   graphLine5(avance5){
 }
   
 async function graphPDM(total){
-alert(total)
+
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
   try {
 
@@ -354,7 +354,7 @@ alert(total)
       dials: {
         dial: [
           {
-            value: parseInt(total)
+            value: Math.ceil(total)
           }
         ]
       }
