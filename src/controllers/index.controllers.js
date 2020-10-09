@@ -47,7 +47,7 @@ const getGeneral = async(req, res)=>{
 
 const getIndicador = async(req, res)=>{
     try {
-        fetch('http://localhost:7000/pi/api/list-indicador')
+        fetch('https://sse-pdm-back.herokuapp.com/pi/api/list-indicador')
         .then(res=>res.json())
         .then(data=>{
             indicadores = data.data;

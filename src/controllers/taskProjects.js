@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 const fetch = require('node-fetch');
 
+
 const getProjects= async(req, res)=>
 {
     try {
@@ -15,12 +16,20 @@ const getProjects= async(req, res)=>
     }
 }
 
+
+
+
+
+
+
+
 const getProject1= async(req, res)=>{
-    try{
+    try{ 
         res.render('./proyectos_estrategicos/proyecto/proyect_e1.html',
          {
              title: "Metro de la 80",
-            subtitle: "Metro de la 80"
+            subtitle: "Metro de la 80",
+            
         } )
     } catch (error) {console.log('Error getProject1: ', error)}
 }
@@ -91,5 +100,5 @@ module.exports = {
     getProject6,getProject7,getProject8,
     getProject9,getProject10,getProject11,
     getProject12,getProject13,getProject14,
-    getProject15,getProject16,getProject17    
+    getProject15,getProject16,getProject17 
 }

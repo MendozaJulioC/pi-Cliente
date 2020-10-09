@@ -4,7 +4,7 @@ async function linea(linea){
     try {
         spinner()
         let tabla=''
-        fetch(`http://localhost:7000/pi/api/line/${linea}`)
+        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/${linea}`)
         .then(res=>res.json())
         .then(datos=>{
             let tam = datos.data.length;
@@ -48,7 +48,7 @@ async function componente(componente){
     try {
        
         let tabla=''
-        fetch(`http://localhost:7000/pi/api/componentes/${componente}`)
+        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/${componente}`)
         .then(res=>res.json())
         .then(datos=>{
             let tam = datos.data.length;
@@ -93,7 +93,7 @@ async function prg(programa){
     try {
        // spinner()
         let tabla=''
-        fetch(`http://localhost:7000/pi/api/programas/${programa}`)
+        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/${programa}`)
         .then(res=>res.json())
         .then(datos=>{
             let tam = datos.data.length;
@@ -139,7 +139,7 @@ async function _codigoIndicador(cod_indicador){
 
         try {
             let tabla='', tabla2='';
-            fetch(`http://localhost:7000/pi/api/indicador/${cod_indicador}`)
+            fetch(`https://sse-pdm-back.herokuapp.com/pi/api/indicador/${cod_indicador}`)
             .then(res => res.json())
             .then(datos => {
                 document.getElementById('_nom_indicador2').innerHTML= datos.data[0].nom_indicador
