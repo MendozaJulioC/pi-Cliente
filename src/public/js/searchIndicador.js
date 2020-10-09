@@ -2,7 +2,7 @@ var avance_cuatrienio= 0;
 var cumplimiento_logro=0;
 
 async function  q_Indicador(){
-
+alert('hola')
     let cod_indicador= document.getElementById('indicadorquery').value;
     if (cod_indicador.length>=5){
 
