@@ -13,11 +13,8 @@ async function _avancePDM(){
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
-  
-      graphPDM(datos.data[0].total_plan)
-      
-
-    })
+        graphPDM(datos.data[0].total_plan)
+      })
   } catch (error) {
     console.log('Error _avancePDM ',error )
   }
@@ -357,7 +354,7 @@ alert(total)
       dials: {
         dial: [
           {
-            value: total
+            value: parseInt(total)
           }
         ]
       }
