@@ -1,5 +1,11 @@
-_avancePDM()
-_avanceline()
+
+
+
+async function _main(){
+  _avancePDM()
+  _avanceline()
+
+}
 
 async function _avancePDM(){
 
@@ -7,7 +13,7 @@ async function _avancePDM(){
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
-      console.log(datos.data[0].total_plan)
+  
       graphPDM(datos.data[0].total_plan)
       
 
@@ -309,11 +315,11 @@ async function   graphLine5(avance5){
         }).render();
       });
 
-      graphPDM()
+      
 }
   
 async function graphPDM(total){
-
+alert(total)
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
   try {
 
@@ -351,7 +357,7 @@ async function graphPDM(total){
       dials: {
         dial: [
           {
-            value: 14
+            value: total
           }
         ]
       }
