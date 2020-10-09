@@ -312,11 +312,12 @@ async function   graphLine5(avance5){
       graphPDM()
 }
   
-async function graphPDM(total_plan){
+async function graphPDM(total){
+
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
   try {
 
-  
+
     
     const dataSource = {
       chart: {
@@ -350,7 +351,7 @@ async function graphPDM(total_plan){
       dials: {
         dial: [
           {
-            value: parseInt(total_plan)
+            value: 14
           }
         ]
       }
