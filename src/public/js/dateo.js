@@ -13,7 +13,7 @@ async function dateomain(){
     columnGeo()
     strategicprojects()
     _PDM()
-   
+    _Components()
 }
 
 async function _PDM(){
@@ -30,7 +30,111 @@ async function _PDM(){
 
 }
 
+async function _Components(){
+  try {
+    let avance_Comp1=[]; let avance_Comp3=[];
+    let avance_Comp2=[]; let avance_Comp4=[]; let avance_Comp5=[];
+    let tabla='', tabla2='',  tabla3='',   tabla4='',  tabla5='';
+    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-componentes')
+    .then(res=>res.json())
+    .then(datos=>{
+      console.log(datos)
+      document.getElementById('tbl_comp1').innerHTML="";
+      let tam = datos.data.length;
+      for(let i =0; i<tam;i++){
+        if ((datos.data[i].cod_linea) =="1"){
+          avance_Comp1.push({
+            "label" : datos.data[i].nom_componente,
+            "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
+          })
+        
+          tabla +='<tr >';
+          tabla +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
+          tabla +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
+          tabla +='<td style="font-weight: 400; width: 21px; text-align: center;"">'+datos.data[i].count+'</td>';
+          tabla +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
+          tabla +='<tr>';
+          document.getElementById('tbl_comp1').innerHTML=tabla;
 
+        }
+
+        if ((datos.data[i].cod_linea) =="2"){
+          avance_Comp2.push({
+            "label" : datos.data[i].nom_componente,
+            "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
+          })
+        
+          tabla2 +='<tr >';
+          tabla2 +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
+          tabla2 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
+          tabla2 +='<td style="font-weight: 400; width: 21px; text-align: center;"">'+datos.data[i].count+'</td>';
+          tabla2 +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
+          tabla2 +='<tr>';
+          document.getElementById('tbl_comp2').innerHTML=tabla2;
+
+        }
+ 
+        if ((datos.data[i].cod_linea) =="3"){
+          avance_Comp3.push({
+            "label" : datos.data[i].nom_componente,
+            "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
+          })
+        
+          tabla3 +='<tr >';
+          tabla3 +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
+          tabla3 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
+          tabla3 +='<td style="font-weight: 400; width: 21px; text-align: center;"">'+datos.data[i].count+'</td>';
+          tabla3 +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
+          tabla3 +='<tr>';
+          document.getElementById('tbl_comp3').innerHTML=tabla3;
+
+        }
+        if ((datos.data[i].cod_linea) =="4"){
+          avance_Comp4.push({
+            "label" : datos.data[i].nom_componente,
+            "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
+          })
+        
+          tabla4 +='<tr >';
+          tabla4 +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
+          tabla4 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
+          tabla4 +='<td style="font-weight: 400; width: 21px; text-align: center;"">'+datos.data[i].count+'</td>';
+          tabla4 +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
+          tabla4 +='<tr>';
+          document.getElementById('tbl_comp4').innerHTML=tabla4;
+
+        }
+
+
+        if ((datos.data[i].cod_linea) =="5"){
+          avance_Comp5.push({
+            "label" : datos.data[i].nom_componente,
+            "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
+          })
+        
+          tabla5 +='<tr >';
+          tabla5 +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
+          tabla5 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
+          tabla5 +='<td style="font-weight: 400; width: 21px; text-align: center;"">'+datos.data[i].count+'</td>';
+          tabla5 +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
+          tabla5 +='<tr>';
+          document.getElementById('tbl_comp5').innerHTML=tabla5;
+
+        }
+
+      }
+      graphCompL1(avance_Comp1);
+      graphCompL2(avance_Comp2);
+      graphCompL3(avance_Comp3);
+      graphCompL4(avance_Comp4);
+      graphCompL5(avance_Comp5);
+      console.log(avance_Comp1);
+
+      })
+  } catch (error) {
+    console.log('Error : _Componentes ', error)
+  }
+}
 
 
 async function graphInversion(){
@@ -136,17 +240,14 @@ async function graphInicial(){
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-avance-lineas')
     .then(res=>res.json())
     .then(datos=>{
-          let tam = datos.data.length;
-          for(let i =0; i<tam;i++){
-            dateo.push({
-             "label" : datos.data[i].nom_linea,
-              "value": Math.ceil(datos.data[i].avance_linea)
-            })
-          }
-      
-
-
- const dataSource = {
+      let tam = datos.data.length;
+      for(let i =0; i<tam;i++){
+        dateo.push({
+          "label" : datos.data[i].nom_linea,
+          "value": Math.ceil(datos.data[i].avance_linea)
+        })
+      }
+      const dataSource = {
         chart: {
           caption: "% Avance ",
           yaxisname: "Medellín Futuro",
@@ -158,18 +259,11 @@ async function graphInicial(){
           yaxisname: "% Ejecución Alcanzada",
           exportEnabled: "1",
           exportFileName:"AvancexLinea",
-         
-        
+      },
+        data:  dateo
+      };
 
-        },
-        data: 
-          dateo
-        
-           
-          
-        };
-
- FusionCharts.ready(function() {
+      FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "column2D",
           renderAt: "chart-inicial",
@@ -180,24 +274,14 @@ async function graphInicial(){
         }).render();
       });
          
-      })
-     
-     
-     
-
-
-
-
+    })
   } catch (error) {
     console.log('Error graphInicial ', error)
   }
-    
-      
-   
-      
+
 };
 
-async function graphCompL1(){
+async function graphCompL1(avanceComp1){
     const dataSource = {
         chart: {
           caption: "Componentes Línea 1. Reactivación Económica y Valle del Software",
@@ -208,28 +292,7 @@ async function graphCompL1(){
           numbersuffix: "%",
           theme: "gammel"
         },
-        data: [
-          {
-            label: "Talento Humano y Empleo",
-            value: 0
-          },
-          {
-            label: "Ciencia, Tecnología, Innovación y Emprendimiento: CTI + E",
-            value: 0
-          },
-          {
-            label: "Productividad, competitividad e internacionalización",
-            value: 0
-          },
-          {
-            label: "Información, datos y generación de valor público",
-            value: 0
-          },
-          {
-            label: "Inglés para Valle del Software",
-            value: 0
-          }
-        ]
+        data: avanceComp1
       };
       
       FusionCharts.ready(function() {
@@ -245,7 +308,7 @@ async function graphCompL1(){
       
 };
 
-async function graphCompL2(){
+async function graphCompL2(avanceComp2){
     const dataSource = {
         chart: {
           caption: "Componentes Línea 2.Transformación Educativa y Cultural",
@@ -256,38 +319,7 @@ async function graphCompL2(){
           numbersuffix: "%",
           theme: "gammel"
         },
-        data: [
-          {
-            label: "Buen Comienzo",
-            value: 0
-          },
-          {
-            label: "Transformación Curricular para la Cuarta revolución Industrial",
-            value: 0
-          },
-          {
-            label: "Educación para todos y todas",
-            value: 0
-          },
-          {
-            label: "Maestros/as: Líderes de Futuro",
-            value: 0
-          },
-          {
-            label: "Infraestructura y ambientes de aprendizaje",
-            value: 0
-          }
-          ,
-          {
-            label: "Cultura, arte y memoria",
-            value: 0
-          }
-          ,
-          {
-            label: "Cultura ciudadana",
-            value: 0
-          }
-        ]
+        data: avanceComp2
       };
       
       FusionCharts.ready(function() {
@@ -303,7 +335,7 @@ async function graphCompL2(){
       
 };
 
-async function graphCompL3(){
+async function graphCompL3(avanceComp3){
   const dataSource = {
       chart: {
         caption: "Componentes Línea 3.Medellín me Cuida",
@@ -314,24 +346,7 @@ async function graphCompL3(){
         numbersuffix: "%",
         theme: "gammel"
       },
-      data: [
-        {
-          label: "Comunidades, cuerpos y mentes saludables",
-          value: 0
-        },
-        {
-          label: "Juventudes",
-          value: 0
-        },  
-        {
-          label: "Mujeres",
-          value: 0
-        },
-        {
-          label: "Maestros/as: Líderes de Futuro",
-          value: 0
-        }
-      ]
+      data: avanceComp3
     };
     
     FusionCharts.ready(function() {
@@ -347,7 +362,7 @@ async function graphCompL3(){
     
 };
 
-async function graphCompL4(){
+async function graphCompL4(avanceComp4){
   const dataSource = {
       chart: {
         caption: "Componentes Línea 4. Ecociudad",
@@ -358,29 +373,7 @@ async function graphCompL4(){
         numbersuffix: "%",
         theme: "gammel"
       },
-      data: [
-        {
-          label: "Movilidad sostenible e inteligente",
-          value: 0
-        },
-        {
-          label: "Servicios públicos, energías alternativas y aprovechamiento de residuos sólidos",
-          value: 0
-        },  
-        {
-          label: "MujerConservación y protección de todas las formas de vidaes",
-          value: 0
-        },
-        {
-          label: "Urbanismo ecológico",
-          value: 0
-        }
-        ,
-        {
-          label: "Corregimientos y Desarrollo rural sostenible",
-          value: 0
-        }
-      ]
+      data: avanceComp4
     };
     
     FusionCharts.ready(function() {
@@ -396,7 +389,7 @@ async function graphCompL4(){
     
 };
 
-async function graphCompL5(){
+async function graphCompL5(avanceComp5){
   const dataSource = {
       chart: {
         caption: "Componentes Línea 5. Gobernanza y Gobernabilidadd",
@@ -407,34 +400,7 @@ async function graphCompL5(){
         numbersuffix: "%",
         theme: "gammel"
       },
-      data: [
-        {
-          label: "Gobierno Transparente",
-          value: 0
-        },
-        {
-          label: "Paz, víctimas y justicia",
-          value: 0
-        },  
-        {
-          label: "Seguridades",
-          value: 0
-        },
-        {
-          label: "Participación",
-          value: 0
-        }
-        ,
-        {
-          label: "Planeación, articulación y fortalecimiento territorial",
-          value: 0
-        }
-        ,
-        {
-          label: "Comunicaciones",
-          value: 0
-        }
-      ]
+      data: avanceComp5
     };
     
     FusionCharts.ready(function() {
