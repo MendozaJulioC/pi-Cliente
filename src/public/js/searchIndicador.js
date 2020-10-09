@@ -54,7 +54,7 @@ async function indi(){
         dials: {
           dial: [
             {
-              value: avance_cuatrienio,
+              value: "52",
               tooltext: "% Avance"
             }
           ]
@@ -115,7 +115,7 @@ async function _graphCumplimientoIndicador(cumple_2020){
         dials: {
           dial: [
             {
-              value: cumple_2020,
+              value: 20,
               tooltext: "% Cumplimiento"
             }
           ]
@@ -152,19 +152,19 @@ async function _graphHistoryIndicador(cumple_2020, cumple_2021, cumple_2022, cum
           {
             data: [
               {
-                value: cumple_2020,
+                value: 20,
                 tooltext: "2020: <b>$dataValue</b>"
               },
               {
-                value: cumple_2021,
+                value: 21,
                 tooltext: "2021 <b>$dataValue</b>"
               },
               {
-                value: cumple_2022,
+                value: 22,
                 tooltext: "2022: <b>$dataValue</b>"
               },
               {
-                value: cumple_2023,
+                value: 23,
                 tooltext: "2023: <b>$dataValue</b>"
               } ]
           }
@@ -292,7 +292,7 @@ async function _getBuscaNombreIndicador(){
             document.getElementById('nom_indicador1').innerHTML= datos.data[0].nom_indicador
             document.getElementById('metaplan1').innerHTML= datos.data[0].meta_plan
             document.getElementById('logroacumulado1').innerHTML= datos.data[0].logro_acumulado
-            document.getElementById('peso-indicador').innerHTML= datos.data[0].peso
+            document.getElementById('peso-indicador').innerHTML=(datos.data[0].peso).substring(0,6)
 
 //1.Información General
             document.getElementById('nom_indicador2').innerHTML= datos.data[0].nom_indicador
@@ -387,7 +387,7 @@ async function _getBuscaNombreIndicador(){
                     document.getElementById('nom_indicador1').innerHTML= datos.data[0].nom_indicador
                     document.getElementById('metaplan1').innerHTML= datos.data[0].meta_plan
                     document.getElementById('logroacumulado1').innerHTML= datos.data[0].logro_acumulado
-                    document.getElementById('peso-indicador').innerHTML= datos.data[0].peso
+                    document.getElementById('peso-indicador').innerHTML=Math.round10(datos.data[0].peso,5)
         
         //1.Información General
                     document.getElementById('nom_indicador2').innerHTML= datos.data[0].nom_indicador
