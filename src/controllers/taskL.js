@@ -4,14 +4,17 @@ const fetch = require('node-fetch');
 
 
 const getLinea1 = async(req, res)=>{
-
+ 
     try {
+        
         res.render('./linea1/linea-1.html', {
             title: "Línea 1"
+          
         })
     } catch (error) {
         console.log('Error getLinea1 ', error)
     }
+  
 }
 
 const getLinea2 = async(req, res)=>{
@@ -73,4 +76,4 @@ const getLinea5 = async(req, res)=>{
 
 
 
-module.exports = { getLinea1, getLinea2, getLinea3, getLinea4, getLinea5 }
+module.exports = { getLinea1,getLinea2, getLinea3, getLinea4, getLinea5 }

@@ -13,7 +13,7 @@
         <%- include ('../partials/head.html') %>
     </head>
     <%- include ('../partials/menuplapp.html')%>
-    <body onload="indi()">
+    <body onload="indi(2)">
         <div class="container mt-4 mb-2">
             <div class="row">
                 <div class="col-sm-12 mt-5">
@@ -115,84 +115,7 @@
                                         <th class="encabezadoTabla">Indicadores</th>
                                     </tr>
                                 </thead>
-                                <tbody >
-                                    <tr>
-                                        <td class="filaCenter" scope="row">1</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">2</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">3</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">4</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">5</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">6</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">7</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">8</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">9</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">10</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">11</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="filaCenter" scope="row">12</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
-                                    <tr> <td class="filaCenter" scope="row">13</td>
-                                        <td class="filaCenter" scope="row">754</td>
-                                        <td class="filaLeft">Centro de Innovación y Negocios de Medellín</td>
-                                        <td class="filaCenter">8</td>
-                                    </tr>
+                                <tbody id="table_responsables"></tbody>
                                 </tbody>
                             </table>
                         </div>
@@ -216,56 +139,7 @@
                             <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
                             <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
                         </thead>
-                        <tbody>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.1</td>
-                        <td style="font-weight: 400; width: 395px;">Buen Comienzo</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">12</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.2</td>
-                        <td style="font-weight: 400; width: 395px;">Transformaci&oacute;n Curricular para la Cuarta revoluci&oacute;n Industrial</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">20</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.3</td>
-                        <td style="font-weight: 400; width: 395px;">Educaci&oacute;n para todos y todas</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">29</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.4</td>
-                        <td style="font-weight: 400; width: 395px;">Maestros/as: L&iacute;deres de Futuro</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">9</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.5</td>
-                        <td style="font-weight: 400; width: 395px;">Infraestructura y ambientes de aprendizaje</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">11</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.6</td>
-                        <td style="font-weight: 400; width: 395px;">Investigaci&oacute;n, creaci&oacute;n y apropiaci&oacute;n de saberes</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">8</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.7</td>
-                        <td style="font-weight: 400; width: 395px;">Cultura, arte y memoria</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">28</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <td style="font-weight: 400; width: 23px; text-align: center;">2.8</td>
-                        <td style="font-weight: 400; width: 395px;">Cultura ciudadana</td>
-                        <td style="font-weight: 400; width: 18px; text-align: center;">12</td>
-                        <td></td>
-                        </tr>
-                        </tbody>
+                        <tbody id="tbl_comp"></tbody>
                      </table>
                    </div> 
             </div>

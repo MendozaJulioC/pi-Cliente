@@ -11,7 +11,7 @@ const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura} = r
     router.get('/estructura', getEstructura)
 
   
-const {getLinea1, getLinea2, getLinea3, getLinea4, getLinea5}= require('../controllers/taskL');
+const {getLinea1,  getLinea2, getLinea3, getLinea4, getLinea5}= require('../controllers/taskL');
 router.get('/linea-1',getLinea1)
     .get('/linea-2',getLinea2)
     .get('/linea-3', getLinea3)
@@ -20,10 +20,10 @@ router.get('/linea-1',getLinea1)
 
 
 
-const{getProjects, getProject1, 
-    getProject2, getProject3,getProject4,getProject5,getProject6,
-    getProject7,getProject8,getProject9,getProject10,getProject11,
-    getProject12,getProject13,getProject14,getProject15,getProject16,getProject17,
+const { getProjects, getProject1, 
+        getProject2, getProject3,getProject4,getProject5,getProject6,
+        getProject7,getProject8,getProject9,getProject10,getProject11,
+        getProject12,getProject13,getProject14,getProject15,getProject16,getProject17,
 } =require('../controllers/taskProjects');
 
 router.get('/projects', getProjects)
