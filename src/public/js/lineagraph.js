@@ -6,6 +6,7 @@ async function indi(val){
   _graphHistoryCumplimientoIndicador(val)
   componentelinea(val);
   programalinea(val);
+
 }
   
 async function _buscaAvancelinea(linea){
@@ -22,7 +23,7 @@ async function _buscaAvancelinea(linea){
       fetch(`http://localhost:7000/pi/api/responsables/line/${linea}`)
       .then(res=>res.json())
       .then(response=>{
-        console.log(response)
+ 
         let tam = response.data.length;
         document.getElementById('table_responsables').innerHTML="";
         for(var i =0; i<(tam) ;i++){
@@ -316,11 +317,11 @@ async function componentelinea(linea){
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/componentes/avance/line/'+linea)
     .then(res=>res.json())
     .then(datos=>{
-      console.log(datos)
+  
       document.getElementById('tbl_comp').innerHTML="";
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
-        if ((datos.data[i].cod_linea) =="1"){
+      
           avance_Comp.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
@@ -333,7 +334,28 @@ async function componentelinea(linea){
           tabla +='<tr>';
           document.getElementById('tbl_comp').innerHTML=tabla;
         }
-      }
+        const dataSource = {
+          chart: {
+            caption: "Componentes Línea "+ linea,
+            subcaption: "Avance",
+            xaxisname: "Componentes",
+            yaxisname: "% Avance",
+            numbersuffix: "%",
+            theme: "zune"
+          },
+          data:avance_Comp
+        };
+        
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "column2d",
+            renderAt: "linea-componente",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
     
       })
   } catch (error) {
@@ -435,28 +457,7 @@ async function programalinea(linea){
 
 async function graphComponente()
 {
-  const dataSource = {
-    chart: {
-      caption: "Componentes Línea "+ linea,
-      subcaption: "Avance",
-      xaxisname: "Componentes",
-      yaxisname: "% Avance",
-      numbersuffix: "%",
-      theme: "zune"
-    },
-    data:avance_Comp1
-  };
   
-  FusionCharts.ready(function() {
-    var myChart = new FusionCharts({
-      type: "column2d",
-      renderAt: "linea-componente",
-      width: "100%",
-      height: "100%",
-      dataFormat: "json",
-      dataSource
-    }).render();
-  });
 
 
 
