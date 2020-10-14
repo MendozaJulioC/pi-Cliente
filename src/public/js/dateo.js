@@ -290,7 +290,7 @@ async function graphCompL1(avanceComp1){
           yaxisname: "% avance actual",
           showvalues: "1",
           numbersuffix: "%",
-          theme: "gammel"
+          theme: "zune"
         },
         data: avanceComp1
       };
@@ -317,7 +317,7 @@ async function graphCompL2(avanceComp2){
           yaxisname: "% avance actual",
           showvalues: "1",
           numbersuffix: "%",
-          theme: "gammel"
+          theme: "zune"
         },
         data: avanceComp2
       };
@@ -344,7 +344,7 @@ async function graphCompL3(avanceComp3){
         yaxisname: "% avance actual",
         showvalues: "1",
         numbersuffix: "%",
-        theme: "gammel"
+        theme: "zune"
       },
       data: avanceComp3
     };
@@ -371,7 +371,7 @@ async function graphCompL4(avanceComp4){
         yaxisname: "% avance actual",
         showvalues: "1",
         numbersuffix: "%",
-        theme: "gammel"
+        theme: "zune"
       },
       data: avanceComp4
     };
@@ -398,7 +398,7 @@ async function graphCompL5(avanceComp5){
         yaxisname: "% avance actual",
         showvalues: "1",
         numbersuffix: "%",
-        theme: "gammel"
+        theme: "zune"
       },
       data: avanceComp5
     };

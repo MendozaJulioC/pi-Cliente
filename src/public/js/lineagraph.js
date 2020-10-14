@@ -7,6 +7,7 @@ async function indi(val){
   _graphHistoryCumplimientoIndicador(val)
   componentelinea(val);
   programalinea(val);
+  _tbl_Indicadores(val)
 
 }
   
@@ -430,9 +431,43 @@ async function programalinea(linea){
 }
 
 
-async function graphComponente()
+async function _tbl_Indicadores(linea)
 {
-  
+  try {
+    let tabla3 ='';
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/indicadores/resumen/${linea}`)
+    .then(res=>res.json())
+    .then(response=>{
+
+      let tam = response.data.length;
+      document.getElementById('tbl_indicadores_linea').innerHTML="";
+      for(var i =0; i<(tam) ;i++){
+   
+          tabla3 +='<tr  style="font-size: xx-small;">';
+          tabla3 +='<td style="text-align: center; font-size: 10px;">'+(i+1)+'</td>';
+          tabla3 +='<td style="text-align: left; font-size: 10px;">'+response.data[i].cod_linea+'</td>';
+          tabla3 +='<td style="text-align: left; font-size: 10px;">'+((response.data[i].cod_componente))+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].cod_programa+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].cod_indicador+'</td>';
+          tabla3 +='<td style="text-align: left;font-size: 10px;">'+response.data[i].nom_indicador+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].tipo_ind+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].lb_ind+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].meta_plan+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].unidad+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+Math.ceil(response.data[i].avance)+'%</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].logro_2020+'</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].nombre_dep+'</td>';
+          tabla3 +='<tr>';
+          document.getElementById('tbl_indicadores_linea').innerHTML=tabla3;
+      } 
+
+
+
+
+    })
+  } catch (error) {
+    console.log('Error _tbl_Indicadores ', error)
+  }
 
 
 
