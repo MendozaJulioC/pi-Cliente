@@ -1,6 +1,7 @@
 
 
 
+
 async function indi(val){
   _buscaAvancelinea(val)
   _graphHistoryCumplimientoIndicador(val)
@@ -367,89 +368,63 @@ async function componentelinea(linea){
 
 async function programalinea(linea){
 
-  const dataSource = {
-      chart: {
-        caption: "Programas Línea"+ linea,
-        subcaption: "Avance",
-        xaxisname: "Programas",
-        yaxisname: "% Avance)",
-        numbersuffix: "%",
-        theme: "zune"
-      },
-      data: [
-        {
-          label: "Venezuela",
-          value: "290"
+  try {
+    let avance_Prg =[];
+    let tabla_prg='';
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/avance/line/${linea}`)
+    .then(res=> res.json())
+    .then(datos=>{
+      document.getElementById('tbl_programa').innerHTML="";
+      let tam = datos.data.length;
+      for(let i =0; i <tam; i++){
+        avance_Prg.push({
+          "label": datos.data[i].cod_programa,
+          "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)
+        })
+        tabla_prg +='<tr >';
+        tabla_prg +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_programa+'</td>';
+        tabla_prg +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_programa))+'</td>';
+        tabla_prg +='<td style="font-weight: 400; width: 21px; text-align: center;"">'+datos.data[i].count+'</td>';
+        tabla_prg +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
+        tabla_prg +='<tr>';
+        document.getElementById('tbl_programa').innerHTML=tabla_prg;
+
+      }
+      const dataSource = {
+        chart: {
+          caption: "Programas Línea"+ linea,
+          subcaption: "Avance",
+          xaxisname: "Programas",
+          yaxisname: "% Avance)",
+          numbersuffix: "%",
+          theme: "zune"
         },
-        {
-          label: "Saudi",
-          value: "260"
-        },
-        {
-          label: "Canada",
-          value: "180"
-        },
-        {
-          label: "Iran",
-          value: "140"
-        },
-        {
-          label: "Russia",
-          value: "115"
-        },
-        {
-          label: "Venezuela",
-          value: "290"
-        },
-        {
-          label: "Saudi",
-          value: "260"
-        },
-        {
-          label: "Canada",
-          value: "180"
-        },
-        {
-          label: "Iran",
-          value: "140"
-        },
-        {
-          label: "Russia",
-          value: "115"
-        },
-        {
-          label: "Venezuela",
-          value: "290"
-        },
-        {
-          label: "Saudi",
-          value: "260"
-        },
-        {
-          label: "Canada",
-          value: "180"
-        },
-        {
-          label: "Iran",
-          value: "140"
-        },
-        {
-          label: "Russia",
-          value: "115"
-        }
-      ]
-    };
+        data: avance_Prg
+      };
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "column2d",
+          renderAt: "linea-programa",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+    })
+   
+
+  } catch (error) {
+    console.log('Error prgramalinea ', error)
+  }
+
+
+
+
+
+ 
     
-    FusionCharts.ready(function() {
-      var myChart = new FusionCharts({
-        type: "column2d",
-        renderAt: "linea-programa",
-        width: "100%",
-        height: "100%",
-        dataFormat: "json",
-        dataSource
-      }).render();
-    });
+   
   
 
 }
