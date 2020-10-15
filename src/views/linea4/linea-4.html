@@ -156,13 +156,18 @@
                   </div>
             </div>
 
+       
             <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
-                <h5 class="text-muted text4Title">Indicadores</h5>
+               
                 <form>
                     <fieldset class="fieldset3 mb-3 ml-1 mt-1">
                         <div class="table-responsive " style=" overflow-y: auto;">
-                            <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                                <thead class="thead-inverse">
+                            <h5 class="text-muted text4Title">Indicadores</h5>
+                            <p class="text14left">Escriba algo en el campo de entrada para buscar en la tabla:</p>  
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                            <br>
+                            <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
+                                <thead">
                                     <tr>
                                         <th class="filaCenter">#</th>
                                         <th class="filaCenter">Cod_línea</th>
@@ -182,6 +187,9 @@
                                 <tbody id="tbl_indicadores_linea"></tbody>
                             </table>
                         </div>
+                        <div>
+                       
+                       </div>
                     </fieldset>
                 </form>
             </div>

@@ -444,9 +444,9 @@ async function _tbl_Indicadores(linea)
       for(var i =0; i<(tam) ;i++){
    
           tabla3 +='<tr  style="font-size: xx-small;">';
-          tabla3 +='<td style="text-align: center; font-size: 10px;">'+(i+1)+'</td>';
-          tabla3 +='<td style="text-align: left; font-size: 10px;">'+response.data[i].cod_linea+'</td>';
-          tabla3 +='<td style="text-align: left; font-size: 10px;">'+((response.data[i].cod_componente))+'</td>';
+          tabla3 +='<td style="text-align: center; font-size: 8px;">'+(i+1)+'</td>';
+          tabla3 +='<td style="text-align: center; font-size: 10px;">'+response.data[i].cod_linea+'</td>';
+          tabla3 +='<td style="text-align: center; font-size: 10px;">'+((response.data[i].cod_componente))+'</td>';
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].cod_programa+'</td>';
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].cod_indicador+'</td>';
           tabla3 +='<td style="text-align: left;font-size: 10px;">'+response.data[i].nom_indicador+'</td>';
@@ -472,3 +472,14 @@ async function _tbl_Indicadores(linea)
 
 
 }
+
+
+
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#tbl_indicadores_linea tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
