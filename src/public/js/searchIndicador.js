@@ -54,7 +54,7 @@ async function indi(){
         dials: {
           dial: [
             {
-              value: "52",
+              value: avance_cuatrienio,
               tooltext: "% Avance"
             }
           ]
@@ -115,7 +115,7 @@ async function _graphCumplimientoIndicador(cumple_2020){
         dials: {
           dial: [
             {
-              value: 20,
+              value: cumple_2020,
               tooltext: "% Cumplimiento"
             }
           ]
@@ -287,7 +287,7 @@ async function _getBuscaNombreIndicador(){
         fetch(`https://sse-pdm-back.herokuapp.com/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
         .then(res=>res.json())
         .then(datos=>{
-           
+  
             if(datos.data.length>0){
             document.getElementById('nom_indicador1').innerHTML= datos.data[0].nom_indicador
             document.getElementById('metaplan1').innerHTML= datos.data[0].meta_plan
@@ -357,9 +357,13 @@ async function _getBuscaNombreIndicador(){
 
 
             //enviar datos a gráficas
+
              _graphAvanceIndicador(datos.data[0].avance_cuatrienio)
              _graphCumplimientoIndicador(datos.data[0].cumple_2020)
              _graphHistoryIndicador(datos.data[0].cumple_2020, datos.data[0].cumple_2021, datos.data[0].cumple_2022, datos.data[0].cumple_2023 )
+             let avance = (datos.data[0].pesoxavnt/datos.data[0].peso )*100
+            
+             _graphAvanceIndicador(avance)
             }
             else{
                 alert('Por favor verifica el código del Indicador')
@@ -387,7 +391,7 @@ async function _getBuscaNombreIndicador(){
                     document.getElementById('nom_indicador1').innerHTML= datos.data[0].nom_indicador
                     document.getElementById('metaplan1').innerHTML= datos.data[0].meta_plan
                     document.getElementById('logroacumulado1').innerHTML= datos.data[0].logro_acumulado
-                    document.getElementById('peso-indicador').innerHTML=Math.round10(datos.data[0].peso,5)
+                    document.getElementById('peso-indicador').innerHTML=(datos.data[0].peso).substring(0,6)
         
         //1.Información General
                     document.getElementById('nom_indicador2').innerHTML= datos.data[0].nom_indicador
@@ -455,6 +459,8 @@ async function _getBuscaNombreIndicador(){
                      _graphAvanceIndicador(datos.data[0].avance_cuatrienio)
                      _graphCumplimientoIndicador(datos.data[0].cumple_2020)
                      _graphHistoryIndicador(datos.data[0].cumple_2020, datos.data[0].cumple_2021, datos.data[0].cumple_2022, datos.data[0].cumple_2023 )
+                     let avance = (datos.data[0].pesoxavnt/datos.data[0].peso )*100
+                     _graphAvanceIndicador(avance)
                 }
                 else{
                     alert('Por favor verifica el código del Indicador')

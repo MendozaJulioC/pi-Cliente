@@ -38,7 +38,7 @@ async function _Components(){
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-componentes')
     .then(res=>res.json())
     .then(datos=>{
-      console.log(datos)
+
       document.getElementById('tbl_comp1').innerHTML="";
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
@@ -128,7 +128,7 @@ async function _Components(){
       graphCompL3(avance_Comp3);
       graphCompL4(avance_Comp4);
       graphCompL5(avance_Comp5);
-      console.log(avance_Comp1);
+      
 
       })
   } catch (error) {
