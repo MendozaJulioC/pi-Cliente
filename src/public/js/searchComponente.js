@@ -313,16 +313,28 @@ async function _getBuscaNombreComponente(){
              fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/consulta-programas/nombre/${nom_Componente}`)
              .then(res=>res.json())
              .then(response=>{
+               let peso=0; let avance=0;
                let tabla=''
                let tam = response.data.length;
                document.getElementById('tbl_prg').innerHTML="";
                for(var i =0; i<(tam) ;i++){
+                 if (response.data[i].avancexpeso ==null){
+                  avance =0
+                 }
+                 else{
+                  avance =response.data[i].avancexpeso
+                 }
+                 if (response.data[i].peso== null) {
+                   peso=0;
+                 } else {
+                   peso= response.data[i].peso;
+                 }
                 tabla +='<tr  style="font-size: xx-small;">';
                 tabla +='<td style="text-align: center; font-size: 10px;">'+(i+1)+'</td>';
                 tabla +='<td style="text-align: left; font-size: 10px;">'+response.data[i].cod_programa+'</td>';
                 tabla +='<td style="text-align: left; font-size: 10px;">'+((response.data[i].nom_programa))+'</td>';
                 tabla +='<td style="text-align: center;font-size: 10px;">'+response.data[i].indicadores+'</td>';
-                tabla +='<td style="text-align: center;font-size: 10px;">'+((response.data[i].avancexpeso/response.data[i].peso)*100).toFixed(2)+'%</td>';
+                tabla +='<td style="text-align: center;font-size: 10px;">'+((avance/peso)*100).toFixed(2)+'%</td>';
                 tabla +='<tr>';
                 document.getElementById('tbl_prg').innerHTML=tabla;
                } 
@@ -330,15 +342,34 @@ async function _getBuscaNombreComponente(){
              fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/responsables/nombre/${nom_Componente}`)
             .then(res=>res.json())
             .then(response=>{
+              let peso3=0; let avance3=0;  let formula=0;
               let tabla3=''
               let tam3 = response.data.length;
               document.getElementById('responsables_componente').innerHTML="";
               for(var i =0; i<(tam3) ;i++){
+                if (response.data[i].avancexpeso == null  ){
+                  avance3 =0;
+                  formula =0;
+                 }
+                 else{
+                  formula =response.data[i].avancexpeso/response.data[i].peso
+                 }
+                 if (response.data[i].peso== null) {
+                   peso3=0;
+                   formula =0;
+                 } else {
+                  formula =response.data[i].avancexpeso/response.data[i].peso
+                 }
+                if (response.data[i].avancexpeso == null && response.data[i].peso== null ) {
+                  formula=0;
+                }
+
+
                 tabla3 +='<tr  style="font-size: xx-small;">';
                 tabla3 +='<td style="text-align: center; font-size: 10px;">'+(i+1)+'</td>';
                 tabla3 +='<td style="text-align: left; font-size: 10px;">'+response.data[i].nombre_dep+'</td>';
                 tabla3 +='<td style="text-align: left; font-size: 10px;">'+((response.data[i].indicadores))+'</td>';
-                tabla3 +='<td style="text-align: center;font-size: 10px;">'+((response.data[i].avancexpeso/response.data[i].peso)*100).toFixed(2)+'%</td>';
+                tabla3 +='<td style="text-align: center;font-size: 10px;">'+((formula)*100).toFixed(2)+'%</td>';
                 tabla3 +='<tr>';
                 document.getElementById('responsables_componente').innerHTML=tabla3;
               } 
