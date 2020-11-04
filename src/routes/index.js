@@ -2,13 +2,14 @@ const { Router} = require('express');
 const router = Router();
 
 
-const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura} = require('../controllers/index.controllers');
+const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente} = require('../controllers/index.controllers');
     router.get('/', getHome);
     router.get('/dash', getDash)
     router.get('/general', getGeneral)
     router.get('/contacto', getContacto); 
     router.get('/indicadores', getIndicador)
     router.get('/estructura', getEstructura)
+    router.get('/componentes',getComponente)
 
   
 const {getLinea1,  getLinea2, getLinea3, getLinea4, getLinea5}= require('../controllers/taskL');

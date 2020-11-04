@@ -1,7 +1,3 @@
-
-
-
-
 async function indi(val){
   _buscaAvancelinea(val)
   _graphHistoryCumplimientoIndicador(val)
@@ -34,7 +30,7 @@ async function _buscaAvancelinea(linea){
             tabla +='<td style="text-align: left; font-size: 10px;">'+response.data[i].cod_responsable_reporte+'</td>';
             tabla +='<td style="text-align: left; font-size: 10px;">'+((response.data[i].nombre_dep))+'</td>';
             tabla +='<td style="text-align: center;font-size: 10px;">'+response.data[i].total_indicadores+'</td>';
-                       tabla +='<tr>';
+            tabla +='<tr>';
             document.getElementById('table_responsables').innerHTML=tabla;
         } 
 
@@ -413,21 +409,9 @@ async function programalinea(linea){
         }).render();
       });
     })
-   
-
   } catch (error) {
     console.log('Error prgramalinea ', error)
   }
-
-
-
-
-
- 
-    
-   
-  
-
 }
 
 

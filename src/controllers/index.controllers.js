@@ -74,8 +74,26 @@ const getEstructura = async(req, res)=>{
     }
 }
 
+const getComponente = async(req, res)=>{
+    try {
+        fetch('https://sse-pdm-back.herokuapp.com/pi/api/list-componente')
+        .then(res=>res.json())
+        .then(data=>{
+            componentes = data.data;
+            res.render('./componentes/componente.html', {
+                title: "Componentes-PDM",
+                componentes: componentes
+            })
+
+        })
+        
+    } catch (e) {
+        console.log('Error getComponente', e );
+    }   
+  
+}
 
 
 
 
-module.exports = { getHome, getDash, getGeneral, getContacto, getIndicador, getEstructura}
+module.exports = { getHome, getDash, getGeneral, getContacto, getIndicador, getEstructura, getComponente}
