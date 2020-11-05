@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+    <link rel="stylesheet" href="/css/prueba.css">
+  
+    <%- include ('../partials/head.html') %>
+</head>
+<%- include ('../partials/menuplapp.html')%>
+<body onload="prg()">
+    <div class="container mt-5 mb-3">
+        <div class="row">
+            <div class="col-sm-12 mt-5">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="card-body">
+                        <div class="card-header shadow p-2 mb-4 bg-white rounded">
+                            <div class="input-group">
+                                <input list="browsers" class="form-control" name="browser" id="browser"
+                                    placeholder="Escriba el nombre del Programa"
+                                    style=" height: 40px ;font-size: x-small;">
+                                    <datalist  id="browsers" style="width: 300px;font-size: medium;"  > 
+                                        <% programas.forEach(function(programa){ %>
+                                          <option value= "<%= programa.nom_programa %> "></option> 
+                                        <% }); %>
+                                    </datalist>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-info"
+                                        onclick="_getBuscaNombrePrograma()">Buscar</button>
+                                    <button type="button"
+                                        class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" onclick="_getBuscaNombrePrograma()">Buscar por el Nombre del Programa</button>
+                                        <button class="dropdown-item" onclick="_getBuscaCodigoPrograma()">Por Código del Programa</button>
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <button class="dropdown-item" onclick="_clearBusca()">Limpiar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 id="nom_programa" class="text18 "></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="card-body">
+                        <h4 class="text-muted text18" >Avance Cuatrienial Programa
+                            <spam>2020-2023</spam>
+                        </h4>
+                        <div class="mt-lg-3" id="avance-indicador" style="height: 250px;  width:100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="card-body">                   
+                    <h4 class="text-muted text18" >Cumplimiento Anual</h4>
+                    <div class="mt-lg-3" id="cumplimiento-indicador" style="height: 250px;  width:100%;"></div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-sm-12 ">
+              <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                <div class="row">
+                  <div class="card-body col-sm-6">
+                    <div class="mt-lg-3" id="history-indicador" style="height: 90px;  width:100%;"></div>
+                  </div>
+                  <div class="card-body col-sm-6"> 
+                    <div class="mt-lg-3" id="history-cumplimiento-indicador" style="height: 80px;  width:100%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    
+    
+        <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+        <h5 class="text24">1. Información General</h5><br>
+        <h5  id="nom_programa2" class="text18"><strong></strong> </h5> 
+        <hr class="hrline">
+        <form>
+            <fieldset class="fieldset2 col-md-12 mb-3 ml-1"> 
+                <legend class="legend1">En el Plan</legend>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_linea">Código Línea</label>
+                        <input type="text" class="form-control" id="_cod_linea" disabled>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label class="textlabel2" for="nom_linea">Línea</label>
+                        <input type="text" class="form-control" id="_nom_linea" disabled>
+                    </div>
+                    </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_componente">Código Componente</label>
+                        <input type="text" class="form-control" id="_cod_componente" disabled>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <label class="textlabel2" for="nom_componente">Componente</label>
+                        <input type="text" class="form-control" id="_nom_componente" disabled>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="textlabel1" for="cod_componente">Código Programa</label>
+                        <input type="text" class="form-control" id="_cod_programa" disabled>
+                    </div>
+                    <div class="form-group col-md-7">
+                        <label class="textlabel2" for="nom_componente">Programa</label>
+                        <input type="text" class="form-control" id="_nom_programa" disabled>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="textlabel1" for="total_indicador"># Indicadores</label>
+                        <input type="text" class="form-control" id="total_indicador" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="textlabel1" for="cod_programa"># Programas</label>
+                        <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th style="font-weight: 400; width: 44px; text-align: center;">#</th>
+                                    <th>Cod. Indicador</th>
+                                    <th>Inidicador </th>
+                                    <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_prg"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+        <h5 class="text24 text-muted">2. Responsables</h5>
+        <form>
+                <fieldset class="fieldset2  mb-3 ml-1 mt-1">
+                
+                    <div class="form-row ml-2 mr-2">
+
+                        <div class="form-group col-md-12">
+                        <label style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Dependencias Responsables</label>
+                     <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                           <thead class="thead-inverse">
+                               <tr>
+                                   <th>#</th>
+                                   <th>Dependencia</th>
+                                   <th>Indicadores</th>
+                                   <th>Avance</th>
+                               </tr>
+                               </thead>
+                               <tbody id="responsables_programa"></tbody>
+                       </table>
+
+                </fieldset>
+            </form>
+        </div>
+
+          
+         
+    </div>
+    <script src="/js/searchProgram.js"></script>
+    <%- include ('../partials/scriptsHome.html')%>
+</body>
+
+
+
+</html>
+
+
+
