@@ -1,11 +1,18 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 const fetch = require('node-fetch');
+
+
 
 const getHome = async (req, res) => {
     try {
+       //const message = req.session.msg; delete req.session.msg;
+   const message = req.flash('message')[0]  ;
+   //console.log(message)
         res.render('./home/index.html', {
-            title: "SEE-PDM"
+            title: "SEE-PDM",
+            message
+           
         })
     } catch (e) {
         console.log(e);
@@ -30,8 +37,6 @@ const getDash= async (req, res)=>{
     } catch (e) {
         console.log(e);
     }
-
-
 }
 
 const getGeneral = async(req, res)=>{

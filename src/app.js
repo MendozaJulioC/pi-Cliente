@@ -3,12 +3,15 @@ const cors = require('cors');
 const EventEmitter = require('events');
 const favicon = require('serve-favicon');
 const path = require('path');
-
-
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 
 //settings
+
 const app = express();
-app.set('port',process.env.port)
+require('./config/configPassport');
+app.set('port',process.env.port);
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors());
@@ -21,7 +24,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 //middlewares
+app.use(session({
+    secret:"M3d3ll1n_dap",
+    resave : false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash());
 
+app.use((req, res, next)=>{
+    res.locals.message = req.flash('message');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+    next();
+});
 
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
