@@ -19,7 +19,7 @@ const getRegister = async(req, res )=>{
             dependencia: dep,
             errors:[],message,
             fullname:"", 
-            email:"", password:"", confirmpassword:"", cargo:"", dependencias:"", tel_contacto:""
+            email: "", password:"", confirmpassword:"", cargo:"", dependencias:"", tel_contacto:""
            })
        })
     } catch (error) {
@@ -46,7 +46,7 @@ const postRegister = async(req, res)=>{
         if (password.length<6 )  {errors.push({message:"Password debe contener más de 6 carateres!!!"})}
         if(errors.length>0){
         
-            fetch(`http://localhost:7000/see/api/dependencias`)
+            fetch(`https://sse-pdm-back.herokuapp.com/see/api/dependencias`)
             .then(res=>res.json())
             .then(data=>{
                 dep =data.data
@@ -114,7 +114,7 @@ const postLoguin = passport.authenticate('local',{
 
 const getLogout = async (req, res)=>{
     req.logout();
-    req.flash('message', 'Has cerrado la session')
+    req.flash('message', 'Has cerrado la session');
     res.redirect('/')
 }
 

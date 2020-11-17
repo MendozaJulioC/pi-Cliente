@@ -1,4 +1,169 @@
-html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
+
+
+*{ 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body{
+ background: #fbf3ff;
+ background:
+ linear-gradient(
+ rgba(180,53,139),
+ rgba(246,247,249,0.8)),
+ url(/img/medellin3.jpg) no-repeat center center fixed;
+background-size: cover;
+  
+}
+
+.container{
+  position: absolute;
+  max-width: 800px;
+  height: 500px;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) ;
+
+}
+
+
+.myRigthCtn{
+  position: relative;
+  background-image: linear-gradient(45deg, #f046ff, #B4358B);
+  border-radius: 25px;
+  height: 100%;
+  padding: 25px;
+  color: rgb(192,192,192);
+  font-size: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.myLeftCtn{
+  position: relative;
+  background: #fff;
+  border-radius: 25px;
+  height: 100%;
+  padding: 25px;
+  padding-left: 50px;
+}
+
+.myLeftCtn header{
+  color: B4358B;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.row{
+  height: 100%;
+}
+
+
+.myCard{
+  position: relative;
+  background: #ffffff;
+  height: 100%;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 10px 40px -10px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 10px 40px -10px rgba(0,0,0,0.7);
+  box-shadow: 0px 10px 40px -10px rgba(0,0,0,0.7);
+}
+
+.myRigthCtn header{
+  color: #fff;
+  font-size: 44px;
+}
+
+.box{
+  position: relative;
+  margin: 20px;
+  margin-bottom: 100px;
+
+}
+
+.myLeftCtn .myInput{
+  width: 330px;
+  border-radius: 25px;
+  padding: 10px;
+  padding-left: 50px;
+  border: none;
+  -webkit-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+  box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+}
+
+.myLeftCtn .myInput:focus {
+  outline: none;
+}
+
+.myForm{
+  position: relative;
+  margin-top: 50px;
+}
+
+.myLeftCtn .butt{
+  background: linear-gradient(45deg, #bb36fd, #B4358B);
+  color: #fff;
+  width: 330px;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 10px 41px -11px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 10px 41px -11px rgba(0,0,0,0.7);
+  box-shadow: 0px 10px 41px -11px rgba(0,0,0,0.7);
+
+}
+.myLeftCtn .butt:hover{
+  background: linear-gradient(45deg, #c85bff), #B4358B;
+}
+
+.myLeftCtn .butt:focus{
+  outline: none;
+}
+
+.myLeftCtn .fa{
+  position: relative;
+  color: #B4358B;
+  left: 36px;
+  
+}
+
+.butt_out{
+  background: transparent;
+  color: #ffff;
+  width: 120px;
+  border: 2px solid#ffff;
+  border-radius: 25px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+  box-shadow: 0px 10px 49px -14px rgba(0,0,0,0.7);
+
+}
+.butt_out:hover{
+  border: 2px solid#eecbff;
+}
+
+.butt_out:focus{
+  outline: none;
+}
+
+.text-intro{
+  color: #fff;
+  font-size: 14px;
+}
+/*
+
+
+/*html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif; }
+
 
 body {
   background:
@@ -375,7 +540,7 @@ a.btn-goback:hover {
     color: #ffffff;
 }
 
-/* refresh button styling */
+
 
 #refresh {
     position: fixed;
@@ -401,3 +566,4 @@ a.btn-goback:hover {
   transform: rotate(180deg);
 }
 
+*/

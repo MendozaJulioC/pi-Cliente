@@ -7,7 +7,7 @@ helpers.isAuthenticated=(req,res, next)=>{
         return next();
 
     } 
-    req.flash('message', 'No tienes autorización')
+    req.flash('error', 'No tienes autorización')
     res.redirect('/');
 }
 

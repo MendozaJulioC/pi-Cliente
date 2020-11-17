@@ -1,87 +1,66 @@
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+
 <%- include ('../partials/head.html') %>
-<link rel="stylesheet" href="css/home.css">
 
 
-<div class="container">
-  <div class="frame">
-    <div class="nav">
-      <ul class"links">
-        <li class="signin-active"><a class="btn">Ingresar</a></li>
+
+
+ <body>
+   <div class="container">
+     <div class="myCard">
+       <div class="row">
+         <div class="col-md-6">
+           <div class="myLeftCtn">
+             <form class="myForm text-center" action="/auth/login" method="POST">
+               <header>Ingresar</header>
+      
+               <div class="form-group">
+                 <i class="fa fa-envelope"></i>
+                 <input class="myInput" type="email" name="username" id="username" placeholder="Usuario" required>
+               </div>
+               <div class="form-group">
+                 <i class="fa fa-lock"></i>
+                 <input class="myInput" type="password" name="password" id="password" placeholder="Password" required>
+               </div>
+               <input type="submit" class="butt" value="Ingresar">
+             </form>
+
        
-      </ul>
-    </div>
-    <div>
-		<form class="form-signin" action="/auth/login" method="POST" name="form">
-       <div class="form-row">
-        <div class="col-sm-6">
-          <label for="username">Usuario</label>
-          <input class="form-styling" type="email" name="username" id="username" placeholder="" />
-          <label for="password">Password</label>
-          <input class="form-styling form-control" type="password" name="password" id="password" placeholder="" required/>
-          <div class="col-sm-12">
-        
-              <input type="submit" class="btn btn-success btn-block" value="Ingresar"/><br>
-           
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="col-sm-12">
-            <h1>SEE-PDM</h1>
-            <label for="">
-              El seguimiento y evaluación al Plan de Desarrollo Municipal –PDM–, se concibe como un sistema en el que participan todos
-              los servidores del municipio de Medellín a nivel central y descentralizado; este sistema contribuye al fortalecimiento de
-              los procesos de planificación y gestión y mejora la disponibilidad de información tanto para la toma de decisiones como para
-              la rendición pública de cuentas, facilitando de esta forma una comunicación de los ciudadanos con la administración pública.
-            </label>
-          </div>
-          <div class="col-sm-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th colspan="3">
-                      <div class="col-sm-12">
-                    <a  class="btn btn-outline-warning btn-sm btn-block" href="/auth/register">Registrame</a>
+    
+           </div>
+      
+         </div>
+          <div class="col-md-6">
+                <div class="myRigthCtn">
+                  <div class="box"> <header>SEE-PDM</header>
+                    <p class="text-intro">
+                      El seguimiento y evaluación al Plan de Desarrollo Municipal –PDM–, se concibe como un sistema en el que participan todos
+                      los servidores del municipio de Medellín a nivel central y descentralizado; este sistema contribuye al fortalecimiento de
+                      los procesos de planificación y gestión y mejora la disponibilidad de información tanto para la toma de decisiones como para
+                      la rendición pública de cuentas, facilitando de esta forma una comunicación de los ciudadanos con la administración pública.
+                    </p><br>
+                    <a class="butt_out" value="Registrarme"   href="/auth/register" name="register" id="register"  >Registrarme</a>
                   </div>
-                </th>
-                </tr>
-              </thead>
-            </table>
-           </div> 
-        </div>
-      </div>  
-   
-    </form>
-  <% if(message) {%>
-      <div class="alert alert-success alert-dismissible fade show " role="alert">
-        <strong>Bienvenido ya estas registrado!!!  </strong><%= message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> 
-  <%}%>  
-
-     
-  </div>
-  <a id="refresh" value="Refresh" onClick="history.go()">
-    <svg class="refreshicon"   version="1.1" id="Capa_1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         width="25px" height="25px" viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;"
-         xml:space="preserve">
-         <path  d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224
-                c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5
-                c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5
-                c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025
-                c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614
-                l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z"/>
-    </svg>
-  </a>
-
-</div>
+               
+                </div>
+             
+              </div>
 
 
-<%- include ('../partials/scriptsHome.html') %>
+       </div>
+    
 
-<script src="/js/home.js"></script>
+
+
+     </div>
+
+   </div>
+ </body>
+
+
+
+ <%- include ('../partials/scriptsHome.html') %>
+<script src="/js/home.js"></script> 
+

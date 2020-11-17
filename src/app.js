@@ -5,6 +5,7 @@ const favicon = require('serve-favicon');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+
 const passport = require('passport');
 
 //settings
@@ -22,8 +23,12 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+var cookieparser = require("cookieparser");
+cookieparser.parse("foo=bar");
+
 
 //middlewares
+
 app.use(session({
     secret:"M3d3ll1n_dap",
     resave : false,
@@ -37,6 +42,7 @@ app.use((req, res, next)=>{
     res.locals.message = req.flash('message');
     res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
+    console.log(res.locals.error)
     next();
 });
 

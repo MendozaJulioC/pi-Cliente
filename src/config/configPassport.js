@@ -21,7 +21,7 @@ passport.use( new LocalStrategy({
             isEmail(email,password,user, done)    
            
         }else{
-            return done(null,false,{message:"Usuario no registrado"})
+            return done(null,false,{message:"Usuario no registrado "})
         }
        
     })
@@ -47,7 +47,8 @@ async function isEmail(email, pass,user,done){
         isMatch(pass, user ,done) 
        
     } else{
-        return done(null,false,{error:"Usuario no registrado"})
+     
+        return done(null,false,{message:"Usuario no registrado "})
     }
 
 }
@@ -58,8 +59,8 @@ async function isMatch(password, user,done)
         if (match) {
             return done(null,user,{message: user[0].nom_usuario });
         }else{
-          
-            return done(null,  false, { error: 'Datos de inicio de session Errados!!!'}  )
+         
+            return done(null,  false, { message: 'Datos de inicio de session errados  !!!'}  )
         }
 
 }
@@ -71,7 +72,7 @@ function finalFunction(id,done){
        if (respuesta.data) {
           return done(null,respuesta.data)
        }else{
-        return done(null, false, { error: 'Datos de inicio de session Errados!!!'}  )   
+        return done(null, false, { message: 'Datos de inicio de session Errados  !!!'}  )   
        }
     })
 }
