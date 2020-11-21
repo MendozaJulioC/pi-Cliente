@@ -6,228 +6,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <%= title %> </title>
     <%- include ('../partials/head.html') %>
-    <link rel="stylesheet" href="css/carddash.css">
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+    <%- include ('../partials/srciptgraph.html') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 <%- include ('../partials/menuplapp.html') %>
-<body onload="_main()" >
-   <div class="container mt-5  mb-2" > 
-    <div class="card-deck mt-5">
-        <div class="card">
-          <div class="about">
-            <h2>Medellín Futuro</h2>
-            <p class="lead">Plan de Desarrollo 2020-2023</p>
-            <a class="btn btn-outline-info btn-block" style="font-size: xx-small;" type="button"  href="/general"> 
-              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true"> Consultar</i>
-            </a>
-          </div>
-          <br>
-          <h4 class="text-muted text12">Avance Cuatrienial</h4>
-          <div id="canvas" style="height: 370px;  width:100%;"></div>
+<body onload="_main()">
+  
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <div class="mt-lg-3" id="canvas" style="height: 250px;  width:100%;"></div>
         </div>
-
-       <div class="card">
-          <!-- Custom information -->
-          <div class="about">
-            <h3>Reactivación Económica y Valle del Software</h3>
-            <p class="lead">Línea Estratégica 1.</p>
-            <table class="table table-sm table-responsive-lg table- table-striped table-hover">
-              <thead class="thead-inverse" style="font-size: smaller;">
-                <tr>
-                  <th>Indicadores</th>
-                  <th>Componentes</th>
-                  <th>Programas</th>
-                </tr>
-                </thead>
-                <tbody style="font-size: smaller;">
-                  <tr>
-                    <td scope="row">120</td>
-                    <td>5</td>
-                    <td>16</td>
-                  </tr>
-                </tbody>
-            </table>
-          </div>
-          <div class="card-body text12" >
-            <strong> Propósito:  </strong> <br>
-            La Reactivación Económica y el Valle del Software conforman una estrategia de
-            desarrollo económico con el objetivo de gestionar a partir de la educación, la innovación y
-            el emprendimiento nuevas oportunidades, aprovechando nuestras necesidades y
-            fortalezas para potenciar, sofisticar y diversificar la economía de la ciudad a través de la
-            apertura de nuevos escenarios y la generación de miles de empleos, en áreas asociadas a
-            la economía digital y la Cuarta Revolución Industrial.
-            <br>
-            <a class="btn btn-outline-info btn-block"  href="/linea-1"style="font-size: xx-small;" type="button"> 
-              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
-            </a>
-          </div>
-          <div  id="canvas1" style="height: 270px;width: 100%;"></div>
-       </div>
-
-        <div class="card mb-2">
-          <!-- Custom information -->
-          <div class="about">
-            <h3>Transformación Educativa y Cultural</h3><br>
-            <p class="lead">Línea Estratégica 2.</p>
-              <table class="table table-sm table-responsive-lg table- table-striped table-hover">
-              <thead class="thead-inverse" style="font-size: smaller;">
-                <tr>
-                  <th>Indicadores</th>
-                  <th>Componentes</th>
-                  <th>Programas</th>
-                </tr>
-                </thead>
-                <tbody style="font-size: smaller;">
-                  <tr>
-                    <td scope="row">129</td>
-                    <td>8</td>
-                    <td>22</td>
-                  </tr>
-                </tbody>
-            </table>
-          </div>
-          <div class="card-body text12">
-            <strong> Propósito:  </strong> <br>
-            Garantizar una educación de calidad como derecho que moviliza la transformación humana, económica, política, ambiental y social
-            de Medellín Futuro, articulada a un proyecto cultural de ciudad fundado en los derechos culturales, que fortalezca el potencial 
-            creativo de sus ciudadanos, salvaguarde sus patrimonios y memorias y contribuya a hacer de Medellín una ciudad más solidaria, participativa 
-            y en paz. 
-            <br> <br>
-            <a class="btn btn-outline-info btn-block"  href="/linea-2"style="font-size: xx-small;" type="button"> 
-              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
-            </a>
-            </div>
-            <div  id="canvas2" style="height: 270px;width: 100%;"></div>
+        <div class="card-footer mt-4" style="background-color: white;">
+          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+            <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
+           </a>
         </div>
-          <!-- Canvas for Chart.js -->
-        
-        
-       </div>
-    
-    <div class="card-deck">
-
-      <div class="card">
-      <!-- Custom information -->
-        <div class="about">
-          <h3>Medellín me Cuida</h3>
-          <p class="lead">Línea Estratégica 3.</p>
-          <table class="table table-sm table-responsive-lg table- table-striped table-hover">
-            <thead class="thead-inverse" style="font-size: smaller;">
-              <tr>
-                <th>Indicadores</th>
-                <th>Componentes</th>
-                <th>Programas</th>
-              </tr>
-            </thead>
-            <tbody style="font-size: smaller;">
-              <tr>
-                <td scope="row">194</td>
-                <td>4</td>
-                <td>21</td>
-              </tr>
-            </tbody>
-          </table> 
-        </div>
-        <div class="card-body text12">
-          <strong> Propósito:  </strong> <br>
-          Promover, crear, renovar y garantizar las condiciones básicas sociales y culturales que les permitan a los ciudadanos de Medellín en sus diferentes 
-          cursos de vida tener las capacidades para desarrollar su potencial humano e individual y contribuir desde sus posibilidades a la creación de entornos
-           sociales y comunitarios saludables, seguros, creativos y sostenibles.
-
-          <br> <br><br>
-          <a class="btn btn-outline-info btn-block"  href="/linea-3"style="font-size: xx-small;" type="button"> 
-            <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
-          </a>
-        </div>          
-        <!-- Canvas for Chart -->
-        <div  id="canvas3" style="height: 275px;width: 100%;"></div>
       </div>
-
-
-      <div class="card">
-        <!-- Custom information -->
-        <div class="about">
-          <h3>Ecociudad</h3>
-          <p class="lead">Línea Estratégica 4.</p>
-          <table class="table table-sm table-responsive-lg table- table-striped table-hover">
-            <thead class="thead-inverse" style="font-size: smaller;">
-              <tr>
-                <th>Indicadores</th>
-                <th>Componentes</th>
-                <th>Programas</th>
-              </tr>
-            </thead>
-            <tbody style="font-size: smaller;">
-              <tr>
-                <td scope="row">169</td>
-                <td>5</td>
-                <td>19</td>
-              </tr>           
-            </tbody>
-          </table>
+      <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <div class="mt-lg-3" id="chart-ejecfisica" style="height: 250px;  width:100%;"></div>
         </div>
-        <div class="card-body text12" >
-          <strong> Propósito:  </strong> <br>
-          Establecer las bases de la transición ecológica para direccionar a Medellín a un futuro de sostenibilidad, donde se garantice
-          el pleno disfrute del derecho a la ciudad, la habitabilidad digna de sus habitantes y la integración funcional y armoniosa de la 
-          ruralidad mediante el reconocimiento y acceso a los derechos de los pobladores rurales.
-          <br> <br><br><br>
-          <a class="btn btn-outline-info btn-block"  href="/linea-4"style="font-size: xx-small;" type="button"> 
-            <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
-          </a>
-        </div>            
-        <!-- Canvas for Chart.js -->
-        <div  id="canvas4" style="height: 270px;width: 100%;"></div>
+        <div class="card-footer mt-4" style="background-color: white;">
+          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+            <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución física por dependencias</i>
+           </a>
+        </div>
       </div>
-
-      <div class="card">
-        <!-- Custom information -->
-        <div class="about">
-          <h3>Gobernanza y Gobernabilidad.</h3>
-          <p class="lead">Línea Estratégica 5.</p>
-          <table class="table table-sm table-responsive-lg table- table-striped table-hover">
-            <thead class="thead-inverse" style="font-size: smaller;">
-              <tr>
-                <th>Indicadores</th>
-                <th>Componentes</th>
-                <th>Programas</th>
-              </tr>
-            </thead>
-            <tbody style="font-size: smaller;">
-              <tr>
-                <td scope="row">198</td>
-                <td>6</td>
-                <td>27</td>
-              </tr>
-            </tbody>
-          </table>
-          </div>
-          <div class="card-body text12">
-            <strong> Propósito:  </strong> <br>
-            <textarea  style="border:0cm" class="text12" name="" id="" cols="45" rows="10">
-              El propósito de la Línea es generar las condiciones y capacidades institucionales, políticas y ciudadanas para el fortalecimiento de lo público,
-              generando sinergia entre el gobierno y la ciudadanía. Buscamos el diálogo abierto desde los diferentes saberes, la concertación entre los 
-              diferentes actores y la construcción colectiva de procesos ciudadanos de paz territorial, desde el conocimiento colectivo del territorio, 
-              la instalación  de capacidades locales e institucionales para la gestión y protección de lo público, el uso del dato y la información como 
-              activo público que otorga valor y la articulación intra e interinstitucional y territorial.
-            </textarea>
-            <a class="btn btn-outline-info btn-block"  href="/linea-5"style="font-size: xx-small;" type="button"> 
-              <i class="fa fa-pencil-square-o" style=" width:60px; height:16px; font-size: small;"aria-hidden="true" > Consultar</i>
-            </a>
-          </div>  
-          <!-- Canvas for Chart.js -->
-          <div  id="canvas5" style="height: 270px;width: 100%;"></div>
+      <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 250px;  width:100%;"></div>
+        </div>
+        <div class="card-footer mt-4" style="background-color: white;">
+          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+            <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución financiera  por dependencias</i>
+           </a>
+        </div>
       </div>
     </div>
-</div>
-</body>
-</html>
 
+    <div class="row">
+      <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
+        <div class="mt-lg-3" id="chart-inicial" style="height: 300px;  width:100%;"></div>
+      </div>
+      <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
+        <div class="mt-lg-3" id="canvas-pa2" style="height: 200px;  width:100%;"></div>
+        <div class="table-responsive-sm">
+          <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
+            <thead style="background-color: #B2B1A7;"> 
+              <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
+              <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
+              <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
+              <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
+
+            </thead> 
+            <tbody id="tbl_comp">
+              <tr>
+                <td  id="compromisos" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
+                <td  id="disponible" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
+                <td  id="ordenado" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
+                <td  id="total" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
+        <div class="mt-lg-3" id="canvas-pa1" style="height: 260px;  width:100%;"></div>
+      </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <h4>Tipo de Inversión</h4>
+      <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 350px;  width:100%;"></div>
+    </div>
+    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <div class="mt-lg-3" id="chart-geo" style="height: 350px;  width:100%;"></div>
+    </div>
+    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <div class="mt-lg-3" id="chart-dep" style="height: 350px;  width:100%;"></div>
+    </div>
+    </div>
+
+  </div>
+  
+
+</body>
+
+</html>
 <%- include ('../partials/scriptsHome.html')%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 <script src="/graph/dashgraph.js"></script>
-
 <script type="text/javascript">
   function stopEnterKey(evt) {
       var evt = (evt) ? evt : ((event) ? event : null);

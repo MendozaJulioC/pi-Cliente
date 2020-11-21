@@ -29,8 +29,14 @@ const getContacto = async (req, res) => {
     }
 }
 
+
+
+
+
+
 const getDash= async (req, res)=>{
     try {
+
         res.render('./dash/dash.html', {
             title: "SEE-PDM"
         })

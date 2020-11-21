@@ -7,8 +7,9 @@ const {isAuthenticated, notAuthenticated}= require('../helpers/auth');
 
 const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente, getPrograma} = require('../controllers/index.controllers');
     router.get('/',notAuthenticated, getHome);
-    router.get('/dash', isAuthenticated,getDash)
-    router.get('/general', getGeneral)
+    router.get('/dash',isAuthenticated, getDash)
+    
+    router.get('/general', isAuthenticated,getGeneral)
     router.get('/contacto', getContacto); 
     router.get('/indicadores',isAuthenticated, getIndicador)
     router.get('/estructura', isAuthenticated,getEstructura)

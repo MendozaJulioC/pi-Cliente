@@ -1,114 +1,9 @@
-<!--  
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-<%- include ('../partials/head.html') %>
 
-<link rel="stylesheet" href="/css/register.css">
-<div class="container">
-  <div class="frame">
-    <div class="nav">
-      <ul class"links">
-        <li class="signup-active"><a class="btn">Registrate </a></li>
-      </ul>
-    </div>
-    <div>
-       
-        <form class="form-signin" action="/auth/register" method="POST" name="formRegister">
-            <div class="form-row">
-                <div class="col-sm-6">
-                    <label for="fullname">Nombre Completo</label>
-                    <input class="form-styling form-control" type="text" name="fullname" id="fullname" placeholder="" value=" <%= fullname %>"required/>
-                </div>
-                <div class="col-sm-6">
-                    <label for="email">Email</label>
-                    <input class="form-styling form-control" type="email" name="email" id="email" placeholder="" required value="<%= email %>" />
-                </div>
-                <div class="col-sm-6 form-group">
-                    <label for="password">Password</label>
-                    <input class="form-styling form-control" type="password" name="password" id="password" placeholder="" required value="<%= password %>" />
-                    <small id="emailHelp" class="form-text text-muted">Mínimo 6 caracteres</small>
-                </div>
-                <div class="col-sm-6">
-                    <label for="confirmpassword">Confirme password</label>
-                    <input class="form-styling form-control" type="password" name="confirmpassword"  id="confirmpassword" placeholder="" required value="<%= confirmpassword %>" />
-                    <small id="emailHelp" class="form-text text-muted">Igual a la anterior</small>
-                </div>
-                <div class="col-sm-4">
-                    <label for="cargo">Empleo</label>
-                    <select class="form-control form-styling" id="cargo" name="cargo" required value="<%= cargo %>" >
-                        <option value="0">Seleccione</option>
-                        <option value="2">Secretario de Despacho</option>
-                        <option value="3">Director Departamento</option>
-                        <option value="4">Asesor</option>
-                        <option value="5">Subdirector</option>
-                        <option value="6">Subsecretario</option>
-                        <option value="7">Enlace</option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label for="dependencia">Dependencia</label>
-                    <select class="form-control form-styling" name="dependencias" id="dependencias" required>
-                        <option value="0">Seleccione</option>
-                        <% dependencia.forEach(function(dep){ %>
-                        <option value= "<%= dep.cod_dep%> " name="dependencias"> <%= dep.nom_cortp %></option> 
-                        <% }); %>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <label for="tel_contacto">Teléfono</label>
-                    <input class="form-styling form-control" type="number" min=0 name="tel_contacto" id="tel_contacto" value="<%= tel_contacto %>"  placeholder=""/>
-                </div>
-            </div>
-            <input type="submit" class="btn btn-warning btn-block" value="Registrarme"/><br>
-            <a  class=" btn btn-sm btn-success" href="/">Loguin</a>
-       
-            <% errors.forEach(function(error){ %>
-              <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
-                        <%= error.message  %>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <% }); %>
-        </form>
-     
-        <div  class="success">
-            <div class="successtext">
-               <p> Thanks for signing up! Check your email for confirmation.</p>
-                <button>hola</button>
-            </div>
-        </div>
-    </div>
-    <a id="refresh" value="Refresh" onClick="history.go()">
-        <svg class="refreshicon"   version="1.1" id="Capa_1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            width="25px" height="25px" viewBox="0 0 322.447 322.447" style="enable-background:new 0 0 322.447 322.447;"
-            xml:space="preserve">
-            <path  d="M321.832,230.327c-2.133-6.565-9.184-10.154-15.75-8.025l-16.254,5.281C299.785,206.991,305,184.347,305,161.224
-                c0-84.089-68.41-152.5-152.5-152.5C68.411,8.724,0,77.135,0,161.224s68.411,152.5,152.5,152.5c6.903,0,12.5-5.597,12.5-12.5
-                c0-6.902-5.597-12.5-12.5-12.5c-70.304,0-127.5-57.195-127.5-127.5c0-70.304,57.196-127.5,127.5-127.5
-                c70.305,0,127.5,57.196,127.5,127.5c0,19.372-4.371,38.337-12.723,55.568l-5.553-17.096c-2.133-6.564-9.186-10.156-15.75-8.025
-                c-6.566,2.134-10.16,9.186-8.027,15.751l14.74,45.368c1.715,5.283,6.615,8.642,11.885,8.642c1.279,0,2.582-0.198,3.865-0.614
-                l45.369-14.738C320.371,243.946,323.965,236.895,321.832,230.327z"/>
-        </svg>
-    </a>
-  </div>
- 
-</div>
-<%- include ('../partials/scriptsHome.html') %>
-<script src="/js/register.js"></script>
-
-
- -->
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
 <%- include ('../partials/head.html') %>
 <link rel="stylesheet" href="/css/register.css">
-
-
-
  <body>
    <div class="container">
      <div class="myCard">
@@ -117,37 +12,27 @@
            <div class="myLeftCtn">
             <div class="box"> <header>SEE-PDM</header>
               <form class="myForm " action="/auth/register" method="POST" name="formRegister">
-              
                 <div class="form-row">
-
                     <div class="form-group col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Escriba su nombre completo</small>
                         <i class="fa fa-user"></i>
                         <input class="myInput " type="text" name="fullname" id="fullname" placeholder="Usuario"  value="<%= fullname %>" required>
                     </div>
-                    
-
                     <div class="form-group col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Escriba el correo electrónico con el que desea ingresar</small>
                         <i class="fa fa-envelope"></i>
                         <input class="myInput" type="email" name="email" id="email" placeholder="Email"  value=" <%= email %>" required>
                     </div>
-
                     <div class="form-group col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Mínimo 6 caracteres</small>
                         <i class="fa fa-lock"></i>
                         <input class="myInput" type="password" name="password" id="email" placeholder="Password"  value=" <%= password %>" required>
-                      
                     </div>
-
                     <div class="form-group col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Igual a la anterior</small>
                         <i class="fa fa-lock"></i>
                         <input class="myInput" type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirme password"  value=" <%= confirmpassword %>" required>
-                      
                     </div>
-
-              
                     <div class=" form-group col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Seleccione su rol</small>
                         <select class="myInput"  id="cargo" name="cargo" required  value="<%= cargo %>" >
@@ -160,8 +45,6 @@
                             <option value="7">Enlace</option>
                         </select>
                     </div>
-
-
                     <div class="form-group col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Seleccione la dependencia a la cual pertenece </small>
                         <select class="myInput" name="dependencias" id="dependencias" required>
@@ -171,24 +54,17 @@
                             <% }); %>
                         </select>
                     </div>
-
                     <div class="col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Escriba su teléfono de contacto </small>
                         <input class="myInput" type="number" min=0 name="tel_contacto" id="tel_contacto" value="<%= tel_contacto %>"  placeholder=""/>
                     </div>
-
-                 
                     <div class="col-md-6">
                         <small id="emailHelp" class="form-text text-muted">Seleccione aquí para registarse </small>
                         <input type="submit" class="butt" value="Registrarme">
                     </div>
-
-                    <div class="col-md-6">
-                      
-                    </div>
+                    <div class="col-md-6"></div>
                     <div class="col-md-6 mt-2">
                         <small id="emailHelp" class="form-text text-muted"></small><br>
-                      
                         <a  class="butt" href="/">Loguin</a>
                     </div>
                     <div class="col-md-12 mt-2">
@@ -199,38 +75,17 @@
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
-                            <% }); %>
+                        <% }); %>
                     </div>
-
                 </div>
-             
-               
-           
-           
-                </div>
+             </div>
             </form>
-         
-
-       
-    
            </div>
-      
          </div>
-    
-
-
        </div>
-    
-
-
-
      </div>
-
    </div>
  </body>
-
-
-
  <%- include ('../partials/scriptsHome.html') %>
 <script src="/js/home.js"></script> 
 
