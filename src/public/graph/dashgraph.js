@@ -274,7 +274,7 @@ async function graphInicial(){
           "label" : datos.data[i].nom_linea,
           "value": Math.ceil(datos.data[i].avance_linea),
           "color": "#B4358B",
-          "link":"http://localhost:8000/linea-"+(i+1)
+          "link":"https://sse-pdm.herokuapp.com/linea-"+(i+1)
         })
       }
       const dataSource = {
