@@ -64,10 +64,10 @@
             </thead> 
             <tbody id="tbl_comp">
               <tr>
-                <td  id="compromisos" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
-                <td  id="disponible" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
-                <td  id="ordenado" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
-                <td  id="total" style="font-weight: 400; width: 44px; text-align: center;">$123.456.798</td>
+                <td  id="compromisos" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                <td  id="disponible" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                <td  id="ordenado" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                <td  id="total" style="font-weight: 400; width: 44px; text-align: center;"></td>
               </tr>
             </tbody>
           </table>
@@ -79,15 +79,42 @@
     </div>
 
     <div class="row">
+        
+      <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+        <h4>Tipo de Inversión</h4>
+        <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 250px;  width:100%;"></div>
+        <div class="table-responsive-sm">
+          <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+            <thead>
+              <th style="font-weight: 400; width: 44px; text-align: center;">Localizada</th>
+              <th style="font-weight: 400; width: 44px; text-align: center;">PP</th>
+              <th style="font-weight: 400; width: 44px; text-align: center;">Ciudad</th>
+              <th style="font-weight: 400; width: 44px; text-align: center;">Fortalecimiento Inst</th>
+            </thead>
+            <tbody class="table-hover" id="tbl_comp1">
+              <tr>
+                <td style="font-weight: 400; width: 415px; text-align: center;"></td>
+                <td style="font-weight: 400; width: 415px;text-align: center;"></td>
+                <td style="font-weight: 400; width: 415px; text-align: center;"></td>
+                <td style="font-weight: 400; width: 415px; text-align: center;"></td>
+                <td></td>
+              </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-12 mt-1">
+          <div class="mt-lg-3" id="chart-geo" style="height: 350px;  width:100%;"></div>
+        </div>
+
+      </div>
+
+
+
+
+    
     <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-      <h4>Tipo de Inversión</h4>
-      <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 350px;  width:100%;"></div>
-    </div>
-    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-      <div class="mt-lg-3" id="chart-geo" style="height: 350px;  width:100%;"></div>
-    </div>
-    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-      <div class="mt-lg-3" id="chart-dep" style="height: 350px;  width:100%;"></div>
+      <div class="mt-lg-3" id="chart-dep" style="height: 700px;  width:100%;"></div>
     </div>
     </div>
 
@@ -100,14 +127,7 @@
 <%- include ('../partials/scriptsHome.html')%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
 <script src="/graph/dashgraph.js"></script>
-<script type="text/javascript">
-  function stopEnterKey(evt) {
-      var evt = (evt) ? evt : ((event) ? event : null);
-      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-      if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
-  }
-  document.onkeypress = stopEnterKey;
-</script>
+
 
 
 

@@ -3,12 +3,9 @@ const router = Router();
 
 const {isAuthenticated, notAuthenticated}= require('../helpers/auth');
 
-
-
 const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente, getPrograma} = require('../controllers/index.controllers');
     router.get('/',notAuthenticated, getHome);
     router.get('/dash',isAuthenticated, getDash)
-    
     router.get('/general', isAuthenticated,getGeneral)
     router.get('/contacto', getContacto); 
     router.get('/indicadores',isAuthenticated, getIndicador)
@@ -59,6 +56,10 @@ router.get('/auth/register', getRegister)
 router.post('/auth/login',notAuthenticated,postLoguin)
 router.get('/auth/logout', getLogout)
 
+
+
+const {getDependencias} = require ('../controllers/taskDependencias')
+router.get('/dependencias',isAuthenticated, getDependencias)
       
 
 

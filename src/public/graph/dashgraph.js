@@ -608,14 +608,14 @@ async function columnDependencias(){
      
         let tam = datos.data.length;
         for(var i =0; i<(tam) ;i++   ){
-          console.log(datos.data[i].nom_cortp)
+ 
              valores.push({
              
               label: datos.data[i].nom_cortp,
               value:datos.data[i].total_dep,
               color: "#009AB2"
         });
-        console.log(valores)
+       
     }
     valores.sort((a, b) => a.value - b.value)
 const dataSource = {
@@ -628,13 +628,19 @@ const dataSource = {
       numberprefix: "$",
       theme: "zune",
       labeldisplay: "ROTATE",
+      placevaluesinside: "1",
+      showValues: "1",
+      valuefontColor: "#000000",
+      formatnumberscale: "0",
+      decimalSeparator: ",",
+      thousandSeparator: "."
     },
     data: valores
   };
   
   FusionCharts.ready(function() {
     var myChart = new FusionCharts({
-      type: "column2d",
+      type: "bar2d",
       renderAt: "chart-dep",
       width: "100%",
       height: "100%",
@@ -647,3 +653,14 @@ const dataSource = {
   
   
 }
+
+
+
+
+
+  function stopEnterKey(evt) {
+      var evt = (evt) ? evt : ((event) ? event : null);
+      var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+      if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
+  }
+  document.onkeypress = stopEnterKey;

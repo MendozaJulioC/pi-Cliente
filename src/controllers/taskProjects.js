@@ -17,12 +17,6 @@ const getProjects= async(req, res)=>
 }
 
 
-
-
-
-
-
-
 const getProject1= async(req, res)=>{
     try{ 
         res.render('./proyectos_estrategicos/proyecto/proyect_e1.html',
