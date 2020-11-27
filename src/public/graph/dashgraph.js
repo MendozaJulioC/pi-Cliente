@@ -17,6 +17,9 @@ async function _main(){
   columnDependencias()
 }
 
+
+
+
 async function _avancePDM(){
   try {
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
@@ -34,7 +37,7 @@ async function graphPDM(total){
   try {
     const dataSource = {
       chart: {
-        caption: "% Avance cumplimiento PDM",
+        caption: "% Avance cuatrienial PDM",
         lowerlimit: "0",
         upperlimit: "100",
         showvalue: "1",
@@ -314,8 +317,6 @@ columnGeo()
 
 
 async function columnGeo(){
-
-
   try {
       fetch(`https://sse-pdm-back.herokuapp.com/geo/api/territorio`)
       .then(res=>res.json())
@@ -335,7 +336,7 @@ async function columnGeo(){
             decimalSeparator: ",",
             thousandSeparator: ".",
             plottooltext: `<div id='divTable'>
-                              <table id='dataTable' class="table table-sm table-responsive-sm table-hover" style="font-size: small;" width='200px'>
+                              <table id='dataTable' class="table table-sm table-responsive-sm " style="font-size: small;" width='200px'>
                                 <tr style="color:white" >
                                   <th>Territorio</th>
                                   <td>$label</td>
@@ -542,7 +543,7 @@ async function tipoinversion()
 {
 
   try {
-   fetch('https://sse-pdm-back.herokuapp.com/geo/api/tipo-inversion')
+   fetch(`https://sse-pdm-back.herokuapp.com/geo/api/tipo-inversion`)
    .then(res=>res.json())
    .then(datos=> {
 

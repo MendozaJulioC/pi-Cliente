@@ -9,20 +9,37 @@ const formatter = new Intl.NumberFormat('en-US', {
   
   
 async function _main(){
-    _avancePDM()
-     porc_avance_fisico()
-    _avance_financiero()
-    tipoinversion()
-    total_proyectos_dep()
-    columnGeo()
+  let dep = document.getElementById('inputGroupSelectDependencia').value
+    _avancePDM(dep)
+    _avance_financiero(dep)
+    porc_avance_fisico(dep)
+    tipoinversion(dep)
+    columnGeo(dep)
+    
+}
+
+
+
+async function dep_estado(cod_dep){
+  _avancePDM(cod_dep)
+  _avance_financiero(cod_dep)
+  porc_avance_fisico(cod_dep)
+  tipoinversion(cod_dep)
+  columnGeo(cod_dep)
+
+
 }
   
-async function _avancePDM(){
+async function _avancePDM(cod_dep){
     try {
-      fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
+      fetch(`https://sse-pdm-back.herokuapp.com/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
-          graphPDM(datos.data[0].total_plan)
+      
+
+        let avance_dep = (datos.data[0].avance/datos.data[0].peso)*100
+
+          graphPDM(avance_dep)
         })
     } catch (error) {
       console.log('Error _avancePDM ',error )
@@ -34,7 +51,7 @@ async function graphPDM(total){
     try {
       const dataSource = {
         chart: {
-          caption: "% Avance cumplimiento PDM",
+          caption: "% Avance cuatrienial PDM",
           lowerlimit: "0",
           upperlimit: "100",
           showvalue: "1",
@@ -65,7 +82,7 @@ async function graphPDM(total){
         dials: {
           dial: [
             {
-              value: Math.ceil(total)
+              value: (total)
             }
           ]
         }
@@ -89,12 +106,12 @@ async function graphPDM(total){
 }
   
   
-async function _avance_financiero(){
+async function _avance_financiero(dep){
     try {
-      fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefinanciero')
+      fetch(`https://sse-pdm-back.herokuapp.com/pa/api/avancefinanciero/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
-        porc_avance_financiero(datos.data[0].ejec_financiera) 
+        porc_avance_financiero(datos.data[0].pptoejecutado/datos.data[0].pptoajustado) 
         graphPDA(parseInt(datos.data[0].poai), parseInt(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
         detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
   
@@ -105,6 +122,7 @@ async function _avance_financiero(){
 }
   
 async function porc_avance_financiero(avance){  
+
     const dataSource = {
       chart: {
         caption: "% Ejecución Financiera",
@@ -253,9 +271,9 @@ function graphPDA(poai, pptoajustado, ordenado){
   
 
   
-async function columnGeo(){
+async function columnGeo(dep){
     try {
-        fetch(`https://sse-pdm-back.herokuapp.com/geo/api/territorio`)
+        fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias/territorio/${dep}`)
         .then(res=>res.json())
         .then(datos=>{
      
@@ -376,6 +394,15 @@ async function columnGeo(){
                 label: "Santa Elena",
                 value: Math.ceil(parseInt(datos.data[0].santa_elena)/1000000) ,color:"#009AB2"
               }
+              ,
+              {
+                label: "Ciudad",
+                value: Math.ceil(parseInt(datos.data[0].ciudad)/1000000) ,color:"#009AB2"
+              },
+              {
+                label: "Fort. Inst",
+                value: Math.ceil(parseInt(datos.data[0].fort_inst)/1000000) ,color:"#009AB2"
+              }
             ]
           };
           FusionCharts.ready(function() {
@@ -395,9 +422,9 @@ async function columnGeo(){
 }
   
   
-async function porc_avance_fisico(){
+async function porc_avance_fisico(dep){
     try {
-      fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefisico')
+      fetch(`https://sse-pdm-back.herokuapp.com/pa/api/avancefisico/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
           const dataSource = {
@@ -433,7 +460,7 @@ async function porc_avance_fisico(){
             dials: {
               dial: [
                 {
-                  value: (datos.data[0].ejec_fisica)*100
+                  value: (datos.data[0].avance_fisico)*100
                 }
               ]
             }
@@ -454,12 +481,17 @@ async function porc_avance_fisico(){
     }
 }
   
-async function tipoinversion(){
+async function tipoinversion(dep){
    try {
-     fetch('https://sse-pdm-back.herokuapp.com/geo/api/tipo-inversion')
+     fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias/tipo-inversion/${dep}`)
      .then(res=>res.json())
      .then(datos=> {
    
+      document.getElementById('localizada').innerHTML = formatter.format(datos.data[0].localizada)
+      document.getElementById('pp').innerHTML = formatter.format(datos.data[0].pp)
+      document.getElementById('ciudad').innerHTML = formatter.format(datos.data[0].ciudad)
+      document.getElementById('fortinst').innerHTML = formatter.format(datos.data[0].fortinst)
+
      })
     } catch (error) {
       console.log('Error tipoinversion', error)
