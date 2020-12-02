@@ -386,12 +386,15 @@ async function _getBuscaNombreIndicador(){
             fetch(`https://sse-pdm-back.herokuapp.com/pi/api/indicador/${cod_Indicador}`)
             .then(res => res.json())
             .then(datos => {
-
+            
                 if(datos.data.length>0){
+                  let peso;
+                  if(datos.data[0].peso==null){peso=0}else{peso=((datos.data[0].peso).substring(0,6))}
+                 
                     document.getElementById('nom_indicador1').innerHTML= datos.data[0].nom_indicador
                     document.getElementById('metaplan1').innerHTML= datos.data[0].meta_plan
                     document.getElementById('logroacumulado1').innerHTML= datos.data[0].logro_acumulado
-                    document.getElementById('peso-indicador').innerHTML=(datos.data[0].peso).substring(0,6)
+                    document.getElementById('peso-indicador').innerHTML=(peso)
         
         //1.Información General
                     document.getElementById('nom_indicador2').innerHTML= datos.data[0].nom_indicador
@@ -416,7 +419,7 @@ async function _getBuscaNombreIndicador(){
                     document.getElementById('incluye_lb').value= datos.data[0].incluye_lb
                     document.getElementById('vigenia_lb').value= datos.data[0].vigencia_lb
                     document.getElementById('tipo_lb').value= datos.data[0].tipo_lb
-                    document.getElementById('peso').value= datos.data[0].peso
+                    document.getElementById('peso').value= peso
                     document.getElementById('periocidad').value= datos.data[0].periocidad_generacion
         
                     document.getElementById('formula_indicador').value= datos.data[0].formula_indicador

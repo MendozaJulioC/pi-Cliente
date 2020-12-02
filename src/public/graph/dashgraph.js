@@ -1,6 +1,4 @@
 
-
-
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -15,6 +13,7 @@ async function _main(){
   _avance_financiero()
   tipoinversion()
   columnDependencias()
+  avance_linea_dep()
 }
 
 
@@ -110,7 +109,7 @@ async function _avance_financiero(){
 async function porc_avance_financiero(avance){  
   const dataSource = {
     chart: {
-      caption: "% Ejecución Financiera",
+      caption: "% Ejecución Financiera Plan de Acción",
       lowerlimit: "0",
       upperlimit: "100",
       showvalue: "1",
@@ -472,10 +471,9 @@ async function porc_avance_fisico(){
     fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefisico')
     .then(res=>res.json())
     .then(datos=>{
-   
         const dataSource = {
           chart: {
-            caption: "% Ejecución Física",
+            caption: "% Ejecución Física del Plan de Acción",
             lowerlimit: "0",
             upperlimit: "100",
             showvalue: "1",
@@ -511,7 +509,6 @@ async function porc_avance_fisico(){
             ]
           }
         };
-        
         FusionCharts.ready(function() {
           var myChart = new FusionCharts({
             type: "angulargauge",
@@ -522,19 +519,10 @@ async function porc_avance_fisico(){
             dataSource
           }).render();
         });
-        
-
-
-
-        
       })
   } catch (error) {
     console.log('Error _avancePDM ',error )
   }
-
-
-
-
 }
 
 
@@ -546,7 +534,10 @@ async function tipoinversion()
    fetch(`https://sse-pdm-back.herokuapp.com/geo/api/tipo-inversion`)
    .then(res=>res.json())
    .then(datos=> {
-
+    document.getElementById('tipo_localizada').innerHTML= formatter.format( datos.data[0].localizada);
+    document.getElementById('tipo_pp').innerHTML= formatter.format(datos.data[0].pp);
+    document.getElementById('tipo_ciudad').innerHTML= formatter.format( datos.data[0].ciudad ) ;
+    document.getElementById('tipo_fort').innerHTML= formatter.format( datos.data[0].fortinst ) ;
     am4core.useTheme(am4themes_animated);
     var chart = am4core.create("canvas-tipoInversion", am4charts.PieChart);
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
@@ -641,7 +632,7 @@ const dataSource = {
   
   FusionCharts.ready(function() {
     var myChart = new FusionCharts({
-      type: "bar2d",
+      type: "column2d",
       renderAt: "chart-dep",
       width: "100%",
       height: "100%",
@@ -655,7 +646,52 @@ const dataSource = {
   
 }
 
+async function avance_linea_dep(){
+  try {
+    let info=[];
+    fetch('https://sse-pdm-back.herokuapp.com/dep/api/dependencias/avance')
+    .then(res=>res.json())
+    .then(datos=>{
+      let tam = datos.data.length;
+      for(let i =0; i<tam;i++){
+        info.push({
+          "label" : datos.data[i].nombre_dep,
+          "value": (datos.data[i].avance/datos.data[i].peso)*100,
+          "color": "#B4358B",
+         
+        })
+      }
+      info.sort((a, b) =>  b.value -a.value )
+      const dataSource = {
+        chart: {
+          caption: "% Avance cuatrienial por Dependencias PDM",
+          yaxisname: "Dependencias",
+          aligncaptionwithcanvas: "0",
+          plottooltext: "<b>$dataValue</b> leads received",
+          theme: "gammel",
+          numbersuffix: "%"
+        },
+        data: info
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "bar2d",
+          renderAt: "chart-avance-dep",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+      
 
+      })
+  } catch (error) {
+    console.log('Error _avancePDM ',error )
+  }
+ 
+}
 
 
 

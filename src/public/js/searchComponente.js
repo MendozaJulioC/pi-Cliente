@@ -310,6 +310,7 @@ async function _getBuscaNombreComponente(){
              _graphHistoryComponente(avancecomponente, datos.data[0].cumple_2021, datos.data[0].cumple_2022, datos.data[0].cumple_2023 )
              _graphHistoryCumplimientoComponente(avancecomponente)
              _graphAvanceComponente(avancecomponente)
+
              fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/consulta-programas/nombre/${nom_Componente}`)
              .then(res=>res.json())
              .then(response=>{

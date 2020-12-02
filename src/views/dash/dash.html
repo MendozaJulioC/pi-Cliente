@@ -15,6 +15,7 @@
   <div class="container-fluid">
 
     <div class="row">
+
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
           <div class="mt-lg-3" id="canvas" style="height: 250px;  width:100%;"></div>
@@ -25,6 +26,8 @@
            </a>
         </div>
       </div>
+
+     
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
           <div class="mt-lg-3" id="chart-ejecfisica" style="height: 250px;  width:100%;"></div>
@@ -35,6 +38,7 @@
            </a>
         </div>
       </div>
+
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
             <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 250px;  width:100%;"></div>
@@ -45,12 +49,11 @@
            </a>
         </div>
       </div>
+
     </div>
 
     <div class="row">
-      <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
-        <div class="mt-lg-3" id="chart-inicial" style="height: 300px;  width:100%;"></div>
-      </div>
+     
       <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
         <div class="mt-lg-3" id="canvas-pa2" style="height: 200px;  width:100%;"></div>
         <div class="table-responsive-sm">
@@ -76,10 +79,6 @@
       <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
         <div class="mt-lg-3" id="canvas-pa1" style="height: 260px;  width:100%;"></div>
       </div>
-    </div>
-
-    <div class="row">
-        
       <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
         <h4>Tipo de Inversión</h4>
         <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 250px;  width:100%;"></div>
@@ -93,32 +92,41 @@
             </thead>
             <tbody class="table-hover" id="tbl_comp1">
               <tr>
-                <td style="font-weight: 400; width: 415px; text-align: center;"></td>
-                <td style="font-weight: 400; width: 415px;text-align: center;"></td>
-                <td style="font-weight: 400; width: 415px; text-align: center;"></td>
-                <td style="font-weight: 400; width: 415px; text-align: center;"></td>
+                <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_localizada"></td>
+                <td style="font-weight: 400; width: 415px;text-align: center;" id="tipo_pp"></td>
+                <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_ciudad"></td>
+                <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_fort"></td>
                 <td></td>
               </tr>
             
             </tbody>
           </table>
         </div>
-        <div class="col-md-12 mt-1">
-          <div class="mt-lg-3" id="chart-geo" style="height: 350px;  width:100%;"></div>
-        </div>
+   
 
+      </div>   
+ 
+    </div>
+
+    <div class="row">
+ 
+
+      <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+        <div class="mt-lg-3" id="chart-geo" style="height: 500px;  width:100%;"></div>
       </div>
-
-
-
-
+      <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+        <div class="mt-lg-3" id="chart-dep" style="height: 500px;  width:100%;"></div>
+      </div>
     
-    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-      <div class="mt-lg-3" id="chart-dep" style="height: 700px;  width:100%;"></div>
+    <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <div class="mt-lg-3" id="chart-inicial" style="height: 550px;  width:100%;"></div>
     </div>
-    <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-    Grafica avance por dependencia pdm
+    <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <div class="mt-lg-3" id="chart-avance-dep" style="height: 550px;  width:100%;"></div>
     </div>
+
+
+
 
 
     </div>

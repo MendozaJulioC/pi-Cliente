@@ -113,31 +113,60 @@
         </div>
        </div>
     </div>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="card text-center shadow mt-2 mb-1">
+  <div class="row">
+    <div class="col-md-3 mt-4  ">
+      <div class="card-body shadow-sm ">
+        <h6 class="card-title cardheader" style="color: #73879C;">Número de Proyectos Iniciativa Institucional</h6>
+        <h6 id="inst"  style="color: rgb(17, 160, 41);" class="card-text total"> <b></b></h6>
+      </div>
+    </div>
+    <div class="col-md-3 mt-4  ">
+      <div class="card-body shadow-sm ">
+        <h6 class="card-title cardheader" style="color: #73879C;">Número de Proyectos Presupuesto Participativo</h6>
+        <h6 id="Proyectos_pp" style="color: rgb(17, 160, 41);" class="card-text total"> <b></b></h6>
+      </div>
+    </div>
+    <div class="col-md-3 mt-4  ">
+      <div class="card-body shadow-sm ">
+        <h6 class="card-title cardheader" style="color: #73879C;">Número de Proyectos Saldos no ejecutables</h6>
+        <h6 id="saldos_no_exec" style="color: rgb(17, 160, 41);"  class="card-text total"> <b></b></h6>
+      </div>
+    </div>
+    <div class="col-md-3 mt-4  ">
+      <div class="card-body shadow-sm ">
+        <h6 class="card-title cardheader" style="color: #73879C;">Número de Proyectos Ejecución saldos pendientes</h6>
+        <h6 id="saldos_pendientes" style="color: rgb(17, 160, 41);"  class="card-text total"> <b></b></h6>
+      </div>
+    </div>
+  </div>
+</div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <div class="card text-center shadow mt-2 mb-1">
   <div class="row">
     <div class="col-md-3 mt-4  ">
       <div class="card-body shadow-sm ">
         <h6 class="card-title cardheader" style="color: #73879C;">Inversión Localizada</h6>
-        <h6 id="localizada"  style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+        <h6 id="localizada"  style="color: rgb(17, 160, 41);"  class="card-text total"> <b></b></h6>
       </div>
     </div>
     <div class="col-md-3 mt-4  ">
       <div class="card-body shadow-sm ">
         <h6 class="card-title cardheader" style="color: #73879C;">Presupuesto Participativo</h6>
-        <h6 id="pp" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+        <h6 id="pp" style="color: rgb(17, 160, 41);"  class="card-text total"> <b></b></h6>
       </div>
     </div>
     <div class="col-md-3 mt-4  ">
       <div class="card-body shadow-sm ">
         <h6 class="card-title cardheader" style="color: #73879C;">Inversión de Ciudad</h6>
-        <h6 id="ciudad" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+        <h6 id="ciudad" style="color: rgb(17, 160, 41);"  class="card-text total"> <b></b></h6>
       </div>
     </div>
     <div class="col-md-3 mt-4  ">
       <div class="card-body shadow-sm ">
         <h6 class="card-title cardheader" style="color: #73879C;">Fortalecimiento Institucional</h6>
-        <h6 id="fortinst" style="color: rgb(17, 160, 41);" id="vigenciaLocal" class="card-text total"> <b></b></h6>
+        <h6 id="fortinst" style="color: rgb(17, 160, 41);"  class="card-text total"> <b></b></h6>
       </div>
     </div>
   </div>
@@ -148,6 +177,23 @@
       <div class="card-body " id="chart-geo-dep" style="width: 100%; height: 400px;"></div>
     </div>
   </div>
+  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
+    <div class="card ">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card-body shadow-sm p3"><div class="card-body " id="chart-lineas-dep" style="width: 100%; height: 400px;"></div></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-body shadow-sm p3"><div class="card-body " id="chart-componentes-dep" style="width: 100%; height: 400px;"></div></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-body shadow-sm p3"><div class="card-body " id="chart-programas-dep" style="width: 100%; height: 400px;"></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+  
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <div class="card border-light shadow-sm p-3 mb-3 bg-white rounded">
     <div class="row">
@@ -162,11 +208,12 @@
            <tr>
              <th>Cod</th>
              <th>Proyecto</th>
-             <th>Eficacia</th>
-             <th>Ejec. Financiera</th>
-             <th>Ppto Inicial</th>
-             <th>Ppto Ajustado</th>
-             <th>Ejec. Financiera</th>
+             <th  style="text-align: center;">Eficacia</th>
+             <th style="text-align: center;">Ejec. Financiera</th>
+             <th style="text-align: center;">Eficiencia</th>
+             <th style="text-align: center;">Ppto Inicial</th>
+             <th style="text-align: center;">Ppto Ajustado</th>
+             <th style="text-align: center;">Ejec. Financiera</th>
              <th style="text-align: center;">+</th>
            </tr>
            </thead>
@@ -182,14 +229,16 @@
       <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
          <thead class="thead-inverse" style="background: rgb(178,177,167);">
            <tr>
-             <th>Cod</th>
+            <th>Cod</th>
              <th>Proyecto</th>
-             <th>Eficacia</th>
-             <th>Ejec. Financiera</th>
-             <th>Ppto Inicial</th>
-             <th>Ppto Ajustado</th>
-             <th>Ejec. Financiera</th>
+             <th  style="text-align: center;">Eficacia</th>
+             <th style="text-align: center;">Ejec. Financiera</th>
+             <th style="text-align: center;">Eficiencia</th>
+             <th style="text-align: center;">Ppto Inicial</th>
+             <th style="text-align: center;">Ppto Ajustado</th>
+             <th style="text-align: center;">Ejec. Financiera</th>
              <th style="text-align: center;">+</th>
+           </tr>
            </tr>
            </thead>
            <tbody id="p_tipo2"></tbody>
@@ -204,14 +253,16 @@
       <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
         <thead class="thead-inverse" style="background: rgb(178,177,167);">
            <tr>
-             <th>Cod</th>
-             <th>Proyecto</th>
-             <th>Eficacia</th>
-             <th>Ejec. Financiera</th>
-             <th>Ppto Inicial</th>
-             <th>Ppto Ajustado</th>
-             <th>Ejec. Financiera</th>
-             <th style="text-align: center;">+</th>
+            <th>Cod</th>
+            <th>Proyecto</th>
+            <th  style="text-align: center;">Eficacia</th>
+            <th style="text-align: center;">Ejec. Financiera</th>
+            <th style="text-align: center;">Eficiencia</th>
+            <th style="text-align: center;">Ppto Inicial</th>
+            <th style="text-align: center;">Ppto Ajustado</th>
+            <th style="text-align: center;">Ejec. Financiera</th>
+            <th style="text-align: center;">+</th>
+          </tr>
            </tr>
            </thead>
            <tbody id="p_tipo3"></tbody>
@@ -225,16 +276,16 @@
     <div class="col-md-12">
       <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
         <thead class="thead-inverse" style="background: rgb(178,177,167);">
-           <tr>
-             <th>Cod</th>
-             <th>Proyecto</th>
-             <th>Eficacia</th>
-             <th>Ejec. Financiera</th>
-             <th>Ppto Inicial</th>
-             <th>Ppto Ajustado</th>
-             <th>Ejec. Financiera</th>
-             <th style="text-align: center;">+</th>
-           </tr>
+          <th>Cod</th>
+          <th>Proyecto</th>
+          <th  style="text-align: center;">Eficacia</th>
+          <th style="text-align: center;">Ejec. Financiera</th>
+          <th style="text-align: center;">Eficiencia</th>
+          <th style="text-align: center;">Ppto Inicial</th>
+          <th style="text-align: center;">Ppto Ajustado</th>
+          <th style="text-align: center;">Ejec. Financiera</th>
+          <th style="text-align: center;">+</th>
+        </tr>
            </thead>
            <tbody id="p_tipo4"></tbody>
        </table>
@@ -252,6 +303,38 @@
     </div>
   </div>
 
+
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+
+  <div class="modal fade bd-example-modal " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+   
+        <div class="modal-body" >
+        <div class="form-row">
+          <div class="col-md-12"><h3>Descripción del avance</h3><span id="cod" ></span></div>
+          <div class="col-md-6"></div>
+          <div class="col-md-12">
+            <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+              <tbody id="valStat">
+             </tbody>
+            </table>
+          </div>
+          
+          <div class="col-md-12">
+            <div class="mt-lg-3" id="chart-geoproyect" style="height: 250px;  width:100%;"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+</div>
 </body>
   <%- include ('../partials/scriptsHome.html')%>
   <script src="/js/htmltoexcel.js"></script>
@@ -260,6 +343,7 @@
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 </html>
+
 
 
 
