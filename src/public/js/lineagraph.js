@@ -18,7 +18,7 @@ async function _buscaAvancelinea(linea){
       _graphHistoryIndicador(datos.data[0].sum)
       _graphHistoryCumplimientoIndicador(datos.data[0].sum)
 
-      fetch(`http://localhost:7000/pi/api/responsables/line/${linea}`)
+      fetch(`https://sse-pdm-back.herokuapp.com/pi/api/responsables/line/${linea}`)
       .then(res=>res.json())
       .then(response=>{
  
