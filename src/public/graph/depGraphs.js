@@ -227,7 +227,6 @@ function graphPDA(poai, pptoajustado, ordenado){
     });
 }
   
-  
 async function detallePpto(compromisos, disponible, ordenado , total){
     document.getElementById('compromisos-dep').innerHTML=  formatter.format((compromisos));
     document.getElementById('disponible-dep').innerHTML=  formatter.format((disponible));
@@ -510,98 +509,98 @@ document.onkeypress = stopEnterKey;
 
 
 async function total_proyectos_dep(dep){
+  try {
+ 
+    fetch(`https://sse-pdm-back.herokuapp.com/pa/api/tipo-iniciativa/dependencias/${dep}`)
+    .then(res=>res.json())
+    .then(datos=>{
+ 
+      document.getElementById('inst').innerHTML=  datos.data[0].ini_inst
+      document.getElementById('Proyectos_pp').innerHTML=  datos.data[0].pp
+      document.getElementById('saldos_no_exec').innerHTML=  datos.data[0].saldos_no_exec
+      document.getElementById('saldos_pendientes').innerHTML=  datos.data[0].saldos_pendientes
 
-try {
-  fetch(`https://sse-pdm-back.herokuapp.com/pa/api/tipo-iniciativa/dependencias/${dep}`)
-  .then(res=>res.json())
-  .then(datos=>{
-  
-    document.getElementById('inst').innerHTML=  datos.data[0].ini_inst
-    document.getElementById('Proyectos_pp').innerHTML=  datos.data[0].pp
-    document.getElementById('saldos_no_exec').innerHTML=  datos.data[0].saldos_no_exec
-    document.getElementById('saldos_pendientes').innerHTML=  datos.data[0].saldos_pendientes
-    const dataSource = {
-      chart: {
-        caption: "Presupuesto por Tipo de Iniciativa",
-        yaxisname: "Millones de pesos",
-        numberprefix: "$",
-        drawcrossline: "1",
-        theme: "gammel",
-        showvalues: "1",
-        formatnumberscale: "0",
-      },
-      categories: [
+      const dataSource = {
+        chart: {
+          caption: "Presupuesto por tipo de iniciativa",
+          xaxisname: "Tipo de iniciativa",
+    yaxisname: "millones de pesos",
+    drawcrossline: "1",
+    plottooltext: "<b>$seriesName</b> expense in $label was <b>$$dataValue</b>",
+    theme: "zune",
+    showvalues: "1",
+    formatnumberscale: "0"
+  },
+  categories: [
+    {
+      category: [
         {
-          category: [
-            {
-              label: "Proyecto Iniciativa Institucional"
-            },
-            {
-              label: "Proyectos Presuspuesto participativo"
-            },
-            {
-              label: "Proyectos con saldos no ejecutables"
-            },
-            {
-              label: "Proyectos con ejecución de saldos pendientes  (Vigencia Anterior)"
-            }
-          ]
-        }
-      ],
-      dataset: [
-        {
-          seriesname: "POAI",
-          data: [
-            {
-              value: (parseInt(datos.data[0].poai_ini_inst))
-            },
-            {
-              value: (parseInt(datos.data[0].poai_pp))
-            },
-            {
-              value: (parseInt(datos.data[0].poai_saldos_no_exec))
-            },
-            {
-              value: (parseInt(datos.data[0].poai_saldos_pendientes))
-            }
-          
-          ]
+          label: "Proyecto Iniciativa Institucional"
         },
         {
-          seriesname: "Ppto. Ajustado",
-          data: [
-            {
-              value: (parseInt(datos.data[0].ajustado_ini_inst))
-            },
-            {
-              value: (parseInt(datos.data[0].ajustado_pp))
-            },
-            {
-              value: (parseInt(datos.data[0].ajustado_saldos_no_exec))
-            },
-            {
-              value: (parseInt(datos.data[0].ajustado_saldos_pendientes))
-            }
-          ]
+          label: "Proyectos Presuspuesto participativo"
+        },
+        {
+          label: "Proyectos con saldos no ejecutables"
+        },
+        {
+          label: "Proyectos con ejecución de saldos pendientes  (Vigencia Anterior)"
         }
       ]
-    };
+    }
+  ],
+  dataset: [
+    {
+      seriesname: "POAI",
+      data: [
+        {
+          value: (parseInt(datos.data[0].poai_ini_inst))
+        },
+        {
+          value: (parseInt(datos.data[0].poai_pp))
+        },
+        {
+          value: (parseInt(datos.data[0].poai_saldos_no_exec))
+        },
+        {
+          value: (parseInt(datos.data[0].poai_saldos_pendientes))
+        }
+      
+      ]
+    },
+    {
+      seriesname: "Ppto. Ajustado",
+      data: [
+        {
+          value: (parseInt(datos.data[0].ajustado_ini_inst))
+        },
+        {
+          value: (parseInt(datos.data[0].ajustado_pp))
+        },
+        {
+          value: (parseInt(datos.data[0].ajustado_saldos_no_exec))
+        },
+        {
+          value: (parseInt(datos.data[0].ajustado_saldos_pendientes))
+        }
+      ]
+    }
+  ]
+};
+
+FusionCharts.ready(function() {
+  var myChart = new FusionCharts({
+    type: "msbar2d",
+    renderAt: "chart-proyectos-dep",
+    width: "100%",
+    height: "100%",
+    dataFormat: "json",
+    dataSource
+  }).render();
+});
+
+
     
-    FusionCharts.ready(function() {
-      var myChart = new FusionCharts({
-        type: "overlappedbar2d",
-        renderAt: "chart-proyectos-dep",
-        width: "100%",
-        height: "100%",
-        dataFormat: "json",
-        dataSource
-      }).render();
-    });
-    
-
-
-
-
   })
 
 
@@ -619,6 +618,9 @@ try {
       
       
 }
+
+
+
 
 async function avance_linea_dep(dep, nom_dep){
   try {
@@ -1051,3 +1053,9 @@ async function geoProyect( nom, cod){
   
   
 }
+
+
+
+
+
+
