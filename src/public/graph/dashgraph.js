@@ -47,7 +47,7 @@ function corteplan(){
     "vigencia": vigencia
   }
 
-  fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
+  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{

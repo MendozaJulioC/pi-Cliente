@@ -37,7 +37,7 @@ async  function corteplan(){
     "mesplan" : mes,
     "vigencia": vigencia
   }
-  fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
+  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -457,7 +457,7 @@ async function avance_linea_dep(){
 
 async function contadorSemaforo(){
   try {
-    fetch(`http://localhost:7000/pi/api/semaforo-corte/contador` )
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/contador` )
     .then(res => res.json())
     .then(response =>{
       document.getElementById('total-gris').innerHTML= response.data[0].gris
@@ -507,7 +507,7 @@ async function contadorSemaforo(){
 async function estado_sem_pordep(codsemaforo) {
   try {
     let info=[];
-    fetch(`http://localhost:7000/pi/api/semaforo-corte/general/${codsemaforo} `)
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/general/${codsemaforo} `)
     .then(res=> res.json()).
     then(datos=>{
       let tam = datos.data.length;

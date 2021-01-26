@@ -1077,7 +1077,7 @@ async function geoProyect( nom, cod){
 
 async function contadorSemDep(cod){
   try {
-    fetch(`http://localhost:7000/pi/api/semaforo-corte/contador/dependencias/${cod}` )
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/contador/dependencias/${cod}` )
     .then(res => res.json())
     .then(response =>{
       let cardsemaforogris ='';
@@ -1145,7 +1145,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
         "cod_semaforo":codsemaforo,
         "cod_dependencia": cod_dep
     }
-  fetch(`http://localhost:7000/pi/api/semaforo-corte/dependencia/tipo/ `,{
+  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/dependencia/tipo/ `,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
