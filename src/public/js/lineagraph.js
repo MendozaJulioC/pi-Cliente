@@ -438,7 +438,7 @@ async function _tbl_Indicadores(linea)
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].lb_ind+'</td>';
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].meta_plan+'</td>';
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].unidad+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+Math.ceil(response.data[i].avance)+'%</td>';
+          tabla3 +='<td style="text-align: center;font-size: 10px;">'+Math.ceil(response.data[i].avance2020)+'%</td>';  
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].logro_2020+'</td>';
           tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].nombre_dep+'</td>';
           tabla3 +='<tr>';

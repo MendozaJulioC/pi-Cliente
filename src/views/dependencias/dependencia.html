@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <title> <%= title %> </title>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%- include ('../partials/head.html') %>
     <%- include ('../partials/srciptgraph.html') %>
   </head>
@@ -26,7 +27,7 @@
         <div class="card-body ">
           <div class="input-group mb-2 col-12 col-12-mobilep input-group">
             <select class="custom-select" id="inputGroupSelectDependencia" onchange="dep_estado(this.value)">
-              <option value=0 >Seleccione...</option>
+              <option value=0 >Seleccione la dependenica a consultar...</option>
                 <% dependencias.forEach(function(dependencia){ %>
               <option value=<%= dependencia.cod_dep %>><%= dependencia.nombre_dep%> </option>
                 <% }); %>
@@ -43,35 +44,95 @@
             <div class="card-body">
               <div class="mt-lg-3" id="canvas-dep" style="height: 250px;  width:100%;"></div>
             </div>
-            <div class="card-footer mt-4" style="background-color: white;">
-              <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
-                <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
-              </a>
-            </div>
+      
           </div>
           <div class="col-md-4 mt-4  ">
             <div class="card-body">
               <div class="mt-lg-3" id="chart-ejecfisica-dep" style="height: 250px;  width:100%;"></div>
             </div>
-            <div class="card-footer mt-4" style="background-color: white;">
-              <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
-                <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución física por dependencias</i>
-              </a>
-            </div>
+          
           </div>
           <div class="col-md-4 mt-4  ">
             <div class="card-body">
                <div class="mt-lg-3" id="chart-ejecfinanciera-dep" style="height: 250px;  width:100%;"></div>
             </div>
-            <div class="card-footer mt-4" style="background-color: white;">
-              <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
-                <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución financiera  por dependencias</i>
-              </a>
-            </div>
+           
           </div>
         </div>
       </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<%- include ('../partials/rangos.html') %>
+  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+<div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
+  <div class="card ">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card-body shadow-sm p3"><div class="card-body " id="chart-lineas-dep" style="width: 100%; height: 400px;"></div></div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body shadow-sm p3"><div class="card-body " id="chart-componentes-dep" style="width: 100%; height: 400px;"></div></div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body shadow-sm p3"><div class="card-body " id="chart-programas-dep" style="width: 100%; height: 400px;"></div></div>
+    </div>
+  </div>
+  </div>
+</div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+   <!--semaforo-->
+   <div class="row">
+
+    <div class="col-md-3 mt-1  shadow-md p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">No programado  <span><img src="/img/pause.png" alt=""  width="30" height="30"></span>
+        </h3>
+        <h1  id="total-gris" style="text-align: center;color:#B2B1A7"></h1>
+        <h3   id="porcentaje-gris" style="text-align: center;color:#B2B1A7"> </h3>
+      </div>
+      <div id="footer-card-gris"></div>
+    </div>
+
+    <div class="col-md-3 mt-1  shadow-md p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Cumplimiento Bajo <span><img src="/img/rojo.png" alt=""  width="20" height="20"></span>
+        </h3>
+        <h1 id="total-rojos"  style="text-align: center;color:#B4358B"></h1>
+        <h3 id="porcentaje-rojos" style="text-align: center;color:#B4358B"></h3>
+      </div>
+      <div id="footer-card-rojo"></div>
+    </div>
+
+    <div class="col-md-3 mt-1 shadow-md p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <div class="legends">
+          <h4 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Cumplimiento Medio <span><img src="/img/amarillo.png" alt=""  width="20" height="20"></span>
+          </h4>
+        </div>
+        <h1 id="total-naranjas" style="text-align: center;color:#EE7518"></h1>
+        <h3 id="porcentaje-naranjas" style="text-align: center;color:#EE7518"></h3>
+      </div>
+      <div id="footer-card-amarillo"></div>
+    </div>
+
+    <div class="col-md-3 mt-1  shadow-md p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <div class="legends">
+          <h4 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Cumplimiento <span><img src="/img/verde.png" alt=""  width="20" height="20"></span>
+          </h4>
+        </div>
+        <h1 id="total-verdes" style="text-align: center;color:#00853E"></h1>
+        <h3 id="porcentaje-verdes"  style="text-align: center;color:#00853E"></h3>
+      </div>
+      <div id="footer-card-verde"></div>
+    </div>
+     
+  </div>
+
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--tarjetas de datos generales de los tipos de inversion-->
     <div class="card text-center shadow mt-2 mb-1">
@@ -172,28 +233,16 @@
   </div>
 </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
+     <!--gráfica inversión por territorio -->
+<div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
     <div class="card ">
       <div class="card-body " id="chart-geo-dep" style="width: 100%; height: 400px;"></div>
     </div>
   </div>
-  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
-    <div class="card ">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card-body shadow-sm p3"><div class="card-body " id="chart-lineas-dep" style="width: 100%; height: 400px;"></div></div>
-      </div>
-      <div class="col-md-4">
-        <div class="card-body shadow-sm p3"><div class="card-body " id="chart-componentes-dep" style="width: 100%; height: 400px;"></div></div>
-      </div>
-      <div class="col-md-4">
-        <div class="card-body shadow-sm p3"><div class="card-body " id="chart-programas-dep" style="width: 100%; height: 400px;"></div></div>
-      </div>
-    </div>
-    </div>
-  </div>
+
   
+
+
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   <div class="card border-light shadow-sm p-3 mb-3 bg-white rounded">
     <div class="row">
@@ -306,19 +355,24 @@
 
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Modal
+Modal valstat
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
 
 
   <div class="modal fade bd-example-modal " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+    <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
       <div class="modal-content">
-   
+        <div class="modal-header">
+          <h5 class="modal-title">SSE-PDM</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <div class="modal-body" >
         <div class="form-row">
           <div class="col-md-12"><h3>Descripción del avance</h3><span id="cod" ></span></div>
-          <div class="col-md-6"></div>
+          <div class="col-md-12">  <h3>Ejecución :<span id="ejec"> </span></h3> </div>
           <div class="col-md-12">
             <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
               <tbody id="valStat">
@@ -334,7 +388,55 @@ Modal
       </div>
     </div>
     </div>
+  </div>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal semaforo
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="modal fade bd-example-modal " id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span> <h4  class="modal-title" id="nom_depencia_query"></h4> </span> 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <div class="form-row">
+          <div class="col-md-12"> </div>
+          <div class="col-md-12">
+            <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+              <thead>
+                <tr style="background-color:gray ;">
+               
+                  <th style="text-align: center;">Cod_Línea</th>
+                  <th style="text-align: center;">Cod_Componente</th>
+                  <th style="text-align: center;">Cod_Programa</th>
+                  <th style="text-align: center;">Cod_Indicador</th>
+                  <th style="text-align: center;">Indicador</th>
+                  <th style="text-align: center;">Unidad</th>
+                  <th style="text-align: center;">FC</th>
+                  <th style="text-align: center;">Sentido</th>
+                  <th style="text-align: center;">Avance</th>
+                  <th style="text-align: center;">Observaciones</th>
+                  <th style="text-align: center;">Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tablaSemaforo">
+             </tbody>
+            </table>
+          </div>
+          <div class="col-md-12"></div>
+        </div>
+     </div>
+
+  </div>
+  </div>
 </div>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 </body>
   <%- include ('../partials/scriptsHome.html')%>
   <script src="/js/htmltoexcel.js"></script>

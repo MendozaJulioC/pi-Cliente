@@ -14,8 +14,49 @@
   
   <div class="container-fluid">
 
+  
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="row">
-
+      <div class="col-md-12 mt-4  shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body shadow-lg">
+          <div class="row">
+            <div class="col-sm-2">
+              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Corte : </b> 
+              <span id="fecha_corte"></span>.</span>  
+            </div>
+            <div class="col-sm-3">
+              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Porcentajes en los Rangos de cumplimiento para este período del seguimiento del PDM 
+              </span> 
+            </div>
+            <div class="col-sm-3">
+              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b>Bajo</b><i class="fa fa-angle-double-down fa-2x" style="color: #B4358B;" ></i>
+              </span>   
+              <input type="number" id="minimo-corte" style="font-size: medium; text-align: center; width:auto;border-color:#B4358B;" disabled> 
+              <span class="text-muted" style="text-align: center;font-size: 12px;line-height: 13px;font-weight: 120;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-percent fa-2x" style="color: #B4358B;;" ></i> 
+              </span> 
+            </div>
+            <div class="col-sm-1">
+              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <i class="fa fa-arrows-h  fa-2x" style="color: #EE7518;"></i>
+              </span> 
+          </div>
+          <div class="col-sm-3">
+              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Alto  </b> <i class="fa fa-angle-double-up fa-2x" style="color: #00853E;" ></i>
+              </span> 
+              <input type="number" id="maximo-corte" style="font-size: medium; text-align: center; width: auto;border-color:rgb( 88,172,133);" disabled>
+              <span class="text-muted" style="text-align: center;font-size: 12px;line-height: 13px;font-weight: 120;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-percent fa-2x" style="color: #00853E;" ></i> 
+              </span> 
+          </div>
+          </div>
+        </div>
+      </div>
+    
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
           <div class="mt-lg-3" id="canvas" style="height: 250px;  width:100%;"></div>
@@ -23,11 +64,10 @@
         <div class="card-footer mt-4" style="background-color: white;">
           <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
             <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
-           </a>
+          </a>
         </div>
       </div>
 
-     
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
           <div class="mt-lg-3" id="chart-ejecfisica" style="height: 250px;  width:100%;"></div>
@@ -35,101 +75,91 @@
         <div class="card-footer mt-4" style="background-color: white;">
           <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
             <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución física por dependencias</i>
-           </a>
+          </a>
         </div>
       </div>
 
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
-            <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 250px;  width:100%;"></div>
+          <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 250px;  width:100%;"></div>
         </div>
         <div class="card-footer mt-4" style="background-color: white;">
           <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
             <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución financiera  por dependencias</i>
-           </a>
+          </a>
         </div>
       </div>
 
     </div>
 
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="row">
-     
-      <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
-        <div class="mt-lg-3" id="canvas-pa2" style="height: 200px;  width:100%;"></div>
-        <div class="table-responsive-sm">
-          <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
-            <thead style="background-color: #B2B1A7;"> 
-              <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
-              <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
-              <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
-              <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
+        
+          <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
+            <div class="mt-lg-3" id="canvas-pa2" style="height: 200px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
+                <thead style="background-color: #B2B1A7;"> 
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
 
-            </thead> 
-            <tbody id="tbl_comp">
-              <tr>
-                <td  id="compromisos" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                <td  id="disponible" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                <td  id="ordenado" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                <td  id="total" style="font-weight: 400; width: 44px; text-align: center;"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
-        <div class="mt-lg-3" id="canvas-pa1" style="height: 260px;  width:100%;"></div>
-      </div>
-      <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-        <h4>Tipo de Inversión</h4>
-        <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 250px;  width:100%;"></div>
-        <div class="table-responsive-sm">
-          <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-            <thead>
-              <th style="font-weight: 400; width: 44px; text-align: center;">Localizada</th>
-              <th style="font-weight: 400; width: 44px; text-align: center;">PP</th>
-              <th style="font-weight: 400; width: 44px; text-align: center;">Ciudad</th>
-              <th style="font-weight: 400; width: 44px; text-align: center;">Fortalecimiento Inst</th>
-            </thead>
-            <tbody class="table-hover" id="tbl_comp1">
-              <tr>
-                <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_localizada"></td>
-                <td style="font-weight: 400; width: 415px;text-align: center;" id="tipo_pp"></td>
-                <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_ciudad"></td>
-                <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_fort"></td>
-                <td></td>
-              </tr>
-            
-            </tbody>
-          </table>
-        </div>
-   
+                </thead> 
+                <tbody id="tbl_comp">
+                  <tr>
+                    <td  id="compromisos" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="disponible" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="ordenado" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="total" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-4  mt-2 shadow-sm p-3 mb-2 bg-white rounded">
+            <div class="mt-lg-3" id="canvas-pa1" style="height: 260px;  width:100%;"></div>
+          </div>
+          <div class="col-md-4 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+            <h4>Tipo de Inversión</h4>
+            <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 250px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                <thead>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Localizada</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">PP</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Ciudad</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Fortalecimiento Inst</th>
+                </thead>
+                <tbody class="table-hover" id="tbl_comp1">
+                  <tr>
+                    <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_localizada"></td>
+                    <td style="font-weight: 400; width: 415px;text-align: center;" id="tipo_pp"></td>
+                    <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_ciudad"></td>
+                    <td style="font-weight: 400; width: 415px; text-align: center;" id="tipo_fort"></td>
+                    <td></td>
+                  </tr>
+                
+                </tbody>
+              </table>
+            </div>
+      
 
-      </div>   
- 
+          </div>   
+    
     </div>
 
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="row">
- 
-
       <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
         <div class="mt-lg-3" id="chart-geo" style="height: 500px;  width:100%;"></div>
       </div>
       <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
         <div class="mt-lg-3" id="chart-dep" style="height: 500px;  width:100%;"></div>
       </div>
-    
-    <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-      <div class="mt-lg-3" id="chart-inicial" style="height: 550px;  width:100%;"></div>
     </div>
-    <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
-      <div class="mt-lg-3" id="chart-avance-dep" style="height: 550px;  width:100%;"></div>
-    </div>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-
-
-
-
-    </div>
   </div>
   
 
@@ -138,6 +168,8 @@
 </html>
 <%- include ('../partials/scriptsHome.html')%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="/graph/dashgraph.js"></script>
 
 

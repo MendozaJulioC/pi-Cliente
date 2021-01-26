@@ -228,3 +228,10 @@ summary{
 details[open] ~ *{
   animation:  sweep .5s ease-in-out;
 }
+
+.swal-title {
+  margin: 0px;
+  font-size: 16px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.21);
+  margin-bottom: 28px;
+}

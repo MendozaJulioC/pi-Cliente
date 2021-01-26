@@ -8,14 +8,70 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 
 async function _main(){
-  _avancePDM()
+  corteplan()
+
    porc_avance_fisico()
   _avance_financiero()
   tipoinversion()
   columnDependencias()
-  avance_linea_dep()
+ // avance_linea_dep()
+
 }
 
+function corteplan(){
+
+  var fecha = new Date('08/31/2020');
+  document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
+
+  // mes = fecha.getMonth(fecha)
+  vigencia = fecha.getFullYear(fecha)
+
+  switch (vigencia) {
+    case 2020:
+      mes= fecha.getMonth(fecha)+1
+    break;
+    case 2021:
+      mes= fecha.getMonth(fecha)+13
+    break;
+    case 2022:
+      mes= fecha.getMonth(fecha)+25
+    break;
+    case 2023:
+      mes= fecha.getMonth(fecha)+37
+    break;
+    default:
+    break;
+  }
+  let parametros={
+    "mesplan" : mes,
+    "vigencia": vigencia
+  }
+
+  fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
+    method:'POST',
+    body: JSON.stringify(parametros), // data can be `string` or {object}!
+    headers:{
+        'Content-Type': 'application/json'
+    }
+  }).then(res=> res.json())
+  .then(response=>{
+    minimovalue= (response.data[0].rojo)*100;
+    maximovalue =(response.data[0].verde)*100;
+    document.getElementById('minimo-corte').value= minimovalue
+    document.getElementById('maximo-corte').value= maximovalue
+    _avancePDM()
+   
+  })
+//alert('ji')
+swal( {
+  title: "SSE-PDM!",
+  text: "Cargando espere un momento!",
+  icon: "info",
+  buttons: false,
+  timer: 3000
+});
+
+}
 
 
 
@@ -43,23 +99,23 @@ async function graphPDM(total){
         numbersuffix: "%",
         theme: "gammel",
         showtooltip: "0",
-        valuefontsize: "25"
+        valuefontsize: "25",
       },
       colorrange: {
         color: [
           {
-            minvalue: "0",
-            maxvalue: "50",
+           minvalue: 0,
+           maxvalue: document.getElementById('minimo-corte').value,
             code: "#B4358B"
           },
           {
-            minvalue: "50",
-            maxvalue: "75",
+            minvalue: document.getElementById('minimo-corte').value,
+            maxvalue: document.getElementById('maximo-corte').value,
             code: "#FFDC15"
           },
           {
-            minvalue: "75",
-            maxvalue: "100",
+            minvalue: document.getElementById('maximo-corte').value,
+            maxvalue: 100,
             code: "#00853E"
           }
         ]
@@ -67,12 +123,26 @@ async function graphPDM(total){
       dials: {
         dial: [
           {
-            value: Math.ceil(total)
+            value: total,
+            tooltext: "<b>$value %</b> Valor Esperado"
+          
+          }
+        ]
+      },
+      trendpoints: {
+        point: [
+          {
+            startvalue: document.getElementById('maximo-corte').value,
+            displayvalue: "Esperado",
+            thickness: "2",
+            color: "#E15A26",
+            usemarker: "1",
+            markerbordercolor: "#E15A26",
+            markertooltext: document.getElementById('maximo-corte').value+"%"
           }
         ]
       }
     };
-    
     FusionCharts.ready(function() {
       var myChart = new FusionCharts({
         type: "angulargauge",
@@ -86,7 +156,6 @@ async function graphPDM(total){
   } catch (error) {
     console.log('Error graphPDM: ', error)
   }
-  
 
 }
 
@@ -259,60 +328,12 @@ async function detallePpto(compromisos, disponible, ordenado , total){
     }).render();
   });
   
-  graphInicial()
+  columnGeo()
 
 }
 
 
-async function graphInicial(){
-  try {
-    var dateo=[];
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-avance-lineas')
-    .then(res=>res.json())
-    .then(datos=>{
-      let tam = datos.data.length;
-      for(let i =0; i<tam;i++){
-        dateo.push({
-          "label" : datos.data[i].nom_linea,
-          "value": Math.ceil(datos.data[i].avance_linea),
-          "color": "#B4358B",
-          "link":"https://sse-pdm.herokuapp.com/linea-"+(i+1)
-        })
-      }
-      const dataSource = {
-        chart: {
-          caption: "% Avance por Líneas del PDM ",
-          yaxisname: "Medellín Futuro",
-          showvalues: "1",
-          //numberprefix: "%",
-          numbersuffix:"%",
-          theme: "gammel",
-          xaxisname: "PDM 2020- 2023",
-          yaxisname: "% Ejecución Alcanzada",
-          exportEnabled: "1",
-          exportFileName:"AvancexLinea",
-      },
-        data:  dateo
-      };
 
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "column2D",
-          renderAt: "chart-inicial",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-         
-    })
-  } catch (error) {
-    console.log('Error graphInicial ', error)
-  }
-columnGeo()
-
-};
 
 
 async function columnGeo(){
@@ -645,54 +666,6 @@ const dataSource = {
   
   
 }
-
-async function avance_linea_dep(){
-  try {
-    let info=[];
-    fetch('https://sse-pdm-back.herokuapp.com/dep/api/dependencias/avance')
-    .then(res=>res.json())
-    .then(datos=>{
-      let tam = datos.data.length;
-      for(let i =0; i<tam;i++){
-        info.push({
-          "label" : datos.data[i].nombre_dep,
-          "value": (datos.data[i].avance/datos.data[i].peso)*100,
-          "color": "#B4358B",
-         
-        })
-      }
-      info.sort((a, b) =>  b.value -a.value )
-      const dataSource = {
-        chart: {
-          caption: "% Avance cuatrienial por Dependencias PDM",
-          yaxisname: "Dependencias",
-          aligncaptionwithcanvas: "0",
-          plottooltext: "<b>$dataValue</b> leads received",
-          theme: "gammel",
-          numbersuffix: "%"
-        },
-        data: info
-      };
-      
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "bar2d",
-          renderAt: "chart-avance-dep",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-      
-
-      })
-  } catch (error) {
-    console.log('Error _avancePDM ',error )
-  }
- 
-}
-
 
 
   function stopEnterKey(evt) {
