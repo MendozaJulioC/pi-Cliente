@@ -15,7 +15,7 @@ const getHome = async (req, res) => {
            
         })
     } catch (e) {
-        console.log(e);
+        console.error('Error getHome ', e);
     }
 }
 
@@ -25,7 +25,7 @@ const getContacto = async (req, res) => {
             title: "Contacto"
         })
     } catch (e) {
-        console.log(e);
+        console.error('Error getContacto ', e);
     }
 }
 
@@ -41,7 +41,7 @@ const getDash= async (req, res)=>{
             title: "SEE-PDM"
         })
     } catch (e) {
-        console.log(e);
+        console.error('Error getHogetDash', e);
     }
 }
 
@@ -51,7 +51,7 @@ const getGeneral = async(req, res)=>{
             title: "SEE-PDM"
         })
     } catch (e) {
-        console.log(e);
+        console.error('Error getGeneral ', e);
     }   
 }
 
@@ -70,7 +70,7 @@ const getIndicador = async(req, res)=>{
         })
         
     } catch (e) {
-        console.log(e);
+        console.error('Error getIndicador ', e);
     }   
 }
 
@@ -81,7 +81,7 @@ const getEstructura = async(req, res)=>{
             title: "Estructura-PDM"
         })
     } catch (e) {
-        console.log(e);
+        console.error('Error getEstructura ', e);
     }
 }
 
@@ -99,7 +99,7 @@ const getComponente = async(req, res)=>{
         })
         
     } catch (e) {
-        console.log('Error getComponente', e );
+        console.error('Error getComponente', e );
     }   
   
 }
@@ -118,10 +118,25 @@ const getPrograma = async(req, res)=>{
         })
         
     } catch (e) {
-        console.log('Error getPrograma', e );
+        console.error('Error getPrograma', e );
     }   
   
 }
 
+const getAlertas = async(req, res)=>{
+  
+      
+        try {
+            res.render('./alertas/alerta.html', {
+                title: "Alertas-PDM"
+            })
+        } catch (e) {
+            console.error('Error getAlertas ', e);
+        }
+     
+        
+   
+  
+}
 
-module.exports = { getHome, getDash, getGeneral, getContacto, getIndicador, getEstructura, getComponente, getPrograma}
+module.exports = { getHome, getDash, getGeneral, getContacto, getIndicador, getEstructura, getComponente, getPrograma, getAlertas}

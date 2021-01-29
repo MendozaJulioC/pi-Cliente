@@ -617,14 +617,7 @@ FusionCharts.ready(function() {
   console.log('Error total_proyectos', error)
 }
 
-
-
-
-
-
-   
-      
-      
+     
       
 }
 

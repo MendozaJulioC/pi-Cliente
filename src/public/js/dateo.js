@@ -427,7 +427,7 @@ async function avance_linea_dep(){
            "color": colorsemaf,
         })
       }
-      info.sort((a, b) =>  b.value -a.value )
+      info.sort((a, b) =>  b.value - a.value )
       const dataSource = {
         chart: {
           caption: "% Avance cuatrienial por Dependencias PDM",
