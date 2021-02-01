@@ -36,7 +36,7 @@
                     <form class="form-inline my-2 my-lg-1">
                         <div class="btn-group" role="group" >
                             <button type="button" class="btn btn-primary" onclick="filtro(0)">Todos</button>
-                            <button type="button" class="btn btn-danger" onclick="filtro(1)">Rojo</button>
+                            <button type="button" class="btn btn-danger" onclick="filtro(1)">Bajo</button>
                             <button type="button" class="btn btn-warning"onclick="filtro(2)">Medio</button>
                             <button type="button" class="btn btn-success"onclick="filtro(3)">Alto</button>
                         </div>
@@ -62,13 +62,13 @@
                             <th style="text-align: center;background-color: gray; width: 50px;">No programados</th>
                             <th style="text-align: center;background-color: gray; width: 50px;">%</th>
 
-                            <th style="text-align: center;background-color: red;  width: 50px;">Rojo <span id="minimorango"></span></th>
+                            <th  style="text-align: center;background-color: red;  width: 50px;">Bajo <span id="minimorango"></span></th>
                             <th style="text-align: center;background-color: red;  width: 50px;"> <span >%</span></th>
 
-                            <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;">Naranja <span id="intermediorango"> </span></th>
+                            <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;">Medio <span id="intermediorango"> </span></th>
                              <th style="text-align: center;background-color:rgb(255,193,7); width: 50px;"><span > %</span></th>
 
-                            <th style="text-align: center;background-color: green;  width: 50px;">Verde <span id="maximorango"> </span></th>
+                            <th style="text-align: center;background-color: green;  width: 50px;">Alto <span id="maximorango"> </span></th>
                             <th style="text-align: center;background-color: green;  width: 50px;"> <span>%</span></th>
 
                             <th style="text-align: center; width: 150px;">% Avance Cuatrienio <span id="avance_cuatrienio"></span></th>
@@ -108,7 +108,10 @@
 </div>
 
 
-
+<table style="border-collapse: collapse">
+  <col span="2" style="background-color: #07B133;
+    color: #ffffff; border: 10px solid #000000;" />
+</table>
 
 
  <!--****-->

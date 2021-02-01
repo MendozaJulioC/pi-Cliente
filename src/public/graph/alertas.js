@@ -110,12 +110,16 @@ async function alertasGraph(){
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
+
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
+
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_amarillo+'</td>';
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
+
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
+
       tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
       //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
       tabla +='<tr>';
@@ -175,8 +179,10 @@ async function  filtro(estado){
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
+
+        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
+        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
+
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
@@ -207,8 +213,8 @@ async function  filtro(estado){
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
+        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid green;">'+valores[index].total_verde+'</td>';
+        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
         //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
         tabla +='<tr>';
@@ -234,8 +240,10 @@ async function  filtro(estado){
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
+
+        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid rgb(255,193,7);">'+valores[index].total_amarillo+'</td>';
+        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
+
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
@@ -261,12 +269,16 @@ async function  filtro(estado){
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
+
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
+
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_amarillo+'</td>';
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
+
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
+      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
+
       tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
       //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
       tabla +='<tr>';
