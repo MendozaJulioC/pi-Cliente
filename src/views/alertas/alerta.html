@@ -48,27 +48,54 @@
         <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
             <div class="card-body">
                 <table  class="table table-sm table-responsive-sm table-hover  "  style="font-size: small; width: 100%;">
-                   <thead class="thead-inverse">
+                   <thead class="thead-inverse" style=" padding-top: 12px;
+                   padding-bottom: 12px;
+                   text-align: left;
+                   background-color: rgb(0,123,255);
+                   color: white;">
                         <tr>
+                            <th style="text-align: center; width: 15px;"><span>#</span></th>
                             <th style="text-align: center; width: 15px;">Cod_dep <span></span></th>
                             <th style="text-align: center;  width: 250px;">Dependencia </th>
                             <th style="text-align: center;  width: 50px;">Indicadores de Producto</th>
-                            <th style="text-align: center;background-color: gray;   width: 50px;">No programados</th>
-                            <th style="text-align: center;background-color: red;    width: 50px;">Rojo <span id="minimorango"></span></th>
-                            <th style="text-align: center;background-color: yellow; width: 50px;">Amarillo <span id="intermediorango"> </span></th>
+
+                            <th style="text-align: center;background-color: gray; width: 50px;">No programados</th>
+                            <th style="text-align: center;background-color: gray; width: 50px;">%</th>
+
+                            <th style="text-align: center;background-color: red;  width: 50px;">Rojo <span id="minimorango"></span></th>
+                            <th style="text-align: center;background-color: red;  width: 50px;"> <span >%</span></th>
+
+                            <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;">Naranja <span id="intermediorango"> </span></th>
+                             <th style="text-align: center;background-color:rgb(255,193,7); width: 50px;"><span > %</span></th>
+
                             <th style="text-align: center;background-color: green;  width: 50px;">Verde <span id="maximorango"> </span></th>
+                            <th style="text-align: center;background-color: green;  width: 50px;"> <span>%</span></th>
+
                             <th style="text-align: center; width: 150px;">% Avance Cuatrienio <span id="avance_cuatrienio"></span></th>
                            <!--  <th style="text-align: center; width: 150px;"> <span style="width: 30; height: 30;"> <i class="fa fa-globe fa-3x fa-rotate-270" style="color: #339af0;"></i> </span></th>  -->
                         </tr>
                     </thead>
                     <tbody id="tabla_alerta" class="table-hover tbody-inverse"></tbody>
-                    <tfoot class="border border-5">
-                        <th colspan="2" style="text-align: right;">Totales</th>
+                    <tfoot style=" padding-top: 12px;
+                    padding-bottom: 12px;
+                    text-align: left;
+                    background-color: #B2B1A7;
+                    color: white;" >
+                        <th colspan="3" style="text-align: right;">Totales</th>
                         <th style="text-align: center;"> <span id="totaInd"></span></th>
-                        <th style="text-align: center;"> <span id="totalnoprogramados"></span></th>
-                        <th style="text-align: center;"> <span id="totalminimorango"></span></th>
-                        <th style="text-align: center;"> <span id="totalinermediorango"></span></th>
-                        <th style="text-align: center;"> <span id="totalmaximorango"></span></th>
+
+                        <th style="text-align: center;background-color: gray; width: 50px;"> <span id="totalnoprogramados"></span></th>
+                        <th style="text-align: center;background-color: gray; width: 50px;"> <span id="pocentajeprogramados"></span></th>
+
+                        <th style="text-align: center;background-color: red;  width: 50px;"> <span id="totalminimorango"></span></th>
+                        <th style="text-align: center;background-color: red;  width: 50px;"> <span id="porcentajeminimorango"></span></th>
+
+                        <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;"> <span id="totalinermediorango"></span></th>
+                        <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;"><span id="porcentajemediorango"></span></th>
+
+                        <th style="text-align: center;background-color: green;  width: 50px;"> <span id="totalmaximorango"></span></th>
+                        <th style="text-align: center;background-color: green;  width: 50px;"> <span id="porcentajemaximorango"></span></th>
+
                         <th style="text-align: center;"> <span id="total_avance_cuatrienio"></span></th>
                         
                     </tfoot>
