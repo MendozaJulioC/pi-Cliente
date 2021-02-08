@@ -3,18 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+
         <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
         <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
         <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
         <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
         <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
-        <link rel="stylesheet" href="/css/prueba.css">
-    
+
         <%- include ('../partials/head.html') %>
     </head>
     <%- include ('../partials/menuplapp.html')%>
     <body onload="indi(4)">
-        <div class="container mt-4 mb-2">
+        <div id="container" class="container-fluid mt-4 mb-2">
+
             <div class="row">
                 <div class="col-sm-12 mt-5">
                     <div class="card shadow-lg p-1 mb-3 bg-white rounded">
@@ -23,181 +27,180 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-6">
+            </div>
+            <%- include ('../partials/rangos.html') %>  
+            
+            <div class="row">
+                <div class="col-sm-4">
                     <div class="card shadow-lg p-3 mb-3 bg-white rounded">
                         <div class="card-body">
-                            <h4 class="text-muted text18" >Avance Cuatrienial Línea
-                                <spam>2020-2023</spam>
-                            </h4>
-                            <div class="mt-lg-3" id="avance-indicador" style="height: 250px;  width:100%;"></div>
+                            <h4 class="text-muted text18" >Avance Cuatrienial Línea <spam id="num_linea"></spam> - (2020-2023)</h4>
+                            <div class="mt-lg-3" id="avance-indicador" style="height: 280px;  width:100%;"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-4">
+                    <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                        <div class="card-body">
+                            <h4 class="text-muted text18" >Total Indicadores de Producto por Estado de Cumplimiento</h4>
+                            <div class="mt-lg-3" id="chart-alerta" style="height: 250px;  width:100%;"></div>
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="col-sm-4">
                     <div class="card shadow-lg p-3 mb-3 bg-white rounded">
                         <div class="card-body">                   
-                            <h4 class="text-muted text18" >Cumplimiento Anual Línea
-                                <spam>2020</spam>
+                            <h4 class="text-muted text18" >Ejecución presupuestal
                             </h4>
-                            <div class="mt-lg-3" id="cumplimiento-indicador" style="height: 250px;  width:100%;"></div>
+                            <div class="mt-lg-3" id="ejecucion-pptal" style="height: 280px;  width:100%;"></div>
                         </div>
                     </div>
-                </div>
-            
-                <div class="col-sm-12 ">
-                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
-                    <div class="row">
-                    <div class="card-body col-sm-6">
-                        <div class="mt-lg-3" id="history-indicador" style="height: 90px;  width:100%;"></div>
-                    </div>
-                    <div class="card-body col-sm-6"> 
-                        <div class="mt-lg-3" id="history-cumplimiento-indicador" style="height: 80px;  width:100%;"></div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            
-                <div class="col-sm-12 ">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="card-body col-sm-12">
-                            <div class="table-responsive " style=" overflow-y: auto;">
-                                <table class="table table-striped able-sm table-responsive-lg  table-inverse table-hover ">
-                                    <thead class="thead-inverse">
-                                        <tr>
-                                            <th class="encabezadoTabla">Total Indicadores</th>
-                                            <th class="encabezadoTabla">Componentes</th>
-                                            <th class="encabezadoTabla" >Programas</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="filaCenter"   scope="row">169</td>
-                                            <td class="filaCenter" >5</td>
-                                            <td class="filaCenter" >19</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card-body  col-sm-12">
-                        <div class="legends">
-                            <h4 class="text-muted text4Title">Propósito
-                            </h4>
-                            <p class="text14left">
-                                Establecer las bases de la transición ecológica para direccionar a Medellín a un futuro de sostenibilidad, 
-                                donde se garantice el pleno disfrute del derecho a la ciudad, la habitabilidad digna de sus habitantes y la 
-                                integración funcional y armoniosa de la ruralidad mediante el reconocimiento y acceso a los derechos de los 
-                                pobladores rurales.
-                            </p>
-                        </div>
-                            <img src="/img/medellinl1.jpeg" width="500" height="350" alt="" srcset="">
-                        </div>
-                    </div>
-                    
-                    <div class="card-body col-sm-6">
-                        <div class="table-responsive " style=" overflow-y: auto;">
-                            <table class="table table-striped able-sm table-responsive-lg  table-inverse table-hover " style="height: 90px;" width="704">
-                                <thead class="thead-inverse">
-                                    <tr>
-                                        <th class="encabezadoTabla">#</th>
-                                        <th class="encabezadoTabla">Cod_Dep</th>
-                                        <th class="encabezadoTabla">Dependencia</th>
-                                        <th class="encabezadoTabla">Indicadores</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table_responsables"></tbody>
-                            </table>
-                        </div>
-                        
-                    </div>  
-                </div>
-
                 </div>
 
             </div>
-        
-        
+
+           
+            <div class="row">
+
+                <div class="col-sm-12 ">
+                    <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                        <div class="row">
+                            <div class="card-body col-sm-8">
+                                <h4 class="text-muted text4Title">Propósito</h4>
+                                <p class="text14left" style="text-align: justify;">
+                                    Establecer las bases de la transición ecológica para direccionar a Medellín a un futuro de sostenibilidad, 
+                                    donde se garantice el pleno disfrute del derecho a la ciudad, la habitabilidad digna de sus habitantes y la 
+                                    integración funcional y armoniosa de la ruralidad mediante el reconocimiento y acceso a los derechos de los 
+                                    pobladores rurales.
+                                </p>
+                            </div>
+                            <div class="card-body col-sm-4">
+                                <div class="table-responsive " style=" overflow-y: auto; font-size: 25px;">
+                                    <table class="table table-striped  table-responsive-lg  table-inverse table-hover ">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th  style="text-align: center;font-size: 16px;">Total Indicadores</th>
+                                                <th  style="text-align: center;font-size: 16px;">Componentes</th>
+                                                <th  style="text-align: center;font-size: 16px;" >Programas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 25px;">
+                                            <tr>
+                                                <td style="text-align: center;font-size: 14px;" scope="row">169</td>
+                                                <td style="text-align: center;font-size: 14px;" >5</td>
+                                                <td style="text-align: center;font-size: 14px;" >19</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 ">
+                    <div class="row">
+                        <div class="card-body col-sm-6">
+                            <div class="table-responsive " style=" overflow-y: auto;">
+                                <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                                    <thead >
+                                        <tr>
+                                            <th class="encabezadoTabla">#</th>
+                                            <th class="encabezadoTabla">Cod_Dep</th>
+                                            <th class="encabezadoTabla">Dependencia</th>
+                                            <th class="encabezadoTabla">Indicadores</th>
+                                            <th class="encabezadoTabla">Avance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_responsables"></tbody>
+                                </table>
+                            </div>
+                        </div>  
+                        <div class="card-body col-sm-6">
+                            <div class="mt-lg-3" id="cumplimiento-linea-dep" style="height: 470px;  width:100%; font-size: small";></div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+            </div>  
+
+
+    
             <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
                 <h5 class="text-muted text4Title">Comportamiento Componentes</h5><br>
                 <div  id="linea-componente" style="height: 270px;width: 100%;"></div>
-              
                 <div class="table-responsive-sm">
                     <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                      <thead>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-                      </thead>
-                      <tbody id="tbl_comp"></tbody>
-                      </table>
+                        <thead>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                            <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                          </thead> 
+                          <tbody id="tbl_comp"></tbody>
+                    </table>
                 </div>
             </div>
+            
 
-        
-            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
-                <h5 class="text-muted text4Title">Comportamiento Programas</h5>
-                <div  id="linea-programa" style="height: 270px;width: 100%;"></div>
-              
-          
-                <div class="table-responsive-sm">
-                    <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                        <thead class="thead-inverse">
-                        <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">Programa</th>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                        <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-                      </thead>
-                      <tbody id="tbl_programa"> </tbody>
-                    </table>
-                  </div>
-            </div>
-
-       
-            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+            <div class="col-md-12 mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-muted text4Title">Comportamiento Programas</h5>
+                        <div  id="linea-programa" style="height: 450px;width: 100%;"></div>
+                    </div>
                
-                <form>
-                    <fieldset class="fieldset3 mb-3 ml-1 mt-1">
-                        <div class="table-responsive " style=" overflow-y: auto;">
-                            <h5 class="text-muted text4Title">Indicadores</h5>
-                            <p class="text14left">Escriba algo en el campo de entrada para buscar en la tabla:</p>  
-                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-                            <br>
-                            <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
-                                <thead">
-                                    <tr>
-                                        <th class="filaCenter">#</th>
-                                        <th class="filaCenter">Cod_línea</th>
-                                        <th class="filaCenter">Cod_compenente</th>
-                                        <th class="filaCenter">Cod_Programa</th>
-                                        <th class="filaCenter">Cod_Inidicador</th>
-                                        <th class="filaCenter">Indicador</th>
-                                        <th class="filaCenter">Tipo Indicador</th>
-                                        <th class="filaCenter">Línea Base</th>
-                                        <th class="filaCenter">Meta Plan</th>
-                                        <th class="filaCenter">Unidad</th>
-                                        <th class="filaCenter">Avance Cuatrienio</th>
-                                        <th class="filaCenter">Logro Acumulado</th>
-                                        <th class="filaCenter">Responsable Reporte</th> 
-                                      </tr>
+                    <div class="col-md-6">
+                         <div class="table-responsive-sm">
+                            <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                                <thead class="thead-inverse">
+                                    <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                                    <th style="font-weight: 400; width: 44px; text-align: center;">Programa</th>
+                                    <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                                    <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
                                 </thead>
-                                <tbody id="tbl_indicadores_linea"></tbody>
+                                <tbody id="tbl_programa"> </tbody>
                             </table>
                         </div>
-                        <div>
-                       
-                       </div>
-                    </fieldset>
-                </form>
+                    </div>
+
+                </div>
+              
+              
             </div>
+
+
+            <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
+                <h5 class="text-muted text4Title row justify-content-center align-items-center minh-100">Tabla Comportamiento Indicadores de producto de la línea  <span id="num_linea_tbl_ind"></span></h5>
+                <table id="example" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-clock-o fa-2x" ></i> No programado</th>
+                                <th><i class="fa fa-times-circle fa-2x"style="color: #ff6b6b;"></i> Bajo</th>
+                                <th><i class="fa fa-minus-circle fa-2x" style="color: #ff922b;"></i> Medio</th>
+                                <th><i class="fa fa-check-circle fa-2x" style="color: #51cf66;"></i >Alto</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        
+        
             
         </div>
         
-        <%- include ('../partials/scriptsHome.html')%>
-        <script src="/js/searchindicador.js"></script>
+   <%- include ('../partials/scriptsHome.html')%>
+        <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
         <script src="/js/lineagraph.js"></script>
         
     </body>
