@@ -25,6 +25,7 @@ passport.use( new LocalStrategy({
         }
        
     })
+  
    
 }));
 

@@ -64,7 +64,7 @@ const postRegister = async(req, res)=>{
             .then(res=>res.json())
             .then(respuesta=>{
                 validaEmail =respuesta.data
-              
+      
                 if(validaEmail.length>0){
                     errors.push({message:"Este Email ya se encuentra registrado!!!"})
                     res.render('./auth/register.html', {
@@ -72,6 +72,7 @@ const postRegister = async(req, res)=>{
                         dependencia: dep,
                         errors: errors,message,
                         fullname: fullname, email, password, confirmpassword, cargo, dependencias, tel_contacto
+                        
                     })
                 }else{
                     var parametros={
