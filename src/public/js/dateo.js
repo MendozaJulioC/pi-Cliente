@@ -173,7 +173,7 @@ async function _Components(){
     let avance_Comp2=[]; let avance_Comp4=[]; let avance_Comp5=[];
     let tabla='', tabla2='',  tabla3='',   tabla4='',  tabla5='';let colorsemaf;
     fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-componentes')
-    .then(res=>res.json())
+    .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_comp1').innerHTML="";
       let tam = datos.data.length;
