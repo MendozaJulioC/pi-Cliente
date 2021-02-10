@@ -15,6 +15,7 @@ passport.use( new LocalStrategy({
     fetch(`https://sse-pdm-back.herokuapp.com/auth/api/validatemail/${email}`)
     .then(res=>res.json())
     .then(respuesta =>{
+      // console.log("Respuesta: ",respuesta);
         let tam = respuesta.data.length;
         if (tam>0) {
             user=respuesta.data
@@ -23,7 +24,7 @@ passport.use( new LocalStrategy({
         }else{
             return done(null,false,{message:"Usuario no registrado "})
         }
-       
+     
     })
   
    

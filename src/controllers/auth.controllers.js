@@ -62,9 +62,10 @@ const postRegister = async(req, res)=>{
             let hashPass = await bcrypt.hash(password,10);
             fetch(`https://sse-pdm-back.herokuapp.com/auth/api/validatemail/${email}`)
             .then(res=>res.json())
+           
             .then(respuesta=>{
                 validaEmail =respuesta.data
-      
+                console.log("prueba ",respuesta);
                 if(validaEmail.length>0){
                     errors.push({message:"Este Email ya se encuentra registrado!!!"})
                     res.render('./auth/register.html', {
@@ -73,7 +74,7 @@ const postRegister = async(req, res)=>{
                         errors: errors,message,
                         fullname: fullname, email, password, confirmpassword, cargo, dependencias, tel_contacto
                         
-                    })
+                })
                 }else{
                     var parametros={
                         "email":email,
