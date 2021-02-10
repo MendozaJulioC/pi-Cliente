@@ -21,10 +21,10 @@ async function _buscaAvancelinea(linea){
       _graphAvanceIndicador(datos.data[0].sum)
    
 
-      fetch(`https://sse-pdm-back.herokuapp.com/pi/api/responsables/line/${linea}`)
+      fetch(`http://localhost:7000/pi/api/responsables/line/${linea}`)
       .then(res=>res.json())
       .then(response=>{
-   
+ 
         let tam = response.data.length;
         document.getElementById('table_responsables').innerHTML="";
         for(var i =0; i<(tam) ;i++){
@@ -146,6 +146,7 @@ async function _graphAvanceIndicador(avance){
 
 async function _graphCumplimientoPptal(linea){
   try {
+  
     fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/financiera/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
@@ -335,7 +336,7 @@ async function _tbl_Indicadores(linea)
       let back_semafav='';
       let tam = response.data.length;
      // document.getElementById('tbl_indicadores_linea').innerHTML="";
-     console.log(response.data)
+  
     
       for(var i =0; i<(tam) ;i++){
     
@@ -352,7 +353,7 @@ async function _tbl_Indicadores(linea)
         if ((response.data[i].semafav )== 3){
           back_semafav =  `<i class="fa fa-check-circle fa-3x" style="color: #51cf66;"></i>`;
         }
-        
+   
 
         dataSet.push([  
           response.data[i].cod_linea,
