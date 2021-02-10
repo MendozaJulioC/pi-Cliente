@@ -11,7 +11,7 @@ async function dateomain(){
 async function avance_linea_dep(){
   try {
     let info=[];
-    fetch('https://sse-pdm-back.herokuapp.com/dep/api/dependencias/avance')
+    fetch('http://localhost:7000/dep/api/dependencias/avance')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -62,7 +62,7 @@ async function alertasGraph(){
     let tabla='';
     let sumInd=0, sumGris=0, sumRojo=0,  sumAmarillo=0, sumVerde=0;
     document.getElementById('tabla_alerta').innerHTML="";
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/alertas`)
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/alertas`)
     .then(res=> res.json())
     .then(datos=>{
     let tam = datos.data.length;

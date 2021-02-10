@@ -27,7 +27,7 @@
       "vigencia": vigencia
     }
   
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
+    fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
@@ -35,6 +35,7 @@
       }
     }).then(res=> res.json())
     .then(response=>{
+      console.log(response);
       minimovalue= (response.data[0].rojo)*100;
       maximovalue =(response.data[0].verde)*100;
       document.getElementById('minimo-corte').value= minimovalue

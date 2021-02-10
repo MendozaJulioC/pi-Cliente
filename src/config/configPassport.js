@@ -12,10 +12,9 @@ passport.use( new LocalStrategy({
     
 }, async (email, password, done)=>{
    let user=[];
-    fetch(`https://sse-pdm-back.herokuapp.com/auth/api/validatemail/${email}`)
-    .then(res=>res.json())
+    fetch(`http://localhost:7000/auth/api/validatemail/${email}`)
+    .then(res=> res.json())
     .then(respuesta =>{
-      // console.log("Respuesta: ",respuesta);
         let tam = respuesta.data.length;
         if (tam>0) {
             user=respuesta.data
@@ -24,7 +23,7 @@ passport.use( new LocalStrategy({
         }else{
             return done(null,false,{message:"Usuario no registrado "})
         }
-     
+       
     })
   
    
@@ -68,8 +67,8 @@ async function isMatch(password, user,done)
 }
 
 function finalFunction(id,done){
-    fetch(`https://sse-pdm-back.herokuapp.com/auth/api/id/${id}`)
-    .then(res=>res.json())
+    fetch(`http://localhost:7000/auth/api/id/${id}`)
+    .then(res=> res.json())
     .then(respuesta =>{
        if (respuesta.data) {
           return done(null,respuesta.data)

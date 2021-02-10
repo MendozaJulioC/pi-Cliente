@@ -47,7 +47,7 @@ function corteplan(){
     "vigencia": vigencia
   }
 
-  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
+  fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -77,7 +77,7 @@ swal( {
 
 async function _avancePDM(){
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
+    fetch('http://localhost:7000/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
         graphPDM(datos.data[0].total_plan)
@@ -162,7 +162,7 @@ async function graphPDM(total){
 
 async function _avance_financiero(){
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefinanciero')
+    fetch('http://localhost:7000/pa/api/avancefinanciero')
     .then(res=>res.json())
     .then(datos=>{
       porc_avance_financiero(datos.data[0].ejec_financiera) 
@@ -338,7 +338,7 @@ async function detallePpto(compromisos, disponible, ordenado , total){
 
 async function columnGeo(){
   try {
-      fetch(`https://sse-pdm-back.herokuapp.com/geo/api/territorio`)
+      fetch(`http://localhost:7000/geo/api/territorio`)
       .then(res=>res.json())
       .then(datos=>{
    
@@ -489,7 +489,7 @@ async function columnGeo(){
 async function porc_avance_fisico(){
 
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefisico')
+    fetch('http://localhost:7000/pa/api/avancefisico')
     .then(res=>res.json())
     .then(datos=>{
         const dataSource = {
@@ -552,7 +552,7 @@ async function tipoinversion()
 {
 
   try {
-   fetch(`https://sse-pdm-back.herokuapp.com/geo/api/tipo-inversion`)
+   fetch(`http://localhost:7000/geo/api/tipo-inversion`)
    .then(res=>res.json())
    .then(datos=> {
     document.getElementById('tipo_localizada').innerHTML= formatter.format( datos.data[0].localizada);
@@ -615,7 +615,7 @@ async function tipoinversion()
 
 async function columnDependencias(){
   var valores=[];
-  fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias`)
+  fetch(`http://localhost:7000/geo/api/dependencias`)
       .then(res=>res.json())
       .then(datos=>{
      
