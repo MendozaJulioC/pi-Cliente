@@ -423,8 +423,8 @@ async function _tbl_Indicadores(linea)
  async function alerta_linea(linea){
   try {
     fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/semafav/${linea}`)
-    .then(res=>res.json()).then(datos=>{
-
+    .then(res=>res.json())
+    .then(datos=>{
       const dataSource = {
         chart: {
           caption: "Semáforo Estado de Cumplimiento de Indicadores",
