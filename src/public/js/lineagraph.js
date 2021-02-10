@@ -147,7 +147,7 @@ async function _graphAvanceIndicador(avance){
 async function _graphCumplimientoPptal(linea){
   try {
   
-    fetch(`http://localhost:7000/pi/api/line/financiera/${linea}`)
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/financiera/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {
@@ -213,7 +213,7 @@ async function componentelinea(linea){
   try {
     let avance_Comp=[]; 
     let tabla='';
-    fetch('http://localhost:7000/pi/api/componentes/avance/line/'+linea)
+    fetch('https://sse-pdm-back.herokuapp.com/pi/api/componentes/avance/line/'+linea)
     .then(res=>res.json())
     .then(datos=>{
       document.getElementById('tbl_comp').innerHTML="";
@@ -271,7 +271,7 @@ async function programalinea(linea){
   try {
     let avance_Prg =[];
     let tabla_prg='';
-    fetch(`http://localhost:7000/pi/api/programas/avance/line/${linea}`)
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/avance/line/${linea}`)
     .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_programa').innerHTML="";
@@ -330,7 +330,7 @@ async function _tbl_Indicadores(linea)
   try {
     let tabla3 ='';
    
-    fetch(`http://localhost:7000/pi/api/line/indicadores/resumen/${linea}`)
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/indicadores/resumen/${linea}`)
     .then(res=>res.json())
     .then(response=>{
       let back_semafav='';
@@ -422,7 +422,7 @@ async function _tbl_Indicadores(linea)
 
  async function alerta_linea(linea){
   try {
-    fetch(`http://localhost:7000/pi/api/line/semafav/${linea}`)
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/semafav/${linea}`)
     .then(res=>res.json()).then(datos=>{
 
       const dataSource = {
