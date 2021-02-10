@@ -14,14 +14,14 @@ async function _buscaAvancelinea(linea){
   try {
     let tabla=''
    let avance_Dep_Line=[];
-    fetch(`http://localhost:7000/pi/api/avance/line/${linea}`)
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/avance/line/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
     
       _graphAvanceIndicador(datos.data[0].sum)
    
 
-      fetch(`http://localhost:7000/pi/api/responsables/line/${linea}`)
+      fetch(`https://sse-pdm-back.herokuapp.com/pi/api/responsables/line/${linea}`)
       .then(res=>res.json())
       .then(response=>{
  
