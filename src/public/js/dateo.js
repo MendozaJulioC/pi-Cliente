@@ -13,7 +13,7 @@ async function dateomain(){
 }
 
 async  function corteplan(){
-  var fecha = new Date('08/31/2020');
+  var fecha = new Date('12/31/2020');
   document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
   // mes = fecha.getMonth(fecha)
   vigencia = fecha.getFullYear(fecha)
@@ -50,7 +50,7 @@ async  function corteplan(){
     document.getElementById('minimo-corte').value= minimovalue
     document.getElementById('maximo-corte').value= maximovalue
   })
-  alert('SSE-PDM')
+  alert('SSE-PDM...')
 }
 
 async function _avancePDM(){
