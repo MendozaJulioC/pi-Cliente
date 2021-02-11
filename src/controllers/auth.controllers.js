@@ -85,7 +85,7 @@ const postRegister = async(req, res)=>{
                         "dependencias": dependencias
                         
                     }
-                    fetch('http://localhost:7000/auth/api/register',{
+                    fetch('https://sse-pdm-back.herokuapp.com/auth/api/register',{
                         method: "POST",
                         body: JSON.stringify(parametros),
                         headers: {
