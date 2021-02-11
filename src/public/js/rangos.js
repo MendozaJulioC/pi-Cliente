@@ -1,6 +1,6 @@
  function corteplan(){
 
-    var fecha = new Date('08/31/2020');
+    var fecha = new Date('12/31/2020');
     document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
   
     // mes = fecha.getMonth(fecha)
@@ -27,7 +27,7 @@
       "vigencia": vigencia
     }
   
-    fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
+    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
@@ -45,7 +45,7 @@
 //alert('ji')
 swal( {
     title: "SSE-PDM!",
-    text: "Cargando espere un momento!",
+    text: "Hola, está cargando espere un momento!",
     icon: "info",
     buttons: false,
     timer: 3000
