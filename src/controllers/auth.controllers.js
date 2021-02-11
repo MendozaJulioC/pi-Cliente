@@ -4,9 +4,6 @@ const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const passport = require('passport')
 
-
-
-
 const getRegister = async(req, res )=>{
    try {
     const message = req.flash('message')[0]  ;
@@ -105,21 +102,14 @@ const postRegister = async(req, res)=>{
         console.log('Error postRegister',error)
     }
 }
-
 const postLoguin = passport.authenticate('local',{
     failureRedirect:'/',
     successRedirect:'/dash',
     failureFlash: true
-
 })
-
-
 const getLogout = async (req, res)=>{
     req.logout();
     req.flash('message', 'Has cerrado la session');
     res.redirect('/')
 }
-
 module.exports = {getRegister, postRegister, postLoguin, getLogout}
-
-
