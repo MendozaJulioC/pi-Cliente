@@ -162,7 +162,11 @@ async function graphPDM(total){
 
 async function _avance_financiero(){
   try {
+<<<<<<< HEAD
     fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefinanciero')
+=======
+    fetch('https://sse-pdm-back.herokuapp.com/avancefinanciero')
+>>>>>>> a37783808fab5cb0ff59962ec78865d5a2efc3a4
     .then(res=>res.json())
     .then(datos=>{
       porc_avance_financiero(datos.data[0].ejec_financiera) 

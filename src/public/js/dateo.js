@@ -50,7 +50,7 @@ async  function corteplan(){
     document.getElementById('minimo-corte').value= minimovalue
     document.getElementById('maximo-corte').value= maximovalue
   })
-  alert('SSE-PDM')
+  alert('SSE-PDM...')
 }
 
 async function _avancePDM(){

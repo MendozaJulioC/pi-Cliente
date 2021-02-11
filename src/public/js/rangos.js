@@ -45,7 +45,7 @@
 //alert('ji')
 swal( {
     title: "SSE-PDM!",
-    text: "Cargando espere un momento!",
+    text: "Hola, está cargando espere un momento!",
     icon: "info",
     buttons: false,
     timer: 3000
