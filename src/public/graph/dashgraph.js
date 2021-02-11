@@ -4,28 +4,18 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   minimumFractionDigits: 2
 })
-
-
-
 async function _main(){
   corteplan()
-
    porc_avance_fisico()
   _avance_financiero()
   tipoinversion()
   columnDependencias()
- // avance_linea_dep()
-
 }
-
 function corteplan(){
-
   var fecha = new Date('12/31/2020');
   document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
-
   // mes = fecha.getMonth(fecha)
   vigencia = fecha.getFullYear(fecha)
-
   switch (vigencia) {
     case 2020:
       mes= fecha.getMonth(fecha)+1
@@ -46,8 +36,7 @@ function corteplan(){
     "mesplan" : mes,
     "vigencia": vigencia
   }
-
-  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
+  fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -60,9 +49,7 @@ function corteplan(){
     document.getElementById('minimo-corte').value= minimovalue
     document.getElementById('maximo-corte').value= maximovalue
     _avancePDM()
-   
   })
-//alert('ji')
 swal( {
   title: "SSE-PDM!",
   text: "Cargando espere un momento!",
@@ -70,14 +57,10 @@ swal( {
   buttons: false,
   timer: 3000
 });
-
 }
-
-
-
 async function _avancePDM(){
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
+    fetch('http://localhost:7000/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
         graphPDM(datos.data[0].total_plan)
@@ -86,7 +69,6 @@ async function _avancePDM(){
     console.log('Error _avancePDM ',error )
   }
 }
-
 async function graphPDM(total){
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
   try {
@@ -156,25 +138,20 @@ async function graphPDM(total){
   } catch (error) {
     console.log('Error graphPDM: ', error)
   }
-
 }
-
-
 async function _avance_financiero(){
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefinanciero')
+    fetch('http://localhost:7000/pa/api/avancefinanciero')
     .then(res=>res.json())
     .then(datos=>{
       porc_avance_financiero(datos.data[0].ejec_financiera) 
       graphPDA(parseInt(datos.data[0].poai), parseInt(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
       detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
-
     })
   } catch (error) {
     console.log('Error porc_avance_financiero ',error )
   }
 }
-
 async function porc_avance_financiero(avance){  
   const dataSource = {
     chart: {
@@ -214,7 +191,6 @@ async function porc_avance_financiero(avance){
         ]
       }
     };
-        
     FusionCharts.ready(function() {
       var myChart = new FusionCharts({
         type: "angulargauge",
@@ -226,10 +202,7 @@ async function porc_avance_financiero(avance){
       }).render();
     });
   }
-
-
  function graphPDA(poai, pptoajustado, ordenado){
-
   const dataSource = {
     chart: {
       caption: " Ejecución Financiera ",
@@ -242,7 +215,6 @@ async function porc_avance_financiero(avance){
       numberprefix: "$",
       decimalSeparator: ",",
     thousandSeparator: "."
-
     },
     data: [
       {
@@ -260,12 +232,9 @@ async function porc_avance_financiero(avance){
         value: Math.ceil(ordenado) ,
         "color": "#EE7518"
       }
-
     ]
   };
-  
   FusionCharts.ready(function() {
- 
     var myChart = new FusionCharts({
       type: "bar2d",
       renderAt: "canvas-pa1",
@@ -273,22 +242,14 @@ async function porc_avance_financiero(avance){
       height: "100%",
       dataFormat: "json",
       dataSource,
-
     }).render();
-    
   });
-  
-
 }
-
-
-
 async function detallePpto(compromisos, disponible, ordenado , total){
   document.getElementById('compromisos').innerHTML=  formatter.format((compromisos));
   document.getElementById('disponible').innerHTML=  formatter.format((disponible));
   document.getElementById('ordenado').innerHTML=  formatter.format((ordenado));
   document.getElementById('total').innerHTML=  formatter.format((total));
-
   const dataSource = {
     chart: {
       caption: "Detalle Presupuesto",
@@ -316,7 +277,6 @@ async function detallePpto(compromisos, disponible, ordenado , total){
       }
     ]
   };
-  
   FusionCharts.ready(function() {
     var myChart = new FusionCharts({
       type: "scrollstackedbar2d",
@@ -327,22 +287,14 @@ async function detallePpto(compromisos, disponible, ordenado , total){
       dataSource
     }).render();
   });
-  
   columnGeo()
-
 }
-
-
-
-
-
 async function columnGeo(){
   try {
-      fetch(`https://sse-pdm-back.herokuapp.com/geo/api/territorio`)
+      fetch(`http://localhost:7000/geo/api/territorio`)
       .then(res=>res.json())
       .then(datos=>{
-   
-        const dataSource = {
+      const dataSource = {
           chart: {
             caption: "Inversión Pública por Comunas y Corregimientos",
             subcaption: "(millones de pesos)",
@@ -365,10 +317,8 @@ async function columnGeo(){
                                   <th>Inversión (en millones de pesos)</th>
                                   <td>$dataValue</td>
                                 </tr>
-                             
                               </table>
                             </div>`,
-            
           },
           data: [
             {
@@ -419,7 +369,6 @@ async function columnGeo(){
               label: "Laureles Estadio",
               value: Math.ceil(parseInt(datos.data[0].laureles_estadio)/1000000) ,color:"#00853E"
             },
-            
             {
               label: "La América",
               value: Math.ceil(parseInt(datos.data[0].la_america)/1000000) ,color:"#00853E"
@@ -462,9 +411,7 @@ async function columnGeo(){
             }
           ]
         };
-        
         FusionCharts.ready(function() {
-          
           var myChart = new FusionCharts({
             type: "column2d",
             renderAt: "chart-geo",
@@ -475,21 +422,13 @@ async function columnGeo(){
           }).render();
         });
       })
-
-
-
   } catch (error) {
     console.log('Error columnGeo: ', error)
   }
- 
-  
 }
-
-
 async function porc_avance_fisico(){
-
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pa/api/avancefisico')
+    fetch('http://localhost:7000/pa/api/avancefisico')
     .then(res=>res.json())
     .then(datos=>{
         const dataSource = {
@@ -545,14 +484,10 @@ async function porc_avance_fisico(){
     console.log('Error _avancePDM ',error )
   }
 }
-
-
-
 async function tipoinversion()
 {
-
   try {
-   fetch(`https://sse-pdm-back.herokuapp.com/geo/api/tipo-inversion`)
+   fetch(`http://localhost:7000/geo/api/tipo-inversion`)
    .then(res=>res.json())
    .then(datos=> {
     document.getElementById('tipo_localizada').innerHTML= formatter.format( datos.data[0].localizada);
@@ -584,51 +519,34 @@ async function tipoinversion()
     chart.innerRadius = am4core.percent(40);
     chart.startAngle = 180;
     chart.endAngle = 360;  
-
     var series = chart.series.push(new am4charts.PieSeries());
     series.dataFields.value = "value";
     series.dataFields.category = "country";
-
     series.slices.template.cornerRadius = 10;
     series.slices.template.innerCornerRadius = 7;
     series.slices.template.draggable = true;
     series.slices.template.inert = true;
     series.alignLabels = false;
-
     series.hiddenState.properties.startAngle = 90;
     series.hiddenState.properties.endAngle = 90;
-
     chart.legend = new am4charts.Legend();
-
    })
-
-
-
   } catch (error) {
     console.log('Error tipoinversion', error)
   }
-
-  
-   
 }
-
-
 async function columnDependencias(){
   var valores=[];
-  fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias`)
+  fetch(`http://localhost:7000/geo/api/dependencias`)
       .then(res=>res.json())
       .then(datos=>{
-     
         let tam = datos.data.length;
         for(var i =0; i<(tam) ;i++   ){
- 
              valores.push({
-             
               label: datos.data[i].nom_cortp,
               value:datos.data[i].total_dep,
               color: "#009AB2"
         });
-       
     }
     valores.sort((a, b) => a.value - b.value)
 const dataSource = {
@@ -650,8 +568,7 @@ const dataSource = {
     },
     data: valores
   };
-  
-  FusionCharts.ready(function() {
+    FusionCharts.ready(function() {
     var myChart = new FusionCharts({
       type: "column2d",
       renderAt: "chart-dep",
@@ -661,14 +578,9 @@ const dataSource = {
       dataSource
     }).render();
   });
-
-      })
-  
-  
+ })
 }
-
-
-  function stopEnterKey(evt) {
+function stopEnterKey(evt) {
       var evt = (evt) ? evt : ((event) ? event : null);
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
       if ((evt.keyCode == 13) && (node.type == "text")) { return false; }

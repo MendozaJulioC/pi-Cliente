@@ -284,7 +284,7 @@ async function _getBuscaNombreIndicador(){
     let nom_Indicador = document.getElementById('browser').value
    
     try {
-        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
+        fetch(`http://localhost:7000/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
         .then(res=>res.json())
         .then(datos=>{
   
@@ -383,7 +383,7 @@ async function _getBuscaNombreIndicador(){
     if (cod_Indicador.length>=5){
 
         try {
-            fetch(`https://sse-pdm-back.herokuapp.com/pi/api/indicador/${cod_Indicador}`)
+            fetch(`http://localhost:7000/pi/api/indicador/${cod_Indicador}`)
             .then(res => res.json())
             .then(datos => {
             

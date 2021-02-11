@@ -1,24 +1,16 @@
 var avance_cuatrienio= 0;
 var cumplimiento_logro=0;
-
-
-
 focusMethod = function getFocus() {           
-    document.getElementById("indicadorquery").focus();
-  }
-
-
+  document.getElementById("indicadorquery").focus();
+}
 async function prg(){
     _graphAvancePrograma()
     _graphCumplimientoPrograma()
     _graphHistoryPrograma()
     _graphHistoryCumplimientoPrograma()
 }
-
-  
-  async function _graphAvancePrograma(avance_cuatrienio){
-
-    const dataSource = {
+async function _graphAvancePrograma(avance_cuatrienio){
+  const dataSource = {
         chart: {
           origw: "380",
           origh: "250",
@@ -60,7 +52,6 @@ async function prg(){
           ]
         }
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "angulargauge",
@@ -71,16 +62,10 @@ async function prg(){
           dataSource
         }).render();
       });
-      
-
-
 };
-
 async function _graphCumplimientoPrograma(avanceprograma){ 
     const dataSource = {
         chart: {
-        
-       
           origw: "380",
           origh: "250",
           gaugestartangle: "135",
@@ -121,7 +106,6 @@ async function _graphCumplimientoPrograma(avanceprograma){
           ]
         }
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "angulargauge",
@@ -132,14 +116,8 @@ async function _graphCumplimientoPrograma(avanceprograma){
           dataSource
         }).render();
       });
-      
-
-
 };
-
-
 async function _graphHistoryPrograma(avanceprograma, cumple_2021, cumple_2022, cumple_2023){
-
     const dataSource = {
         chart: {
           caption: "Comportamiento Avance",
@@ -170,7 +148,6 @@ async function _graphHistoryPrograma(avanceprograma, cumple_2021, cumple_2022, c
           }
         ]
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "sparkcolumn",
@@ -181,16 +158,11 @@ async function _graphHistoryPrograma(avanceprograma, cumple_2021, cumple_2022, c
           dataSource
         }).render();
       });
-      
 }
-
-
 async function _graphHistoryCumplimientoPrograma( avance2020){
-
     const dataSource = {
         chart: {
           caption: "Comportamiento Cumplimiento",
-      
           charttopmargin: "10",
           numbersuffix: "%",
           theme: "gammel"
@@ -198,7 +170,6 @@ async function _graphHistoryCumplimientoPrograma( avance2020){
         dataset: [
           {
             data: [
-             
               {
                 value: avance2020,
                 tooltext: "Octubre 2020: <b>$dataValue</b>"
@@ -259,7 +230,6 @@ async function _graphHistoryCumplimientoPrograma( avance2020){
           }
         ]
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "sparkcolumn",
@@ -270,15 +240,12 @@ async function _graphHistoryCumplimientoPrograma( avance2020){
           dataSource
         }).render();
       });
-      
 }
-
-
 async function _getBuscaNombrePrograma(){
     let nom_Programa = document.getElementById('browser').value
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     try {
-        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/consulta/nombre/${nom_Programa}`)
+        fetch(`http://localhost:7000/pi/api/programas/consulta/nombre/${nom_Programa}`)
         .then(res=>res.json())
         .then(datos=>{
             let tabla='';
@@ -322,8 +289,6 @@ async function _getBuscaNombrePrograma(){
                 document.getElementById('tbl_prg').innerHTML=tabla;
            }
             let avanceprograma = (avancexpeso/peso_total)*100
-             //  document.getElementById('peso-indicador').innerHTML=(datos.data[0].peso).substring(0,6)
-             //1.Información General
               document.getElementById('nom_programa2').innerHTML= datos.data[0].nom_programa
               document.getElementById('_cod_linea').value= datos.data[0].cod_linea
               document.getElementById('_nom_linea').value= datos.data[0].nom_linea
@@ -332,13 +297,11 @@ async function _getBuscaNombrePrograma(){
               document.getElementById('_cod_programa').value= datos.data[0].cod_programa
               document.getElementById('_nom_programa').value= datos.data[0].nom_programa
               document.getElementById('total_indicador').value= _total_indicador
-            //enviar datos a gráficas
             _graphCumplimientoPrograma(avanceprograma)
              _graphHistoryPrograma(avanceprograma, datos.data[0].cumple_2021, datos.data[0].cumple_2022, datos.data[0].cumple_2023 )
              _graphHistoryCumplimientoPrograma(avanceprograma)
              _graphAvancePrograma(avanceprograma)
-            
-             fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/responsables/nombre/${nom_Programa}`)
+             fetch(`http://localhost:7000/pi/api/programas/responsables/nombre/${nom_Programa}`)
             .then(res=>res.json())
             .then(response=>{
               let peso3=0; let avance3=0;  let formula=0;
@@ -362,8 +325,6 @@ async function _getBuscaNombrePrograma(){
                 if (response.data[i].avancexpeso == null && response.data[i].peso== null ) {
                   formula=0;
                 }
-
-
                 tabla3 +='<tr  style="font-size: xx-small;">';
                 tabla3 +='<td style="text-align: center; font-size: 10px;">'+(i+1)+'</td>';
                 tabla3 +='<td style="text-align: left; font-size: 10px;">'+response.data[i].nombre_dep+'</td>';
@@ -383,13 +344,12 @@ async function _getBuscaNombrePrograma(){
     } catch (error) {
     }
  }
-
  async function _getBuscaCodigoPrograma(){
     let cod_programa = document.getElementById('browser').value
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     if (cod_programa.length>=5){
         try {
-          fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/consulta/codigo/${cod_programa}`)
+          fetch(`http://localhost:7000/pi/api/programas/consulta/codigo/${cod_programa}`)
             .then(res => res.json())
             .then(datos => {
               let tabla='';
@@ -407,7 +367,6 @@ async function _getBuscaNombrePrograma(){
                     }else{
                       avancexpeso = avancexpeso + parseFloat(datos.data[index].avancexpeso);
                     }
-
                     if (datos.data[index].avancexpeso == null  ){
                       avance3 =0;
                       formula =0;
@@ -433,24 +392,21 @@ async function _getBuscaNombrePrograma(){
                     document.getElementById('tbl_prg').innerHTML=tabla;
                   }
                   let avanceprograma = (avancexpeso/peso_total)*100
-                //  document.getElementById('peso-indicador').innerHTML=(datos.data[0].peso).substring(0,6)
-                //1.Información General
-                document.getElementById('nom_programa2').innerHTML= datos.data[0].nom_programa
-                document.getElementById('_cod_linea').value= datos.data[0].cod_linea
-                document.getElementById('_nom_linea').value= datos.data[0].nom_linea
-                document.getElementById('_cod_componente').value= datos.data[0].cod_componente
-                document.getElementById('_nom_componente').value= datos.data[0].nom_componente
-                document.getElementById('_cod_programa').value= datos.data[0].cod_programa
-                document.getElementById('_nom_programa').value= datos.data[0].nom_programa
-                document.getElementById('total_indicador').value= _total_indicador
-                //enviar datos a gráficas
-               _graphCumplimientoPrograma(avanceprograma)
-               _graphHistoryPrograma(avanceprograma, datos.data[0].cumple_2021, datos.data[0].cumple_2022, datos.data[0].cumple_2023 )
-               _graphHistoryCumplimientoPrograma(avanceprograma)
-               _graphAvancePrograma(avanceprograma)
-              
-                  //responsables
-                  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/responsables/codigo/${cod_programa}`)
+                  document.getElementById('nom_programa2').innerHTML= datos.data[0].nom_programa
+                  document.getElementById('_cod_linea').value= datos.data[0].cod_linea
+                  document.getElementById('_nom_linea').value= datos.data[0].nom_linea
+                  document.getElementById('_cod_componente').value= datos.data[0].cod_componente
+                  document.getElementById('_nom_componente').value= datos.data[0].nom_componente
+                  document.getElementById('_cod_programa').value= datos.data[0].cod_programa
+                  document.getElementById('_nom_programa').value= datos.data[0].nom_programa
+                  document.getElementById('total_indicador').value= _total_indicador
+                 //enviar datos a gráficas
+                _graphCumplimientoPrograma(avanceprograma)
+                _graphHistoryPrograma(avanceprograma, datos.data[0].cumple_2021, datos.data[0].cumple_2022, datos.data[0].cumple_2023 )
+                _graphHistoryCumplimientoPrograma(avanceprograma)
+                _graphAvancePrograma(avanceprograma)
+                //responsables
+                  fetch(`http://localhost:7000/pi/api/programas/responsables/codigo/${cod_programa}`)
                     .then(res=>res.json())
                     .then(response3=>{
                         let tabla3=''
@@ -477,19 +433,10 @@ async function _getBuscaNombrePrograma(){
     } else {
         alert('Por favor verifica el código del Componente')
         document.getElementById('browser').value=" ";
-    document.getElementById("browser").focus();
+        document.getElementById("browser").focus();
     }
   }
-
-
-
-
-
-
- 
- 
   async function _clearBusca(){
     document.getElementById('browser').value="";
     document.getElementById("browser").focus();
  }
-

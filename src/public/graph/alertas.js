@@ -2,16 +2,13 @@
 var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
 var colorfondo='';
 let valores=[];
-
 async function dateomain(){
  setTimeout(function(){ avance_linea_dep()   }, 3000);
 }
-//alertasGraph()
-
 async function avance_linea_dep(){
   try {
     let info=[];
-    fetch('https://sse-pdm-back.herokuapp.com/dep/api/dependencias/avance')
+    fetch('http://localhost:7000/dep/api/dependencias/avance')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -55,14 +52,12 @@ async function avance_linea_dep(){
   document.getElementById('intermediorango').innerHTML= minimovalue +'-'+ maximovalue
   alertasGraph()
 }
-
-
 async function alertasGraph(){
   try {
     let tabla='';
     let sumInd=0, sumGris=0, sumRojo=0,  sumAmarillo=0, sumVerde=0;
     document.getElementById('tabla_alerta').innerHTML="";
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/alertas`)
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/alertas`)
     .then(res=> res.json())
     .then(datos=>{
     let tam = datos.data.length;
@@ -86,18 +81,6 @@ async function alertasGraph(){
             "avance": avance,
             "color" : colorfondo
           })
-          /*
-          tabla +='<tr >';
-          tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+datos.data[i].cod_dep+'</td>';
-          tabla +='<td style="text-align: left;font-weight: 400; width: 10px; width: 20px;">'+((datos.data[i].nombre_dep))+'</td>';
-          tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((gris)+(rojo)+(amarillo)+(verde))+'</td>';
-          tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+gris+'</td>';
-          tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+rojo+'</td>';
-          tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+amarillo+'</td>';
-          tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+verde+'</td>';
-          tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(parseFloat(datos.data[i].avance)).toFixed(2) +'%</td>';
-          tabla +='<tr>';
-          document.getElementById('tabla_alerta').innerHTML=tabla;*/
       }
      valores.sort((b, a) =>  b.avance - a.avance )
      let count =1; 
@@ -110,18 +93,13 @@ async function alertasGraph(){
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_amarillo+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-      //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
       tabla +='<tr>';
       document.getElementById('tabla_alerta').innerHTML=tabla;
       sumInd= sumInd+ ((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
@@ -144,8 +122,6 @@ async function alertasGraph(){
     console.error('Error alertasGraph ', error)
   }
 }
-
-
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -154,7 +130,6 @@ $(document).ready(function(){
     });
   });
 });
-
 async function  filtro(estado){
   let tabla='';
   let sumInd=0, sumGris=0, sumRojo=0,  sumAmarillo=0, sumVerde=0;
@@ -164,14 +139,11 @@ async function  filtro(estado){
   document.getElementById('totalminimorango').innerHTML='';
   document.getElementById('totalinermediorango').innerHTML='';
   document.getElementById('totalmaximorango').innerHTML='';
-
   if(estado == 1){
     let count =1; 
-
     for (let index = 0; index < valores.length; index++) {
       let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
       if((valores[index].avance).toFixed(2)<= minimovalue){
-       
         tabla +='<tr>';
         tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
         tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
@@ -179,29 +151,22 @@ async function  filtro(estado){
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-        //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
         tabla +='<tr>';
         document.getElementById('tabla_alerta').innerHTML=tabla;
         }
     }
-
-
-
   }else if (estado == 3) {
     let count =1; 
     for (let index = 0; index < valores.length; index++) {
       let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
       if((valores[index].avance).toFixed(2)>= maximovalue){
-
         tabla +='<tr>';
         tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
         tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
@@ -216,21 +181,15 @@ async function  filtro(estado){
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid green;">'+valores[index].total_verde+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-        //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
         tabla +='<tr>';
         document.getElementById('tabla_alerta').innerHTML=tabla;
-      
       }
-    
-  
     }
- 
   } else if (estado==2){
     let count =1; 
     for (let index = 0; index < valores.length; index++) {
       let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
       if( ( (valores[index].avance).toFixed(2)> minimovalue) && ((valores[index].avance).toFixed(2) < maximovalue)){
-  
         tabla +='<tr>';
         tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
         tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
@@ -240,24 +199,15 @@ async function  filtro(estado){
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid rgb(255,193,7);">'+valores[index].total_amarillo+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
         tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
         tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-        //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
         tabla +='<tr>';
         document.getElementById('tabla_alerta').innerHTML=tabla;
-         
-        
-  
-      }
-
-  
+     }
     }
-
   }else{
     let count =1; 
     for (let index = 0; index < valores.length; index++) {
@@ -269,38 +219,25 @@ async function  filtro(estado){
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_amarillo+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
       tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-
       tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-      //tabla +='<td td style="text-align: center;font-weight: 100; width: 10px; width: 20px;"><button class="btn btn-outline-primary btn-sm" onclick="ampliarDep('+valores[index].cod_dep+')"><i class="fa fa-globe fa-2x fa-rotate-270" style="color: #339af0;"></i></button></td>';
       tabla +='<tr>';
       document.getElementById('tabla_alerta').innerHTML=tabla;
-      
       sumInd= sumInd+ ((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
       sumGris= sumGris+ (valores[index].total_gris);
       sumRojo= sumRojo+ (valores[index].total_rojo);
       sumAmarillo = sumAmarillo+ (valores[index].total_amarillo);
       sumVerde=sumVerde+ (valores[index].total_verde);
-      
-
-
-    }
+   }
     document.getElementById('totaInd').innerHTML=sumInd
     document.getElementById('totalnoprogramados').innerHTML=sumGris
     document.getElementById('totalminimorango').innerHTML=sumRojo
     document.getElementById('totalinermediorango').innerHTML=sumAmarillo
     document.getElementById('totalmaximorango').innerHTML=sumVerde
   }
-  
-
-  
-
 }

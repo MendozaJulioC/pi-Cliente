@@ -1,12 +1,9 @@
 //import fetch from "node-fetch"
-
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
   })
-  
-  
 async function _main(){
   let dep = document.getElementById('inputGroupSelectDependencia').value
     _avancePDM(dep)
@@ -21,8 +18,6 @@ async function _main(){
     plan_accion_dep(dep)
     //contadorSemDep(cod)
 }
-
-
 async function dep_estado(cod_dep){
   let terminal = document.getElementById("inputGroupSelectDependencia");
   var selectedText = terminal.options[terminal.selectedIndex].text;   
@@ -37,15 +32,12 @@ async function dep_estado(cod_dep){
   total_proyectos_dep(cod_dep)
   plan_accion_dep(cod_dep)
   contadorSemDep(cod_dep)
-
 }
-  
 async function _avancePDM(cod_dep){
     try {
-      fetch(`https://sse-pdm-back.herokuapp.com/dep/api/avance/${cod_dep}`)
+      fetch(`http://localhost:7000/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
-      
        let avance_dep = (datos.data[0].avance/datos.data[0].peso)*100
           graphPDM(avance_dep)
         })
@@ -53,7 +45,6 @@ async function _avancePDM(cod_dep){
       console.log('Error _avancePDM ',error )
     }
 }
-  
 async function graphPDM(total){
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
     try {
@@ -92,7 +83,6 @@ async function graphPDM(total){
             {
               value: total,
               tooltext: "<b>$value %</b> Valor Esperado"
-            
             }
           ]
         },
@@ -124,10 +114,9 @@ async function graphPDM(total){
       console.log('Error graphPDM: ', error)
     }
 }
-  
 async function _avance_financiero(dep){
     try {
-      fetch(`https://sse-pdm-back.herokuapp.com/pa/api/avancefinanciero/dep/${dep}`)
+      fetch(`http://localhost:7000/pa/api/avancefinanciero/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
         porc_avance_financiero(datos.data[0].pptoejecutado/datos.data[0].pptoajustado) 
@@ -138,7 +127,6 @@ async function _avance_financiero(dep){
       console.log('Error porc_avance_financiero ',error )
     }
 }
-  
 async function porc_avance_financiero(avance){  
     const dataSource = {
       chart: {
@@ -178,7 +166,6 @@ async function porc_avance_financiero(avance){
           ]
         }
       };
-          
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "angulargauge",
@@ -190,7 +177,6 @@ async function porc_avance_financiero(avance){
         }).render();
       });
 }
-  
 function graphPDA(poai, pptoajustado, ordenado){
     const dataSource = {
       chart: {
@@ -221,7 +207,6 @@ function graphPDA(poai, pptoajustado, ordenado){
           value: Math.ceil(ordenado) ,
           "color": "#EE7518"
         }
-  
       ]
     };
     FusionCharts.ready(function() {
@@ -232,18 +217,14 @@ function graphPDA(poai, pptoajustado, ordenado){
         height: "100%",
         dataFormat: "json",
         dataSource,
-  
       }).render();
-      
     });
 }
-  
 async function detallePpto(compromisos, disponible, ordenado , total){
     document.getElementById('compromisos-dep').innerHTML=  formatter.format((compromisos));
     document.getElementById('disponible-dep').innerHTML=  formatter.format((disponible));
     document.getElementById('ordenado-dep').innerHTML=  formatter.format((ordenado));
     document.getElementById('total-dep').innerHTML=  formatter.format((total));
-  
     const dataSource = {
       chart: {
         caption: "Detalle Presupuesto",
@@ -282,13 +263,11 @@ async function detallePpto(compromisos, disponible, ordenado , total){
       }).render();
     });
 }
-  
 async function columnGeo(dep){
     try {
-        fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias/territorio/${dep}`)
+        fetch(`http://localhost:7000/geo/api/dependencias/territorio/${dep}`)
         .then(res=>res.json())
         .then(datos=>{
-     
           const dataSource = {
             chart: {
               caption: "Inversión Pública por Comunas y Corregimientos",
@@ -321,7 +300,6 @@ async function columnGeo(dep){
                 label: "Popular",
                 value: Math.ceil(parseInt(datos.data[0].popular)/1000000)
                 ,color:"#009AB2"
-              
               },
               {
                 label: "Santa Cruz",
@@ -365,7 +343,6 @@ async function columnGeo(dep){
                 label: "Laureles Estadio",
                 value: Math.ceil(parseInt(datos.data[0].laureles_estadio)/1000000) ,color:"#009AB2"
               },
-              
               {
                 label: "La América",
                 value: Math.ceil(parseInt(datos.data[0].la_america)/1000000) ,color:"#009AB2"
@@ -427,16 +404,14 @@ async function columnGeo(dep){
               dataSource
             }).render();
           });
-
-        })
+       })
     } catch (error) {
       console.log('Error columnGeo: ', error)
     }
 }
-  
 async function porc_avance_fisico(dep){
     try {
-      fetch(`https://sse-pdm-back.herokuapp.com/pa/api/avancefisico/dep/${dep}`)
+      fetch(`http://localhost:7000/pa/api/avancefisico/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
           const dataSource = {
@@ -492,43 +467,35 @@ async function porc_avance_fisico(dep){
       console.log('Error _avancePDM ',error )
     }
 }
-  
 async function tipoinversion(dep){
    try {
-     fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias/tipo-inversion/${dep}`)
+     fetch(`http://localhost:7000/geo/api/dependencias/tipo-inversion/${dep}`)
      .then(res=>res.json())
      .then(datos=> {
-   
       document.getElementById('localizada').innerHTML = formatter.format(datos.data[0].localizada)
       document.getElementById('pp').innerHTML = formatter.format(datos.data[0].pp)
       document.getElementById('ciudad').innerHTML = formatter.format(datos.data[0].ciudad)
       document.getElementById('fortinst').innerHTML = formatter.format(datos.data[0].fortinst)
-
      })
     } catch (error) {
       console.log('Error tipoinversion', error)
     }
 }
-
 function stopEnterKey(evt) {
     var evt = (evt) ? evt : ((event) ? event : null);
     var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
     if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
 }
 document.onkeypress = stopEnterKey;
-
 async function total_proyectos_dep(dep){
   try {
- 
-    fetch(`https://sse-pdm-back.herokuapp.com/pa/api/tipo-iniciativa/dependencias/${dep}`)
+     fetch(`http://localhost:7000/pa/api/tipo-iniciativa/dependencias/${dep}`)
     .then(res=>res.json())
     .then(datos=>{
- 
       document.getElementById('inst').innerHTML=  datos.data[0].ini_inst
       document.getElementById('Proyectos_pp').innerHTML=  datos.data[0].pp
       document.getElementById('saldos_no_exec').innerHTML=  datos.data[0].saldos_no_exec
       document.getElementById('saldos_pendientes').innerHTML=  datos.data[0].saldos_pendientes
-
       const dataSource = {
         chart: {
           caption: "Presupuesto por tipo de iniciativa",
@@ -574,7 +541,6 @@ async function total_proyectos_dep(dep){
         {
           value: (parseInt(datos.data[0].poai_saldos_pendientes))
         }
-      
       ]
     },
     {
@@ -596,7 +562,6 @@ async function total_proyectos_dep(dep){
     }
   ]
 };
-
 FusionCharts.ready(function() {
   var myChart = new FusionCharts({
     type: "msbar2d",
@@ -607,42 +572,26 @@ FusionCharts.ready(function() {
     dataSource
   }).render();
 });
-
-
-    
-  })
-
-
+})
 } catch (error) {
   console.log('Error total_proyectos', error)
 }
-
-     
-      
 }
-
 async function avance_linea_dep(dep, nom_dep){
   try {
     let valores =[];
-    fetch(`https://sse-pdm-back.herokuapp.com/dep/api/avance/lineas/${dep}`)
+    fetch(`http://localhost:7000/dep/api/avance/lineas/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
-      
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
-
-
         if ((Math.ceil((datos.data[i].avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00853E"}
         else if (Math.ceil((datos.data[i].avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#B4358B"}
         else {colorsemaf="#EE7518"}
-
-
         valores.push({
           "label" : datos.data[i].nom_linea,
           "value": (datos.data[i].avance/datos.data[i].peso)*100,
           "color": colorsemaf
-         
-         
         })
       }
       const dataSource = {
@@ -656,7 +605,6 @@ async function avance_linea_dep(dep, nom_dep){
         },
         data: valores
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "column2d",
@@ -667,8 +615,6 @@ async function avance_linea_dep(dep, nom_dep){
           dataSource
         }).render();
       });
-      
-
     })
    } catch (error) {
      console.log('Error tipoinversion', error)
@@ -678,21 +624,18 @@ async function avance_linea_dep(dep, nom_dep){
 async function avance_componente_dep(dep , nom_dep){
   try {
     let valores =[];
-    fetch(`https://sse-pdm-back.herokuapp.com/dep/api/avance/componentes/${dep}`)
+    fetch(`http://localhost:7000/dep/api/avance/componentes/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
-
         if ((Math.ceil((datos.data[i].avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00853E"}
         else if (Math.ceil((datos.data[i].avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#B4358B"}
         else {colorsemaf="#EE7518"}
-
         valores.push({
           "label" : datos.data[i].nom_componente,
           "value": (datos.data[i].avance/datos.data[i].peso)*100,
           "color": colorsemaf
-
         })
       }
       const dataSource = {
@@ -721,16 +664,14 @@ async function avance_componente_dep(dep , nom_dep){
     console.log('Error avance_componente_dep', error)
   }
 }
-  
 async function avance_prgs_dep(dep, nom_dep){
   try {
     let info=[];
-    fetch(`https://sse-pdm-back.herokuapp.com/dep/api/avance/programas/${dep}`)
+    fetch(`http://localhost:7000/dep/api/avance/programas/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
-
         if ((Math.ceil((datos.data[i].avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00853E"}
         else if (Math.ceil((datos.data[i].avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#B4358B"}
         else {colorsemaf="#EE7518"}
@@ -766,10 +707,9 @@ async function avance_prgs_dep(dep, nom_dep){
     console.log('Error avance_prgs_dep', error)
   }
 }
-
 async function plan_accion_dep(dep)
 {
-  fetch(`https://sse-pdm-back.herokuapp.com/pa/api/plan/dependencias/${dep}`)
+  fetch(`http://localhost:7000/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
     let tabla='', tabla2='',tabla3='', tabla4='';
@@ -780,9 +720,7 @@ async function plan_accion_dep(dep)
     document.getElementById('p_tipo3').innerHTML="";
     document.getElementById('p_tipo4').innerHTML="";
     for(var i =0; i<(tam) ;i++){
-
      if (datos.data[i].tipo_iniciativa==1){
-  
         if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
         else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
           tabla +='<tr  style="font-size: xx-small;">';
@@ -798,10 +736,7 @@ async function plan_accion_dep(dep)
           tabla +='<tr>';
           document.getElementById('p_tipo1').innerHTML=tabla;
      }
-
-   
      if (datos.data[i].tipo_iniciativa==2){
-  
       if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
       else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
         tabla2 +='<tr  style="font-size: xx-small;">';
@@ -817,11 +752,7 @@ async function plan_accion_dep(dep)
         tabla2 +='<tr>';
         document.getElementById('p_tipo2').innerHTML=tabla2;
    }
-
-
-
    if (datos.data[i].tipo_iniciativa==3){
-  
     if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
     else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
       tabla3 +='<tr  style="font-size: xx-small;">';
@@ -837,11 +768,7 @@ async function plan_accion_dep(dep)
       tabla3 +='<tr>';
       document.getElementById('p_tipo3').innerHTML=tabla3;
  }
-
-
-
  if (datos.data[i].tipo_iniciativa==4){
-  
   if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
   else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
     tabla4 +='<tr  style="font-size: xx-small;">';
@@ -856,20 +783,13 @@ async function plan_accion_dep(dep)
     tabla4 +=`<td style="text-align: center;font-size: 10px;"><a name="" id="" class="btn btn-primary btn-sm" onclick="buscavalstat('${(datos.data[i].nom_proyecto)}' , ${datos.data[i].cod_proyecto}, ${datos.data[i].ejecucion})" role="button">+</a></td>`;
     tabla4 +='<tr>';
     document.getElementById('p_tipo4').innerHTML=tabla4;
-   
+    }
+  } 
+})
 }
-
-
-    } 
-  })
-
-}
-
 async function buscavalstat(nomproyecto, cod, ejec){
-
 try {
-  
-   fetch(`https://sse-pdm-back.herokuapp.com/pa/api/proyecto/${cod}`)
+   fetch(`http://localhost:7000/pa/api/proyecto/${cod}`)
   .then(res=>res.json())
   .then(datos=>{
   geoProyect(nomproyecto,cod)
@@ -914,11 +834,9 @@ try {
 }
   $('#exampleModal2').modal('show'); ;
 }
-
 async function geoProyect( nom, cod){
   try {
-      
-    fetch(`https://sse-pdm-back.herokuapp.com/geo/api/dependencias/proyectos/${cod}`)
+    fetch(`http://localhost:7000/geo/api/dependencias/proyectos/${cod}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {
@@ -952,7 +870,6 @@ async function geoProyect( nom, cod){
                   label: "Popular",
                   value: Math.ceil(parseInt(datos.data[0].popular)/1000000)
                   ,color:"#009AB2"
-                
                 },
                 {
                   label: "Santa Cruz",
@@ -996,7 +913,6 @@ async function geoProyect( nom, cod){
                   label: "Laureles Estadio",
                   value: Math.ceil(parseInt(datos.data[0].laureles_estadio)/1000000) ,color:"#009AB2"
                 },
-                
                 {
                   label: "La América",
                   value: Math.ceil(parseInt(datos.data[0].la_america)/1000000) ,color:"#009AB2"
@@ -1036,8 +952,7 @@ async function geoProyect( nom, cod){
                 {
                   label: "Santa Elena",
                   value: Math.ceil(parseInt(datos.data[0].santa_elena)/1000000) ,color:"#009AB2"
-                }
-                ,
+                },
                 {
                   label: "Ciudad",
                   value: Math.ceil(parseInt(datos.data[0].ciudad)/1000000) ,color:"#009AB2"
@@ -1059,18 +974,13 @@ async function geoProyect( nom, cod){
       }).render();
     });
     })
-
-
   } catch (error) {
   console.log('Error groProyect', error)      
   }
-
- 
 }
-
 async function contadorSemDep(cod){
   try {
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/contador/dependencias/${cod}` )
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/contador/dependencias/${cod}` )
     .then(res => res.json())
     .then(response =>{
       let cardsemaforogris ='';
@@ -1082,7 +992,6 @@ async function contadorSemDep(cod){
       document.getElementById('footer-card-rojo').innerHTML='';
       document.getElementById('footer-card-amarillo').innerHTML='';
       document.getElementById('footer-card-verde').innerHTML='';
-
       cardsemaforogris=`  
       <div class="card-footer mt-4" style="background-color: white;">
         <a  class="btn btn-light btn-block" style="font-size: xx-small;" type="button" onclick="estado_sem_dep(${cod},${gris})"> 
@@ -1111,7 +1020,6 @@ async function contadorSemDep(cod){
         </a>
       </div>
       `
-
       document.getElementById('footer-card-gris').innerHTML=cardsemaforogris;
       document.getElementById('footer-card-rojo').innerHTML=cardsemafororojo;
       document.getElementById('footer-card-amarillo').innerHTML=cardsemaforoamarillo;
@@ -1138,7 +1046,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
         "cod_semaforo":codsemaforo,
         "cod_dependencia": cod_dep
     }
-  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/dependencia/tipo/ `,{
+  fetch(`http://localhost:7000/pi/api/semaforo-corte/dependencia/tipo/ `,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{

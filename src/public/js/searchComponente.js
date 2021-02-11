@@ -1,23 +1,12 @@
-
-
 var avance_cuatrienio= 0;
 var cumplimiento_logro=0;
-
-
-
 focusMethod = function getFocus() {           
     document.getElementById("indicadorquery").focus();
   }
-
-
 async function indi(){
     _graphAvanceComponente()
-
-
 }
-
-  
-  async function _graphAvanceComponente(avance_cuatrienio){
+async function _graphAvanceComponente(avance_cuatrienio){
     const dataSource = {
       chart: {
         theme: "fusion",
@@ -66,32 +55,22 @@ async function indi(){
         ]
       }
     };
-        
-        FusionCharts.ready(function() {
-          var myChart = new FusionCharts({
-            type: "angulargauge",
-            renderAt: "avance-indicador",
-            width: "100%",
-            height: "100%",
-            dataFormat: "json",
-            dataSource
-          }).render();
-        });
-
-
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "angulargauge",
+        renderAt: "avance-indicador",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
 };
-
-
-
-
-
-
-
 async function _getBuscaNombreComponente(){
     let nom_Componente = document.getElementById('browser').value
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     try {
-        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/consulta/nombre/${nom_Componente}`)
+        fetch(`http://localhost:7000/pi/api/componentes/consulta/nombre/${nom_Componente}`)
         .then(res=> res.json())
         .then(datos=>{
           if(datos.data.length>0){
@@ -123,8 +102,7 @@ async function _getBuscaNombreComponente(){
             alerta_nomcomponente(nom_Componente)
              _graphAvanceComponente(avancecomponente)
              pptoComponente(datos.data[0].cod_componente)
-
-             fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/consulta-programas/nombre/${nom_Componente}`)
+             fetch(`http://localhost:7000/pi/api/componentes/consulta-programas/nombre/${nom_Componente}`)
              .then(res=> res.json())
              .then(response=>{
                let peso=0; let avance=0;
@@ -153,7 +131,7 @@ async function _getBuscaNombreComponente(){
                 document.getElementById('tbl_prg').innerHTML=tabla;
                } 
              })
-             fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/responsables/nombre/${nom_Componente}`)
+             fetch(`http://localhost:7000/pi/api/componentes/responsables/nombre/${nom_Componente}`)
             .then(res=> res.json())
             .then(response =>{
               let peso3=0; let avance3=0;  let formula=0;
@@ -195,19 +173,15 @@ async function _getBuscaNombreComponente(){
         });
     } catch (error) {
     }
- }
-
- async function _getBuscaCodigoComponente(){
+} 
+async function _getBuscaCodigoComponente(){
     let cod_componente = document.getElementById('browser').value
-
-
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     if (cod_componente.length>=3){
         try {
-          fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/consulta/codigo/${cod_componente}`)
+          fetch(`http://localhost:7000/pi/api/componentes/consulta/codigo/${cod_componente}`)
             .then(res=> res.json())
             .then(datos => {
-    
               if(datos.data.length>0){
                 document.getElementById('nom_componente').innerHTML= datos.data[0].nom_componente
                 for (let index = 0; index < datos.data.length; index++) {
@@ -236,7 +210,7 @@ async function _getBuscaNombreComponente(){
               // _graphCumplimientoComponente(avancecomponente)
                alerta_nomcomponente(datos.data[0].nom_componente)
                _graphAvanceComponente(avancecomponente)
-               fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/consulta-programas/codigo/${cod_componente}`)
+               fetch(`http://localhost:7000/pi/api/componentes/consulta-programas/codigo/${cod_componente}`)
                .then(res=> res.json())
                .then(response=>{
                   let tabla=''
@@ -254,8 +228,7 @@ async function _getBuscaNombreComponente(){
                     } 
                   })
                   //responsables
-
-                     fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/responsables/codigo/${cod_componente}`)
+                     fetch(`http://localhost:7000/pi/api/componentes/responsables/codigo/${cod_componente}`)
                      .then(res=> res.json())
                      .then(response3=>{
                         let tabla3=''
@@ -269,13 +242,8 @@ async function _getBuscaNombreComponente(){
                             tabla3 +='<td style="text-align: center;font-size: 10px;">'+((response3.data[i].avancexpeso/response3.data[i].peso)*100).toFixed(2)+'%</td>';
                             tabla3 +='<tr>';
                             document.getElementById('responsables_componente').innerHTML=tabla3;
-                          } 
-                        })
-   
-
-
-
-
+                        } 
+                    })
               }
               else{
                   alert('Por favor verifica el código del Componente')
@@ -287,25 +255,16 @@ async function _getBuscaNombreComponente(){
     } else {
         alert('Por favor verifica el código del Componente')
         document.getElementById('browser').value=" ";
-    document.getElementById("browser").focus();
+        document.getElementById("browser").focus();
     }
-  }
- async function _clearBusca(){
-    document.getElementById('browser').value="";
-    document.getElementById("browser").focus();
- }
-
-
- 
-
-
-
-
-
- async function alerta_nomcomponente(nom_Componente){
-
+}
+async function _clearBusca(){
+  document.getElementById('browser').value="";
+  document.getElementById("browser").focus();
+}
+async function alerta_nomcomponente(nom_Componente){
   try {
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componentes/semaforo-corte/alerta/nombre/${nom_Componente}`)
+    fetch(`http://localhost:7000/pi/api/componentes/semaforo-corte/alerta/nombre/${nom_Componente}`)
     .then(res=> res.json())
     .then(response=>{
         const dataSource = {
@@ -360,13 +319,9 @@ async function _getBuscaNombreComponente(){
   }
 
 }
-
-
-
 async function pptoComponente(cod_componente){
   try {
-    
-        fetch(`https://sse-pdm-back.herokuapp.com/pi/api/componente/ppto/${cod_componente}`)
+        fetch(`http://localhost:7000/pi/api/componente/ppto/${cod_componente}`)
         .then(res=> res.json())
         .then(datos=>{
           const dataSource = {
@@ -420,10 +375,7 @@ async function pptoComponente(cod_componente){
             }).render();
           });
         })
-
-
   } catch (error) {
     console.error('Error pptoComponente :>error', error );
-
   }
 }

@@ -1,7 +1,4 @@
-//import fetch from "node-fetch";
-
 var dataSet = [];
-
 async function indi(val){
   setTimeout(function(){ _buscaAvancelinea(val)   }, 3500);
   _tbl_Indicadores(val)
@@ -9,22 +6,17 @@ async function indi(val){
   _graphCumplimientoPptal(val)
   document.getElementById('num_linea').innerHTML= val
 }
-  
 async function _buscaAvancelinea(linea){
   try {
     let tabla=''
    let avance_Dep_Line=[];
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/avance/line/${linea}`)
+    fetch(`http://localhost:7000/pi/api/avance/line/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
-    
       _graphAvanceIndicador(datos.data[0].sum)
-   
-
-      fetch(`https://sse-pdm-back.herokuapp.com/pi/api/responsables/line/${linea}`)
+      fetch(`http://localhost:7000/pi/api/responsables/line/${linea}`)
       .then(res=>res.json())
       .then(response=>{
- 
         let tam = response.data.length;
         document.getElementById('table_responsables').innerHTML="";
         for(var i =0; i<(tam) ;i++){
@@ -41,10 +33,8 @@ async function _buscaAvancelinea(linea){
             tabla +='<tr>';
             document.getElementById('table_responsables').innerHTML=tabla;
         } 
-
       avance_Dep_Line.sort((a, b) => b.value - a.value)
-        
-        const dataSource = {
+       const dataSource = {
           chart: {
             caption: "Avance por Dependencias",
             subcaption: `Avance de Dependencias con Indicadores en la línea${linea}`,
@@ -55,7 +45,6 @@ async function _buscaAvancelinea(linea){
           },
           data:avance_Dep_Line
         };
-        
         FusionCharts.ready(function() {
           var myChart = new FusionCharts({
             type: "bar2d",
@@ -66,23 +55,12 @@ async function _buscaAvancelinea(linea){
             dataSource
           }).render();
         });
-        
-
-  
-
-
       })
-
-
-
     })
-    
   } catch (error) {
     console.log('Error _buscalinea')
   }
-
 }
-
 async function _graphAvanceIndicador(avance){
   const dataSource = {
       chart: {
@@ -143,18 +121,14 @@ async function _graphAvanceIndicador(avance){
       }).render();
     });
 };
-
 async function _graphCumplimientoPptal(linea){
   try {
-  
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/financiera/${linea}`)
+    fetch(`http://localhost:7000/pi/api/line/financiera/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {
         chart: {
           caption: `Ejecución Presupuestal Línea  ${linea}`,
-          //subcaption: "" ,
-          //xaxisname: "Month",
           yaxisname: "Cifras en miillones de pesos (In COP)",
           drawcrossline: "1",
           numberprefix: "$",
@@ -207,13 +181,11 @@ async function _graphCumplimientoPptal(linea){
     console.error('Error _graphCumplimientoPptal', error)
   }
 };
-
-
 async function componentelinea(linea){
   try {
     let avance_Comp=[]; 
     let tabla='';
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/componentes/avance/line/'+linea)
+    fetch('http://localhost:7000/pi/api/componentes/avance/line/'+linea)
     .then(res=>res.json())
     .then(datos=>{
       document.getElementById('tbl_comp').innerHTML="";
@@ -246,7 +218,6 @@ async function componentelinea(linea){
           },
           data:avance_Comp
         };
-        
         FusionCharts.ready(function() {
           var myChart = new FusionCharts({
             type: "column2d",
@@ -257,21 +228,17 @@ async function componentelinea(linea){
             dataSource
           }).render();
         });
-    
       })
   } catch (error) {
     console.log('Error : _Componentes ', error)
   }
- 
-
 }
 
 async function programalinea(linea){
-
   try {
     let avance_Prg =[];
     let tabla_prg='';
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/programas/avance/line/${linea}`)
+    fetch(`http://localhost:7000/pi/api/programas/avance/line/${linea}`)
     .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_programa').innerHTML="";
@@ -285,7 +252,6 @@ async function programalinea(linea){
           "value": ((datos.data[i].peso_avance/datos.data[i].peso)*100).toFixed(2),
           "color": colorsemaf
         })
-
         tabla_prg +='<tr >';
         tabla_prg +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_programa+'</td>';
         tabla_prg +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_programa))+'</td>';
@@ -293,10 +259,8 @@ async function programalinea(linea){
         tabla_prg +='<td style="font-weight: 400; width: 21px; text-align: center;">'+((datos.data[i].peso_avance/datos.data[i].peso)*100).toFixed(2) +'%</td>';
         tabla_prg +='<tr>';
         document.getElementById('tbl_programa').innerHTML=tabla_prg;
-
       }
-           avance_Prg.sort((a, b) => b.value - a.value)
-
+      avance_Prg.sort((a, b) => b.value - a.value)
       const dataSource = {
         chart: {
           caption: "Programas Línea"+ linea,
@@ -323,23 +287,16 @@ async function programalinea(linea){
     console.log('Error prgramalinea ', error)
   }
 }
-
-
 async function _tbl_Indicadores(linea)
 {
   try {
     let tabla3 ='';
-   
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/indicadores/resumen/${linea}`)
+    fetch(`http://localhost:7000/pi/api/line/indicadores/resumen/${linea}`)
     .then(res=>res.json())
     .then(response=>{
       let back_semafav='';
       let tam = response.data.length;
-     // document.getElementById('tbl_indicadores_linea').innerHTML="";
-  
-    
       for(var i =0; i<(tam) ;i++){
-    
         if ((response.data[i].semafav ) == 0)
         {
           back_semafav =  ` <i class="fa fa-clock-o fa-3x" ></i>`;
@@ -353,8 +310,6 @@ async function _tbl_Indicadores(linea)
         if ((response.data[i].semafav )== 3){
           back_semafav =  `<i class="fa fa-check-circle fa-3x" style="color: #51cf66;"></i>`;
         }
-   
-
         dataSet.push([  
           response.data[i].cod_linea,
           response.data[i].cod_componente,
@@ -369,29 +324,7 @@ async function _tbl_Indicadores(linea)
           back_semafav, 
           response.data[i].nombre_dep
         ] )
-
-      /*
-          tabla3 +='<tr  style="font-size: xx-small;">';
-          tabla3 +='<td style="text-align: center; font-size: 8px;">'+(i+1)+'</td>';
-          tabla3 +='<td style="text-align: center; font-size: 10px;">'+response.data[i].cod_linea+'</td>';
-          tabla3 +='<td style="text-align: center; font-size: 10px;">'+((response.data[i].cod_componente))+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].cod_programa+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].cod_indicador+'</td>';
-          tabla3 +='<td style="text-align: left;font-size: 10px;">'+response.data[i].nom_indicador+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].tipo_ind+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].lb_ind+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].meta_plan+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].unidad+'</td>';
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+((response.data[i].pesoxavnt/response.data[i].peso)*100).toFixed(2)+'%</td>';
-          tabla3+=back_semafav;
-         
-          tabla3 +='<td style="text-align: center;font-size: 10px;">'+response.data[i].nombre_dep+'</td>';
-          tabla3 +='<tr>';
-         document.getElementById('tbl_indicadores_linea').innerHTML=tabla3;
-      */
-
       } 
-
       document.getElementById('num_linea_tbl_ind').innerHTML= linea
       $('#example').DataTable( {
           data: dataSet,
@@ -412,20 +345,16 @@ async function _tbl_Indicadores(linea)
             scrollCollapse: true,
             stateSave: true
       } );
-
     })
   } catch (error) {
     console.log('Error _tbl_Indicadores ', error)
   }
-
 }
-
  async function alerta_linea(linea){
   try {
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/line/semafav/${linea}`)
+    fetch(`http://localhost:7000/pi/api/line/semafav/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
-
       const dataSource = {
         chart: {
           caption: "Semáforo Estado de Cumplimiento de Indicadores",
@@ -455,10 +384,8 @@ async function _tbl_Indicadores(linea)
             value: datos.data[0].gris,
              color: "#B2B1A7"
           },
-         
         ]
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "bar2d",
@@ -469,23 +396,16 @@ async function _tbl_Indicadores(linea)
           dataSource
         }).render();
       });
-
     })
   } catch (error) {
     console.error('Eror alerta_linea ', error)
   }
 }
-
-
-
 $(document).ready(function(){
-
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#tbl_indicadores_linea tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
-
-
 });

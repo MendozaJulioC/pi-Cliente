@@ -1,6 +1,5 @@
 //import fetch from "node-fetch";
 var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
-
 async function dateomain(){
   corteplan()
   _avancePDM()
@@ -11,7 +10,6 @@ async function dateomain(){
     timer: 3000,
   });
 }
-
 async  function corteplan(){
   var fecha = new Date('12/31/2020');
   document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
@@ -37,7 +35,7 @@ async  function corteplan(){
     "mesplan" : mes,
     "vigencia": vigencia
   }
-  fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte`,{
+  fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -52,10 +50,9 @@ async  function corteplan(){
   })
   alert('SSE-PDM...')
 }
-
 async function _avancePDM(){
   try {
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total')
+    fetch('http://localhost:7000/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
       avancePDMtarget(datos.data[0].total_plan)
@@ -64,7 +61,6 @@ async function _avancePDM(){
     console.error('Error _avancePDM ',error )
   }
 }
-
 async function avancePDMtarget(avanceplan){
   const dataSource = {
     chart: {
@@ -97,7 +93,6 @@ async function avancePDMtarget(avanceplan){
    value: avanceplan,
    target: document.getElementById('maximo-corte').value
   };
-  
   FusionCharts.ready(function() {
     var myChart = new FusionCharts({
       type: "hbullet",
@@ -110,11 +105,10 @@ async function avancePDMtarget(avanceplan){
   });
   graphInicial()
 }
-
 async function graphInicial(){
   try {
     var dateo=[];
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-avance-lineas')
+    fetch('http://localhost:7000/pi/api/total-avance-lineas')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -147,7 +141,6 @@ async function graphInicial(){
       },
         data:  dateo
       };
-
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "column2D",
@@ -158,21 +151,18 @@ async function graphInicial(){
           dataSource
         }).render();
       });
-         
     })
   } catch (error) {
     console.error('Error graphInicial ', error)
   }
   avance_linea_dep()
 };
-
-
 async function _Components(){
   try {
     let avance_Comp1=[]; let avance_Comp3=[];
     let avance_Comp2=[]; let avance_Comp4=[]; let avance_Comp5=[];
     let tabla='', tabla2='',  tabla3='',   tabla4='',  tabla5='';let colorsemaf;
-    fetch('https://sse-pdm-back.herokuapp.com/pi/api/total-componentes')
+    fetch('http://localhost:7000/pi/api/total-componentes')
     .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_comp1').innerHTML="";
@@ -182,13 +172,11 @@ async function _Components(){
           if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00853E"}
           else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#B4358B"}
           else {colorsemaf="#EE7518"}
-
           avance_Comp1.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
             "color": colorsemaf
           })
-        
           tabla +='<tr >';
           tabla +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
           tabla +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
@@ -196,9 +184,7 @@ async function _Components(){
           tabla +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
           tabla +='<tr>';
           document.getElementById('tbl_comp1').innerHTML=tabla;
-
-        }
-
+       }
         if ((datos.data[i].cod_linea) =="2"){
           if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=maximovalue){colorsemaf="#00853E"}
           else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"}
@@ -208,7 +194,6 @@ async function _Components(){
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
             "color": colorsemaf
           })
-        
           tabla2 +='<tr >';
           tabla2 +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
           tabla2 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
@@ -217,7 +202,6 @@ async function _Components(){
           tabla2 +='<tr>';
           document.getElementById('tbl_comp2').innerHTML=tabla2;
         }
- 
         if ((datos.data[i].cod_linea) =="3"){
           if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00853E"}
           else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"}
@@ -227,7 +211,6 @@ async function _Components(){
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
             "color": colorsemaf
           })
-        
           tabla3 +='<tr >';
           tabla3 +='<td style="font-weight: 400; width: 10px;"">'+datos.data[i].cod_componente+'</td>';
           tabla3 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_componente))+'</td>';
@@ -235,7 +218,6 @@ async function _Components(){
           tabla3 +='<td style="font-weight: 400; width: 21px; text-align: center;">'+Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100) +'%</td>';
           tabla3 +='<tr>';
           document.getElementById('tbl_comp3').innerHTML=tabla3;
-
         }
         if ((datos.data[i].cod_linea) =="4"){
           if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00853E"}
@@ -282,8 +264,6 @@ async function _Components(){
     console.error('Error : _Componentes ', error)
   }
 }
-
-
 async function graphCompL1(avanceComp1){
   const dataSource = {
     chart: {
@@ -308,7 +288,6 @@ async function graphCompL1(avanceComp1){
     }).render();
   });
 };
-
 async function graphCompL2(avanceComp2){
   const dataSource = {
     chart: {
@@ -333,7 +312,6 @@ async function graphCompL2(avanceComp2){
     }).render();
   });
 };
-
 async function graphCompL3(avanceComp3){
   const dataSource = {
     chart: {
@@ -358,7 +336,6 @@ async function graphCompL3(avanceComp3){
     }).render();
   });
 };
-
 async function graphCompL4(avanceComp4){
   const dataSource = {
     chart: {
@@ -383,7 +360,6 @@ async function graphCompL4(avanceComp4){
     }).render();
   });
 };
-
 async function graphCompL5(avanceComp5){
   const dataSource = {
     chart: {
@@ -408,12 +384,10 @@ async function graphCompL5(avanceComp5){
     }).render();
   });
 };
-
-
 async function avance_linea_dep(){
   try {
     let info=[];
-    fetch('https://sse-pdm-back.herokuapp.com/dep/api/dependencias/avance')
+    fetch('http://localhost:7000/dep/api/dependencias/avance')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -454,10 +428,9 @@ async function avance_linea_dep(){
   }
   contadorSemaforo()
 }
-
 async function contadorSemaforo(){
   try {
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/contador` )
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/contador` )
     .then(res => res.json())
     .then(response =>{
       document.getElementById('total-gris').innerHTML= response.data[0].gris
@@ -503,11 +476,10 @@ async function contadorSemaforo(){
     console.error('Error contadorSemaforo ',error)
   }
 }
- 
 async function estado_sem_pordep(codsemaforo) {
   try {
     let info=[];
-    fetch(`https://sse-pdm-back.herokuapp.com/pi/api/semaforo-corte/general/${codsemaforo} `)
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/general/${codsemaforo} `)
     .then(res=> res.json()).
     then(datos=>{
       let tam = datos.data.length;
