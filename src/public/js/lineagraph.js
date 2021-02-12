@@ -341,9 +341,16 @@ async function _tbl_Indicadores(linea)
               { title: "Avance" },
               { title: "Estado" },
               { title: "Responsable" }
-          ] ,scrollY:        "500px",
-            scrollCollapse: true,
-            stateSave: true
+          ] ,   scrollY:        '50vh',
+          scrollCollapse: true,
+            stateSave: true,
+            "language": {
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "zeroRecords": "Nothing found - sorry",
+              "info": "Vistas página _PAGE_ of _PAGES_",
+              "infoEmpty": "No hay registros Disponibles",
+              "infoFiltered": "(filtered from _MAX_ total registros)"
+          }
       } );
     })
   } catch (error) {

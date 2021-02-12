@@ -76,17 +76,17 @@ async function avancePDMtarget(avanceplan){
       {
         minvalue: 0,
         maxvalue:  document.getElementById('minimo-corte').value,
-        code: "#B4358B"
+        code: "#f05454"
       },
       {
         minvalue: document.getElementById('minimo-corte').value,
         maxvalue: document.getElementById('maximo-corte').value,
-        code: "#EE7518"
+        code: "#ffc764"
       },
       {
         minvalue: document.getElementById('maximo-corte').value,
         maxvalue: 100,
-        code: "#00853E"
+        code: "#00af91"
       }
     ]
   },
@@ -113,17 +113,17 @@ async function graphInicial(){
     .then(datos=>{
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
-        if ((Math.ceil(datos.data[i].avance_linea))>=document.getElementById('maximo-corte').value){colorsemaf="#00853E"}
+        if ((Math.ceil(datos.data[i].avance_linea))>=document.getElementById('maximo-corte').value){colorsemaf="#00af91"}
         else if ((Math.ceil(datos.data[i].avance_linea))<=document.getElementById('minimo-corte').value) {
-          colorsemaf="#B4358B"
+          colorsemaf="#f05454"
         } else {
-          colorsemaf="#EE7518"
+          colorsemaf="#ffc764"
         }
         dateo.push({
           "label" : datos.data[i].nom_linea,
           "value": Math.ceil(datos.data[i].avance_linea),
           "color": colorsemaf,
-          "link":"https://sse-pdm.herokuapp.com/linea-"+(i+1)
+          "link":"http://localhost:8000/linea-"+(i+1)
         })
       }
       const dataSource = {
@@ -169,9 +169,9 @@ async function _Components(){
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){   
         if ((datos.data[i].cod_linea) =="1"){
-          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00853E"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#B4358B"}
-          else {colorsemaf="#EE7518"}
+          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#f05454"}
+          else {colorsemaf="#ffc764"}
           avance_Comp1.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
@@ -186,9 +186,9 @@ async function _Components(){
           document.getElementById('tbl_comp1').innerHTML=tabla;
        }
         if ((datos.data[i].cod_linea) =="2"){
-          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=maximovalue){colorsemaf="#00853E"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"}
-          else {colorsemaf="#EE7518"}
+          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=maximovalue){colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"}
+          else {colorsemaf="#ffc764"}
           avance_Comp2.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
@@ -203,9 +203,9 @@ async function _Components(){
           document.getElementById('tbl_comp2').innerHTML=tabla2;
         }
         if ((datos.data[i].cod_linea) =="3"){
-          if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00853E"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"}
-          else {colorsemaf="#EE7518"}
+          if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"}
+          else {colorsemaf="#ffc764"}
           avance_Comp3.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
@@ -220,9 +220,9 @@ async function _Components(){
           document.getElementById('tbl_comp3').innerHTML=tabla3;
         }
         if ((datos.data[i].cod_linea) =="4"){
-          if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00853E"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"}
-          else {colorsemaf="#EE7518"}
+          if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"}
+          else {colorsemaf="#ffc764"}
           avance_Comp4.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
@@ -237,9 +237,9 @@ async function _Components(){
           document.getElementById('tbl_comp4').innerHTML=tabla4;
         }
         if ((datos.data[i].cod_linea) =="5"){
-          if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00853E"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"}
-          else {colorsemaf="#EE7518"}
+          if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"}
+          else {colorsemaf="#ffc764"}
           avance_Comp5.push({
             "label" : datos.data[i].nom_componente,
             "value": Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100),
@@ -392,9 +392,9 @@ async function avance_linea_dep(){
     .then(datos=>{
       let tam = datos.data.length;
          for(let i =0; i<tam;i++){
-        if (((datos.data[i].avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00853E"}
-        else if (((datos.data[i].avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#B4358B"} 
-        else {colorsemaf="#EE7518"}
+        if (((datos.data[i].avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00af91"}
+        else if (((datos.data[i].avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"} 
+        else {colorsemaf="#ffc764"}
         info.push({
            "label" : datos.data[i].nombre_dep,
            "value": (datos.data[i].avance/datos.data[i].peso)*100,
@@ -485,9 +485,9 @@ async function estado_sem_pordep(codsemaforo) {
       let tam = datos.data.length;
       for (let index = 0; index < tam; index++) {
         if (codsemaforo == 0){colorsemaf="#b2b1a7"}
-        else if (codsemaforo == 1) {colorsemaf="#B4358B"}
-        else if (codsemaforo == 2) {colorsemaf="#EE7518"}
-        else {colorsemaf="#00853E"}
+        else if (codsemaforo == 1) {colorsemaf="#f05454"}
+        else if (codsemaforo == 2) {colorsemaf="#ffc764"}
+        else {colorsemaf="#00af91"}
         info.push({
           "label" : datos.data[index].nombre_dep,
           "value": datos.data[index].total_indicadores,

@@ -31,8 +31,7 @@
       }
     }).then(res=> res.json())
     .then(response=>{
-      console.log(response);
-      minimovalue= (response.data[0].rojo)*100;
+        minimovalue= (response.data[0].rojo)*100;
       maximovalue =(response.data[0].verde)*100;
       document.getElementById('minimo-corte').value= minimovalue
       document.getElementById('maximo-corte').value= maximovalue
