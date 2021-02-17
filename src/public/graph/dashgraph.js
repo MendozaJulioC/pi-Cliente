@@ -249,7 +249,7 @@ async function detallePpto(compromisos, disponible, ordenado , total){
   document.getElementById('compromisos').innerHTML=  formatter.format((compromisos));
   document.getElementById('disponible').innerHTML=  formatter.format((disponible));
   document.getElementById('ordenado').innerHTML=  formatter.format((ordenado));
-  document.getElementById('total').innerHTML=  formatter.format((total));
+  document.getElementById('totalppto').innerHTML=  formatter.format((total));
   const dataSource = {
     chart: {
       caption: "Detalle Presupuesto",
@@ -490,29 +490,29 @@ async function tipoinversion()
    fetch(`http://localhost:7000/geo/api/tipo-inversion`)
    .then(res=>res.json())
    .then(datos=> {
-    document.getElementById('tipo_localizada').innerHTML= formatter.format( datos.data[0].localizada);
-    document.getElementById('tipo_pp').innerHTML= formatter.format(datos.data[0].pp);
-    document.getElementById('tipo_ciudad').innerHTML= formatter.format( datos.data[0].ciudad ) ;
-    document.getElementById('tipo_fort').innerHTML= formatter.format( datos.data[0].fortinst ) ;
+    document.getElementById('tipo_localizada').innerHTML= formatter.format( datos.data[0].localizada/1000000);
+    document.getElementById('tipo_pp').innerHTML= formatter.format(datos.data[0].pp/1000000);
+    document.getElementById('tipo_ciudad').innerHTML= formatter.format( datos.data[0].ciudad/1000000 ) ;
+    document.getElementById('tipo_fort').innerHTML= formatter.format( datos.data[0].fortinst/1000000 ) ;
     am4core.useTheme(am4themes_animated);
     var chart = am4core.create("canvas-tipoInversion", am4charts.PieChart);
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
     chart.data = [
       {
         country: "Localizada",
-        value: datos.data[0].localizada
+        value: datos.data[0].localizada/1000000
       },
       {
         country: "PP",
-        value: datos.data[0].pp
+        value: datos.data[0].pp/1000000
       },
       {
         country: "Ciudad",
-        value: datos.data[0].ciudad
+        value: datos.data[0].ciudad/1000000
       },
       {
         country: "Fort. Inst/nal.",
-        value: datos.data[0].fortinst
+        value: datos.data[0].fortinst/1000000
       }
     ];
     chart.radius = am4core.percent(70);
@@ -549,7 +549,7 @@ async function columnDependencias(){
         });
     }
     valores.sort((a, b) => a.value - b.value)
-const dataSource = {
+    const dataSource = {
     chart: {
       caption: "Inversión Pública por Dependencias",
       subcaption: "Agosto-31-2020",
@@ -586,3 +586,101 @@ function stopEnterKey(evt) {
       if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
   }
   document.onkeypress = stopEnterKey;
+
+
+  async function ejecfisica(){
+   try {
+     let infofisicadep=[];
+     fetch(`http://localhost:7000/pa/api/ejecusion-fisica/dependencias`)
+     .then(res=> res.json())
+     .then(datos=>{
+      let tam = datos.data.length;
+      for(let i =0; i<tam;i++){
+     
+        infofisicadep.push({
+          "label" : datos.data[i].nom_dependencia,
+          "value": (datos.data[i].porc_ejecfisica)*100,
+     
+         })
+      }
+      infofisicadep.sort((a, b) => b.value - a.value)
+      const dataSource = {
+        chart: {
+         
+          aligncaptionwithcanvas: "0",
+          numbersuffix: "%",
+          plottooltext: "<b>$dataValue</b> leads received",
+          theme: "zune"
+        },
+        data: infofisicadep
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "bar2d",
+          renderAt: "chart-ejecfisica-dep",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+      
+     })
+     
+   } catch (error) {
+     console.error('Error ejecfisica :>> ', error);
+   }
+
+    $('#ejecfisicaModal').modal('show'); ;
+
+  }
+
+
+  async function ejecfinanciera(){
+    try {
+      let infofisicadep=[];
+      fetch(`http://localhost:7000/pa/api/ejecusion-financiera/dependencias`)
+      .then(res=> res.json())
+      .then(datos=>{
+       let tam = datos.data.length;
+       for(let i =0; i<tam;i++){
+      
+         infofisicadep.push({
+           "label" : datos.data[i].nom_dependencia,
+           "value": (datos.data[i].porcexec_financiera)*100,
+           "color":"#00af91"
+      
+          })
+       }
+       infofisicadep.sort((a, b) => b.value - a.value)
+       const dataSource = {
+         chart: {
+          
+           aligncaptionwithcanvas: "0",
+           numbersuffix: "%",
+           plottooltext: "<b>$dataValue</b> leads received",
+           theme: "zune"
+         },
+         data: infofisicadep
+       };
+       
+       FusionCharts.ready(function() {
+         var myChart = new FusionCharts({
+           type: "bar2d",
+           renderAt: "chart-ejecfinanciera-dep",
+           width: "100%",
+           height: "100%",
+           dataFormat: "json",
+           dataSource
+         }).render();
+       });
+       
+      })
+      
+    } catch (error) {
+      console.error('Error ejecfinanciera :>> ', error);
+    }
+ 
+     $('#ejecfinancieraModal').modal('show'); ;
+  }

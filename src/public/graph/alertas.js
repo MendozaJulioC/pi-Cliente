@@ -20,9 +20,18 @@ async function avance_linea_dep(){
            "label" : datos.data[i].nombre_dep,
            "value": (datos.data[i].avance/datos.data[i].peso)*100,
            "color": colorsemaf,
+   
         })
       }
       info.sort((a, b) =>  b.value -a.value )
+      var modal = document.getElementById("myModal");
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+    
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+    
       const dataSource = {
         chart: {
           caption: "% Avance cuatrienial por Dependencias PDM",
@@ -40,8 +49,26 @@ async function avance_linea_dep(){
           width: "100%",
           height: "100%",
           dataFormat: "json",
-          dataSource
+          dataSource,
+          events: {
+            dataplotClick: function(evt) {
+              window.showAlert = function(str) {
+                var arr = str.split(",");
+                modal.style.display = "block";
+                document.getElementById("info").innerHTML =
+                  "\n" + arr[0] + " juice sales for the last year: " + arr[1];
+              };
+            }
+          }
         }).render();
+        span.onclick = function() {
+          modal.style.display = "none";
+        };
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
       });
     })
   } catch (error) {

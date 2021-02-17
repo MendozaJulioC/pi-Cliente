@@ -351,7 +351,7 @@ async function pptoComponente(cod_componente){
                 seriesname: "Ajustado",
                 data: [
                   {
-                    value: datos.data[0].pptoajustado/1000000
+                    value: datos.data[0].ppto_ajustado/1000000
                   }
                 ]
               }, {

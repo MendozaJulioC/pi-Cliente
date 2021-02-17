@@ -67,6 +67,7 @@ async function avancePDMtarget(avanceplan){
       caption: "Avance Cuatrienial PDM",
       subcaption: "Mes "+ mes + " del Plan",
       numbersuffix: "%",
+      valuefontsize: "25",
       theme: "fusion",
       plottooltext:
         "Avance  $datavalue del $targetDataValue esperado para este corte"
@@ -105,6 +106,8 @@ async function avancePDMtarget(avanceplan){
   });
   graphInicial()
 }
+
+
 async function graphInicial(){
   try {
     var dateo=[];

@@ -20,7 +20,9 @@
     <div class="row">
       <div class="col-md-12 mt-4  shadow-lg p-3 mb-5 bg-white rounded">
         <div class="card-body shadow-lg">
+
           <div class="row">
+
             <div class="col-sm-2">
               <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
               font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Corte : </b> 
@@ -33,31 +35,17 @@
             </div>
             <div class="col-sm-3">
               <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b>Bajo</b><i class="fa fa-angle-double-down fa-2x" style="color: #B4358B;" ></i>
+                 font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-arrow-down fa-2x" style="color: crimson;"></i>
               </span>   
-              <input type="number" id="minimo-corte" style="font-size: medium; text-align: center; width:auto;border-color:#B4358B;" disabled> 
-              <span class="text-muted" style="text-align: center;font-size: 12px;line-height: 13px;font-weight: 120;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-percent fa-2x" style="color: #B4358B;;" ></i> 
-              </span> 
+              <input type="number" id="minimo-corte" style="font-size: medium; text-align: center; width:50%;border-color:#B4358B;" disabled> 
             </div>
-            <div class="col-sm-1">
-              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <i class="fa fa-arrows-h  fa-2x" style="color: #EE7518;"></i>
-              </span> 
-          </div>
-          <div class="col-sm-3">
-              <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
-                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Alto  </b> <i class="fa fa-angle-double-up fa-2x" style="color: #00853E;" ></i>
-              </span> 
-              <input type="number" id="maximo-corte" style="font-size: medium; text-align: center; width: auto;border-color:rgb( 88,172,133);" disabled>
-              <span class="text-muted" style="text-align: center;font-size: 12px;line-height: 13px;font-weight: 120;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-percent fa-2x" style="color: #00853E;" ></i> 
-              </span> 
-          </div>
+           <div class="col-sm-3">
+              <input type="number" id="maximo-corte" style="font-size: medium; text-align: center; width: 50%;border-color:rgb( 88,172,133);" disabled>
+              <i class="fa fa-arrow-up fa-2x" style="color: #00af91;"></i>
+           </div>
           </div>
         </div>
       </div>
-    
       <div class="col-md-4 mt-4  shadow-sm p-3 mb-5 bg-white rounded">
         <div class="card-body">
           <div class="mt-lg-3" id="canvas" style="height: 250px;  width:100%;"></div>
@@ -74,7 +62,7 @@
           <div class="mt-lg-3" id="chart-ejecfisica" style="height: 250px;  width:100%;"></div>
         </div>
         <div class="card-footer mt-4" style="background-color: white;">
-          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  onclick="ejecfisica()"> 
             <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución física por dependencias</i>
           </a>
         </div>
@@ -85,7 +73,7 @@
           <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 250px;  width:100%;"></div>
         </div>
         <div class="card-footer mt-4" style="background-color: white;">
-          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+          <a  class="btn btn-light" style="font-size: xx-small;" type="button"   onclick="ejecfinanciera()"> 
             <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución financiera  por dependencias</i>
           </a>
         </div>
@@ -109,10 +97,10 @@
                 </thead> 
                 <tbody id="tbl_comp">
                   <tr>
-                    <td  id="compromisos" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                    <td  id="disponible" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                    <td  id="ordenado" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                    <td  id="total" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="compromisos"   style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="disponible"    style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="ordenado"      style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="totalppto"     style="font-weight: 400; width: 44px; text-align: center;"></td>
                   </tr>
                 </tbody>
               </table>
@@ -160,9 +148,45 @@
       </div>
     </div>
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-
   </div>
-  
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal %ejec fisica por dependencias
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="modal fade bd-ejecfisica-modal " id="ejecfisicaModal" tabindex="-1" role="dialog" aria-labelledby="ejecfisicaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span> <h4  class="modal-title text-muted" > % Ejecución Física por Dependencias</h4> </span> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <div class="mt-lg-3" id="chart-ejecfisica-dep" style="height: 550px;  width:100%;"></div>
+     </div>
+  </div>
+  </div>
+</div>  
+
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal %ejec financiera por dependencias
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="modal fade bd-ejecfinanciera-modal " id="ejecfinancieraModal" tabindex="-1" role="dialog" aria-labelledby="ejecfinancieraModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span> <h4  class="modal-title text-muted" > % Ejecución Financiera por Dependencias</h4> </span> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <div class="mt-lg-3" id="chart-ejecfinanciera-dep" style="height: 550px;  width:100%;"></div>
+     </div>
+  </div>
+  </div>
+</div>  
 
 </body>
 
@@ -178,8 +202,6 @@
 
 
   
-
- 
 
 
 

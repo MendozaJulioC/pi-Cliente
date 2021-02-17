@@ -15,8 +15,11 @@
 <%- include ('../partials/menuplapp.html')%>
 <body onload="indi()">
     <div id="container" class="mt-5 mb-3">
+
+        <%- include ('../partials/rangos.html') %>  
         <div class="row">
-            <div class="col-sm-12 mt-5">
+
+            <div class="col-sm-12 mt-3">
                 <div class="card shadow-lg p-3 mb-3 bg-white rounded">
                     <div class="card-body">
                         <div class="card-header shadow p-2 mb-4 bg-white rounded">
@@ -58,81 +61,33 @@
                         <h4 class="text-muted text18" >Avance Cuatrienial Indicador
                             <spam>2020-2023</spam>
                         </h4>
-                        <div class="mt-lg-3" id="avance-indicador" style="height: 250px;  width:100%;"></div>
+                        <div class="mt-lg-3" id="avance-indicador" style="height: 150px;  width:100%;"></div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-6">
+            <div class="col-sm-2">
+                <div class="card shadow-lg p-3 mb-3 bg-white rounded">
+                    <div class="card-body">    
+                        <h4 class="text-muted text18" >Semáfaro</h4>     
+                        <div class="mt-lg-3" id="semafav-indicador" style="height: 150px;  width:100%;"></div>
+                    </div>
+                </div>
+                </div>
+            
+            <div class="col-sm-4">
             <div class="card shadow-lg p-3 mb-3 bg-white rounded">
                 <div class="card-body">                   
-                    <h4 class="text-muted text18" >Cumplimiento Anual
-                        <spam>2020</spam>
-                    </h4>
-                    <div class="mt-lg-3" id="cumplimiento-indicador" style="height: 250px;  width:100%;"></div>
+                  <div class="form-group">
+                    <label class="textlabel1"  for="">Observación corte indicador</label>
+                    <textarea class="form-control" name="" id="obserindi" rows="5"></textarea>
+                  </div>
                 </div>
             </div>
             </div>
         
-            <div class="col-sm-12 ">
-              <div class="card shadow-lg p-3 mb-3 bg-white rounded">
-                <div class="row">
-                  <div class="card-body col-sm-6">
-                    <div class="mt-lg-3" id="history-indicador" style="height: 90px;  width:100%;"></div>
-                  </div>
-                  <div class="card-body col-sm-6"> 
-                    <div class="mt-lg-3" id="history-cumplimiento-indicador" style="height: 80px;  width:100%;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        
-            <div class="col-sm-12 ">
-              <div class="row">
-                  <div class="card-body col-sm-4">
-                      <div class="legends">
-                          <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 13px;font-weight: 150;color: #73879C;
-                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Meta Plan
-                          </h4>
-                      </div>
-                      <h1 id="metaplan1"   style="text-align: center;font-size: 50px;line-height: 90px;font-weight: 190;color: #73879C;
-                      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                          <strong>  </strong>
-                      </h1>
-                  </div>
-
-                  <div class="card-body col-sm-4">
-
-                      <div class="legends">
-                          <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 13px;font-weight: 150;color: #73879C;
-                         font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Logro Acumulado
-                          </h4>
-                      </div>
-                      <h1 id="logroacumulado1" class="total" style="text-align: center;font-size: 50px;line-height: 90px;font-weight: 190;color: #73879C;
-                         font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                          <strong> </strong>
-                      </h1>
-                  </div>
-
-                  <div class="card-body col-sm-4">
-
-                      <div class="legends">
-                          <h4 class="text-muted" style="text-align: center;font-size: 16px;line-height: 13px;font-weight: 150;color: #73879C;
-                      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">% Peso Indicador
-                          </h4>
-                      </div>
-                      <h1 id="peso-indicador" style="text-align: center;font-size: 50px;line-height: 90px;font-weight: 190;color: #73879C;
-                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                          <strong> </strong>
-                      </h1>
-                  </div>
-
-              </div>
-
-            </div>
-
+         
+       
         </div>
-    
     
         <div class="mt-2 shadow-lg p-3 mb-3 bg-white rounded">
         <h5 class="text24">1. Información General</h5><br>
