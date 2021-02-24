@@ -2,126 +2,105 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%- include ('../partials/scriptsHome.html')%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+
+ 
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="/css/css.css">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <%- include ('../partials/head.html') %>
+    <style>  #container {
+      padding-left: 50px;
+      padding-right: 60px;
+      padding-top: 5px;
+      padding-bottom: 2px;
+    }
+    tr { height: 5px; }
+  </style>
 </head>
 <%- include ('../partials/menuplapp.html')%>
 <body onload="dateomain()">
 
-  <div id="container" class="mt-5 mb-3">
+  <div id="container" class="container-fluid mt-4 ">
  
     <div class="row">
-
         <%- include ('../partials/rangos.html')%>
-
-        <div class="col-md-12 mt-4  shadow-lg p-3  mb-1 bg-white rounded">
+        <div class="col-md-9 mt-4  shadow-lg p-3   mb-1 bg-white rounded">
            <div class="card-body">
-               <div id="chart-container" style="width: 100%; height: 700px;"></div>
+               <div id="chart-container" style="width: 100%; height: 600px;"></div>
+          </div>
+        </div> 
+        <div class="col-md-1"> </div>
+
+        <div class="col-md-2   shadow-lg p-3 mt-4 mb-1 bg-white rounded">
+          <div class="row">
+              <div class="col-md-12">
+                <h4 class="text-muted  text-center" id="title-dep">   </h4>
+              </div>
+              <div class="col-md-12 mt-4  shadow-sm p-3 bg-white rounded">
+                <div id="verde" style="width: 100%; height: 100px;"></div>
+              </div> 
+              <div class="col-md-12 mt-4  shadow-sm p-3 mb-2  bg-white rounded">
+                <div id="amarillo" style="width: 100%; height: 100px;"></div>
+              </div> 
+              <div class="col-md-12 mt-4  shadow-sm p-3  mb-1 bg-white rounded">
+                <div id="rojo" style="width: 100%; height: 100px;"></div>
+              </div> 
+              <div class="col-md-12 mt-4  shadow-sm p-3    bg-white rounded">
+                <div id="gris" style="width: 100%; height: 100px;"></div>
+              </div> 
           </div>
         </div> 
 
-          <div class="col-md-12  shadow-lg">
-            <div class="card-body">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <input class="form-control " id="myInput" type="search" placeholder="Search.." aria-label="Search" style="width: 100%;">
-                    <form class="form-inline my-2 my-lg-1">
-                        <div class="btn-group" role="group" >
-                            <button type="button" class="btn btn-primary" onclick="filtro(0)">Todos</button>
-                            <button type="button" class="btn btn-danger" onclick="filtro(1)">Bajo</button>
-                            <button type="button" class="btn btn-warning"onclick="filtro(2)">Medio</button>
-                            <button type="button" class="btn btn-success"onclick="filtro(3)">Alto</button>
-                        </div>
-                    </form>
-                </nav>
-            </div>
-          </div>
-
         <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
-            <div class="card-body">
-                <table  class="table table-sm table-responsive-sm table-hover  "  style="font-size: small; width: 100%;">
-                   <thead class="thead-inverse" style=" padding-top: 12px;
-                   padding-bottom: 12px;
-                   text-align: left;
-                   background-color: rgb(0,123,255);
-                   color: white;">
-                        <tr>
-                            <th style="text-align: center; width: 15px;"><span>#</span></th>
-                            <th style="text-align: center; width: 15px;">Cod_dep <span></span></th>
-                            <th style="text-align: center;  width: 250px;">Dependencia </th>
-                            <th style="text-align: center;  width: 50px;">Indicadores de Producto</th>
-
-                            <th style="text-align: center;background-color: gray; width: 50px;">No programados</th>
-                            <th style="text-align: center;background-color: gray; width: 50px;">%</th>
-
-                            <th  style="text-align: center;background-color: red;  width: 50px;">Bajo <span id="minimorango"></span></th>
-                            <th style="text-align: center;background-color: red;  width: 50px;"> <span >%</span></th>
-
-                            <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;">Medio <span id="intermediorango"> </span></th>
-                             <th style="text-align: center;background-color:rgb(255,193,7); width: 50px;"><span > %</span></th>
-
-                            <th style="text-align: center;background-color: green;  width: 50px;">Alto <span id="maximorango"> </span></th>
-                            <th style="text-align: center;background-color: green;  width: 50px;"> <span>%</span></th>
-
-                            <th style="text-align: center; width: 150px;">% Avance Cuatrienio <span id="avance_cuatrienio"></span></th>
-                           <!--  <th style="text-align: center; width: 150px;"> <span style="width: 30; height: 30;"> <i class="fa fa-globe fa-3x fa-rotate-270" style="color: #339af0;"></i> </span></th>  -->
-                        </tr>
-                    </thead>
-                    <tbody id="tabla_alerta" class="table-hover tbody-inverse"></tbody>
-                    <tfoot style=" padding-top: 12px;
-                    padding-bottom: 12px;
-                    text-align: left;
-                    background-color: #B2B1A7;
-                    color: white;" >
-                        <th colspan="3" style="text-align: right;">Totales</th>
-                        <th style="text-align: center;"> <span id="totaInd"></span></th>
-
-                        <th style="text-align: center;background-color: gray; width: 50px;"> <span id="totalnoprogramados"></span></th>
-                        <th style="text-align: center;background-color: gray; width: 50px;"> <span id="pocentajeprogramados"></span></th>
-
-                        <th style="text-align: center;background-color: red;  width: 50px;"> <span id="totalminimorango"></span></th>
-                        <th style="text-align: center;background-color: red;  width: 50px;"> <span id="porcentajeminimorango"></span></th>
-
-                        <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;"> <span id="totalinermediorango"></span></th>
-                        <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;"><span id="porcentajemediorango"></span></th>
-
-                        <th style="text-align: center;background-color: green;  width: 50px;"> <span id="totalmaximorango"></span></th>
-                        <th style="text-align: center;background-color: green;  width: 50px;"> <span id="porcentajemaximorango"></span></th>
-
-                        <th style="text-align: center;"> <span id="total_avance_cuatrienio"></span></th>
-                        
-                    </tfoot>
+          <div class="card-body">
+            <table  class="table table-sm table-responsive-sm table-hover  "  style="font-size: small; width: 100%;">
+              <thead class="thead-inverse" style=" padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: rgb(0,123,255);color: white;">
+                <tr>
+                  <th  style="text-align: center;background-color: red;  width: 50px;">Bajo</th>
+                  <th style="text-align: center;background-color: red;  width: 50px;"> <span id="minimorango"></span> <span >%</span></th>
+                  <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;">Medio </th>
+                  <th style="text-align: center;background-color:rgb(255,193,7); width: 50px;"><span id="intermediorango"> </span><span > %</span></th>
+                  <th style="text-align: center;background-color: green;  width: 50px;">Alto </th>
+                  <th style="text-align: center;background-color: green;  width: 50px;"> <span id="maximorango"> </span><span>%</span></th>
+                  <th style="text-align: center; width: 50px;">Avance Cuatrienio </th>
+                  <th style="text-align: center; width: 50px;">  <span id="avance_cuatrienio"></span></th>
+                </tr>
+              </thead>
+              <tbody id="tabla_alerta" class="table-hover tbody-inverse"></tbody>
             </table>
-
-
           </div> 
-     
         </div>
-</div>
+        <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
+          <table id="alerta_table" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
+        </div>
+    </div> 
+
+  </div>
 
 
-<table style="border-collapse: collapse">
-  <col span="2" style="background-color: #07B133;
-    color: #ffffff; border: 10px solid #000000;" />
-</table>
-
-
- <!--****-->
 
  
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+
     
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Modal semaforo
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="modal fade bd-example-modal " id="exampleModalSemFavGeneral" tabindex="-1" role="dialog" aria-labelledby="exampleModalSemFavGeneral" aria-hidden="true">
+<div class="modal fade bd-example-modal " id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -132,22 +111,32 @@ Modal semaforo
       </div>
       <div class="modal-body" >
         <div class="form-row">
-          <div class="col-md-12" id="chart-container" style="height: 500px;  width:100%;"> </div>
-        
-    
+          <table id="alerta_modal" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
         </div>
      </div>
-
-  </div>
+   </div>
   </div>
 </div>
 
 
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="chart-wrapper">
-  <div id="chart-container"></div>
-  <div id="chart-container1"></div>
+
+
+
 </body>
+<%- include ('../partials/scriptsHome.html')%>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+
+<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 
 <script src="/graph/alertas.js"></script>
   <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>

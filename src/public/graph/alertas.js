@@ -1,9 +1,22 @@
-//import fetch from "node-fetch";
 var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
 var colorfondo='';
-let valores=[];
+let valores=[]; let valores2=[]; let valores3=[];
 async function dateomain(){
- setTimeout(function(){ avance_linea_dep()   }, 3000);
+   setTimeout(function(){ avance_linea_dep()   }, 3000);
+  semaforo_inicial()
+}
+
+async function semaforo_inicial(){
+fetch(`http://localhost:7000/pi/api/semaforo-corte/total`)
+.then(res=> res.json())
+.then(response=>{
+  document.getElementById('title-dep').innerHTML="PDM-2020-2023";
+  noprogramadas(response.data[0].gris)
+  rojo(response.data[0].rojo)
+  amarillo(response.data[0].amarillo)
+  verde(response.data[0].verde)
+})
+
 }
 async function avance_linea_dep(){
   try {
@@ -17,27 +30,19 @@ async function avance_linea_dep(){
         else if (((datos.data[i].avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#F06764"} 
         else {colorsemaf="#FFBD2E"}
         info.push({
-           "label" : datos.data[i].nombre_dep,
-           "value": (datos.data[i].avance/datos.data[i].peso)*100,
-           "color": colorsemaf,
-   
+          "label" : datos.data[i].nombre_dep,
+          "value": (datos.data[i].avance/datos.data[i].peso)*100,
+          "color": colorsemaf,
+          "link": "j-showAlert-"+datos.data[i].cod_responsable_reporte
         })
       }
       info.sort((a, b) =>  b.value -a.value )
-      var modal = document.getElementById("myModal");
-
-      // Get the button that opens the modal
-      var btn = document.getElementById("myBtn");
-    
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-    
       const dataSource = {
         chart: {
           caption: "% Avance cuatrienial por Dependencias PDM",
           yaxisname: "Dependencias",
           aligncaptionwithcanvas: "0",
-          theme: "gammel",
+          theme: "zune",
           numbersuffix: "%"
         },
         data: info
@@ -51,24 +56,13 @@ async function avance_linea_dep(){
           dataFormat: "json",
           dataSource,
           events: {
-            dataplotClick: function(evt) {
+            'dataplotClick': function(evt) {
+              otragrafica( evt)
               window.showAlert = function(str) {
-                var arr = str.split(",");
-                modal.style.display = "block";
-                document.getElementById("info").innerHTML =
-                  "\n" + arr[0] + " juice sales for the last year: " + arr[1];
               };
             }
           }
         }).render();
-        span.onclick = function() {
-          modal.style.display = "none";
-        };
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        };
       });
     })
   } catch (error) {
@@ -77,6 +71,7 @@ async function avance_linea_dep(){
   document.getElementById('minimorango').innerHTML= '< '+minimovalue
   document.getElementById('maximorango').innerHTML= '> '+maximovalue
   document.getElementById('intermediorango').innerHTML= minimovalue +'-'+ maximovalue
+  _avancePDM()
   alertasGraph()
 }
 async function alertasGraph(){
@@ -89,12 +84,23 @@ async function alertasGraph(){
     .then(datos=>{
     let tam = datos.data.length;
     var gris=0, rojo=0, amarillo=0, verde=0, avance=0;
+    let back_semafav='';
      for(let i =0; i<tam;i++){
         if (datos.data[i].total_gris == null){ gris= 0 } else { gris = parseInt(datos.data[i].total_gris)  }
         if (datos.data[i].total_rojo == null){rojo= 0} else { rojo = parseInt(datos.data[i].total_rojo ) }
         if (datos.data[i].total_amarillo == null){ amarillo= 0} else { amarillo = parseInt(datos.data[i].total_amarillo ) }
         if (datos.data[i].total_verde == null){ verde= 0} else { verde = parseInt(  datos.data[i].total_verde )}
-        if (datos.data[i].avance == null){avance= 0} else { avance = parseFloat( datos.data[i].avance )}
+        if (datos.data[i].avance == null){avance= 0 ;}
+        else {
+          avance = parseFloat( datos.data[i].avance );
+          if (avance<=minimovalue){
+            back_semafav =  ` <i class="fa fa-times-circle fa-2x"style="color: #ff6b6b;"> </i>`;
+          }else if (avance>=maximovalue){
+            back_semafav =  `<i class="fa fa-check-circle fa-2x" style="color: #51cf66;"></i>`;
+          }else{
+            back_semafav =  ` <i class="fa fa-minus-circle fa-2x" style="color: #ff922b;"></i>`;
+          }
+        }
         if((parseFloat(datos.data[i].avance)).toFixed(2)< minimovalue ){colorfondo='#f06764'}
         else if ((parseFloat(datos.data[i].avance)).toFixed(2)>= maximovalue) {colorfondo='#58ac84'
         } else {colorfondo='#ffbd2e'}
@@ -108,47 +114,158 @@ async function alertasGraph(){
             "avance": avance,
             "color" : colorfondo
           })
+          valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,(gris+rojo+amarillo+verde),
+                          gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          (avance).toFixed(2), back_semafav
+                      ] )
       }
      valores.sort((b, a) =>  b.avance - a.avance )
-     let count =1; 
-    for (let index = 0; index < valores.length; index++) {
-      let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      tabla +='<tr>';
-      tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
-      tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
-      tabla +='<td style="text-align: left;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].nombre_dep))+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_amarillo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-      tabla +='<tr>';
-      document.getElementById('tabla_alerta').innerHTML=tabla;
-      sumInd= sumInd+ ((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      sumGris= sumGris+ (valores[index].total_gris);
-      sumRojo= sumRojo+ (valores[index].total_rojo);
-      sumAmarillo = sumAmarillo+ (valores[index].total_amarillo);
-      sumVerde=sumVerde+ (valores[index].total_verde);
-    }
-    document.getElementById('totaInd').innerHTML=sumInd
-    document.getElementById('totalnoprogramados').innerHTML=sumGris
-    document.getElementById('pocentajeprogramados').innerHTML= ((sumGris/sumInd)*100).toFixed(2)+"%"
-    document.getElementById('totalminimorango').innerHTML=sumRojo
-    document.getElementById('porcentajeminimorango').innerHTML= ((sumRojo/sumInd)*100).toFixed(2)+"%"
-    document.getElementById('totalinermediorango').innerHTML=sumAmarillo
-    document.getElementById('porcentajemediorango').innerHTML= ((sumAmarillo/sumInd)*100).toFixed(2)+"%"
-    document.getElementById('totalmaximorango').innerHTML=sumVerde
-    document.getElementById('porcentajemaximorango').innerHTML= ((sumVerde/sumInd)*100).toFixed(2)+"%"
+     valores2.sort((b, a) =>  a.avance - b.avance )
+
+
+     var table= $('#alerta_table').DataTable( {
+      data: valores2,
+      columns: [
+       
+          { title: "Cod_Dep" },
+          { title: "Dependencia" },
+          { title: "Indicadores de Producto" },
+          { title: "No programados" },
+          { title: "%" },
+          { title: "Bajo" },
+          { title: "%" },
+          { title: "Medio" },
+          { title: "%" },
+          { title: "Alto" },
+          { title: "%" },
+          { title: " % Avance Cuatrienio" },
+          { title: " Estado" },
+          { title: " Ampliar" }, 
+        ] ,   
+      scrollCollapse: true, 
+      fixedColumns: {
+        heightMatch: 'none'
+    }, fixedHeader: true,
+      stateSave: true,
+        "language": {
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "zeroRecords": "Nothing found - sorry",
+          "info": "Vistas página _PAGE_ of _PAGES_",
+          "infoEmpty": "No hay registros Disponibles",
+          "infoFiltered": "(filtered from _MAX_ total registros)", 
+          
+          paginate: {
+            first: "Primera",
+            last: "Última",
+            next: "Siguiente",
+            previous: "Anterior"
+          },
+          sProcessing:"Procesando..."
+        },
+        responsive:"true",
+        dom:'Bfrtlp',
+        buttons:[
+          {
+            extend: 'excelHtml5',
+            text  : '<i class="fa fa-file-excel-o"></i>' ,
+            title : "Alerta_Dependencias",
+            tittleAttr: 'Exportar a Excel',
+            className: 'btn btn-success',
+            autoFilter: true,
+            sheetName: 'Alerta Dependencias'
+           },
+           {
+            extend: 'pdfHtml5',
+            text  : '<i class="fa fa-file-pdf-o"></i>' ,
+            title : "Alerta_Dependencias",
+            tittleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            orientation: 'landscape',
+            pageSize: 'LEGAL',
+            messageTop: 'PDF created by Unidad de SegumientoPlan de Desarrollo-DAP.'
+           },
+           {
+            extend: 'print',
+            text  : '<i class="fa fa-print"></i>' ,
+            title : "Alerta_Dependencias",
+            tittleAttr: 'Imprimir',
+            className: 'btn btn-info'
+           },  {
+            extend: 'csvHtml5',
+            text: '<i class="fa fa-file-text"></i>',
+            title : "Alerta_Dependencias",
+            className: 'btn btn-warning',
+            exportOptions: {
+                modifier: {
+                    search: 'none'
+                }
+            }
+        }],
+        columnDefs: [
+          {/*cod_dep*/  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false  },
+          {/*cod_dep*/  width: "550px", targets: 1                           },
+          {/*nom_dep*/  width: "70px", targets: 2    ,  className: "text-center"      },
+          {/*total_indicadores*/  width: "100px", targets: 3, className: "text-center"},
+          {/*no prg*/   width: "70px",  targets: 4, className: "text-center"          },
+          {/*%no prg*/  width: "70px",  targets: 5, className: "text-center"          },
+          {/*rojo*/     width: "70px",  targets: 6, className: "text-center"          },
+          {/*%rojo*/    width: "70px",  targets: 7, className: "text-center"          },
+          {/*amarillo*/ width: "70px",  targets: 8, className: "text-center"          },
+          {/*%amarillo*/width: "70px",  targets: 9, className: "text-center"          }, 
+          {/*verde*/    width: "70px",  targets: 10, className: "text-center"         }, 
+          {/*%verde*/   width: "70px",  targets: 11, className: "text-center"         },
+          {/*avance*/   width: "90px", targets: 12, className: "text-center"         },
+          {width: "70px", targets: 13,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+        ],
+       
+          order: [[ 1, 'asc' ]], createdRow: function(row, data){
+          if(data[11]<=minimovalue){
+            $('td', row).eq(11).css({
+              'background-color':'#f05454'
+            })
+          }else if(data[11]>=maximovalue){
+            $('td', row).eq(11).css({
+              'background-color':'#00AF91'
+            })
+          }else{
+            $('td', row).eq(11).css({
+              'background-color':'#ffc764'
+            })
+          }
+        }
+    });
+
+   // t.on( 'order.dt search.dt', function () {
+     // t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+       //   cell.innerHTML = i+1;
+     // } );
+   // } ).draw();
+     //let count =1; 
+
+     $('#alerta_table tbody').on( 'click', 'button', function () {
+      var data = table.row( $(this).parents('tr') ).data();
+      hola( data[0], data[1], data[11]);
+
+  
+
+  } );
+
+
+
    })
+
+
+
    } catch (error) {
     console.error('Error alertasGraph ', error)
   }
 }
+
+
+
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -157,114 +274,274 @@ $(document).ready(function(){
     });
   });
 });
-async function  filtro(estado){
-  let tabla='';
-  let sumInd=0, sumGris=0, sumRojo=0,  sumAmarillo=0, sumVerde=0;
-  document.getElementById('tabla_alerta').innerHTML="";
-  document.getElementById('totaInd').innerHTML='';
-  document.getElementById('totalnoprogramados').innerHTML='';
-  document.getElementById('totalminimorango').innerHTML='';
-  document.getElementById('totalinermediorango').innerHTML='';
-  document.getElementById('totalmaximorango').innerHTML='';
-  if(estado == 1){
-    let count =1; 
-    for (let index = 0; index < valores.length; index++) {
-      let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      if((valores[index].avance).toFixed(2)<= minimovalue){
-        tabla +='<tr>';
-        tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
-        tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
-        tabla +='<td style="text-align: left;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].nombre_dep))+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-        tabla +='<tr>';
-        document.getElementById('tabla_alerta').innerHTML=tabla;
-        }
-    }
-  }else if (estado == 3) {
-    let count =1; 
-    for (let index = 0; index < valores.length; index++) {
-      let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      if((valores[index].avance).toFixed(2)>= maximovalue){
-        tabla +='<tr>';
-        tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
-        tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
-        tabla +='<td style="text-align: left;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].nombre_dep))+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_amarillo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid green;">'+valores[index].total_verde+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-        tabla +='<tr>';
-        document.getElementById('tabla_alerta').innerHTML=tabla;
-      }
-    }
-  } else if (estado==2){
-    let count =1; 
-    for (let index = 0; index < valores.length; index++) {
-      let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      if( ( (valores[index].avance).toFixed(2)> minimovalue) && ((valores[index].avance).toFixed(2) < maximovalue)){
-        tabla +='<tr>';
-        tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
-        tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
-        tabla +='<td style="text-align: left;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].nombre_dep))+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_rojo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid rgb(255,193,7);">'+valores[index].total_amarillo+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-        tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-        tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-        tabla +='<tr>';
-        document.getElementById('tabla_alerta').innerHTML=tabla;
-     }
-    }
-  }else{
-    let count =1; 
-    for (let index = 0; index < valores.length; index++) {
-      let suma=((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      tabla +='<tr>';
-      tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+(count++)+'</td>';
-      tabla +='<td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].cod_dep+'</td>';
-      tabla +='<td style="text-align: left;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].nombre_dep))+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_gris+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+((valores[index].total_gris)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_rojo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid red;">'+((valores[index].total_rojo)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-left: 5px solid red;">'+valores[index].total_amarillo+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid rgb(255,193,7);">'+((valores[index].total_amarillo)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;">'+valores[index].total_verde+'</td>';
-      tabla +='<td td style="text-align: center;font-weight: 400; width: 10px; width: 20px;border-right: 5px solid green;">'+((valores[index].total_verde)/((suma))*100).toFixed(2)+'%</td>';
-      tabla +='<td  style="text-align: center;font-weight: 400; width: 10px; width: 20px;background-color:'+valores[index].color +' ;"> '+ (valores[index].avance).toFixed(2)+'  %</td>';
-      tabla +='<tr>';
-      document.getElementById('tabla_alerta').innerHTML=tabla;
-      sumInd= sumInd+ ((valores[index].total_gris)+(valores[index].total_rojo)+(valores[index].total_amarillo)+(valores[index].total_verde))
-      sumGris= sumGris+ (valores[index].total_gris);
-      sumRojo= sumRojo+ (valores[index].total_rojo);
-      sumAmarillo = sumAmarillo+ (valores[index].total_amarillo);
-      sumVerde=sumVerde+ (valores[index].total_verde);
-   }
-    document.getElementById('totaInd').innerHTML=sumInd
-    document.getElementById('totalnoprogramados').innerHTML=sumGris
-    document.getElementById('totalminimorango').innerHTML=sumRojo
-    document.getElementById('totalinermediorango').innerHTML=sumAmarillo
-    document.getElementById('totalmaximorango').innerHTML=sumVerde
+
+async function _avancePDM(){
+  try {
+    fetch('http://localhost:7000/pi/api/total')
+    .then(res=>res.json())
+    .then(datos=>{
+      let avance = parseFloat(datos.data[0].total_plan).toFixed(2)
+     document.getElementById('avance_cuatrienio').innerHTML=avance+"%"
+      })
+  } catch (error) {
+    console.error('Error _avancePDM ',error )
   }
 }
+async function otragrafica(data){
+  console.log(data.data);
+  let cod_dep = (data.data.link).substring(12,15)
+  //console.log(cod_dep);
+  try {
+    fetch(` http://localhost:7000/pi/api/semaforo-corte/contador/dependencias/${cod_dep}`)
+    .then(res=> res.json())
+    .then(response=> {
+ //     console.log(response.data[0].gris);
+      document.getElementById('title-dep').innerHTML=data.data.categoryLabel;
+      noprogramadas(response.data[0].gris)
+      rojo(response.data[0].rojo)
+      amarillo(response.data[0].amarillo)
+      verde(response.data[0].verde)
+    })
+  } catch (error) {
+    console.log('object otragrafica :>> ', error);
+  }
+
+}
+async function noprogramadas(gris){
+  const dataSource = {
+    chart: {
+      upperlimit: "0",
+      lowerlimit: "25",
+      usecolornameasvalue: "1",
+      placevaluesinside: "1",
+      valuefontsize: "20",
+      plottooltext: "$value No programados",
+      theme: "fusion"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "100",
+          label: gris,
+          code: "#cdc9c3"
+        }
+      ]
+    },
+    value: gris
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bulb",
+      renderAt: "gris",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+}
+async function rojo(rojo){
+  const dataSource = {
+    chart: {
+      upperlimit: "0",
+      lowerlimit: "25",
+      usecolornameasvalue: "1",
+      placevaluesinside: "1",
+      valuefontsize: "20",
+      plottooltext: "$value Bajo",
+      theme: "fusion"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "100",
+          label: rojo,
+          code: "#f05454"
+        }
+      ]
+    },
+    value: rojo
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bulb",
+      renderAt: "rojo",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+}
+async function amarillo(amarillo){
+  const dataSource = {
+    chart: {
+      upperlimit: "0",
+      lowerlimit: "25",
+      usecolornameasvalue: "1",
+      placevaluesinside: "1",
+      valuefontsize: "20",
+      plottooltext: "$value Medio",
+      theme: "fusion"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "100",
+          label: amarillo,
+          code: "#ffc764"
+        }
+      ]
+    },
+    value: amarillo
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bulb",
+      renderAt: "amarillo",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+}
+async function verde(verde){
+  const dataSource = {
+    chart: {
+      upperlimit: "0",
+      lowerlimit: "25",
+      usecolornameasvalue: "1",
+      placevaluesinside: "1",
+      valuefontsize: "20",
+      plottooltext: "$value Alto",
+      theme: "fusion"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "100",
+          label: verde,
+          code: "#00af91"
+        }
+      ]
+    },
+    value: verde
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bulb",
+      renderAt: "verde",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+}
+
+
+
+async function hola (cod_dep,nom_dep,avance){
+
+
+  try {
+    document.getElementById('nom_depencia_query').innerHTML=nom_dep
+    back_semafav =  ` <i class="fa fa-times-circle fa-2x"style="color: #ff6b6b;"> </i>`;
+
+    let parametros={
+      "cod_semaforo": 1,
+      "cod_dependencia": cod_dep
+    }
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/dependencia/tipo/ `,{
+      method:'POST',
+      body: JSON.stringify(parametros), // data can be `string` or {object}!
+      headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res=> res.json())
+      .then(datos=>{
+        let tam = datos.data.length;
+      valores3=[];
+
+        for(let i =0; i<tam;i++){
+          valores3.push(
+            [ datos.data[i].cod_indicador,
+              datos.data[i].nom_indicador,
+              datos.data[i].meta_plan,
+              datos.data[i].unidad,
+              datos.data[i].sentido,
+              ((datos.data[i].avnorm)*100).toFixed(2),
+              datos.data[i].observaciones_indicador,
+              back_semafav
+            ]
+         )
+
+        }
+
+      //console.log(valores3);
+        tableModal = $('#alerta_modal').DataTable({
+          data: valores3,
+          columns: [
+            { title: "Cod_Ind" },
+            { title: "Indicador" },
+            { title: "Meta Plan" },
+            { title: "Unidad" },
+            { title: "Sentido" },
+            { title: "%Avance" },
+            { title: "Observaciones" },
+            { title: "Estado" }
+          ]  ,   
+          scrollCollapse: true, 
+
+          fixedColumns: {
+            heightMatch: 'none'
+          }, fixedHeader: true,
+          stateSave: false,
+          language: {
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "zeroRecords": "Nothing found - sorry",
+              "info": "Vistas página _PAGE_ of _PAGES_",
+              "infoEmpty": "No hay registros Disponibles",
+              "infoFiltered": "(filtered from _MAX_ total registros)", 
+          paginate: {
+            first: "Primera",
+            last: "Última",
+            next: "Siguiente",
+            previous: "Anterior"
+          },
+          sProcessing:"Procesando..."
+         },
+         responsive:"true",
+       // dom:'Bfrtlp',
+     
+        columnDefs: [
+            {/*cod_ind */  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false   },
+            {/*nom_ind */  width: "550px", targets: 1  },
+            {/*meta  */    width: "70px",  targets: 2, className: "text-center"},
+            {/*unidad  */  width: "70px",  targets: 3, className: "text-center"},
+            {/*sentido */  width: "70px",  targets: 4, className: "text-center"},
+            {/*avance  */  width: "70px",  targets: 5, className: "text-center"          },
+            {/*%obser  */  width: "200px", targets: 6, className: "text-center"          },
+            {/*estado  */  width: "70px",  targets: 7, className: "text-center"          },
+           ],   
+             bDestroy: true
+         });
+      
+     
+      })
+     
+    
+  } catch (error) { 
+    
+}
+  jQuery.noConflict();
+  $('#exampleModal5').modal('show'); 
+}
+
+

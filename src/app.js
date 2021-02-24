@@ -12,6 +12,7 @@ const passport = require('passport');
 
 const app = express();
 require('./config/configPassport');
+
 app.set('port',process.env.port);
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));

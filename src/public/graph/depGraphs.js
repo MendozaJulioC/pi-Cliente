@@ -1053,8 +1053,8 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
         'Content-Type': 'application/json'
       }
     })
-  .then(res=> res.json()).
-  then(datos=>{
+  .then(res=> res.json())
+  .then(datos=>{
     let terminal = document.getElementById("inputGroupSelectDependencia");
     var selectedText = terminal.options[terminal.selectedIndex].text;   
     document.getElementById('nom_depencia_query').innerHTML= selectedText

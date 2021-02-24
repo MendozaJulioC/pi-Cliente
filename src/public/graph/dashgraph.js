@@ -632,7 +632,7 @@ function stopEnterKey(evt) {
      console.error('Error ejecfisica :>> ', error);
    }
 
-    $('#ejecfisicaModal').modal('show'); ;
+    $('#ejecfisicaModal').modal('show'); 
 
   }
 
