@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
 
- 
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
@@ -19,13 +18,14 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
     <%- include ('../partials/head.html') %>
-    <style>  #container {
+    <style> 
+     #container {
       padding-left: 50px;
       padding-right: 60px;
       padding-top: 5px;
       padding-bottom: 2px;
     }
-    tr { height: 5px; }
+    tr { height: 2px; }
   </style>
 </head>
 <%- include ('../partials/menuplapp.html')%>
@@ -67,10 +67,10 @@
             <table  class="table table-sm table-responsive-sm table-hover  "  style="font-size: small; width: 100%;">
               <thead class="thead-inverse" style=" padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: rgb(0,123,255);color: white;">
                 <tr>
-                  <th  style="text-align: center;background-color: red;  width: 50px;">Bajo</th>
+                  <th style="text-align: center;background-color: red;  width: 50px;">Bajo</th>
                   <th style="text-align: center;background-color: red;  width: 50px;"> <span id="minimorango"></span> <span >%</span></th>
                   <th style="text-align: center;background-color :rgb(255,193,7); width: 50px;">Medio </th>
-                  <th style="text-align: center;background-color:rgb(255,193,7); width: 50px;"><span id="intermediorango"> </span><span > %</span></th>
+                  <th style="text-align: center;background-color: rgb(255,193,7); width: 50px;"><span id="intermediorango"> </span><span > %</span></th>
                   <th style="text-align: center;background-color: green;  width: 50px;">Alto </th>
                   <th style="text-align: center;background-color: green;  width: 50px;"> <span id="maximorango"> </span><span>%</span></th>
                   <th style="text-align: center; width: 50px;">Avance Cuatrienio </th>

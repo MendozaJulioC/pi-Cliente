@@ -1,9 +1,12 @@
+
+
 //import fetch from "node-fetch"
+var nomarchivopdf='';
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
-  })
+})
 async function _main(){
   let dep = document.getElementById('inputGroupSelectDependencia').value
     _avancePDM(dep)
@@ -500,14 +503,14 @@ async function total_proyectos_dep(dep){
         chart: {
           caption: "Presupuesto por tipo de iniciativa",
           xaxisname: "Tipo de iniciativa",
-    yaxisname: "millones de pesos",
-    drawcrossline: "1",
-    plottooltext: "<b>$seriesName</b> expense in $label was <b>$$dataValue</b>",
-    theme: "zune",
-    showvalues: "1",
-    formatnumberscale: "0"
-  },
-  categories: [
+      yaxisname: "millones de pesos",
+      drawcrossline: "1",
+      plottooltext: "<b>$seriesName</b> expense in $label was <b>$$dataValue</b>",
+      theme: "zune",
+      showvalues: "1",
+      formatnumberscale: "0"
+    },
+    categories: [
     {
       category: [
         {
@@ -563,19 +566,19 @@ async function total_proyectos_dep(dep){
   ]
 };
 FusionCharts.ready(function() {
-  var myChart = new FusionCharts({
-    type: "msbar2d",
-    renderAt: "chart-proyectos-dep",
-    width: "100%",
-    height: "100%",
-    dataFormat: "json",
-    dataSource
-  }).render();
-});
-})
-} catch (error) {
-  console.log('Error total_proyectos', error)
-}
+    var myChart = new FusionCharts({
+      type: "msbar2d",
+      renderAt: "chart-proyectos-dep",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  })
+  } catch (error) {
+    console.log('Error total_proyectos', error)
+  }
 }
 async function avance_linea_dep(dep, nom_dep){
   try {
@@ -620,7 +623,6 @@ async function avance_linea_dep(dep, nom_dep){
      console.log('Error tipoinversion', error)
    }
 }
-   
 async function avance_componente_dep(dep , nom_dep){
   try {
     let valores =[];
@@ -713,78 +715,65 @@ async function plan_accion_dep(dep)
   .then(res=>res.json())
   .then(datos=>{
     let tabla='', tabla2='',tabla3='', tabla4='';
-    let eficacia, finaciera, formula;
+    let  formula; let valores1=[]; let valores2=[];let valores3=[];let valores4=[];
     let tam = datos.data.length;
-    document.getElementById('p_tipo1').innerHTML="";
-    document.getElementById('p_tipo2').innerHTML="";
-    document.getElementById('p_tipo3').innerHTML="";
-    document.getElementById('p_tipo4').innerHTML="";
     for(var i =0; i<(tam) ;i++){
      if (datos.data[i].tipo_iniciativa==1){
-        if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
-        else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
-          tabla +='<tr  style="font-size: xx-small;">';
-          tabla +='<td style="text-align: left; font-size: 10px;">'+datos.data[i].cod_proyecto+'</td>';
-          tabla +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_proyecto))+'</td>';
-          tabla +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2)+'%</td>';
-          tabla +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].ejec_financiera)*100).toFixed(2)+'%</td>';
-          tabla +='<td style="text-align: center;font-size: 10px;">'+formula+'%</td>';
-          tabla +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].poai)+'</td>';
-          tabla +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ppto_ajustado)+'</td>';
-          tabla +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ejecucion)+'</td>';
-          tabla +=`<td style="text-align: center;font-size: 10px;"><a name="" id="" class="btn btn-primary btn-sm" onclick="buscavalstat(    ' ${(datos.data[i].nom_proyecto)}' , ${datos.data[i].cod_proyecto}, ${datos.data[i].ejecucion})" role="button">+</a></td>`;
-          tabla +='<tr>';
-          document.getElementById('p_tipo1').innerHTML=tabla;
+      valores1.push([ datos.data[i].cod_linea,
+        datos.data[i].cod_componente,
+        datos.data[i].cod_programa,
+        datos.data[i].cod_proyecto,
+        datos.data[i].nom_proyecto,
+        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+        formatter.format(datos.data[i].poai),
+        formatter.format(datos.data[i].ppto_ajustado),
+        formatter.format(datos.data[i].ejecucion)
+      ]);
      }
-     if (datos.data[i].tipo_iniciativa==2){
-      if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
-      else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
-        tabla2 +='<tr  style="font-size: xx-small;">';
-        tabla2 +='<td style="text-align: left; font-size: 10px;">'+datos.data[i].cod_proyecto+'</td>';
-        tabla2 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_proyecto))+'</td>';
-        tabla2 +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2)+'%</td>';
-        tabla2 +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].ejec_financiera)*100).toFixed(2)+'%</td>';
-        tabla2 +='<td style="text-align: center;font-size: 10px;">'+formula+'%</td>';
-        tabla2 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].poai)+'</td>';
-        tabla2 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ppto_ajustado)+'</td>';
-        tabla2 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ejecucion)+'</td>';
-        tabla2 +=`<td style="text-align: center;font-size: 10px;"><a name="" id="" class="btn btn-primary btn-sm" onclick="buscavalstat(    ' ${(datos.data[i].nom_proyecto)}' , ${datos.data[i].cod_proyecto}, ${datos.data[i].ejecucion})" role="button">+</a></td>`;
-        tabla2 +='<tr>';
-        document.getElementById('p_tipo2').innerHTML=tabla2;
+    if (datos.data[i].tipo_iniciativa==2){
+      valores2.push([ datos.data[i].cod_linea,
+        datos.data[i].cod_componente,
+        datos.data[i].cod_programa,
+        datos.data[i].cod_proyecto,
+        datos.data[i].nom_proyecto,
+        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+        formatter.format(datos.data[i].poai),
+        formatter.format(datos.data[i].ppto_ajustado),
+        formatter.format(datos.data[i].ejecucion)
+      ]);
    }
    if (datos.data[i].tipo_iniciativa==3){
-    if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
-    else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
-      tabla3 +='<tr  style="font-size: xx-small;">';
-      tabla3 +='<td style="text-align: left; font-size: 10px;">'+datos.data[i].cod_proyecto+'</td>';
-      tabla3 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_proyecto))+'</td>';
-      tabla3 +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2)+'%</td>';
-      tabla3 +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].ejec_financiera)*100).toFixed(2)+'%</td>';
-      tabla3 +='<td style="text-align: center;font-size: 10px;">'+formula+'%</td>';
-      tabla3 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].poai)+'</td>';
-      tabla3 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ppto_ajustado)+'</td>';
-      tabla3 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ejecucion)+'</td>';
-      tabla3 +=`<td style="text-align: center;font-size: 10px;"><a name="" id="" class="btn btn-primary btn-sm" onclick="buscavalstat(    ' ${(datos.data[i].nom_proyecto)}' , ${datos.data[i].cod_proyecto}, ${datos.data[i].ejecucion})" role="button">+</a></td>`;
-      tabla3 +='<tr>';
-      document.getElementById('p_tipo3').innerHTML=tabla3;
- }
- if (datos.data[i].tipo_iniciativa==4){
-  if(datos.data[i].ejec_financiera== null || datos.data[i].ejec_financiera== 0 ){ formula =0}
-  else{ formula = ( (    ((datos.data[i].porc_eficacia_proyecto))   / ((datos.data[i].ejec_financiera)))*100).toFixed(2)}
-    tabla4 +='<tr  style="font-size: xx-small;">';
-    tabla4 +='<td style="text-align: left; font-size: 10px;">'+datos.data[i].cod_proyecto+'</td>';
-    tabla4 +='<td style="text-align: left; font-size: 10px;">'+((datos.data[i].nom_proyecto))+'</td>';
-    tabla4 +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2)+'%</td>';
-    tabla4 +='<td style="text-align: center;font-size: 10px;">'+((datos.data[i].ejec_financiera)*100).toFixed(2)+'%</td>';
-    tabla4 +='<td style="text-align: center;font-size: 10px;">'+formula+'%</td>';
-    tabla4 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].poai)+'</td>';
-    tabla4 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ppto_ajustado)+'</td>';
-    tabla4 +='<td style="text-align: center;font-size: 10px;">'+formatter.format(datos.data[i].ejecucion)+'</td>';
-    tabla4 +=`<td style="text-align: center;font-size: 10px;"><a name="" id="" class="btn btn-primary btn-sm" onclick="buscavalstat('${(datos.data[i].nom_proyecto)}' , ${datos.data[i].cod_proyecto}, ${datos.data[i].ejecucion})" role="button">+</a></td>`;
-    tabla4 +='<tr>';
-    document.getElementById('p_tipo4').innerHTML=tabla4;
+      valores3.push([ datos.data[i].cod_linea,
+        datos.data[i].cod_componente,
+        datos.data[i].cod_programa,
+        datos.data[i].cod_proyecto,
+        datos.data[i].nom_proyecto,
+        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+        formatter.format(datos.data[i].poai),
+        formatter.format(datos.data[i].ppto_ajustado),
+        formatter.format(datos.data[i].ejecucion)
+      ]);
+
     }
-  } 
+    if (datos.data[i].tipo_iniciativa==4){
+        valores4.push([ datos.data[i].cod_linea,
+          datos.data[i].cod_componente,
+          datos.data[i].cod_programa,
+          datos.data[i].cod_proyecto,
+          datos.data[i].nom_proyecto,
+          ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+          ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+          formatter.format(datos.data[i].poai),
+          formatter.format(datos.data[i].ppto_ajustado),
+          formatter.format(datos.data[i].ejecucion)
+        ]);
+    }
+ 
+    } 
+    nuevatabla(valores1,valores2,valores3,valores4)
 })
 }
 async function buscavalstat(nomproyecto, cod, ejec){
@@ -796,42 +785,60 @@ try {
     let tablaValStat ='';
     document.getElementById('valStat').innerHTML="";
     let tam = datos.data.length;
-    document.getElementById('cod').innerHTML = nomproyecto;
+    document.getElementById('nom').innerHTML = nomproyecto;
+    document.getElementById('nomprodetalle').innerHTML=nomproyecto;
+    document.getElementById('cod').innerHTML = cod;
+
+    document.getElementById('cod_linea').innerHTML = datos.data[0].cod_linea;
+    document.getElementById('nom_linea').innerHTML = datos.data[0].nom_linea;
+    document.getElementById('cod_componente').innerHTML = datos.data[0].cod_componente;
+    document.getElementById('nom_componente').innerHTML = datos.data[0].nom_componente;
+    document.getElementById('cod_programa').innerHTML = datos.data[0].cod_programa;
+    document.getElementById('nom_programa').innerHTML = datos.data[0].nom_programa;
+
+    document.getElementById('poai').innerHTML = formatter.format(datos.data[0].y_dev_poai);
+    document.getElementById('ppto_ajustado').innerHTML = formatter.format(datos.data[0].y_dev_pptoajustado);
     document.getElementById('ejec').innerHTML = formatter.format(ejec);
- 
+    proyecto_fisico(cod)
     for (let index = 0; index < tam; index++) {
      tablaValStat += `<tr style="background-color:gray ;">
-                        <th>Código</th>
-                        <th style="text-align: center;">Producto</th>
+                        <th   style="text-align: center;">Val. Est.</th>
+                        <th   colspan="2" style="text-align: center;">Producto/Bien/Servicio </th>
+                        <th   style="text-align: center;">SUIFP</th>
+                      </tr>
+                      <tr>
+                        <td   style="text-align: center;">${datos.data[index].cod_val_stat}</td>
+                        <td   colspan="2" style="text-align: left;">${datos.data[index].nom_val_stat} </td>
+                        <th   style="text-align: center;">${datos.data[index].cod_siufp_catal}</th>     
+                      </tr>
+                      <tr>
                         <th style="text-align: center;">Unidad</th>
                         <th style="text-align: center;">Cantidad Planeada</th>
                         <th style="text-align: center;">Cantidad Ejecutada</th>
-                        <th style="text-align: center;">Eficacia Producto</th>
+                        <th colspan="2" style="text-align: center;">Eficacia Producto</th>
                       </tr>
                       <tr>
-                        <td style="text-align: center;">${datos.data[index].cod_val_stat}</td>
-                        <td style="text-align: left;">${datos.data[index].nom_val_stat} </td>
                         <td style="text-align: center;">${datos.data[index].u_medida}</td>
                         <td style="text-align: center;">${datos.data[index].q_plan}</td>
                         <td style="text-align: center;">${datos.data[index].q_real}</td>
-                        <td style="text-align: center;">${Math.ceil(datos.data[index].eficacia_ve)}%</td>
+                        <td colspan="2" style="text-align: center;">${Math.ceil(datos.data[index].eficacia_ve)}%</td>
                       </tr>
                       <tr>
-                        <th colspan="3"> Observación Val_Stat </th>
-                        <th colspan="2">Observación SUIF</th>
-                        <th colspan="1" style="text-align: center;">${datos.data[index].cod_siufp_catal}</th>              
+                        <th colspan="2">Observación P/B/S</th>
+                        <th colspan="2">Observación Seguimiento</th>
                       </tr>
                       <tr>
-                        <td colspan="3" style="text-align: left;">${datos.data[index].obs_val_stat}</td>
-                        <td colspan="3" style="text-align: left;">${datos.data[index].obs_cod_siufp}</td>
+                        <td colspan="2" style="text-align: left;">${datos.data[index].obs_cod_siufp}</td>
+                        <td colspan="2" style="text-align: left;">${datos.data[index].obs_val_stat}</td>
                       </tr>
-                      <tr><td colspan="6"><hr></td> </tr>  `
+                      <tr><td colspan="4"><hr></td> </tr>  `
       document.getElementById('valStat').innerHTML=tablaValStat;  
     }
   })
 } catch (error) {
   console.log('Error buscavalstat ', error)
 }
+jQuery.noConflict();
   $('#exampleModal2').modal('show'); ;
 }
 async function geoProyect( nom, cod){
@@ -973,7 +980,107 @@ async function geoProyect( nom, cod){
         dataSource
       }).render();
     });
+    document.getElementById('inv_territorio_project').innerHTML="";
+
+    let tabla='';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Popular</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].popular)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Santa Cruz</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].santa_cruz)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Manrique</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].manrique)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Aranjuez</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].aranjuez)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Castilla</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].castilla)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Doce de Octubre</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].doce_de_octubre)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Robledo</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].robledo)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Villa Hermosa</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].villa_hermosa)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Buenos Aires</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].buenos_aires)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">La Candelaria</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].la_candelaria)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Lureles - Estadio</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].laureles_estadio)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">La América</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].la_america)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">San Javier</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].san_javier)))+'</td>';
+    tabla +='</tr>';
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">El Poblado</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].el_poblado)))+'</td>';
+    tabla +='</tr>'; 
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Guayabal</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].guayabal)))+'</td>';
+    tabla +='</tr>';                
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Belén</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].belen)))+'</td>';
+    tabla +='</tr>';                
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">San Sebastían de Palmitas</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].palmitas)))+'</td>';
+    tabla +='</tr>';  
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">San Cristóbal</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].san_cristobal)))+'</td>';
+    tabla +='</tr>';      
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Altavista</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].altavista)))+'</td>';
+    tabla +='</tr>';  
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">San Antonio de Prado</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].san_antonio)))+'</td>';
+    tabla +='</tr>';  
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Santa Elena</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].santa_elena)))+'</td>';
+    tabla +='</tr>';  
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Ciudad</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].ciudad)))+'</td>';
+    tabla +='</tr>';  
+    tabla +='<tr  style="font-size: xx-small;">';
+      tabla +='<td style="text-align: left; font-size: 10px;">Fortalecimiento Institucional</td>';   
+      tabla +='<td style="text-align: left; font-size: 10px;">'+ formatter.format(Math.ceil(parseInt(datos.data[0].fort_inst)))+'</td>';
+    tabla +='</tr>';      
+    document.getElementById('inv_territorio_project').innerHTML=tabla;
+   
     })
+
+
+
   } catch (error) {
   console.log('Error groProyect', error)      
   }
@@ -1039,7 +1146,6 @@ async function contadorSemDep(cod){
     console.log('Error contadorSemaforo ',error)
   }
 }
-
 async function estado_sem_dep(cod_dep,codsemaforo) {
   try {
     let parametros={
@@ -1091,11 +1197,456 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
                          <td style="text-align: center;"> <span><img src="${imagen_semafav}" alt=""  width="30" height="30"></span></td>
                        </tr>
                       `
-       document.getElementById('tablaSemaforo').innerHTML=tablaSemaforo;  
+  
+      document.getElementById('tablaSemaforo').innerHTML=tablaSemaforo;  
      }
   })
   } catch (error) {
     console.log("Error estado_sem_dep: ", error)
   }
+  jQuery.noConflict();
   $('#exampleModal3').modal('show'); ;
+}
+async function proyecto_fisico(cod){
+  try {
+    fetch(`http://localhost:7000/pa/api/avances/ejecucion/${cod}`)
+    .then(res=> res.json())
+    .then(response=>{
+      let avanxcefisicoproject= parseFloat((response.data[0].porc_eficacia_proyecto)*100); 
+      let avancexfinanciero= parseFloat((response.data[0].porc_ejec_financiera)*100);proyecto_financiero(avancexfinanciero)
+      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].porc_ejec_financiera))*0.50 )*100
+      //console.log("fisico ",avanxcefisicoproject);
+      //console.log("financiero ",avancexfinanciero);
+      //console.log("ffp ",ffp);
+      fifapon(ffp)
+      nomarchivopdf=response.data[0].cod_proyecto;
+      let tipo_proyecto="";
+      if (response.data[0].tipo_iniciativa==1) {tipo_proyecto= "Proyecto de Iniciativa Institucional"}
+      else if (response.data[0].tipo_iniciativa==2) { tipo_proyecto= " Proyecto de Presupuesto Participativo (Iniciativas Comunitarias)"}
+      else if (response.data[0].tipo_iniciativa==3) { tipo_proyecto= "Proyecto con saldos no Ejecutables"}
+      else {tipo_proyecto= "Proyecto con ejecución de saldos Pendientes (Vigencia Anterior)"}
+  
+        
+  
+      document.getElementById('tipo_proyecto').innerHTML= tipo_proyecto
+
+      const dataSource = {
+        chart: {
+          caption: "% Ejecución Física ",
+          lowerlimit: "0",
+          upperlimit: "100",
+          showvalue: "1",
+          numbersuffix: "%",
+          theme: "fusion",
+          showtooltip: "0"
+        },
+        colorrange: {
+          color: [
+            {
+              minvalue: "0",
+              maxvalue: "50",
+              code: "#F2726F"
+            },
+            {
+              minvalue: "50",
+              maxvalue: "75",
+              code: "#FFC533"
+            },
+            {
+              minvalue: "75",
+              maxvalue: "100",
+              code: "#62B58F"
+            }
+          ]
+        },
+        dials: {
+          dial: [
+            {
+              value: avanxcefisicoproject
+            }
+          ]
+        }
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "angulargauge",
+          renderAt: "chart-1",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+
+
+
+    })
+    
+  } catch (error) {
+    console.log('Error proyecto_fisico :>> ', error);
+  }
+ 
+ 
+}
+async function proyecto_financiero(avancexfinanciero){
+  const dataSource = {
+    chart: {
+      caption: "% Ejecución Financiera ",
+      lowerlimit: "0",
+      upperlimit: "100",
+      showvalue: "1",
+      numbersuffix: "%",
+      theme: "fusion",
+      showtooltip: "0"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "50",
+          code: "#F2726F"
+        },
+        {
+          minvalue: "50",
+          maxvalue: "75",
+          code: "#FFC533"
+        },
+        {
+          minvalue: "75",
+          maxvalue: "100",
+          code: "#62B58F"
+        }
+      ]
+    },
+    dials: {
+      dial: [
+        {
+          value:avancexfinanciero
+        }
+      ]
+    }
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "angulargauge",
+      renderAt: "chart-2",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+
+}
+async function fifapon(ffp){
+  const dataSource = {
+    chart: {
+      caption: "% Cumplimiento",
+     
+      lowerlimit: "0",
+      upperlimit: "100",
+      showvalue: "1",
+      numbersuffix: "%",
+      theme: "fusion",
+      showtooltip: "0"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: "50",
+          code: "#F2726F"
+        },
+        {
+          minvalue: "50",
+          maxvalue: "75",
+          code: "#FFC533"
+        },
+        {
+          minvalue: "75",
+          maxvalue: "100",
+          code: "#62B58F"
+        }
+      ]
+    },
+    dials: {
+      dial: [
+        {
+          value: ffp
+        }
+      ]
+    }
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "angulargauge",
+      renderAt: "chart-3",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+}
+window.onload= function(){
+  document.getElementById('download').addEventListener('click', ()=>{
+      const invoice = this.document.getElementById('invoice');
+     // console.log(invoice);
+     //console.log(window);
+     var opt = {
+      margin:       1,
+      filename:     nomarchivopdf+'.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 3 , letterRending:true },
+      pagebreak: { mode: 'avoid-all', before: '#page2el' },
+      jsPDF:        { unit: 'in', format: 'a3', orientation: 'portrait' }
+    };
+     html2pdf().from(invoice).set(opt).save();
+
+  })
+}
+
+
+async function   nuevatabla(valores1, valores2, valores3,valores4){
+  var table1 = $('#table_tipo1').DataTable({
+    data: valores1,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+ // dom:'Bfrtlp',
+
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+   var table2 = $('#table_tipo2').DataTable({
+    data: valores2,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+ // dom:'Bfrtlp',
+
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+   var table3 = $('#table_tipo3').DataTable({
+    data: valores3,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+ // dom:'Bfrtlp',
+
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+   var table4 = $('#table_tipo4').DataTable({
+    data: valores4,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "emptyTable":     "No hay datos para este tipo de proyectos",
+        "zeroRecords": "Nothing found - sorry",
+        "info": "Vistas página _PAGE_ of _PAGES_",
+        "infoEmpty": "No hay registros Disponibles",
+        "infoFiltered": "(filtered from _MAX_ total registros)", 
+        "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+ // dom:'Bfrtlp',
+
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+
+  $('#table_tipo1 tbody').on( 'click', 'button', function () {
+      var data1 = table1.row( $(this).parents('tr') ).data();
+      buscavalstat(data1[4], data1[3], data1[9])
+  } );
+  $('#table_tipo2 tbody').on( 'click', 'button', function () {
+    var data2 = table2.row( $(this).parents('tr') ).data();
+    buscavalstat(data2[4], data2[3], data2[9])
+  } );
+  $('#table_tipo3 tbody').on( 'click', 'button', function () {
+    var data3 = table3.row( $(this).parents('tr') ).data();
+    buscavalstat(data3[4], data3[3], data3[9])
+  } );
+  $('#table_tipo4 tbody').on( 'click', 'button', function () {
+    var data4 = table4.row( $(this).parents('tr') ).data();
+    buscavalstat(data4[4], data4[3], data4[9])
+  } );  
 }

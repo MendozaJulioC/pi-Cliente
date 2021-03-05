@@ -1,4 +1,4 @@
-var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
+  var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
 var colorfondo='';
 let valores=[]; let valores2=[]; let valores3=[];
 async function dateomain(){
@@ -248,10 +248,7 @@ async function alertasGraph(){
      $('#alerta_table tbody').on( 'click', 'button', function () {
       var data = table.row( $(this).parents('tr') ).data();
       hola( data[0], data[1], data[11]);
-
-  
-
-  } );
+    } );
 
 
 
@@ -288,7 +285,7 @@ async function _avancePDM(){
   }
 }
 async function otragrafica(data){
-  console.log(data.data);
+  //console.log(data.data);
   let cod_dep = (data.data.link).substring(12,15)
   //console.log(cod_dep);
   try {

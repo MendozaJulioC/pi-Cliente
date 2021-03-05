@@ -144,7 +144,7 @@ async function _avance_financiero(){
     fetch('http://localhost:7000/pa/api/avancefinanciero')
     .then(res=>res.json())
     .then(datos=>{
-      porc_avance_financiero(datos.data[0].ejec_financiera) 
+      porc_avance_financiero((datos.data[0].pptoejecutado/datos.data[0].pptoajustado))
       graphPDA(parseInt(datos.data[0].poai), parseInt(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
       detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
     })
@@ -153,6 +153,7 @@ async function _avance_financiero(){
   }
 }
 async function porc_avance_financiero(avance){  
+
   const dataSource = {
     chart: {
       caption: "% Ejecución Financiera Plan de Acción",
@@ -552,7 +553,7 @@ async function columnDependencias(){
     const dataSource = {
     chart: {
       caption: "Inversión Pública por Dependencias",
-      subcaption: "Agosto-31-2020",
+    
       xaxisname: "Dependencias",
       yaxisname: "cifras en millones de pesos",
       //numbersuffix: "$",
@@ -584,11 +585,10 @@ function stopEnterKey(evt) {
       var evt = (evt) ? evt : ((event) ? event : null);
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
       if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
-  }
-  document.onkeypress = stopEnterKey;
+}
+document.onkeypress = stopEnterKey;
 
-
-  async function ejecfisica(){
+async function ejecfisica(){
    try {
      let infofisicadep=[];
      fetch(`http://localhost:7000/pa/api/ejecusion-fisica/dependencias`)
@@ -634,10 +634,8 @@ function stopEnterKey(evt) {
 
     $('#ejecfisicaModal').modal('show'); 
 
-  }
-
-
-  async function ejecfinanciera(){
+}
+async function ejecfinanciera(){
     try {
       let infofisicadep=[];
       fetch(`http://localhost:7000/pa/api/ejecusion-financiera/dependencias`)
@@ -683,4 +681,4 @@ function stopEnterKey(evt) {
     }
  
      $('#ejecfinancieraModal').modal('show'); ;
-  }
+}
