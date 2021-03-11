@@ -518,6 +518,7 @@ async function estado_sem_pordep(codsemaforo) {
           dataSource
       }).render();
     });
+    jQuery.noConflict();
     $('#exampleModalSemFavGeneral').modal('show'); ;
   })
   } catch (error) {

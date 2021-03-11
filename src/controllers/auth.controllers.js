@@ -3,6 +3,7 @@ const app = express();
 const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const passport = require('passport')
+
 const getRegister = async(req, res )=>{
    try {
     const message = req.flash('message')[0]  ;

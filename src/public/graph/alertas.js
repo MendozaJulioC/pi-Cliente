@@ -1,4 +1,9 @@
-  var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+})
+var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
 var colorfondo='';
 let valores=[]; let valores2=[]; let valores3=[];
 async function dateomain(){
@@ -7,16 +12,15 @@ async function dateomain(){
 }
 
 async function semaforo_inicial(){
-fetch(`http://localhost:7000/pi/api/semaforo-corte/total`)
-.then(res=> res.json())
-.then(response=>{
-  document.getElementById('title-dep').innerHTML="PDM-2020-2023";
-  noprogramadas(response.data[0].gris)
-  rojo(response.data[0].rojo)
-  amarillo(response.data[0].amarillo)
-  verde(response.data[0].verde)
-})
-
+  fetch(`http://localhost:7000/pi/api/semaforo-corte/total`)
+  .then(res=> res.json())
+  .then(response=>{
+    document.getElementById('title-dep').innerHTML="PDM-2020-2023";
+    noprogramadas(response.data[0].gris)
+    rojo(response.data[0].rojo)
+    amarillo(response.data[0].amarillo)
+    verde(response.data[0].verde)
+  })
 }
 async function avance_linea_dep(){
   try {
@@ -260,9 +264,6 @@ async function alertasGraph(){
     console.error('Error alertasGraph ', error)
   }
 }
-
-
-
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -271,7 +272,6 @@ $(document).ready(function(){
     });
   });
 });
-
 async function _avancePDM(){
   try {
     fetch('http://localhost:7000/pi/api/total')
@@ -440,9 +440,6 @@ async function verde(verde){
     }).render();
   });
 }
-
-
-
 async function hola (cod_dep,nom_dep,avance){
 
 
@@ -535,7 +532,7 @@ async function hola (cod_dep,nom_dep,avance){
      
     
   } catch (error) { 
-    
+    console.log("Error function Hola ",error);
 }
   jQuery.noConflict();
   $('#exampleModal5').modal('show'); 

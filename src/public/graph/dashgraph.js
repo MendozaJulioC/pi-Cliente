@@ -631,7 +631,7 @@ async function ejecfisica(){
    } catch (error) {
      console.error('Error ejecfisica :>> ', error);
    }
-
+   jQuery.noConflict();
     $('#ejecfisicaModal').modal('show'); 
 
 }
@@ -679,6 +679,6 @@ async function ejecfinanciera(){
     } catch (error) {
       console.error('Error ejecfinanciera :>> ', error);
     }
- 
+    jQuery.noConflict();
      $('#ejecfinancieraModal').modal('show'); ;
 }

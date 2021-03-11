@@ -2,6 +2,7 @@
 
 //import fetch from "node-fetch"
 var nomarchivopdf='';
+var table4={};
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -18,10 +19,11 @@ async function _main(){
     avance_prgs_dep(dep)
     avance_componente_dep(dep)
     total_proyectos_dep(dep)
-    plan_accion_dep(dep)
+    plan_accion_dep()
     //contadorSemDep(cod)
 }
 async function dep_estado(cod_dep){
+ 
   let terminal = document.getElementById("inputGroupSelectDependencia");
   var selectedText = terminal.options[terminal.selectedIndex].text;   
   _avancePDM(cod_dep)
@@ -709,14 +711,16 @@ async function avance_prgs_dep(dep, nom_dep){
     console.log('Error avance_prgs_dep', error)
   }
 }
-async function plan_accion_dep(dep)
-{
+async function plan_accion_dep(dep){  
+ let valores1=[]; let valores2=[];let valores3=[];let valores4=[];
+
+
   fetch(`http://localhost:7000/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
-    let tabla='', tabla2='',tabla3='', tabla4='';
-    let  formula; let valores1=[]; let valores2=[];let valores3=[];let valores4=[];
-    let tam = datos.data.length;
+    let tam = datos.data.length; 
+    
+
     for(var i =0; i<(tam) ;i++){
      if (datos.data[i].tipo_iniciativa==1){
       valores1.push([ datos.data[i].cod_linea,
@@ -773,32 +777,290 @@ async function plan_accion_dep(dep)
     }
  
     } 
+//    console.log(valores1);
     nuevatabla(valores1,valores2,valores3,valores4)
+
 })
 }
-async function buscavalstat(nomproyecto, cod, ejec){
+
+async function   nuevatabla(valores1, valores2, valores3,valores4){
+document.getElementById('table_tipo1').innerHTML=""
+  var table1 = $('#table_tipo1').DataTable({
+    data: valores1,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+  dom:'frtlp',
+ bDestroy: true,
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+
+   document.getElementById('table_tipo2').innerHTML=""
+   var table2 = $('#table_tipo2').DataTable({
+    data: valores2,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+ // dom:'Bfrtlp',
+
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+   document.getElementById('table_tipo3').innerHTML=""
+   var table3 = $('#table_tipo3').DataTable({
+    data: valores3,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+ // dom:'Bfrtlp',
+ bDestroy: true,
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ],   
+       bDestroy: true
+   });
+   document.getElementById('table_tipo4').innerHTML=""
+   table4 = $('#table_tipo4').DataTable({
+    data: valores4,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "emptyTable":     "No hay datos para este tipo de proyectos",
+        "zeroRecords": "Nothing found - sorry",
+        "info": "Vistas página _PAGE_ of _PAGES_",
+        "infoEmpty": "No hay registros Disponibles",
+        "infoFiltered": "(filtered from _MAX_ total registros)", 
+        "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+
+   },
+   responsive:"true",
+ 
+   
+ // dom:'Bfrtlp',
+ 
+ bDestroy: true,
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link' ><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ]
+   });
+
+
+   $('#table_tipo1 tbody').on( 'click', 'button', function () {
+    var data1 = table1.row( $(this).parents('tr') ).data();
+    buscavalstat(data1[4], data1[3], data1[9])
+  } );
+  $('#table_tipo2 tbody').on( 'click', 'button', function () {
+    var data2 = table2.row( $(this).parents('tr') ).data();
+     buscavalstat(data2[4], data2[3], data2[9])
+  } );
+  $('#table_tipo3 tbody').on( 'click', 'button', function () {
+    var data3 = table3.row( $(this).parents('tr') ).data();
+    buscavalstat(data3[4], data3[3], data3[9])
+  } );
+  $('#table_tipo4 tbody').on( 'click', 'button', function () {
+    var data4 = table4.row( $(this).parents('tr') ).data();
+    buscavalstat(data4[4], data4[3], data4[9])
+  } ); 
+
+}
+
+
+
+ function buscavalstat(nomproyecto, cod, ejec){
+ 
 try {
+
    fetch(`http://localhost:7000/pa/api/proyecto/${cod}`)
   .then(res=>res.json())
   .then(datos=>{
-  geoProyect(nomproyecto,cod)
+    geoProyect(nomproyecto,cod)
     let tablaValStat ='';
     document.getElementById('valStat').innerHTML="";
     let tam = datos.data.length;
-    document.getElementById('nom').innerHTML = nomproyecto;
+    document.getElementById('nom1').innerHTML = nomproyecto;
     document.getElementById('nomprodetalle').innerHTML=nomproyecto;
-    document.getElementById('cod').innerHTML = cod;
+    document.getElementById('cod1').innerHTML = cod;
+    let fecha = new Date(datos.data[0].corte_ejecucion)
+     document.getElementById('corte1').innerHTML=(fecha.toLocaleDateString())
+    document.getElementById('cod_linea1').innerHTML = datos.data[0].cod_linea;
+    document.getElementById('nom_linea1').innerHTML = datos.data[0].nom_linea;
+    document.getElementById('cod_componente1').innerHTML = datos.data[0].cod_componente;
+    document.getElementById('nom_componente1').innerHTML = datos.data[0].nom_componente;
+    document.getElementById('cod_programa1').innerHTML = datos.data[0].cod_programa;
+    document.getElementById('nom_programa1').innerHTML = datos.data[0].nom_programa;
 
-    document.getElementById('cod_linea').innerHTML = datos.data[0].cod_linea;
-    document.getElementById('nom_linea').innerHTML = datos.data[0].nom_linea;
-    document.getElementById('cod_componente').innerHTML = datos.data[0].cod_componente;
-    document.getElementById('nom_componente').innerHTML = datos.data[0].nom_componente;
-    document.getElementById('cod_programa').innerHTML = datos.data[0].cod_programa;
-    document.getElementById('nom_programa').innerHTML = datos.data[0].nom_programa;
-
-    document.getElementById('poai').innerHTML = formatter.format(datos.data[0].y_dev_poai);
-    document.getElementById('ppto_ajustado').innerHTML = formatter.format(datos.data[0].y_dev_pptoajustado);
-    document.getElementById('ejec').innerHTML = formatter.format(ejec);
+    document.getElementById('poai1').innerHTML = formatter.format(datos.data[0].y_dev_poai);
+    document.getElementById('ppto_ajustado1').innerHTML = formatter.format(datos.data[0].y_dev_pptoajustado);
+    document.getElementById('ejec1').innerHTML = (ejec);
     proyecto_fisico(cod)
     for (let index = 0; index < tam; index++) {
      tablaValStat += `<tr style="background-color:gray ;">
@@ -835,6 +1097,7 @@ try {
       document.getElementById('valStat').innerHTML=tablaValStat;  
     }
   })
+ 
 } catch (error) {
   console.log('Error buscavalstat ', error)
 }
@@ -1205,7 +1468,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
     console.log("Error estado_sem_dep: ", error)
   }
   jQuery.noConflict();
-  $('#exampleModal3').modal('show'); ;
+  $('#exampleModal3').modal('show'); 
 }
 async function proyecto_fisico(cod){
   try {
@@ -1392,6 +1655,7 @@ async function fifapon(ffp){
   });
   
 }
+
 window.onload= function(){
   document.getElementById('download').addEventListener('click', ()=>{
       const invoice = this.document.getElementById('invoice');
@@ -1411,242 +1675,6 @@ window.onload= function(){
 }
 
 
-async function   nuevatabla(valores1, valores2, valores3,valores4){
-  var table1 = $('#table_tipo1').DataTable({
-    data: valores1,
-    columns: [
-      { title: "Línea" },
-      { title: "Componente" },
-      { title: "Programa" },
-      { title: "BPIN" },
-      { title: "Proyecto" },
-      { title: "Eficacia" },
-      { title: "%Ejec. Financiera" },
-      { title: "POAI" },
-      { title: "Ppto. Ajustado" },
-      { title: "Ejec. Financiera" },
-      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
-    ]  ,   
-    scrollCollapse: true, 
 
-    fixedColumns: {
-      heightMatch: 'none'
-    }, fixedHeader: true,
-    stateSave: false,
-    language: {
-      "lengthMenu": "Mostrar _MENU_ registros por página",
-      "emptyTable":     "No hay datos para este tipo de proyectos",
-      "zeroRecords": "Nothing found - sorry",
-      "info": "Vistas página _PAGE_ of _PAGES_",
-      "infoEmpty": "No hay registros Disponibles",
-      "infoFiltered": "(filtered from _MAX_ total registros)", 
-      "zeroRecords": "No hay datos para este tipo de proyectos",
-    paginate: {
-      first: "Primera",
-      last: "Última",
-      next: "Siguiente",
-      previous: "Anterior"
-    },
-    sProcessing:"Procesando..."
-   },
-   responsive:"true",
- // dom:'Bfrtlp',
 
-  columnDefs: [
-      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
-      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
-      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
-      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
-      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
-      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
-      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
-      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
-      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
-      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
-      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
-     ],   
-       bDestroy: true
-   });
-   var table2 = $('#table_tipo2').DataTable({
-    data: valores2,
-    columns: [
-      { title: "Línea" },
-      { title: "Componente" },
-      { title: "Programa" },
-      { title: "BPIN" },
-      { title: "Proyecto" },
-      { title: "Eficacia" },
-      { title: "%Ejec. Financiera" },
-      { title: "POAI" },
-      { title: "Ppto. Ajustado" },
-      { title: "Ejec. Financiera" },
-      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
-    ]  ,   
-    scrollCollapse: true, 
 
-    fixedColumns: {
-      heightMatch: 'none'
-    }, fixedHeader: true,
-    stateSave: false,
-    language: {
-      "lengthMenu": "Mostrar _MENU_ registros por página",
-      "emptyTable":     "No hay datos para este tipo de proyectos",
-      "zeroRecords": "Nothing found - sorry",
-      "info": "Vistas página _PAGE_ of _PAGES_",
-      "infoEmpty": "No hay registros Disponibles",
-      "infoFiltered": "(filtered from _MAX_ total registros)", 
-      "zeroRecords": "No hay datos para este tipo de proyectos",
-    paginate: {
-      first: "Primera",
-      last: "Última",
-      next: "Siguiente",
-      previous: "Anterior"
-    },
-    sProcessing:"Procesando..."
-   },
-   responsive:"true",
- // dom:'Bfrtlp',
-
-  columnDefs: [
-      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
-      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
-      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
-      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
-      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
-      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
-      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
-      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
-      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
-      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
-      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
-     ],   
-       bDestroy: true
-   });
-   var table3 = $('#table_tipo3').DataTable({
-    data: valores3,
-    columns: [
-      { title: "Línea" },
-      { title: "Componente" },
-      { title: "Programa" },
-      { title: "BPIN" },
-      { title: "Proyecto" },
-      { title: "Eficacia" },
-      { title: "%Ejec. Financiera" },
-      { title: "POAI" },
-      { title: "Ppto. Ajustado" },
-      { title: "Ejec. Financiera" },
-      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
-    ]  ,   
-    scrollCollapse: true, 
-
-    fixedColumns: {
-      heightMatch: 'none'
-    }, fixedHeader: true,
-    stateSave: false,
-    language: {
-      "lengthMenu": "Mostrar _MENU_ registros por página",
-      "emptyTable":     "No hay datos para este tipo de proyectos",
-      "zeroRecords": "Nothing found - sorry",
-      "info": "Vistas página _PAGE_ of _PAGES_",
-      "infoEmpty": "No hay registros Disponibles",
-      "infoFiltered": "(filtered from _MAX_ total registros)", 
-      "zeroRecords": "No hay datos para este tipo de proyectos",
-    paginate: {
-      first: "Primera",
-      last: "Última",
-      next: "Siguiente",
-      previous: "Anterior"
-    },
-    sProcessing:"Procesando..."
-   },
-   responsive:"true",
- // dom:'Bfrtlp',
-
-  columnDefs: [
-      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
-      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
-      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
-      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
-      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
-      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
-      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
-      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
-      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
-      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
-      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
-     ],   
-       bDestroy: true
-   });
-   var table4 = $('#table_tipo4').DataTable({
-    data: valores4,
-    columns: [
-      { title: "Línea" },
-      { title: "Componente" },
-      { title: "Programa" },
-      { title: "BPIN" },
-      { title: "Proyecto" },
-      { title: "Eficacia" },
-      { title: "%Ejec. Financiera" },
-      { title: "POAI" },
-      { title: "Ppto. Ajustado" },
-      { title: "Ejec. Financiera" },
-      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
-    ]  ,   
-    scrollCollapse: true, 
-
-    fixedColumns: {
-      heightMatch: 'none'
-    }, fixedHeader: true,
-    stateSave: false,
-    language: {
-        "lengthMenu": "Mostrar _MENU_ registros por página",
-        "emptyTable":     "No hay datos para este tipo de proyectos",
-        "zeroRecords": "Nothing found - sorry",
-        "info": "Vistas página _PAGE_ of _PAGES_",
-        "infoEmpty": "No hay registros Disponibles",
-        "infoFiltered": "(filtered from _MAX_ total registros)", 
-        "zeroRecords": "No hay datos para este tipo de proyectos",
-    paginate: {
-      first: "Primera",
-      last: "Última",
-      next: "Siguiente",
-      previous: "Anterior"
-    },
-    sProcessing:"Procesando..."
-   },
-   responsive:"true",
- // dom:'Bfrtlp',
-
-  columnDefs: [
-      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
-      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
-      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
-      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
-      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
-      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
-      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
-      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
-      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
-      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
-      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
-     ],   
-       bDestroy: true
-   });
-
-  $('#table_tipo1 tbody').on( 'click', 'button', function () {
-      var data1 = table1.row( $(this).parents('tr') ).data();
-      buscavalstat(data1[4], data1[3], data1[9])
-  } );
-  $('#table_tipo2 tbody').on( 'click', 'button', function () {
-    var data2 = table2.row( $(this).parents('tr') ).data();
-    buscavalstat(data2[4], data2[3], data2[9])
-  } );
-  $('#table_tipo3 tbody').on( 'click', 'button', function () {
-    var data3 = table3.row( $(this).parents('tr') ).data();
-    buscavalstat(data3[4], data3[3], data3[9])
-  } );
-  $('#table_tipo4 tbody').on( 'click', 'button', function () {
-    var data4 = table4.row( $(this).parents('tr') ).data();
-    buscavalstat(data4[4], data4[3], data4[9])
-  } );  
-}
