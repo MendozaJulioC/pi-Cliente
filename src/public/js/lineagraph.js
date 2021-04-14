@@ -151,14 +151,14 @@ async function _graphCumplimientoPptal(linea){
             seriesname: "Ajustado",
             data: [
               {
-                value: datos.data[0].pptoajustado/1000000
+                value: datos.data[0].pptoajustado
               }
             ]
           }, {
             seriesname: "Ejecutado",
             data: [
               {
-                value: datos.data[0].ejecutado/1000000
+                value: datos.data[0].ejecutado
               }
             ]
           },

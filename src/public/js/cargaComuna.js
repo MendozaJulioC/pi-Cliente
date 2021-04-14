@@ -17,9 +17,9 @@ const comunas = async (req, res)=>{
         // Set latitude and longitude of the map center (required)
         center: [6.2982733, -75.5459204],
         // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-        zoom: 11,
-        //maxZoom: 12,
-        //minZoom: 12
+        //zoom: 12,
+        maxZoom: 12,
+        minZoom: 12
       });
       // Create a Tile Layer and add it to the map
       var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
@@ -224,6 +224,7 @@ async function mapComuna(territorio){
       var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2518/-75.5636">maps.stamen.com</a> contributors'
       }).addTo(map);
+      
     const geo_url= 'https://www.medellin.gov.co/mapas/rest/services/ServiciosCatastro/OPENDATA_Catastro/MapServer/6/query?where=comuna%3D'+territorio+'&f=geojson'
     fetch(geo_url)
     .then(res=>res.json())

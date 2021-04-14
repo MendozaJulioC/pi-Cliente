@@ -304,7 +304,7 @@ async function columnGeo(){
             showvalues: "1",
             formatnumberscale: "0",
             numberprefix: "$",
-            theme: "zune",
+            theme: "ocean",
             labeldisplay: "ROTATE",
             decimalSeparator: ",",
             thousandSeparator: ".",
@@ -324,71 +324,71 @@ async function columnGeo(){
           data: [
             {
               label: "Popular",
-              value: Math.ceil(parseInt(datos.data[0].popular)/1000000)
-              ,color:"#00853E",
+              value: Math.ceil(parseInt(datos.data[0].popular)/1000000),
+          
               link: "j-showAlert-Apple,$810K"
             },
             {
               label: "Santa Cruz",
               value: Math.ceil(parseInt(datos.data[0].santa_cruz)/1000000)
-              ,color:"#00853E"
+        
             },
             {
               label: "Manrique",
               value: Math.ceil(parseInt(datos.data[0].manrique)/1000000)
-              ,color:"#00853E"
+           
             },
             {
               label: "Aranjuez",
-              value: Math.ceil(parseInt(datos.data[0].aranjuez)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].aranjuez)/1000000) 
             },
             {
               label: "Castilla",
-              value: Math.ceil(parseInt(datos.data[0].castilla)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].castilla)/1000000) 
             },
             {
               label: "Doce de Octubre",
-              value: Math.ceil(parseInt(datos.data[0].doce_de_octubre)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].doce_de_octubre)/1000000)
             },
             {
               label: "Robledo",
-              value: Math.ceil(parseInt(datos.data[0].robledo)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].robledo)/1000000) 
             },
             {
               label: "Villa Hermosa",
-              value: Math.ceil(parseInt(datos.data[0].villa_hermosa)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].villa_hermosa)/1000000) 
             },
             {
               label: "Buenos Aires",
-              value: Math.ceil(parseInt(datos.data[0].buenos_aires)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].buenos_aires)/1000000)
             },
             {
               label: "La Candelaria",
-              value: Math.ceil(parseInt(datos.data[0].la_candelaria)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].la_candelaria)/1000000) 
             },
             {
               label: "Laureles Estadio",
-              value: Math.ceil(parseInt(datos.data[0].laureles_estadio)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].laureles_estadio)/1000000)
             },
             {
               label: "La América",
-              value: Math.ceil(parseInt(datos.data[0].la_america)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].la_america)/1000000) 
             },
             {
               label: "San Javier",
-               value: Math.ceil(parseInt(datos.data[0].san_javier)/1000000) ,color:"#00853E"
+               value: Math.ceil(parseInt(datos.data[0].san_javier)/1000000) 
             },
             {
               label: "El Poblado",
-              value: Math.ceil(parseInt(datos.data[0].el_poblado)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].el_poblado)/1000000) 
             },
             {
               label: "Guayabal",
-              value: Math.ceil(parseInt(datos.data[0].guayabal)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].guayabal)/1000000) 
             },
             {
               label: "Belén",
-              value: Math.ceil(parseInt(datos.data[0].belen)/1000000) ,color:"#00853E"
+              value: Math.ceil(parseInt(datos.data[0].belen)/1000000) 
             },
             {
               label: "Palmitas",

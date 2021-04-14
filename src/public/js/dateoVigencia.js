@@ -163,7 +163,7 @@ async function mapa(vigencia_query){
       // Set latitude and longitude of the map center (required)
       center: [6.2982733, -75.5459204],
       // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-      zoom: 12,
+      zoom: 10,
       //maxZoom: 12,
       //minZoom: 12
     });
@@ -189,10 +189,12 @@ async function mapa(vigencia_query){
        onEachFeature: function (feature, layer) {
          switch (parseInt(vigencia_query)) {
            case 2019:
+             
              var localizada = feature.properties.inver_localizada_2019;
              var ciudad = feature.properties.inver_ciudad_2019;
              var pp = feature.properties.inver_pp_2019;
              var total = feature.properties.Vigencia2019;
+         
              break;
            case 2018:
              var localizada = feature.properties.inver_localizada_2018;
@@ -358,6 +360,7 @@ async function pintagrafica(vigencia_query){
             "total":(parseInt(datos.data[i].total))
           });
         }
+        /*
         var chart = AmCharts.makeChart( "chartdiv", {
           "type": "serial",
           "theme": "light",
@@ -389,7 +392,13 @@ async function pintagrafica(vigencia_query){
             "enabled": true
           }
         
-        } );
+        } );*/
+
+
+      
+
+
+        
       })
 }   
 

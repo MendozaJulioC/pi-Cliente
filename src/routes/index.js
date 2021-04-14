@@ -1,9 +1,9 @@
 const { Router} = require('express');
 const router = Router();
 
-const {isAuthenticated, notAuthenticated}= require('../helpers/auth');
+const { isAuthenticated, notAuthenticated }= require('../helpers/auth');
 
-const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente, getPrograma, getAlertas} = require('../controllers/index.controllers');
+const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente, getPrograma, getAlertas } = require('../controllers/index.controllers');
     router.get('/',notAuthenticated, getHome);
     router.get('/dash',isAuthenticated, getDash)
     router.get('/general', isAuthenticated,getGeneral)
@@ -23,6 +23,8 @@ router.get('/linea-1',isAuthenticated,getLinea1)
     .get('/linea-5', isAuthenticated,getLinea5)
 
 
+const { getTerritorio }= require('../controllers/taskTerritorio'); 
+router.get('/territorio', isAuthenticated, getTerritorio)
 
 const { getProjects, getProject1, 
         getProject2, getProject3,getProject4,getProject5,getProject6,

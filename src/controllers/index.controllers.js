@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
 
-
-
 const getHome = async (req, res) => {
     try {
        //const message = req.session.msg; delete req.session.msg;
@@ -12,7 +10,6 @@ const getHome = async (req, res) => {
         res.render('./home/index.html', {
             title: "SEE-PDM",
             message
-           
         })
     } catch (e) {
         console.error('Error getHome ', e);
@@ -29,14 +26,8 @@ const getContacto = async (req, res) => {
     }
 }
 
-
-
-
-
-
 const getDash= async (req, res)=>{
     try {
-
         res.render('./dash/dash.html', {
             title: "SEE-PDM"
         })
@@ -55,7 +46,6 @@ const getGeneral = async(req, res)=>{
     }   
 }
 
-
 const getIndicador = async(req, res)=>{
     try {
         fetch('http://localhost:7000/pi/api/list-indicador')
@@ -66,14 +56,11 @@ const getIndicador = async(req, res)=>{
                 title: "Indicadores",
                 indicadores: indicadores
             })
-
         })
-        
     } catch (e) {
         console.error('Error getIndicador ', e);
     }   
 }
-
 
 const getEstructura = async(req, res)=>{
     try {
@@ -95,13 +82,10 @@ const getComponente = async(req, res)=>{
                 title: "Componentes-PDM",
                 componentes: componentes
             })
-
         })
-        
     } catch (e) {
         console.error('Error getComponente', e );
     }   
-  
 }
 
 const getPrograma = async(req, res)=>{
@@ -114,29 +98,20 @@ const getPrograma = async(req, res)=>{
                 title: "Programas-PDM",
                 componentes: programas
             })
-
         })
-        
-    } catch (e) {
+     } catch (e) {
         console.error('Error getPrograma', e );
     }   
-  
 }
 
 const getAlertas = async(req, res)=>{
-  
-      
-        try {
-            res.render('./alertas/alerta.html', {
-                title: "Alertas-PDM"
-            })
-        } catch (e) {
-            console.error('Error getAlertas ', e);
-        }
-     
-        
-   
-  
+    try {
+        res.render('./alertas/alerta.html', {
+            title: "Alertas-PDM"
+        })
+    } catch (e) {
+        console.error('Error getAlertas ', e);
+    }
 }
 
 module.exports = { getHome, getDash, getGeneral, getContacto, getIndicador, getEstructura, getComponente, getPrograma, getAlertas}
