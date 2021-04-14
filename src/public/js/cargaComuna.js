@@ -57,7 +57,7 @@ function buscaComuna(){
 	    "vigencia":vigencia   
     }
     if(territorio!=0){  
-        fetch('http://localhost:4000/api/comuna/vigencia',{
+        fetch('https://sse-pdm.herokuapp.com/api/comuna/vigencia',{
             method:'POST',
             body: JSON.stringify(parametros), // data can be `string` or {object}!
             headers:{
@@ -133,7 +133,7 @@ function ComunaDepVigencia(){
 	    "vigencia":vigencia   
     }
     if(territorio!=0){  
-        fetch('http://localhost:4000/api/comuna/dependencias',{
+        fetch('https://sse-pdm.herokuapp.com/api/comuna/dependencias',{
             method:'POST',
             body: JSON.stringify(parametros), // data can be `string` or {object}!
             headers:{
@@ -313,7 +313,7 @@ async function proyectosxcomuna(bloque){
             "page"      :   bloque
         }
       
-        fetch('http://localhost:4000/api/comuna/proyectos/',{
+        fetch('https://sse-pdm.herokuapp.com/api/comuna/proyectos/',{
             method: 'POST',
             body: JSON.stringify(parametros),
             headers:{

@@ -70,7 +70,7 @@ async function _getBuscaNombreComponente(){
     let nom_Componente = document.getElementById('browser').value
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     try {
-        fetch(`http://localhost:7000/pi/api/componentes/consulta/nombre/${nom_Componente}`)
+        fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/consulta/nombre/${nom_Componente}`)
         .then(res=> res.json())
         .then(datos=>{
           if(datos.data.length>0){
@@ -102,7 +102,7 @@ async function _getBuscaNombreComponente(){
             alerta_nomcomponente(nom_Componente)
              _graphAvanceComponente(avancecomponente)
              pptoComponente(datos.data[0].cod_componente)
-             fetch(`http://localhost:7000/pi/api/componentes/consulta-programas/nombre/${nom_Componente}`)
+             fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/consulta-programas/nombre/${nom_Componente}`)
              .then(res=> res.json())
              .then(response=>{
                let peso=0; let avance=0;
@@ -131,7 +131,7 @@ async function _getBuscaNombreComponente(){
                 document.getElementById('tbl_prg').innerHTML=tabla;
                } 
              })
-             fetch(`http://localhost:7000/pi/api/componentes/responsables/nombre/${nom_Componente}`)
+             fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/responsables/nombre/${nom_Componente}`)
             .then(res=> res.json())
             .then(response =>{
               let peso3=0; let avance3=0;  let formula=0;
@@ -179,7 +179,7 @@ async function _getBuscaCodigoComponente(){
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     if (cod_componente.length>=3){
         try {
-          fetch(`http://localhost:7000/pi/api/componentes/consulta/codigo/${cod_componente}`)
+          fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/consulta/codigo/${cod_componente}`)
             .then(res=> res.json())
             .then(datos => {
               if(datos.data.length>0){
@@ -210,7 +210,7 @@ async function _getBuscaCodigoComponente(){
               // _graphCumplimientoComponente(avancecomponente)
                alerta_nomcomponente(datos.data[0].nom_componente)
                _graphAvanceComponente(avancecomponente)
-               fetch(`http://localhost:7000/pi/api/componentes/consulta-programas/codigo/${cod_componente}`)
+               fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/consulta-programas/codigo/${cod_componente}`)
                .then(res=> res.json())
                .then(response=>{
                   let tabla=''
@@ -228,7 +228,7 @@ async function _getBuscaCodigoComponente(){
                     } 
                   })
                   //responsables
-                     fetch(`http://localhost:7000/pi/api/componentes/responsables/codigo/${cod_componente}`)
+                     fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/responsables/codigo/${cod_componente}`)
                      .then(res=> res.json())
                      .then(response3=>{
                         let tabla3=''
@@ -264,7 +264,7 @@ async function _clearBusca(){
 }
 async function alerta_nomcomponente(nom_Componente){
   try {
-    fetch(`http://localhost:7000/pi/api/componentes/semaforo-corte/alerta/nombre/${nom_Componente}`)
+    fetch(`https://sse-pdm.herokuapp.com/pi/api/componentes/semaforo-corte/alerta/nombre/${nom_Componente}`)
     .then(res=> res.json())
     .then(response=>{
         const dataSource = {
@@ -321,7 +321,7 @@ async function alerta_nomcomponente(nom_Componente){
 }
 async function pptoComponente(cod_componente){
   try {
-        fetch(`http://localhost:7000/pi/api/componente/ppto/${cod_componente}`)
+        fetch(`https://sse-pdm.herokuapp.com/pi/api/componente/ppto/${cod_componente}`)
         .then(res=> res.json())
         .then(datos=>{
           const dataSource = {
