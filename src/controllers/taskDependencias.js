@@ -14,7 +14,7 @@ const getDependencias = async (req, res) => {
    const message = req.flash('message')[0]  ;
    //console.log(message)
  
-       fetch(`https://sse-pdm.herokuapp.com/see/api/dependencias`)
+       fetch(`http://localhost:7000/see/api/dependencias`)
        .then(res=>res.json())
        .then(data=>{
            dependencias =data.data

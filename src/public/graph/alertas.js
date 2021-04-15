@@ -12,7 +12,7 @@ async function dateomain(){
 }
 
 async function semaforo_inicial(){
-  fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/total`)
+  fetch(`http://localhost:7000/pi/api/semaforo-corte/total`)
   .then(res=> res.json())
   .then(response=>{
     document.getElementById('title-dep').innerHTML="PDM-2020-2023";
@@ -25,7 +25,7 @@ async function semaforo_inicial(){
 async function avance_linea_dep(){
   try {
     let info=[];
-    fetch('https://sse-pdm.herokuapp.com/dep/api/dependencias/avance')
+    fetch('http://localhost:7000/dep/api/dependencias/avance')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -83,7 +83,7 @@ async function alertasGraph(){
     let tabla='';
     let sumInd=0, sumGris=0, sumRojo=0,  sumAmarillo=0, sumVerde=0;
     document.getElementById('tabla_alerta').innerHTML="";
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/alertas`)
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/alertas`)
     .then(res=> res.json())
     .then(datos=>{
     let tam = datos.data.length;
@@ -274,7 +274,7 @@ $(document).ready(function(){
 });
 async function _avancePDM(){
   try {
-    fetch('https://sse-pdm.herokuapp.com/pi/api/total')
+    fetch('http://localhost:7000/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
       let avance = parseFloat(datos.data[0].total_plan).toFixed(2)
@@ -289,7 +289,7 @@ async function otragrafica(data){
   let cod_dep = (data.data.link).substring(12,15)
   //console.log(cod_dep);
   try {
-    fetch(` https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/contador/dependencias/${cod_dep}`)
+    fetch(` http://localhost:7000/pi/api/semaforo-corte/contador/dependencias/${cod_dep}`)
     .then(res=> res.json())
     .then(response=> {
  //     console.log(response.data[0].gris);
@@ -451,7 +451,7 @@ async function hola (cod_dep,nom_dep,avance){
       "cod_semaforo": 1,
       "cod_dependencia": cod_dep
     }
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/dependencia/tipo/ `,{
+    fetch(`http://localhost:7000/pi/api/semaforo-corte/dependencia/tipo/ `,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{

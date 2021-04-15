@@ -383,7 +383,7 @@ const mapaVogencia = async (req, res) => {
 const tablaVigencia = async(req, res)=>{
   try {
       var datadep=[];
-      fetch('https://sse-pdm.herokuapp.com/api/vigencias/dependencias/2019')
+      fetch('http://localhost:7000/api/vigencias/dependencias/2019')
       .then(res=> res.json())
           .then(datos=>{
 

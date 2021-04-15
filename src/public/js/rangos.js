@@ -23,7 +23,7 @@
       "mesplan" : mes,
       "vigencia": vigencia
     }
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte`,{
+    fetch(`http://localhost:7000/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
