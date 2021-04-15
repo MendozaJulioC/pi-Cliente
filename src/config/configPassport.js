@@ -12,7 +12,7 @@ passport.use( new LocalStrategy({
     
 }, async (email, password, done)=>{
    let user=[];
-    fetch(`http://localhost:7000/auth/api/validatemail/${email}`)
+    fetch(`https://sse-pdm.herokuapp.com/auth/api/validatemail/${email}`)
     .then(res=> res.json())
     .then(respuesta =>{
         let tam = respuesta.data.length;
@@ -67,7 +67,7 @@ async function isMatch(password, user,done)
 }
 
 function finalFunction(id,done){
-    fetch(`http://localhost:7000/auth/api/id/${id}`)
+    fetch(`https://sse-pdm.herokuapp.com/auth/api/id/${id}`)
     .then(res=> res.json())
     .then(respuesta =>{
        if (respuesta.data) {

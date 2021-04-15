@@ -15,7 +15,7 @@ const vigencia= async(req,res)=>{
      let ciudad = document.getElementById('inverCiudad');
      let pp = document.getElementById('pp');
      let fortInst= document.getElementById('fortInst');
-    fetch('http://localhost:7000/geo/api/tipo-inversion')
+    fetch('https://sse-pdm.herokuapp.com/geo/api/tipo-inversion')
     .then(res=>res.json())
     .then(datos=>{
 
@@ -91,7 +91,7 @@ const vigencia= async(req,res)=>{
 
 const garficaTotalCmuna = async(req, res)=>{
   try {
-    fetch(`http://localhost:7000/geo/api/territorio`)
+    fetch(`https://sse-pdm.herokuapp.com/geo/api/territorio`)
     .then(res=>res.json())
     .then(datos=>{
     const dataSource = {
@@ -383,7 +383,7 @@ const mapaVogencia = async (req, res) => {
 const tablaVigencia = async(req, res)=>{
   try {
       var datadep=[];
-      fetch('http://localhost:7000/api/vigencias/dependencias/2019')
+      fetch('https://sse-pdm.herokuapp.com/api/vigencias/dependencias/2019')
       .then(res=> res.json())
           .then(datos=>{
 

@@ -48,7 +48,7 @@ const getGeneral = async(req, res)=>{
 
 const getIndicador = async(req, res)=>{
     try {
-        fetch('http://localhost:7000//pi/api/list-indicador')
+        fetch('https://sse-pdm.herokuapp.com/pi/api/list-indicador')
         .then(res=> res.json())
         .then(data=>{
             indicadores = data.data;
@@ -74,7 +74,7 @@ const getEstructura = async(req, res)=>{
 
 const getComponente = async(req, res)=>{
     try {
-        fetch('http://localhost:7000/pi/api/list-componente')
+        fetch('https://sse-pdm.herokuapp.com/pi/api/list-componente')
         .then(res=>res.json())
         .then(data=>{
             componentes = data.data;
@@ -90,7 +90,7 @@ const getComponente = async(req, res)=>{
 
 const getPrograma = async(req, res)=>{
     try {
-        fetch('http://localhost:7000/pi/api/list-programas')
+        fetch('https://sse-pdm.herokuapp.com/pi/api/list-programas')
         .then(res=>res.json())
         .then(data=>{
             programas = data.data;
