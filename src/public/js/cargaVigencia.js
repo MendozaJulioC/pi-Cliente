@@ -17,7 +17,13 @@ const vigencia= async(req,res)=>{
     fetch('https://sse-pdm.herokuapp.com/geo/api/tipo-inversion')
     .then(res=>res.json())
     .then(datos=>{
-
+      swal( {
+        title: "SSE-PDM!",
+        text: "Hola, está cargando espere un momento!",
+        icon: "info",
+        buttons: false,
+        timer: 4000
+      });
      
         vigencia.innerHTML= 2020
         localizada.innerHTML=formatter.format(Math.round(datos.data[0].localizada))
@@ -464,6 +470,13 @@ async function comunas (value, nombre, valor, localizada, ciudad, pp){
 var nom_comuna ="";
 
 async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
+  swal( {
+    title: "SSE-PDM!",
+    text: "Hola, está cargando espere un momento!",
+    icon: "info",
+    buttons: false,
+    timer: 4000
+  });
   nom_comuna=nombre
     document.getElementById('mapaprueba').innerHTML= value
     document.getElementById('nombre_comuna').innerHTML= nombre
@@ -489,6 +502,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       fetch(geo_url)
       .then(res=>res.json())
       .then(data => {
+     
         document.getElementById('total').innerHTML= new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(valor))
       
          let geojsonlayer2 = L.geoJson(data, {

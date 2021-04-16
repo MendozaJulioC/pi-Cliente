@@ -6,6 +6,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
 var colorfondo='';
 let valores=[]; let valores2=[]; let valores3=[];
+
 async function dateomain(){
    setTimeout(function(){ avance_linea_dep()   }, 4000);
   semaforo_inicial()
