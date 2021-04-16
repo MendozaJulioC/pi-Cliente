@@ -461,8 +461,10 @@ async function comunas (value, nombre, valor, localizada, ciudad, pp){
 
 }
 */
+var nom_comuna ="";
+
 async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
-  console.log(value, nombre, valor);
+  nom_comuna=nombre
     document.getElementById('mapaprueba').innerHTML= value
     document.getElementById('nombre_comuna').innerHTML= nombre
     var container = L.DomUtil.get('map2');
@@ -480,7 +482,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2580/-75.5542">maps.stamen.com</a> contributors'
       }).addTo(map2);
-      console.log('Map ready');
+     
       let geo_url=""; 
       geo_url=`https://www.medellin.gov.co/mapas/rest/services/ServiciosCiudad/CartografiaBase/MapServer/9/query?where=LIMITECOMUNACORREGIMIENTOID%3D%27${value}%27&f=geojson`
    
@@ -488,6 +490,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       .then(res=>res.json())
       .then(data => {
         document.getElementById('total').innerHTML= new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(valor))
+      
          let geojsonlayer2 = L.geoJson(data, {
            style: style2(valor),
            onEachFeature: async function (feature, layer) {
@@ -666,3 +669,22 @@ async function depterriotiomodal(value){
 }
 
 
+
+
+async function dowloadGEO (){
+
+
+  const invoice = this.document.getElementById('GeoReport');
+  // console.log(invoice);
+  //console.log(window);
+  var opt = {
+    margin:       1,
+    filename:     nom_comuna+'.pdf',
+    image:        { type: 'jpeg', quality: 0.95 },
+    html2canvas:  { scale: 4, letterRending:true },
+    pagebreak: { mode: 'avoid-all', before: '#page2el' },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'landscape' }
+  };
+  html2pdf().from(invoice).set(opt).save();
+
+}

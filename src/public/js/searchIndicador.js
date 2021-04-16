@@ -1,7 +1,11 @@
 var avance_cuatrienio= 0;
 var cumplimiento_logro=0;
 
-
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+})
 
 focusMethod = function getFocus() {           
     document.getElementById("indicadorquery").focus();
