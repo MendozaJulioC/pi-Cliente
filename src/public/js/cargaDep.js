@@ -117,8 +117,8 @@ async function queryDepVig(){
              datos.push({
             "comuna": response.data[i].nom_corto_comuna,
             "total":Math.round(parseInt(response.data[i].total)/1000000),
-        });
-    }
+         });
+        }
 
 
     var chart = AmCharts.makeChart("chartdivComunas", {

@@ -1,5 +1,4 @@
 
-
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -80,13 +79,12 @@ const vigencia= async(req,res)=>{
     })
    
     garficaTotalCmuna()
+
     
   }catch (error) {console.log(error)}
 
 
 }
-
-
 
 
 const garficaTotalCmuna = async(req, res)=>{
@@ -229,8 +227,6 @@ const garficaTotalCmuna = async(req, res)=>{
 mapaVogencia();
 }
  
-
-
 const mapaVogencia = async (req, res) => {
   var container = L.DomUtil.get('map');
   if(container != null){
@@ -271,7 +267,7 @@ const mapaVogencia = async (req, res) => {
         style: style,
         
         onEachFeature: function (feature, layer) {
-          
+  
 
 
           
@@ -304,7 +300,7 @@ const mapaVogencia = async (req, res) => {
                       <tr>
                         <td>Consultar</td>
                         <td>
-                        <a name="" id="" class="btn btn-sm btn-success btn-block" onclick="pruebaevento( ${feature.properties.CODIGO }, '${feature.properties.NOMBRE }',${feature.properties.Vigencia2020},${feature.properties.inver_localizada_2020},${feature.properties.inver_ciudad_2020}, ${feature.properties.inver_pp_2020})"  data-toggle="modal" data-target="#exampleModalmapa" role="button">
+                        <a name="" id="" class="btn btn-sm btn-success btn-block" onclick="pruebaevento( '${feature.properties.CODIGO }', '${feature.properties.NOMBRE }',${feature.properties.Vigencia2020},${feature.properties.inver_localizada_2020},${feature.properties.inver_ciudad_2020}, ${feature.properties.inver_pp_2020})"  data-toggle="modal" data-target="#exampleModalmapa" role="button">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                           </svg> Ampliar
@@ -380,64 +376,7 @@ const mapaVogencia = async (req, res) => {
 
 }
 
-const tablaVigencia = async(req, res)=>{
-  try {
-      var datadep=[];
-      fetch('https://sse-pdm.herokuapp.com/api/vigencias/dependencias/2019')
-      .then(res=> res.json())
-          .then(datos=>{
 
-            let tam = datos.data.length;
-          
-        
-            for(var i =0; i<(tam) ;i++   ){
-                datadep.push({
-                  "dependencias": datos.data[i].nom_cortp,
-                  "total":(parseInt(datos.data[i].total))
-                });
-                
-            }
-         
-            var chart = AmCharts.makeChart( "chartdiv", {
-              "type": "serial",
-              "theme": "light",
-              "rotate": true,
-         
-              "dataProvider": datadep,
-              "gridAboveGraphs": true,
-              "startDuration": 1,
-              "graphs": [ {
-                "balloonText": "[[category]]: <b>[[value]]</b>",
-                "fillAlphas": 0.9,
-                "lineAlpha": 0.2,
-                "type": "column",
-                "fillColors":"#EE7518",
-                "valueField": "total"
-              } ],
-              "chartCursor": {
-                "categoryBalloonEnabled": false,
-                "cursorAlpha": 0,
-                "zoomable": false
-              },
-              "categoryField": "dependencias",
-              "categoryAxis": {
-                "gridPosition": "start",
-                "gridAlpha": 0,
-                "tickPosition": "start",
-                "tickLength": 5
-              },
-              "export": {
-                "enabled": true
-              }
-            
-            } );
-            
-
-
-          })
-
-  } catch (error) {}
-}
 
 
 function getColor(d) {
@@ -496,6 +435,32 @@ function resetHighlight(e) {
   geojson.resetStyle(e.target);
 }
 
+
+
+/*
+async function comunas (value, nombre, valor, localizada, ciudad, pp){
+
+  var container = L.DomUtil.get('map2');
+  if(container != null){
+      container._leaflet_id = null;
+  }
+  var map2 = L.map('map2', {
+      // Set latitude and longitude of the map center (required)
+      center: [6.2982733, -75.5459204],
+      // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
+      zoom: 11,
+      //maxZoom: 12,
+      //minZoom: 12
+    });
+    // Create a Tile Layer and add it to the map
+    var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2518/-75.5636">maps.stamen.com</a> contributors'
+    }).addTo(map2);   
+
+    pruebaevento(value, nombre, valor, localizada, ciudad, pp)
+
+}
+*/
 async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
   console.log(value, nombre, valor);
     document.getElementById('mapaprueba').innerHTML= value
@@ -506,18 +471,19 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
     }
     var map2 = L.map('map2', {
       // Set latitude and longitude of the map center (required)
-      center: [6.2262, -75.5453],
+      center: [6.2269, -75.5459204],
       // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-      zoom: 12,
+      zoom: 11,
       //maxZoom: 12,  
       //minZoom: 12
     });
-    var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+      var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2580/-75.5542">maps.stamen.com</a> contributors'
       }).addTo(map2);
       console.log('Map ready');
       let geo_url=""; 
-      geo_url=`https://www.medellin.gov.co/mapas/rest/services/ServiciosCatastro/OPENDATA_Catastro/MapServer/6/query?where=comuna%3D${value}&f=geojson`
+      geo_url=`https://www.medellin.gov.co/mapas/rest/services/ServiciosCiudad/CartografiaBase/MapServer/9/query?where=LIMITECOMUNACORREGIMIENTOID%3D%27${value}%27&f=geojson`
+   
       fetch(geo_url)
       .then(res=>res.json())
       .then(data => {
@@ -562,7 +528,12 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
           
 
            }
+        
          }).addTo(map2)
+
+         map2.fitBounds(geojsonlayer2.getBounds(),  {maxZoom: 15})
+
+
           L.Control.Watermark = L.Control.extend({
           onAdd: function(map2) {
           var img = L.DomUtil.create('img');
@@ -580,48 +551,42 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
           L.control.watermark({ position: 'bottomleft' }).addTo(map2);
 
       });
-
-      
       map2.whenReady(() => {
-        setTimeout(() => {map2.invalidateSize();}, 800);
- 
-        jQuery.noConflict();
+       
+        setTimeout(() => {map2.invalidateSize();}, 200);
+         jQuery.noConflict();
         $('#Modalmapa').modal('show');    
     })
     const dataSource = {
       chart: {
-        caption: "Android Distribution for our app",
-        subcaption: "For all users in 2017",
-        showpercentvalues: "1",
-        defaultcenterlabel: "Android Distribution",
-        aligncaptionwithcanvas: "0",
-        captionpadding: "0",
-        decimals: "1",
-        plottooltext:
-          "<b>$percentValue</b> of our Android users are on <b>$label</b>",
-        centerlabel: "# Users: $value",
-        theme: "ocean"
-      },
+        caption: "Distribución por tipo de Inversión",
+        subcaption: `${nombre}`,
+            showpercentvalues: "0",
+            defaultcenterlabel: "Tipo de Inversión",
+            aligncaptionwithcanvas: "0",
+            captionpadding: "0",
+            numberprefix: "$",
+            //numbersuffix:"%",
+            formatnumberscale: "0",
+            decimals: "1",
+            plottooltext:
+              "<b>$percentValue</b> de la Inversión <b>Total</b>",
+              centerlabelFontSize:"1rem",
+            centerlabel: "$label: $value",
+            theme: "ocean"
+          },
       data: [
         {
-          label: "Ice Cream Sandwich",
-          value: "1000"
+          label: "Localizada",
+          value: localizada
         },
         {
-          label: "Jelly Bean",
-          value: "5300"
+          label: "Ciudad",
+          value: ciudad
         },
         {
-          label: "Kitkat",
-          value: "10500"
-        },
-        {
-          label: "Lollipop",
-          value: "18900"
-        },
-        {
-          label: "Marshmallow",
-          value: "17904"
+          label: "PP",
+          value: pp
         }
       ]
     };
@@ -636,70 +601,68 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
         dataSource
       }).render();
     });
-    depterriotiomodal() 
+    depterriotiomodal(value) 
 
     
 }
 
 
 
-async function depterriotiomodal(){
-  const dataSource = {
-    chart: {
-      caption: "Countries With Most Oil Reserves [2017-18]",
-      subcaption: "In MMbbl = One Million barrels",
-      xaxisname: "Country",
-      yaxisname: "Reserves (MMbbl)",
-      numbersuffix: "K",
-      theme: "ocean"
-    },
-    data: [
-      {
-        label: "Venezuela",
-        value: "290"
-      },
-      {
-        label: "Saudi",
-        value: "260"
-      },
-      {
-        label: "Canada",
-        value: "180"
-      },
-      {
-        label: "Iran",
-        value: "140"
-      },
-      {
-        label: "Russia",
-        value: "115"
-      },
-      {
-        label: "UAE",
-        value: "100"
-      },
-      {
-        label: "US",
-        value: "30"
-      },
-      {
-        label: "China",
-        value: "30"
+async function depterriotiomodal(value){
+  try {
+    let comuna = parseInt(value)
+    var datos=[];
+    fetch(`http://localhost:7000/geo/api/comuna/dep-inversion/${comuna}`)
+    .then(res=> res.json())
+    .then(response=>{
+      let tam = response.data.length;
+      for(var i =0; i<(tam) ;i++   ){
+           datos.push({
+          "label": response.data[i].nom_cortp,
+          "value":Math.round(parseInt(response.data[i].total)),
+       });
       }
-    ]
-  };
-  
-  FusionCharts.ready(function() {
-    var myChart = new FusionCharts({
-      type: "column2d",
-      renderAt: "ChartDepComuna-modal",
-      width: "100%",
-      height: "100%",
-      dataFormat: "json",
-      dataSource
-    }).render();
-  });
 
+      const dataSource = {
+        chart: {
+          caption: "Inversión realizada por las Dependencias",
+          subcaption: "Cifras en millones de pesos",
+          xaxisname: "Dependencias",
+          yaxisname: "Millones de pesos",
+          labeldisplay: "ROTATE",
+          showvalues: "1",
+          formatnumberscale: "0",
+          numberprefix: "$",
+          theme: "gammel"
+        },
+        data: datos
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "bar2d",
+          renderAt: "ChartDepComuna-modal",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+    
+
+
+
+      
+    })
+
+  } catch (error) {
+        console.error('Error  depterriotiomodal:  ', error)
+  }
+
+
+
+
+ 
 }
 
 
