@@ -615,7 +615,7 @@ async function depterriotiomodal(value){
   try {
     let comuna = parseInt(value)
     var datos=[];
-    fetch(`http://localhost:7000/geo/api/comuna/dep-inversion/${comuna}`)
+    fetch(`https://sse-pdm.herokuapp.com/geo/api/comuna/dep-inversion/${comuna}`)
     .then(res=> res.json())
     .then(response=>{
       let tam = response.data.length;
