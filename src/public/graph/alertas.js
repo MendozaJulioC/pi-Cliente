@@ -119,12 +119,18 @@ async function alertasGraph(){
             "avance": avance,
             "color" : colorfondo
           })
-          valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,(gris+rojo+amarillo+verde),
-                          gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+          valores2.push([ datos.data[i].cod_dep, 
+                          datos.data[i].nombre_dep,
+                        "",
+                          gris,
+                          ( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          rojo,
+                          ( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
                           amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          (avance).toFixed(2), back_semafav
+                          verde,
+                          ( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          (avance).toFixed(2),
+                          (gris+rojo+amarillo+verde)
                       ] )
       }
      valores.sort((b, a) =>  b.avance - a.avance )
@@ -137,7 +143,7 @@ async function alertasGraph(){
        
           { title: "Cod_Dep" },
           { title: "Dependencia" },
-          { title: "Indicadores de Producto" },
+          { title: " Ampliar" }, 
           { title: "No programados" },
           { title: "%" },
           { title: "Bajo" },
@@ -147,8 +153,7 @@ async function alertasGraph(){
           { title: "Alto" },
           { title: "%" },
           { title: " % Avance Cuatrienio" },
-          { title: " Estado" },
-          { title: " Ampliar" }, 
+         { title: "Indicadores de Producto" },
         ] ,   
       scrollCollapse: true, 
       fixedColumns: {
@@ -211,9 +216,11 @@ async function alertasGraph(){
         }],
         columnDefs: [
           {/*cod_dep*/  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false  },
-          {/*cod_dep*/  width: "550px", targets: 1                           },
-          {/*nom_dep*/  width: "70px", targets: 2    ,  className: "text-center"      },
-          {/*total_indicadores*/  width: "100px", targets: 3, className: "text-center"},
+          {/*nom_dep*/  width: "510px", targets: 1                           },
+          {/*ampliar*/  width: "70px", targets: 2,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
+          {/*no_prg*/  width: "70px", targets: 3    ,  className: "text-center"      },
+         
+          
           {/*no prg*/   width: "70px",  targets: 4, className: "text-center"          },
           {/*%no prg*/  width: "70px",  targets: 5, className: "text-center"          },
           {/*rojo*/     width: "70px",  targets: 6, className: "text-center"          },
@@ -222,8 +229,9 @@ async function alertasGraph(){
           {/*%amarillo*/width: "70px",  targets: 9, className: "text-center"          }, 
           {/*verde*/    width: "70px",  targets: 10, className: "text-center"         }, 
           {/*%verde*/   width: "70px",  targets: 11, className: "text-center"         },
-          {/*avance*/   width: "90px", targets: 12, className: "text-center"         },
-          {width: "70px", targets: 13,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+      
+     
+          {/*total_indicadores*/  width: "100px", targets:12, className: "text-center"},
         ],
        
           order: [[ 1, 'asc' ]], createdRow: function(row, data){
@@ -443,8 +451,6 @@ async function verde(verde){
   });
 }
 async function hola (cod_dep,nom_dep,avance){
-
-
   try {
     document.getElementById('nom_depencia_query').innerHTML=nom_dep
     back_semafav =  ` <i class="fa fa-times-circle fa-2x"style="color: #ff6b6b;"> </i>`;

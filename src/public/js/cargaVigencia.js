@@ -468,8 +468,13 @@ async function comunas (value, nombre, valor, localizada, ciudad, pp){
 }
 */
 var nom_comuna ="";
-
+/*
+async function dateomain(value, nombre, valor, localizada, ciudad, pp){
+  setTimeout(function(){  pruebaevento(value, nombre, valor, localizada, ciudad, pp) , 1000  });
+ 
+}*/
 async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
+
   swal( {
     title: "SSE-PDM!",
     text: "Hola, está cargando espere un momento!",
@@ -477,7 +482,9 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
     buttons: false,
     timer: 4000
   });
-  nom_comuna=nombre
+
+
+    nom_comuna=nombre
     document.getElementById('mapaprueba').innerHTML= value
     document.getElementById('nombre_comuna').innerHTML= nombre
     var container = L.DomUtil.get('map2');
@@ -619,6 +626,10 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       }).render();
     });
     depterriotiomodal(value) 
+    
+    
+
+  
 
     
 }
