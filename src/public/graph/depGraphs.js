@@ -1,5 +1,3 @@
-
-
 //import fetch from "node-fetch"
 var nomarchivopdf='';
 var table4={};
@@ -714,13 +712,10 @@ async function avance_prgs_dep(dep, nom_dep){
 async function plan_accion_dep(dep){  
  let valores1=[]; let valores2=[];let valores3=[];let valores4=[];
 
-
   fetch(`https://sse-pdm.herokuapp.com/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
     let tam = datos.data.length; 
-    
-
     for(var i =0; i<(tam) ;i++){
      if (datos.data[i].tipo_iniciativa==1){
       valores1.push([ datos.data[i].cod_linea,
@@ -775,10 +770,9 @@ async function plan_accion_dep(dep){
           formatter.format(datos.data[i].ejecucion)
         ]);
     }
- 
-    } 
-//    console.log(valores1);
-    nuevatabla(valores1,valores2,valores3,valores4)
+  } 
+//console.log(valores1);
+  nuevatabla(valores1,valores2,valores3,valores4)
 
 })
 }

@@ -1,5 +1,5 @@
  function corteplan(){
-    var fecha = new Date('12/31/2020');
+    var fecha = new Date('03/31/2021');
     document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
     // mes = fecha.getMonth(fecha)
     vigencia = fecha.getFullYear(fecha)

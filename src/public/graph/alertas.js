@@ -119,18 +119,12 @@ async function alertasGraph(){
             "avance": avance,
             "color" : colorfondo
           })
-          valores2.push([ datos.data[i].cod_dep, 
-                          datos.data[i].nombre_dep,
-                        "",
-                          gris,
-                          ( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          rojo,
-                          ( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+          valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,"",
+                          gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
                           amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          verde,
-                          ( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          (avance).toFixed(2),
-                          (gris+rojo+amarillo+verde)
+                          verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+                          (avance).toFixed(2),(gris+rojo+amarillo+verde)
                       ] )
       }
      valores.sort((b, a) =>  b.avance - a.avance )
@@ -140,7 +134,6 @@ async function alertasGraph(){
      var table= $('#alerta_table').DataTable( {
       data: valores2,
       columns: [
-       
           { title: "Cod_Dep" },
           { title: "Dependencia" },
           { title: " Ampliar" }, 
@@ -166,7 +159,6 @@ async function alertasGraph(){
           "info": "Vistas página _PAGE_ of _PAGES_",
           "infoEmpty": "No hay registros Disponibles",
           "infoFiltered": "(filtered from _MAX_ total registros)", 
-          
           paginate: {
             first: "Primera",
             last: "Última",
@@ -216,11 +208,9 @@ async function alertasGraph(){
         }],
         columnDefs: [
           {/*cod_dep*/  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false  },
-          {/*nom_dep*/  width: "510px", targets: 1                           },
-          {/*ampliar*/  width: "70px", targets: 2,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
-          {/*no_prg*/  width: "70px", targets: 3    ,  className: "text-center"      },
-         
-          
+          {/*nom_dep*/  width: "510px", targets: 1                                    },
+          {/*ampliar*/  width: "70px",  targets: 2, className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
+          {/*no_prg*/  width: "70px",   targets: 3,  className: "text-center"         },
           {/*no prg*/   width: "70px",  targets: 4, className: "text-center"          },
           {/*%no prg*/  width: "70px",  targets: 5, className: "text-center"          },
           {/*rojo*/     width: "70px",  targets: 6, className: "text-center"          },
@@ -229,8 +219,6 @@ async function alertasGraph(){
           {/*%amarillo*/width: "70px",  targets: 9, className: "text-center"          }, 
           {/*verde*/    width: "70px",  targets: 10, className: "text-center"         }, 
           {/*%verde*/   width: "70px",  targets: 11, className: "text-center"         },
-      
-     
           {/*total_indicadores*/  width: "100px", targets:12, className: "text-center"},
         ],
        
@@ -351,7 +339,7 @@ async function rojo(rojo){
   const dataSource = {
     chart: {
       upperlimit: "0",
-      lowerlimit: "25",
+      lowerlimit: "150",
       usecolornameasvalue: "1",
       placevaluesinside: "1",
       valuefontsize: "20",

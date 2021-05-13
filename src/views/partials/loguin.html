@@ -3,11 +3,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <%- include ('../partials/head.html') %>
-
-
-
-
  <body>
+   
    <div class="container">
      <div class="myCard">
        <div class="row">
@@ -15,7 +12,6 @@
            <div class="myLeftCtn">
              <form class="myForm text-center" action="/auth/login" method="POST">
                <header>Ingresar</header>
-      
                <div class="form-group">
                  <i class="fa fa-envelope"></i>
                  <input class="myInput" type="email" name="username" id="username" placeholder="Usuario" required>
@@ -26,11 +22,7 @@
                </div>
                <input type="submit" class="butt" value="Ingresar">
              </form>
-
-       
-    
            </div>
-      
          </div>
           <div class="col-md-6">
                 <div class="myRigthCtn">
@@ -43,24 +35,12 @@
                     </p><br>
                   <!--  <a class="butt_out" value="Registrarme"   href="/auth/register" name="register" id="register"  >Registrarme</a> -->
                   </div>
-               
                 </div>
-             
               </div>
-
-
        </div>
-    
-
-
-
      </div>
-
    </div>
  </body>
-
-
-
  <%- include ('../partials/scriptsHome.html') %>
 <script src="/js/home.js"></script> 
 

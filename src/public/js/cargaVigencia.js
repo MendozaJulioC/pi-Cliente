@@ -25,7 +25,7 @@ const vigencia= async(req,res)=>{
         timer: 4000
       });
      
-        vigencia.innerHTML= 2020
+        vigencia.innerHTML= 2021
         localizada.innerHTML=formatter.format(Math.round(datos.data[0].localizada))
         ciudad.innerHTML= formatter.format(Math.round(datos.data[0].ciudad))
         pp.innerHTML= formatter.format(Math.round(datos.data[0].pp))
@@ -128,8 +128,7 @@ const garficaTotalCmuna = async(req, res)=>{
           {
             label: "Popular",
             value: Math.ceil(parseInt(datos.data[0].popular)/1000000),
-        
-            link: "j-showAlert-Apple,$810K"
+                    
           },
           {
             label: "Santa Cruz",
@@ -266,17 +265,9 @@ const mapaVogencia = async (req, res) => {
   fetch(geojson_url)
     .then(res => res.json())
     .then(data => {
-     
-    
       let geojsonlayer = L.geoJson(data, {
-        
         style: style,
-        
         onEachFeature: function (feature, layer) {
-  
-
-
-          
           let popupContent = `                       
              <div class="card" style="width: 18rem;">
                 <!-aquí podemos colocar una imagen-->     
@@ -289,24 +280,24 @@ const mapaVogencia = async (req, res) => {
                     <tbody>
                       <tr>
                         <td>Inversión Localizada</td>
-                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.inver_localizada_2020)) + `</td>
+                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.inver_localizada_2021)) + `</td>
                       </tr>
                      <tr>
                         <td>Inversión Ciudad</td>
-                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(feature.properties.inver_ciudad_2020)) + `</td>
+                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(feature.properties.inver_ciudad_2021)) + `</td>
                       </tr>
                       <tr>
                         <td>Inversión Presupuesto Participativo</td>
-                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(feature.properties.inver_pp_2020)) + `</td>
+                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD'}).format(parseInt(feature.properties.inver_pp_2021)) + `</td>
                       </tr>
                       <tr>
                         <td>Total Inversión</td>
-                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.Vigencia2020)) + ` </td>
+                        <td>` + new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.Vigencia2021)) + ` </td>
                       </tr>
                       <tr>
                         <td>Consultar</td>
                         <td>
-                        <a name="" id="" class="btn btn-sm btn-success btn-block" onclick="pruebaevento( '${feature.properties.CODIGO }', '${feature.properties.NOMBRE }',${feature.properties.Vigencia2020},${feature.properties.inver_localizada_2020},${feature.properties.inver_ciudad_2020}, ${feature.properties.inver_pp_2020})"  data-toggle="modal" data-target="#exampleModalmapa" role="button">
+                        <a name="" id="" class="btn btn-sm btn-success btn-block" onclick="pruebaevento( '${feature.properties.CODIGO }', '${feature.properties.NOMBRE }',${feature.properties.Vigencia2021},${feature.properties.inver_localizada_2021},${feature.properties.inver_ciudad_2021}, ${feature.properties.inver_pp_2021})"  data-toggle="modal" data-target="#exampleModalmapa" role="button">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                           </svg> Ampliar
@@ -319,43 +310,35 @@ const mapaVogencia = async (req, res) => {
                 </div>
               </div>`
               
-      let tooltipconten=' <p>  <span> <strong> <em>'+ feature.properties.NOMBRE +' </em> </strong></span>'+ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.Vigencia2020))+'</p>'
-   
-         layer.bindPopup(popupContent)
-         layer.bindTooltip( tooltipconten );
-
-        
-
-        }
-
-        
-      }).addTo(map)
-
-      map.fitBounds(geojsonlayer.getBounds())
-      var info = L.control();
-      info.onAdd = function (map) {
+      let tooltipconten=' <p>  <span> <strong> <em>'+ feature.properties.NOMBRE +' </em> </strong></span>'+ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.Vigencia2021))+'</p>'
+      layer.bindPopup(popupContent)
+      layer.bindTooltip( tooltipconten );
+    }
+  }).addTo(map)
+    map.fitBounds(geojsonlayer.getBounds())
+    var info = L.control();
+    info.onAdd = function (map) {
         this._div = L.DomUtil.create('div', 'info');
         this.update();
         return this._div;
-      };
+    };
 
-      info.update = function () {
-        this._div.innerHTML = '<p><b>2020</b></p>';
-      };
+    info.update = function () {
+      this._div.innerHTML = '<p><b>2021</b></p>';
+    };
 
-      info.addTo(map);
+    info.addTo(map);
       var legend = L.control({
-        position: 'bottomright'
-        
-      });
+      position: 'bottomright'
+    });
 
-      legend.onAdd = function (map) {
-        var div = L.DomUtil.create('div', 'info legend'),
-          grades = [0, 100000000000, 150000000000, 200000000000, 250000000000, 250000000000, 300000000000, 400000000000],
-          labels = [];
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
-          div.innerHTML +=
+    legend.onAdd = function (map) {
+      var div = L.DomUtil.create('div', 'info legend'),
+      grades = [0, 100000000000, 150000000000, 200000000000, 250000000000, 300000000000, 350000000000, 400000000000],
+      labels = [];
+      // loop through our density intervals and generate a label with a colored square for each interval
+      for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
             '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
@@ -391,15 +374,15 @@ function getColor(d) {
          d > 300000000000  ? '#41ab5d' :
          d > 250000000000  ? '#74c476' :
          d > 200000000000  ? '#a1d99b' :
-         d > 150000000000   ? '#c7e9c0' :
-         d > 100000000000   ? '#e5f5e0' :
+         d > 150000000000  ? '#c7e9c0' :
+         d > 100000000000  ? '#e5f5e0' :
                              '#f7fcf5' ;
 }
 
 
 function style(feature) {
   return {
-      fillColor: getColor(feature.properties.Vigencia2019),
+      fillColor: getColor(feature.properties.Vigencia2021),
       weight: 2,
       opacity: 1,
       color: 'white',
@@ -626,15 +609,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       }).render();
     });
     depterriotiomodal(value) 
-    
-    
-
-  
-
-    
 }
-
-
 
 async function depterriotiomodal(value){
   try {
@@ -676,29 +651,13 @@ async function depterriotiomodal(value){
           dataSource
         }).render();
       });
-    
-
-
-
-      
     })
-
   } catch (error) {
         console.error('Error  depterriotiomodal:  ', error)
   }
-
-
-
-
- 
 }
 
-
-
-
 async function dowloadGEO (){
-
-
   const invoice = this.document.getElementById('GeoReport');
   // console.log(invoice);
   //console.log(window);
