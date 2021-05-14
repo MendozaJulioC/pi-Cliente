@@ -145,7 +145,7 @@ async function _avance_financiero(){
     .then(res=>res.json())
     .then(datos=>{
       porc_avance_financiero((datos.data[0].pptoejecutado/datos.data[0].pptoajustado))
-      graphPDA(parseInt(datos.data[0].poai), parseInt(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
+      graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseFloat(datos.data[0].pptoejecutado))
       detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
     })
   } catch (error) {
@@ -220,17 +220,17 @@ async function porc_avance_financiero(avance){
     data: [
       {
         label: "Ppto. Inicial",
-        value: Math.ceil(poai),
+        value: Math.round(poai),
         "color": "#009FE3"
       },
       {
         label: "Ppto. Ajustado",
-        value: Math.ceil(pptoajustado),
+        value: Math.round(pptoajustado),
         "color": "#009AB2"
       },
       {
-        label: "Ppto. Ordenado",
-        value: Math.ceil(ordenado) ,
+        label: "Ppto. Ejecutado",
+        value:Math.round (ordenado) ,
         "color": "#EE7518"
       }
     ]
