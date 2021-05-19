@@ -228,8 +228,8 @@ const garficaTotalCmuna = async(req, res)=>{
 } catch (error) {
   console.log('Error columnGeo: ', error)
 }
+mapaVogencia()
 
-mapaVogencia();
 }
  
 const mapaVogencia = async (req, res) => {
@@ -258,7 +258,11 @@ const mapaVogencia = async (req, res) => {
     attribution: '&copy; <a href="http://maps.stamen.com/#terrain/11/6.2518/-75.5636">maps.stamen.com</a> contributors'
   }).addTo(map);
 
- 
+  map.whenReady(() => {
+       
+    setTimeout(() => {map.invalidateSize();}, 300);
+    
+})
  
   const geojson_url = "/GeoJson/Limite_Comuna_Corregimiento.geojson";
  
@@ -485,7 +489,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2580/-75.5542">maps.stamen.com</a> contributors'
       }).addTo(map2);
-     
+   
       let geo_url=""; 
       geo_url=`https://www.medellin.gov.co/mapas/rest/services/ServiciosCiudad/CartografiaBase/MapServer/9/query?where=LIMITECOMUNACORREGIMIENTOID%3D%27${value}%27&f=geojson`
    

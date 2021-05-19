@@ -16,7 +16,7 @@ const getRegister = async(req, res )=>{
             dependencia: dep,
             errors:[],message,
             fullname:"", 
-            email: "", password:"", confirmpassword:"", cargo:"", dependencias:"", tel_contacto:""
+            email: "",  cargo:"", dependencias:"", tel_contacto:""
            })
        })
     } catch (error) {

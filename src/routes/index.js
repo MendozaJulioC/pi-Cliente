@@ -64,6 +64,8 @@ router.get('/auth/logout', getLogout)
 const {getDependencias} = require ('../controllers/taskDependencias')
 router.get('/dependencias',isAuthenticated, getDependencias)
       
-
+const {getObras} = require ('../controllers/taskObrafisica')
+router.get('/obra-fisica',isAuthenticated, getObras)
+      
 
 module.exports = router;
