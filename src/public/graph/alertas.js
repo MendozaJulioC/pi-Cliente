@@ -468,7 +468,7 @@ async function hola (cod_dep,nom_dep,avance){
               datos.data[i].meta_plan,
               datos.data[i].unidad,
               datos.data[i].sentido,
-              ((datos.data[i].avnorm)*100).toFixed(2),
+              ((datos.data[i].avance_cuatrienio)*100).toFixed(2),
               datos.data[i].observaciones_indicador,
               back_semafav
             ]

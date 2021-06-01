@@ -136,7 +136,7 @@ async function _getBuscaNombreIndicador(){
             document.getElementById('_observaciones').value= datos.data[0].observaciones
             //enviar datos a gráficas
             if (datos.data[0].tipo_ind=='Resultado'){
-              let avance = (datos.data[0].avnorm)*100
+              let avance = (datos.data[0].avance_cuatrienio)*100
              _graphAvanceIndicador(avance)
              semaforo(avance)
             }else{
@@ -241,7 +241,7 @@ async function _getBuscaNombreIndicador(){
         
                
                     if (datos.data[0].tipo_ind=='Resultado'){
-                      let avance = (datos.data[0].avnorm)*100
+                      let avance = (datos.data[0].avance_cuatrienio)*100
                      _graphAvanceIndicador(avance)
                      semaforo(avance)
                     }else{

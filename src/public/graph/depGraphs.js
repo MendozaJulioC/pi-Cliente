@@ -1449,7 +1449,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
                          <td style="text-align: center;">${datos.data[index].unidad}</td>
                          <td style="text-align: center;">${datos.data[index].fc}</td>
                          <td style="text-align: center;">${datos.data[index].sentido}</td>
-                         <td style="text-align: center;">${((datos.data[index].avnorm)*100).toFixed(2)}%</td>
+                         <td style="text-align: center;">${((datos.data[index].avance_cuatrienio)*100).toFixed(2)}%</td>
                          <td style="text-align: center;">${datos.data[index].observaciones_indicador}</td>
                          <td style="text-align: center;"> <span><img src="${imagen_semafav}" alt=""  width="30" height="30"></span></td>
                        </tr>
