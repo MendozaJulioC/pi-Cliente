@@ -562,6 +562,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
           L.control.watermark({ position: 'bottomleft' }).addTo(map2);
 
       });
+      
       map2.whenReady(() => {
        
         setTimeout(() => {map2.invalidateSize();}, 200);

@@ -64,8 +64,16 @@ router.get('/auth/logout', getLogout)
 const {getDependencias} = require ('../controllers/taskDependencias')
 router.get('/dependencias',isAuthenticated, getDependencias)
       
-const {getObras} = require ('../controllers/taskObrafisica')
-router.get('/obra-fisica',isAuthenticated, getObras)
+const {getObras, getAlertaObra, getObraTema,getObraTipo, getObraEtapas, getObraDep, getObraDepDetalle, getObrasGeo } = require ('../controllers/taskObrafisica')
+router.get('/obra-fisica',isAuthenticated, getObras )
+router.get('/obra-fisica/alerta',isAuthenticated,getAlertaObra)
+router.get('/obra-fisica/temas', isAuthenticated, getObraTema)
+router.get('/obra-fisica/tipo', isAuthenticated, getObraTipo)
+router.get('/obra-fisica/etapa', isAuthenticated, getObraEtapas)
+router.get('/obra-fisica/dep', isAuthenticated, getObraDep)
+router.get('/obra-fisica/dep/detalle/:cod_dep', isAuthenticated, getObraDepDetalle)
+router.get('/obra-fisica/geo', isAuthenticated, getObrasGeo)
+
       
 
 module.exports = router;

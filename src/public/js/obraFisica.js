@@ -1,8 +1,14 @@
+
+
 async function inicia(){
     estado()
     comunas()
     sumaobrasgeo()
     alertaobra()
+    tipo_tema()
+    tipo_intervencion()
+    let x= document.getElementById('dep-hito');
+    x.style.display='none'
 }
 
 const comunas = async (req, res)=>{
@@ -14,20 +20,74 @@ const comunas = async (req, res)=>{
         // Set latitude and longitude of the map center (required)
         center: [6.2508, -75.5738],
         // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-        zoom: 12,
+        zoom: 13,
       
       });
       // Create a Tile Layer and add it to the map
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map1);
+
+    let geo_url=""; 
+    geo_url=`https://www.medellin.gov.co/mapas/rest/services/ServiciosCiudad/CartografiaBase/MapServer/11/query?where=1%3D1&text=&objectIds=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&parameterValues=&rangeValues=&f=geojson`
+ 
+    fetch(geo_url)
+    .then(res=>res.json())
+    .then(data => {
+   
+      //document.getElementById('total').innerHTML= new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(valor))
+    
+       let geojsonlayer2 = L.geoJson(data, {
+       
+         onEachFeature: async function (feature, layer) {
+          let poputcontentMap=  ` <p class="card-title">` + feature.properties.NOMBRE +` </p>`
+           layer.bindPopup(poputcontentMap)
+        
+
+         }
+      
+       }).addTo(map1)
+
+       map1.fitBounds(geojsonlayer2.getBounds(),  {maxZoom: 15})
+
+
+        L.Control.Watermark = L.Control.extend({
+        onAdd: function(map1) {
+        var img = L.DomUtil.create('img');
+        img.src = '/img/logo.png';
+        img.style.width = '100px';
+        return img;
+        },
+        onRemove: function(map1) {
+            // Nothing to do here
+        }
+        });
+        L.control.watermark = function(opts) {
+        return new L.Control.Watermark(opts);
+        }
+        L.control.watermark({ position: 'bottomleft' }).addTo(map1);
+
+    });
+    
+
+
     map1.whenReady(() => {
         setTimeout(() => {map1.invalidateSize();}, 200);
     })
+ 
+
+
+
+
 }
 
 async function estado(){
-    const dataSource = {
+  try {
+    fetch(`/obra-fisica/etapa`)
+    .then(res=> res.json())
+    .then(response=>{
+
+      const dataSource = {
         chart: {
           caption: "Etapas",
           subcaption: "Estado actual de la obra",
@@ -36,37 +96,14 @@ async function estado(){
           aligncaptionwithcanvas: "0",
           captionpadding: "0",
           formatnumberscale: "0",
+          doughnutRadius:"70%",
+          baseFontSize:"1.5rem",
           plottooltext:
             "<b>$percentValue</b> <b>$label</b>",
           centerlabel: "<b>$label</b> $value",
           theme: "zune"
         },
-        data: [
-          {
-            label: "Estudios Preliminares",
-            value: "64"
-          },
-          {
-            label: "Gestión social y predial",
-            value: "6"
-          },
-          {
-            label: "Diseños",
-            value: "65"
-          },
-          {
-            label: "Proceso de contratación",
-            value: "28"
-          },
-          {
-            label: "Etapa constructiva",
-            value: "204"
-          },
-          {
-            label: "Obra ejecutada",
-            value: "652"
-          }
-        ]
+        data: response.data
       };
       
       FusionCharts.ready(function() {
@@ -79,110 +116,36 @@ async function estado(){
           dataSource
         }).render();
       });
- 
+
+    })
+  } catch (error) {
+    console.error('Error estado: ', error)
+  }
 }
-
-
 
 async function sumaobrasgeo()
 {
-    const dataSource = {
+  try {
+  
+    fetch(`/obra-fisica/geo`)
+    .then(res=>res.json())
+    .then(response=>{
+      console.log(response.data);
+
+      const dataSource = {
         chart: {
-          caption: "Lead sources by industry",
-          yaxisname: "Number of Leads",
+          caption: "Intervenciones en la comuna",
+          yaxisname: "Número de Intervenciones",
           aligncaptionwithcanvas: "0",
           plottooltext: "<b>$dataValue</b> leads received",
-          theme: "ocean"
+          theme: "ocean",
+          labelDisplay: "rotate",
+          slantLabel: "1"
         },
-        data: [
-          {
-            label: "Travel & Leisure",
-            value: "41"
-          },
-          {
-            label: "Advertising/Marketing/PR",
-            value: "39"
-          },
-          {
-            label: "Other",
-            value: "38"
-          },
-          {
-            label: "Real Estate",
-            value: "32"
-          },
-          {
-            label: "Communications/Cable/Phone",
-            value: "26"
-          },
-          {
-            label: "Construction",
-            value: "25"
-          },
-          {
-            label: "Entertainment",
-            value: "25"
-          },
-          {
-            label: "Staffing Firm/Full Time/Temporary",
-            value: "24"
-          },
-          {
-            label: "Transportation/Logistics",
-            value: "23"
-          },
-          {
-            label: "Utilities",
-            value: "22"
-          },
-          {
-            label: "Aerospace/Defense Products",
-            value: "18"
-          },
-          {
-            label: "Banking/Finance/Securities",
-            value: "16"
-          },
-          {
-            label: "Consumer Products - Non-Durables",
-            value: "15"
-          },
-          {
-            label: "Distribution",
-            value: "13"
-          },
-          {
-            label: "Education",
-            value: "12"
-          },
-          {
-            label: "Health Products & Services",
-            value: "11"
-          },
-          {
-            label: "Hospitality & Hotels",
-            value: "10"
-          },
-          {
-            label: "Non-Business/Residential",
-            value: "6"
-          },
-          {
-            label: "Pharmaceutical",
-            value: "4"
-          },
-          {
-            label: "Printing & Publishing",
-            value: "1"
-          },
-          {
-            label: "Professional Services",
-            value: "1"
-          }
-        ]
-      };
-      
-      FusionCharts.ready(function() {
+        data: response.data
+  };
+     
+  FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "column2d",
           renderAt: "geoobra",
@@ -191,223 +154,322 @@ async function sumaobrasgeo()
           dataFormat: "json",
           dataSource
         }).render();
-      });
-      sumaobrasdep()
+  });
+
+    })
+
+    
+  } catch (error) {
+    console.error('Error sumaobrasgeo: ', error)
+  }
+ 
+  sumaobrasdep()
 }
 
 async function sumaobrasdep()
 {
+  fetch(`/obra-fisica/dep`)
+  .then(res=>res.json())
+  .then(response=>{
     const dataSource = {
-        chart: {
-          caption: "Lead sources by industry",
-          yaxisname: "Number of Leads",
-          aligncaptionwithcanvas: "0",
-          plottooltext: "<b>$dataValue</b> leads received",
-          theme: "zune"
-        },
-        data: [
-          {
-            label: "Travel & Leisure",
-            value: "41"
-          },
-          {
-            label: "Advertising/Marketing/PR",
-            value: "39"
-          },
-          {
-            label: "Other",
-            value: "38"
-          },
-          {
-            label: "Real Estate",
-            value: "32"
-          },
-          {
-            label: "Communications/Cable/Phone",
-            value: "26"
-          },
-          {
-            label: "Construction",
-            value: "25"
-          },
-          {
-            label: "Entertainment",
-            value: "25"
-          },
-          {
-            label: "Staffing Firm/Full Time/Temporary",
-            value: "24"
-          },
-          {
-            label: "Transportation/Logistics",
-            value: "23"
-          },
-          {
-            label: "Utilities",
-            value: "22"
-          },
-          {
-            label: "Aerospace/Defense Products",
-            value: "18"
-          },
-          {
-            label: "Banking/Finance/Securities",
-            value: "16"
-          },
-          {
-            label: "Consumer Products - Non-Durables",
-            value: "15"
-          },
-          {
-            label: "Distribution",
-            value: "13"
-          },
-          {
-            label: "Education",
-            value: "12"
-          },
-          {
-            label: "Health Products & Services",
-            value: "11"
-          },
-          {
-            label: "Hospitality & Hotels",
-            value: "10"
-          },
-          {
-            label: "Non-Business/Residential",
-            value: "6"
-          },
-          {
-            label: "Pharmaceutical",
-            value: "4"
-          },
-          {
-            label: "Printing & Publishing",
-            value: "1"
-          },
-          {
-            label: "Professional Services",
-            value: "1"
+      chart: {
+        caption: "Obras por dependencias",
+        subcaption: "Número de obras",
+        xaxisname: "Dependencias",
+        yaxisname: "Obras",
+        placevaluesinside: "0",
+        showvalues: "1",
+        valuefontcolor: "#0c4271",
+        plottooltext: "<b>$seriesName</b>  $label  <b>$dataValue</b>",
+        theme: "ocean",
+      },
+      data: 
+       response.data
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "column2d",
+        renderAt: "depobra",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource,
+        events: {
+          'dataplotClick': function(evt) {
+            graficadepobra( evt)
+            window.showAlert = function(str) {
+            };
           }
-        ]
-      };
+        }
+      }).render();
+    });
+  })
+ 
+  
       
+}
+
+
+
+async function graficadepobra(data){
+  let nom_dep= data.data.id
+  let cod_dep= (data.data.link).substring(12,15);
+  document.getElementById('obraModalLabel').innerHTML=nom_dep
+
+  fetch(`/obra-fisica/dep/detalle/${cod_dep}`)
+    .then(res=>res.json())
+    .then(response=>{
+      let inversion_dep =response.inversion
+      const dataSource = {
+        chart: {
+          caption: "Tipo de Intervención",
+          subcaption: "número de obras",
+          xaxisname: "obras",
+          yaxisname: "Tipo",
+          showvalues:"1",
+          theme: "umber"
+        },
+        data: response.data
+      };
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
-          type: "bar2d",
-          renderAt: "depobra",
+          type: "column2d",
+          renderAt: "dep-tipo",
           width: "100%",
           height: "100%",
           dataFormat: "json",
           dataSource
         }).render();
       });
-      
+      document.getElementById('total_ivnersion_dep').innerHTML= inversion_dep
+      depmodal_alerta(response.alerta)
+      depetapamodal(response.etapa)
+      if(cod_dep=='741'){  hitograpg(response.hitos)}
+    })
+    jQuery.noConflict();
+    $('#obraModal').modal('show'); 
+}
+
+
+async function depmodal_alerta(data){
+  let x= document.getElementById('dep-hito');
+  x.style.display='none'
+  const dataSource = {
+    chart: {
+      caption: "Tipo de Alerta",
+      subcaption: "número de obras",
+      xaxisname: "alerta",
+      yaxisname: "total",
+      showvalues:"1",
+     // numbersuffix: "K",
+      theme: "umber"
+    },
+    data: data
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bar2d",
+      renderAt: "dep-alerta",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+}
+
+async function depetapamodal(etapa){
+  const dataSource = {
+    chart: {
+      captionalignment: "right",
+      caption: "Etapas",
+      subcaption: "Estado actual de las obras",
+      xaxisname: "etapas",
+      yaxisname: "número de obras",
+     // numbersuffix: "K",
+     showvalues:"1",
+      theme: "umber"
+    },
+    data: etapa
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "column2d",
+      renderAt: "dep-etapa",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+}
+
+async function hitograpg(hitos)
+{
+  try {
+    let x= document.getElementById('dep-hito');
+    x.style.display='block'
+    const dataSource = {
+      chart: {
+        captionalignment: "right",
+        caption: "Detalle Obras",
+        subcaption: "Número de obras",
+        xaxisname: "obra",
+        yaxisname: "total",
+        theme: "umber",
+        showvalues:"1",
+        labelDisplay: "rotate",
+        slantLabel: "1",
+      },
+      data:hitos
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "column2d",
+        renderAt: "dep-hito",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+    
+    
+  } catch (error) {
+    console.error('Error hitograph'. error)
+  }
 }
 
 
 async function alertaobra(){
-    am4core.ready(function() {
+ try {
+  fetch(`/obra-fisica/alerta`)
+  .then(res=> res.json())
+  .then(response=>{
+    const dataSource = {
+      chart: {
+        caption: "Detalle del avance",
+        yaxisname: "Número de Obras",
+        aligncaptionwithcanvas: "0",
+        plottooltext: "<b>$dataValue</b> $label",
+        theme: "zune"
+      },
+      data: response.data
+    };
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "bar2d",
+        renderAt: "chartdiv",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+  })
+   
+ } catch (error) {
+   console.error('Error alertaobra: ', error)
+ }
+ 
+}
 
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        
-        
-        
-        // Create chart instance
-        var chart = am4core.create("chartdiv", am4charts.RadarChart);
-        
-        // Add data
-        chart.data = [{
-          "category": "Gestión del proceso",
-          "value": 0,
-          "full": 100
-        }, {
-          "category": "Criterio técnico",
-          "value": 35,
-          "full": 100
-        }, {
-          "category": "Cumplimiento",
-          "value": 92,
-          "full": 100
-        }, {
-          "category": "Déficit presupuestal",
-          "value": 68,
-          "full": 100
-        }
-        , {
-            "category": "Funcionamiento",
-            "value": 68,
-            "full": 100
-          }, {
-            "category": "Múltiples alertas",
-            "value": 68,
-            "full": 100
-          }, {
-            "category": "Suspendida",
-            "value": 0,
-            "full": 100
-          }, {
-            "category": "Siguiente Administración",
-            "value": 68,
-            "full": 100
-          }
+
+async function tipo_tema(){
+
+try {
+  fetch(`/obra-fisica/temas`)
+  .then(res=> res.json())
+  .then(datos=>{
+
+    const dataSource = {
+      chart: {
+        caption: "Distribución por temática",
+        subcaption: "Número de obras por tema",
+        decimals: "1",
+        showvalues: "1",
+        plottooltext: "$label: <b>$dataValue</b>",
+        plotfillalpha: "70",
+        theme: "ocean",
+        streamlineddata: "0"
+      },
+      data: datos.data
+    };
     
-    ];
-        
-        // Make chart not full circle
-        chart.startAngle = -90;
-        chart.endAngle = 180;
-        chart.innerRadius = am4core.percent(20);
-        
-        // Set number format
-        chart.numberFormatter.numberFormat = "#.#";
-        
-        // Create axes
-        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
-        categoryAxis.dataFields.category = "category";
-        categoryAxis.renderer.grid.template.location = 0;
-        categoryAxis.renderer.grid.template.strokeOpacity = 0;
-        categoryAxis.renderer.labels.template.horizontalCenter = "right";
-        categoryAxis.renderer.labels.template.fontWeight = 500;
-        categoryAxis.renderer.labels.template.adapter.add("fill", function(fill, target) {
-          return (target.dataItem.index >= 0) ? chart.colors.getIndex(target.dataItem.index) : fill;
-        });
-        categoryAxis.renderer.minGridDistance = 10;
-        
-        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
-        valueAxis.renderer.grid.template.strokeOpacity = 0;
-        valueAxis.min = 0;
-        valueAxis.max = 100;
-        valueAxis.strictMinMax = true;
-        
-        // Create series
-        var series1 = chart.series.push(new am4charts.RadarColumnSeries());
-        series1.dataFields.valueX = "full";
-        series1.dataFields.categoryY = "category";
-        series1.clustered = false;
-        series1.columns.template.fill = new am4core.InterfaceColorSet().getFor("alternativeBackground");
-        series1.columns.template.fillOpacity = 0.08;
-        series1.columns.template.cornerRadiusTopLeft = 20;
-        series1.columns.template.strokeWidth = 0;
-        series1.columns.template.radarColumn.cornerRadius = 20;
-        
-        var series2 = chart.series.push(new am4charts.RadarColumnSeries());
-        series2.dataFields.valueX = "value";
-        series2.dataFields.categoryY = "category";
-        series2.clustered = false;
-        series2.columns.template.strokeWidth = 0;
-        series2.columns.template.tooltipText = "{category}: [bold]{value}[/]";
-        series2.columns.template.radarColumn.cornerRadius = 20;
-        
-        series2.columns.template.adapter.add("fill", function(fill, target) {
-          return chart.colors.getIndex(target.dataItem.index);
-        });
-        
-        // Add cursor
-        chart.cursor = new am4charts.RadarCursor();
-        
-        }); // end am4core.ready()
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "funnel",
+        renderAt: "tipointervencion",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+  })
+} catch (error) {
+  console.error('Error tipo_tema: ', error)
+}
+
+
+  
+}
+
+
+async function  tipo_intervencion(){
+  try {
+  fetch(`/obra-fisica/tipo`)
+  .then(res=> res.json())
+  .then(response=>{
+  //  console.log(response.data);
+    const dataSource = {
+      chart: {
+        caption: "Obras por tipo de intervención",
+        subcaption: "Número de obras",
+        xaxisname: "Tipo",
+        yaxisname: "Obras",
+        labelDisplay: "rotate",
+        slantLabel: "1",
+       
+        theme: "ocean"
+      },
+      data: response.data
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "column2d",
+        renderAt: "chart-tema",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+
+  })    
+
+  } catch (error) {
+    console.error('Error tipo_intervencion: ', error)
+  }
+
+ 
+  
+}
+
+
+function style2(valor) {
+  return {
+      fillColor: getColor(valor),
+      weight: 2,
+      opacity: 1,
+      color: 'blue',
+      dashArray: '3',
+      fillOpacity: 0.7
+  };
 }

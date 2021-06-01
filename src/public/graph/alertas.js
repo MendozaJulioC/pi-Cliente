@@ -301,6 +301,8 @@ async function otragrafica(data){
   }
 
 }
+
+
 async function noprogramadas(gris){
   const dataSource = {
     chart: {
