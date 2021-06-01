@@ -461,14 +461,25 @@ async function hola (cod_dep,nom_dep,avance){
         let tam = datos.data.length;
       valores3=[];
 
+      let avance="";
+
         for(let i =0; i<tam;i++){
+          if (datos.data[i].avance_cuatrienio== -1) {
+            avance = "N/A"
+            
+          } else if(datos.data[i].avance_cuatrienio== -2){
+            avance = "N/D"
+          } else{
+            avance = ((datos.data[i].avance_cuatrienio)*100).toFixed(2)
+          }
+
           valores3.push(
             [ datos.data[i].cod_indicador,
               datos.data[i].nom_indicador,
               datos.data[i].meta_plan,
               datos.data[i].unidad,
               datos.data[i].sentido,
-              ((datos.data[i].avance_cuatrienio)*100).toFixed(2),
+              avance,
               datos.data[i].observaciones_indicador,
               back_semafav
             ]
@@ -528,7 +539,7 @@ async function hola (cod_dep,nom_dep,avance){
      
       })
      
-    
+   
   } catch (error) { 
     console.log("Error function Hola ",error);
 }
@@ -536,4 +547,149 @@ async function hola (cod_dep,nom_dep,avance){
   $('#exampleModal5').modal('show'); 
 }
 
+
+async function alerta_rojos(){
+try {
+  swal("Reporte creado búsquelo al final de la página!");
+  let valoresRojos=[]
+  let avance=""
+  fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/rojos`)
+  .then(res=> res.json())
+  .then(response=>{
+
+    for (let index = 0; index < response.data.length; index++) {
+
+
+      if (response.data[index].avance_cuatrienio== -1) {
+        avance = "N/A"
+        
+      } else if(response.data[index].avance_cuatrienio== -2){
+        avance = "N/D"
+      } else{
+        avance = ((response.data[index].avance_cuatrienio)*100).toFixed(2)
+      }
+
+      valoresRojos.push([
+        response.data[index].cod_linea,
+        response.data[index].nom_linea,
+        response.data[index].cod_componente,
+        response.data[index].nom_componente,
+        response.data[index].cod_programa,
+        response.data[index].nom_programa,
+        response.data[index].tipo_ind,
+        response.data[index].cod_indicador,
+        response.data[index].nom_indicador, 
+        response.data[index].meta_plan,
+        response.data[index].cod_responsable_reporte,
+        response.data[index].nom_cortp,
+        avance,
+        response.data[index].observaciones_indicador
+      ])
+    }
+    var tableRed= $('#alerta_rojos').DataTable( {
+      data: valoresRojos,
+      columns: [
+          { title: "Cod_Línea" },
+          { title: "Línea" },
+          { title: "cod_componente" }, 
+          { title: "nom_component" }, 
+          { title: "cod_prg" },
+          { title: "Programa" },
+          { title: "tipo_Ind" },
+          { title: "Cod_Ind" },
+          { title: "Nombre Indicador" },
+          { title: "Meta plan" },
+          { title: "Cod_dep" },
+          { title: "Responsable reporte" },
+         { title: "% Avance" },
+         { title: "Obervaciones" },
+        ] ,   
+      scrollCollapse: true, 
+      fixedColumns: {
+        heightMatch: 'none'
+    }, fixedHeader: true,
+      stateSave: true,
+        "language": {
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "zeroRecords": "Nothing found - sorry",
+          "info": "Vistas página _PAGE_ of _PAGES_",
+          "infoEmpty": "No hay registros Disponibles",
+          "infoFiltered": "(filtered from _MAX_ total registros)", 
+          paginate: {
+            first: "Primera",
+            last: "Última",
+            next: "Siguiente",
+            previous: "Anterior"
+          },
+          sProcessing:"Procesando..."
+        },
+        responsive:"true",
+        dom:'Bfrtlp',
+        buttons:[
+          {
+            extend: 'excelHtml5',
+            text  : '<i class="fa fa-file-excel-o"></i>' ,
+            title : "Alerta_Dependencias",
+            tittleAttr: 'Exportar a Excel',
+            className: 'btn btn-success',
+            autoFilter: true,
+            sheetName: 'Alerta Indicadores Rojos'
+           },
+           {
+            extend: 'pdfHtml5',
+            text  : '<i class="fa fa-file-pdf-o"></i>' ,
+            title : "Alerta_Dependencias",
+            tittleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+            orientation: 'landscape',
+            pageSize: 'LEGAL',
+            messageTop: 'PDF created by Unidad de SegumientoPlan de Desarrollo-DAP.'
+           },
+           {
+            extend: 'print',
+            text  : '<i class="fa fa-print"></i>' ,
+            title : "Alerta_Dependencias",
+            tittleAttr: 'Imprimir',
+            className: 'btn btn-info'
+           },  {
+            extend: 'csvHtml5',
+            text: '<i class="fa fa-file-text"></i>',
+            title : "Alerta_Dependencias",
+            className: 'btn btn-warning',
+            exportOptions: {
+                modifier: {
+                    search: 'none'
+                }
+            }
+        }],
+        columnDefs: [
+          {/*cod_linea */ width: "10px",  targets: 0,   className: "text-center"  },
+          {/*nom_linea*/  width: "100px", targets: 1,   className: "text-center"  },
+          {/*nom_dep*/    width: "10px", targets: 2 ,    className: "text-center"    },                
+          {/*nom_dep*/    width: "100px", targets: 3,                               },
+          {/*no_prg*/     width: "10px", targets: 4,   className: "text-center"  },
+          {/*no prg*/     width: "70px",  targets: 5,   className: "text-center"  },
+          {/*%no prg*/    width: "70px",  targets: 6,   className: "text-center"  },
+          {/*rojo*/       width: "70px",  targets: 7,   className: "text-center"  },
+          {/*%rojo*/      width: "100px",  targets: 8,   className: "text-center"  },
+          {/*rojo*/       width: "70px",  targets: 9,   className: "text-center"  },
+          {/*%rojo*/      width: "70px",  targets: 10,  className: "text-center"  },
+          {/*%rojo*/      width: "70px",  targets: 11,  className: "text-center"  },
+          {/*%rojo*/      width: "70px",  targets: 12,  className: "text-center"  },
+          {/*%rojo*/      width: "70px",  targets: 13,  className: "text-center"  },
+       
+      
+        ],bDestroy: true,
+       
+
+    });
+
+
+  
+  })
+} catch (error) {
+  console.error('Error alerta_rojos', error)
+}
+
+}
 
