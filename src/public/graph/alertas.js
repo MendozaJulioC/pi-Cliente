@@ -558,11 +558,8 @@ try {
   .then(response=>{
 
     for (let index = 0; index < response.data.length; index++) {
-
-
       if (response.data[index].avance_cuatrienio== -1) {
         avance = "N/A"
-        
       } else if(response.data[index].avance_cuatrienio== -2){
         avance = "N/D"
       } else{
@@ -592,17 +589,17 @@ try {
           { title: "Cod_Línea" },
           { title: "Línea" },
           { title: "cod_componente" }, 
-          { title: "nom_component" }, 
+          { title: "Componente" }, 
           { title: "cod_prg" },
           { title: "Programa" },
-          { title: "tipo_Ind" },
+          { title: "Tipo_Ind" },
           { title: "Cod_Ind" },
           { title: "Nombre Indicador" },
           { title: "Meta plan" },
           { title: "Cod_dep" },
           { title: "Responsable reporte" },
          { title: "% Avance" },
-         { title: "Obervaciones" },
+         { title: "Obesrvaciones" },
         ] ,   
       scrollCollapse: true, 
       fixedColumns: {
