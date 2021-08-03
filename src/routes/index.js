@@ -3,7 +3,7 @@ const router = Router();
 
 const { isAuthenticated, notAuthenticated }= require('../helpers/auth');
 
-const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente, getPrograma, getAlertas } = require('../controllers/index.controllers');
+const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, getComponente, getPrograma, getAlertas, getSiem } = require('../controllers/index.controllers');
     router.get('/',notAuthenticated, getHome);
     router.get('/dash',isAuthenticated, getDash)
     router.get('/general', isAuthenticated,getGeneral)
@@ -13,6 +13,7 @@ const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, get
     router.get('/componentes',isAuthenticated,getComponente)
     router.get('/programas', isAuthenticated,getPrograma)
     router.get('/alertas', isAuthenticated,getAlertas)
+    router.get('/indicadores/siem', isAuthenticated,getSiem)
 
   
 const {getLinea1,  getLinea2, getLinea3, getLinea4, getLinea5}= require('../controllers/taskL');

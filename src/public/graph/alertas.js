@@ -73,9 +73,9 @@ async function avance_linea_dep(){
   } catch (error) {
     console.error('Error _avancePDM ',error )
   }
-  document.getElementById('minimorango').innerHTML= '< '+minimovalue
-  document.getElementById('maximorango').innerHTML= '> '+maximovalue
-  document.getElementById('intermediorango').innerHTML= minimovalue +'-'+ maximovalue
+  document.getElementById('minimorango').innerHTML= '< '+minimovalue.toFixed(2)
+  document.getElementById('maximorango').innerHTML= '> '+maximovalue.toFixed(2)
+  document.getElementById('intermediorango').innerHTML= minimovalue.toFixed(2) +'-'+ maximovalue.toFixed(2)
   _avancePDM()
   alertasGraph()
 }
