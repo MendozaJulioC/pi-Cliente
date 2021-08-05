@@ -4,6 +4,7 @@ async function dateomain(){
   corteplan()
   _avancePDM()
   _Components()
+  detalleAvance()
   swal("Espere mientras cargamos la información!",{
     buttons: false,
     icon: "info",
@@ -524,4 +525,120 @@ async function estado_sem_pordep(codsemaforo) {
   } catch (error) {
     console.error("Error estado_sem_dep: ", error)
   }
+}
+
+
+async function detalleAvance()
+{
+  const dataSource = {
+    chart: {
+      caption: "Avance y cumplimiento por Línea Estratégica del Plan de Desarrollo Municipal",
+      subcaption: "Medellín Futuro",
+      xaxisname: "Líneas",
+      yaxisname: "Porcentaje",
+      numbersuffix: "%",
+      showvalues: "1",
+      formatnumberscale: "2",
+      plottooltext:
+        "<b>$dataValue</b> Reportado <b>$seriesName</b> in $label",
+      theme: "ocean",
+      drawcrossline: "1"
+    },
+    categories: [
+      {
+        category: [
+          {
+            label: "Reactivación Económica y Valle del Software"
+          },
+          {
+            label: "Transformación Educativa y Cultural"
+          },
+          {
+            label: "Medellín me Cuida"
+          },
+          {
+            label: "Ecociudad"
+          },
+          {
+            label: "Gobernanza y Gobernabilidad"
+          }
+        ]
+      }
+    ],
+    dataset: [
+      {
+        seriesname: "Avance",
+        data: [
+          {
+            value: "12"
+          },
+          {
+            value: "30"
+          },
+          {
+            value: "48"
+          },
+          {
+            value: "80"
+          },
+          {
+            value: "11"
+          }
+        ]
+      },
+      {
+        seriesname: "Cumplimiento",
+        data: [
+          {
+            value: "70"
+          },
+          {
+            value: "15"
+          },
+          {
+            value: "35"
+          },
+          {
+            value: "60"
+          },
+          {
+            value: "14"
+          }
+        ]
+      },
+      {
+        seriesname: "Proyección",
+        data: [
+          {
+            value: "10"
+          },
+          {
+            value: "10"
+          },
+          {
+            value: "30"
+          },
+          {
+            value: "60"
+          },
+          {
+            value: "90"
+          }
+        ]
+      }
+    ]
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "mscolumn2d",
+      renderAt: "chart-container",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+
 }
