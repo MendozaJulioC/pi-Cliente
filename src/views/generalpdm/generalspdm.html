@@ -15,17 +15,13 @@
 </head>
 <%- include ('../partials/menuplapp.html')%>
 <body onload="dateomain()">
-
   <div id="container" class=" mt-5 mb-3">
- 
     <div class="row">
-
       <div class="col-md-12 mt-4  shadow-lg p-3  mb-1 bg-white rounded">
         <div class="card-body">
           <div class="mt-lg-3" id="graphpdmtarget" style="height: 150px;  width:100%;"></div>
         </div>
       </div> 
-
       <div class="col-md-12 mt-1  shadow-lg p-3  mb-5 bg-white rounded">
         <div class="row">
           <div class="col-sm-2">
@@ -49,81 +45,79 @@
             <i class="fa fa-arrow-up fa-2x" style="color: #00af91;"></i>
           </div>
         </div>
-       </div>
-    <!--****-->
-  
-      <div class="col-md-3 mt-1  shadow-lg p-3 mb-5 bg-white rounded">
+      </div>
+      <!--****-->
+      <div class="card-deck col-md-12 mt-1 mb-2 shadow-lg p-3  bg-white rounded">
+      <div class="card shadow-lg">
+        <span class="mt-1" style="text-align: center;"><img src="/img/pause.png" alt=""  width="100" height="100"></span>
         <div class="card-body">
-          <h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">No programado <span><img src="/img/pause.png" alt=""  width="30" height="30"></span>
-          </h3>
+          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">No programado 
+          </h3></h5>
           <h1  id="total-gris" style="text-align: center;color:#B2B1A7"></h1>
           <h3   id="porcentaje-gris" style="text-align: center;color:#B2B1A7"> </h3>
         </div>
-        <div id="footer-card-gris"></div>
+        <div class="card-footer">
+          <div id="footer-card-gris"></div>
+        </div>
       </div>
- 
-      <div class="col-md-3 mt-1  shadow-lg p-3 mb-5 bg-white rounded">
-          <div class="card-body">
-            <h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
-              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Cumplimiento Bajo <span><img src="/img/rojo.png" alt=""  width="30" height="30"></span>
-            </h3>
-            <h1 id="total-rojos"  style="text-align: center;color:#B4358B"></h1>
-            <h3 id="porcentaje-rojos" style="text-align: center;color:#B4358B"></h3>
-          </div>
-          <div id="footer-card-rojo"></div>
-      </div>
-    
-      <div class="col-md-3 mt-1  shadow-lg p-3 mb-5 bg-white rounded">
-          <div class="card-body">
-            <div class="legends">
-              <h4 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Cumplimiento Medio <span><img src="/img/amarillo.png" alt=""  width="30" height="30"></span>
-              </h4>
-            </div>
-            <h1 id="total-naranjas" style="text-align: center;color:#EE7518"></h1>
-            <h3 id="porcentaje-naranjas" style="text-align: center;color:#EE7518"></h3>
-          </div>
-          <div id="footer-card-amarillo"></div>
-      </div>
-   
-      <div class="col-md-3 mt-1  shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="card shadow-lg">
+        <span class="mt-2" style="text-align: center;"><img src="/img/rojo.png" alt=""  width="80" height="80"></span>
         <div class="card-body">
-                  <div class="legends">
-                    <h4 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
-                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Cumplimiento <span><img src="/img/verde.png" alt=""  width="30" height="30"></span>
-                  </h4>
-                </div>
-                <h1 id="total-verdes" style="text-align: center;color:#00853E"></h1>
-                <h3 id="porcentaje-verdes"  style="text-align: center;color:#00853E"></h3>
-                </div>
-                <div id="footer-card-verde"></div>
+          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Bajo 
+          </h3></h5>
+          <h1 id="total-rojos"  style="text-align: center;color:#B4358B"></h1>
+          <h3 id="porcentaje-rojos" style="text-align: center;color:#B4358B"></h3>
+        </div>
+        <div class="card-footer">
+          <div id="footer-card-rojo"></div>
+        </div>
       </div>
-     
+      <div class="card shadow-lg">
+        <span class="mt-2" style="text-align: center;"><img src="/img/amarillo.png" alt=""  width="80" height="80"></span>
+        <div class="card-body">
+          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Medio 
+          </h3></h5>
+          <h1 id="total-naranjas" style="text-align: center;color:#EE7518"></h1>
+          <h3 id="porcentaje-naranjas" style="text-align: center;color:#EE7518"></h3>
+        </div>
+        <div class="card-footer">
+          <div id="footer-card-amarillo"></div>
+        </div>
+      </div>
+      <div class="card">
+        <span class="mt-2" style="text-align: center;"><img src="/img/verde.png" alt=""  width="80" height="80"></span>
+        <div class="card-body">
+          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 24px;line-height: 13px;font-weight: 150;color: #73879C;
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Alto 
+          </h3></h5>
+          <h1 id="total-verdes" style="text-align: center;color:#00853E"></h1>
+          <h3 id="porcentaje-verdes"  style="text-align: center;color:#00853E"></h3>
+        </div>
+        <div class="card-footer">
+          <div id="footer-card-verde"></div>
+        </div>
     </div>
 
      <!--****-->
  
 
-    <div class="row">
+  
         
         <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
           <div  id="chart-inicial" style="height: 550px;  width:100%;"></div>
         </div>
 
-        <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
-          <div  id="chart-avance-dep" style="height: 850px;  width:100%;"></div>
-        </div>
+       
 
-    </div>
+
 
      
-  </div>
-
-
- <!--****-->
-
-    <div class="shadow-lg p-3 mb-3 bg-white rounded">
+      </div>
+      <!--****-->
+      <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded">
       <h3>Avance Cuatrienial por Componentes del Plan de Desarrollo</h3>
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -230,19 +224,13 @@
             </div>
       </div>
     </div>
-
-
-
-
   </div>
-
-    
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Modal semaforo
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <div class="modal fade bd-example-modal " id="exampleModalSemFavGeneral" tabindex="-1" role="dialog" aria-labelledby="exampleModalSemFavGeneral" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
-    <div class="modal-content">
+   <div class="modal-content">
       <div class="modal-header">
         <span> <h4  class="modal-title" id="nom_depencia_query"></h4> </span> 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -252,25 +240,19 @@ Modal semaforo
       <div class="modal-body" >
         <div class="form-row">
           <div class="col-md-12" id="chart-container" style="height: 500px;  width:100%;"> </div>
-        
-    
         </div>
-     </div>
-
-  </div>
+    </div>
+   </div>
   </div>
 </div>
-
-
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    
 </body>
 <%- include ('../partials/scriptsHome.html')%>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="/js/dateo.js"></script>
-  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+<script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 </html>
 
 

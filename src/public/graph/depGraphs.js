@@ -490,6 +490,7 @@ function stopEnterKey(evt) {
     if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
 }
 document.onkeypress = stopEnterKey;
+
 async function total_proyectos_dep(dep){
   try {
      fetch(`https://sse-pdm.herokuapp.com/pa/api/tipo-iniciativa/dependencias/${dep}`)
@@ -710,7 +711,7 @@ async function avance_prgs_dep(dep, nom_dep){
   }
 }
 async function plan_accion_dep(dep){  
- let valores1=[]; let valores2=[];let valores3=[];let valores4=[];
+ let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[];
 
   fetch(`https://sse-pdm.herokuapp.com/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
@@ -770,14 +771,27 @@ async function plan_accion_dep(dep){
           formatter.format(datos.data[i].ejecucion)
         ]);
     }
+    if (datos.data[i].tipo_iniciativa==5){
+      valores5.push([ datos.data[i].cod_linea,
+        datos.data[i].cod_componente,
+        datos.data[i].cod_programa,
+        datos.data[i].cod_proyecto,
+        datos.data[i].nom_proyecto,
+        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+        formatter.format(datos.data[i].poai),
+        formatter.format(datos.data[i].ppto_ajustado),
+        formatter.format(datos.data[i].ejecucion)
+      ]);
+  }
   } 
 //console.log(valores1);
-  nuevatabla(valores1,valores2,valores3,valores4)
+  nuevatabla(valores1,valores2,valores3,valores4, valores5)
 
 })
 }
 
-async function   nuevatabla(valores1, valores2, valores3,valores4){
+async function   nuevatabla(valores1, valores2, valores3,valores4, valores5){
 document.getElementById('table_tipo1').innerHTML=""
   var table1 = $('#table_tipo1').DataTable({
     data: valores1,
@@ -1007,6 +1021,66 @@ document.getElementById('table_tipo1').innerHTML=""
      ]
    });
 
+   document.getElementById('table_tipo5').innerHTML=""
+   table5 = $('#table_tipo5').DataTable({
+    data: valores5,
+    columns: [
+      { title: "Línea" },
+      { title: "Componente" },
+      { title: "Programa" },
+      { title: "BPIN" },
+      { title: "Proyecto" },
+      { title: "Eficacia" },
+      { title: "%Ejec. Financiera" },
+      { title: "POAI" },
+      { title: "Ppto. Ajustado" },
+      { title: "Ejec. Financiera" },
+      { title: `<i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i>` }
+    ]  ,   
+    scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: false,
+    language: {
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "emptyTable":     "No hay datos para este tipo de proyectos",
+        "zeroRecords": "Nothing found - sorry",
+        "info": "Vistas página _PAGE_ of _PAGES_",
+        "infoEmpty": "No hay registros Disponibles",
+        "infoFiltered": "(filtered from _MAX_ total registros)", 
+        "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+
+   },
+   responsive:"true",
+ 
+   
+ // dom:'Bfrtlp',
+ 
+ bDestroy: true,
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+      {width: "70px",  targets: 10,className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link' ><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } 
+     ]
+   });
+
 
    $('#table_tipo1 tbody').on( 'click', 'button', function () {
     var data1 = table1.row( $(this).parents('tr') ).data();
@@ -1024,7 +1098,10 @@ document.getElementById('table_tipo1').innerHTML=""
     var data4 = table4.row( $(this).parents('tr') ).data();
     buscavalstat(data4[4], data4[3], data4[9])
   } ); 
-
+  $('#table_tipo5 tbody').on( 'click', 'button', function () {
+    var data5 = table5.row( $(this).parents('tr') ).data();
+    buscavalstat(data5[4], data5[3], data5[9])
+  } ); 
 }
 
 

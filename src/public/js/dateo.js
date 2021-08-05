@@ -12,7 +12,7 @@ async function dateomain(){
 }
 async  function corteplan(){
   var fecha = new Date('06/30/2021');
-  document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
+  document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   // mes = fecha.getMonth(fecha)
   vigencia = fecha.getFullYear(fecha)
   switch (vigencia) {
@@ -45,7 +45,7 @@ async  function corteplan(){
   .then(response=>{
     minimovalue= (response.data[0].rojo)*100;
     maximovalue =(response.data[0].verde)*100;
-    document.getElementById('minimo-corte').value= minimovalue
+    document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
     document.getElementById('maximo-corte').value= maximovalue
   })
   alert('SSE-PDM...')
@@ -77,7 +77,7 @@ async function avancePDMtarget(avanceplan){
       {
         minvalue: 0,
         maxvalue:  document.getElementById('minimo-corte').value,
-        code: "#f05454"
+        code: "#f05454" 
       },
       {
         minvalue: document.getElementById('minimo-corte').value,

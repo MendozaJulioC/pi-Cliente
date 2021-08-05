@@ -13,7 +13,7 @@ async function _main(){
 }
 function corteplan(){
   var fecha = new Date('06/30/2021');
-  document.getElementById('fecha_corte').innerHTML= fecha.toDateString()
+  document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   // mes = fecha.getMonth(fecha)
   vigencia = fecha.getFullYear(fecha)
   switch (vigencia) {

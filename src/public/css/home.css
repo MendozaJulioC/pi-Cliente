@@ -10,9 +10,7 @@
 body{
  background: #fbf3ff;
  background:
- linear-gradient(
- rgba(180,53,139),
- rgba(246,247,249,0.8)),
+ 
  url(/img/medellin3.jpg) no-repeat center center fixed;
 background-size: cover;
   
