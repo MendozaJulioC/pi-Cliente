@@ -136,7 +136,7 @@ async function _PASemaf (){
     var fechaPA = new Date('06/30/2021');
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`http://localhost:7000/pa/semaforo-corte/${mespa}`)
+    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
       valorminimo = (response.data[0].rojo)-0.01;
