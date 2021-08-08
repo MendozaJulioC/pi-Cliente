@@ -127,12 +127,7 @@ async function detalleAvanceLinea(){
               });
 
         })
-    
-    
-    
-      
-    
-    
+
     
     } catch (error) {
         console.error(error);
