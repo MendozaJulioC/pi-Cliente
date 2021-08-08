@@ -4,11 +4,11 @@ async function dateomain(){
   corteplan()
   _avancePDM()
   _Components()
-  detalleAvance()
+  contadorSemaforo()
   swal("Espere mientras cargamos la información!",{
     buttons: false,
     icon: "info",
-    timer: 3000,
+    timer: 4000,
   });
 }
 async  function corteplan(){
@@ -56,12 +56,15 @@ async function _avancePDM(){
     fetch('https://sse-pdm.herokuapp.com/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
-      avancePDMtarget(datos.data[0].total_plan)
+      //avancePDMtarget(datos.data[0].total_plan)
+      triadaInicial(datos.data[0].total_plan)
       })
   } catch (error) {
     console.error('Error _avancePDM ',error )
   }
 }
+
+/*
 async function avancePDMtarget(avanceplan){
   const dataSource = {
     chart: {
@@ -105,10 +108,10 @@ async function avancePDMtarget(avanceplan){
       dataSource
     }).render();
   });
-  graphInicial()
+ // graphInicial()
 }
 
-
+/*
 async function graphInicial(){
   try {
     var dateo=[];
@@ -159,8 +162,9 @@ async function graphInicial(){
   } catch (error) {
     console.error('Error graphInicial ', error)
   }
-  avance_linea_dep()
+  //avance_linea_dep()
 };
+*/ 
 async function _Components(){
   try {
     let avance_Comp1=[]; let avance_Comp3=[];
@@ -388,6 +392,10 @@ async function graphCompL5(avanceComp5){
     }).render();
   });
 };
+
+
+
+/*
 async function avance_linea_dep(){
   try {
     let info=[];
@@ -430,8 +438,10 @@ async function avance_linea_dep(){
   } catch (error) {
     console.error('Error _avancePDM ',error )
   }
-  contadorSemaforo()
+ 
 }
+*/
+
 async function contadorSemaforo(){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/contador` )
@@ -528,117 +538,69 @@ async function estado_sem_pordep(codsemaforo) {
 }
 
 
-async function detalleAvance()
-{
+async function triadaInicial(datos){
   const dataSource = {
-    chart: {
-      caption: "Avance y cumplimiento por Línea Estratégica del Plan de Desarrollo Municipal",
-      subcaption: "Medellín Futuro",
-      xaxisname: "Líneas",
-      yaxisname: "Porcentaje",
-      numbersuffix: "%",
-      showvalues: "1",
-      formatnumberscale: "2",
-      plottooltext:
-        "<b>$dataValue</b> Reportado <b>$seriesName</b> in $label",
-      theme: "ocean",
-      drawcrossline: "1"
-    },
-    categories: [
-      {
-        category: [
+      chart: {
+        caption: "% Avance Cuatrienial PDM",
+        subcaption: "2020-2023",
+        lowerlimit: "0",
+        upperlimit: "100",
+        showvalue: "1",
+        valuefontsize: "25",
+        numbersuffix: "%",
+        theme: "fusion"
+      },
+      colorrange: {
+        color: [
           {
-            label: "Reactivación Económica y Valle del Software"
+            minvalue: 0,
+           maxvalue: document.getElementById('minimo-corte').value,
+            code: "#F2726F"
           },
           {
-            label: "Transformación Educativa y Cultural"
+            minvalue: document.getElementById('minimo-corte').value,
+            maxvalue: document.getElementById('maximo-corte').value,
+            code: "#FFC533"
           },
           {
-            label: "Medellín me Cuida"
-          },
-          {
-            label: "Ecociudad"
-          },
-          {
-            label: "Gobernanza y Gobernabilidad"
-          }
-        ]
-      }
-    ],
-    dataset: [
-      {
-        seriesname: "Avance",
-        data: [
-          {
-            value: "12"
-          },
-          {
-            value: "30"
-          },
-          {
-            value: "48"
-          },
-          {
-            value: "80"
-          },
-          {
-            value: "11"
+            minvalue: document.getElementById('maximo-corte').value,
+            maxvalue: 100,
+            code: "#62B58F"
           }
         ]
       },
-      {
-        seriesname: "Cumplimiento",
-        data: [
+      dials: {
+        dial: [
           {
-            value: "70"
-          },
-          {
-            value: "15"
-          },
-          {
-            value: "35"
-          },
-          {
-            value: "60"
-          },
-          {
-            value: "14"
+            value: datos,
+            tooltext: "<b>%</b>Avance PDM"
           }
         ]
       },
-      {
-        seriesname: "Proyección",
-        data: [
+      trendpoints: {
+        point: [
           {
-            value: "10"
-          },
-          {
-            value: "10"
-          },
-          {
-            value: "30"
-          },
-          {
-            value: "60"
-          },
-          {
-            value: "90"
+            startvalue: document.getElementById('maximo-corte').value,
+            displayvalue: "Esperado",
+            thickness: "2",
+            color: "#E15A26",
+            usemarker: "1",
+            markerbordercolor: "#E15A26",
+            markertooltext: document.getElementById('maximo-corte').value+"%"
           }
         ]
       }
-    ]
-  };
-  
-  FusionCharts.ready(function() {
-    var myChart = new FusionCharts({
-      type: "mscolumn2d",
-      renderAt: "chart-container",
-      width: "100%",
-      height: "100%",
-      dataFormat: "json",
-      dataSource
-    }).render();
-  });
-  
-
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "angulargauge",
+        renderAt: "triada1",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+    
 }

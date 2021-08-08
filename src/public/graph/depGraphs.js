@@ -1,4 +1,5 @@
 //import fetch from "node-fetch"
+var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0
 var nomarchivopdf='';
 var table4={};
 const formatter = new Intl.NumberFormat('en-US', {
@@ -21,7 +22,6 @@ async function _main(){
     //contadorSemDep(cod)
 }
 async function dep_estado(cod_dep){
- 
   let terminal = document.getElementById("inputGroupSelectDependencia");
   var selectedText = terminal.options[terminal.selectedIndex].text;   
   _avancePDM(cod_dep)
@@ -44,6 +44,7 @@ async function _avancePDM(cod_dep){
        let avance_dep = (datos.data[0].avance/datos.data[0].peso)*100
           graphPDM(avance_dep)
         })
+        _PASemaf()
     } catch (error) {
       console.log('Error _avancePDM ',error )
     }
@@ -123,62 +124,86 @@ async function _avance_financiero(dep){
       .then(res=>res.json())
       .then(datos=>{
         porc_avance_financiero(datos.data[0].pptoejecutado/datos.data[0].pptoajustado) 
-        graphPDA(parseInt(datos.data[0].poai), parseInt(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
+        graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
         detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
       })
     } catch (error) {
       console.log('Error porc_avance_financiero ',error )
     }
 }
+async function _PASemaf (){
+  try {
+    var fechaPA = new Date('06/30/2021');
+    mespa = fechaPA.getMonth(fechaPA)+1
+    vigencia = fechaPA.getFullYear(fecha)
+    fetch(`http://localhost:7000/pa/semaforo-corte/${mespa}`)
+    .then(res=>res.json())
+    .then(response=>{
+      valorminimo = (response.data[0].rojo)-0.01;
+      valormaximo = (response.data[0].verde);
+    })
+  } catch (error) {
+  }
+}
 async function porc_avance_financiero(avance){  
-    const dataSource = {
-      chart: {
-        caption: "% Ejecución Financiera",
-        lowerlimit: "0",
-        upperlimit: "100",
-        showvalue: "1",
-        numbersuffix: "%",
-        theme: "gammel",
-        showtooltip: "0",
-        valuefontsize: "25"
-      },
-      colorrange: {
-        color: [
-          {
-            minvalue: "0",
-            maxvalue: "40",
-            code: "#F2726F"
+  try {
+    var fechaPA = new Date('06/30/2021');
+    mespa = fechaPA.getMonth(fechaPA)+1
+    vigencia = fechaPA.getFullYear(fecha)
+    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    .then(res=>res.json())
+    .then(response=>{
+        const dataSource = {
+          chart: {
+            caption: "% Ejecución Financiera",
+            lowerlimit: "0",
+            upperlimit: "100",
+            showvalue: "1",
+            numbersuffix: "%",
+            theme: "gammel",
+            showtooltip: "0",
+            valuefontsize: "25"
           },
-          {
-            minvalue: "40",
-            maxvalue: "60",
-            code: "#FFC533"
-          },
-          {
-            minvalue: "60",
-            maxvalue: "100",
-            code: "#62B58F"
-          }
-        ]
-        },
-        dials: {
-          dial: [
-            {
-              value: (avance)*100
+          colorrange: {
+            color: [
+              {
+                minvalue: "0",
+                maxvalue: valorminimo,
+                code: "#F2726F"
+              },
+              {
+                minvalue: valorminimo,
+                maxvalue: valormaximo,
+                code: "#FFC533"
+              },
+              {
+                minvalue: valorminimo,
+                maxvalue: "100",
+                code: "#62B58F"
+              }
+            ]
+            },
+            dials: {
+              dial: [
+                {
+                  value: (avance)*100
+                }
+              ]
             }
-          ]
-        }
-      };
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "angulargauge",
-          renderAt: "chart-ejecfinanciera-dep",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
+          };
+          FusionCharts.ready(function() {
+            var myChart = new FusionCharts({
+              type: "angulargauge",
+              renderAt: "chart-ejecfinanciera-dep",
+              width: "100%",
+              height: "100%",
+              dataFormat: "json",
+              dataSource
+            }).render();
+          });
+    })
+  } catch (error) {
+  }
 }
 function graphPDA(poai, pptoajustado, ordenado){
     const dataSource = {
@@ -432,16 +457,16 @@ async function porc_avance_fisico(dep){
               color: [
                 {
                   minvalue: "0",
-                  maxvalue: "40",
+                  maxvalue: valorminimo,
                   code: "#F2726F"
                 },
                 {
-                  minvalue: "40",
-                  maxvalue: "60",
+                  minvalue: valorminimo,
+                  maxvalue: valormaximo,
                   code: "#FFC533"
                 },
                 {
-                  minvalue: "60",
+                  minvalue: valorminimo,
                   maxvalue: "100",
                   code: "#62B58F"
                 }
@@ -534,7 +559,7 @@ async function total_proyectos_dep(dep){
       seriesname: "POAI",
       data: [
         {
-          value: (parseInt(datos.data[0].poai_ini_inst))
+          value: Math.round (parseFloat(datos.data[0].poai_ini_inst))
         },
         {
           value: (parseInt(datos.data[0].poai_pp))
@@ -1157,7 +1182,7 @@ try {
                         <td colspan="2" style="text-align: center;">${Math.ceil(datos.data[index].eficacia_ve)}%</td>
                       </tr>
                       <tr>
-                        <th colspan="2">Observación P/B/S</th>
+                        <th colspan="2">Descripción</th>
                         <th colspan="2">Observación Seguimiento</th>
                       </tr>
                       <tr>
@@ -1590,16 +1615,16 @@ async function proyecto_fisico(cod){
           color: [
             {
               minvalue: "0",
-              maxvalue: "50",
+              maxvalue: valorminimo,
               code: "#F2726F"
             },
             {
-              minvalue: "50",
-              maxvalue: "75",
+              minvalue: valorminimo,
+              maxvalue: valormaximo,
               code: "#FFC533"
             },
             {
-              minvalue: "75",
+              minvalue: valorminimo,
               maxvalue: "100",
               code: "#62B58F"
             }
@@ -1650,16 +1675,16 @@ async function proyecto_financiero(avancexfinanciero){
       color: [
         {
           minvalue: "0",
-          maxvalue: "50",
+          maxvalue: valorminimo,
           code: "#F2726F"
         },
         {
-          minvalue: "50",
-          maxvalue: "75",
+          minvalue: valorminimo,
+          maxvalue: valormaximo,
           code: "#FFC533"
         },
         {
-          minvalue: "75",
+          minvalue: valorminimo,
           maxvalue: "100",
           code: "#62B58F"
         }
@@ -1702,16 +1727,16 @@ async function fifapon(ffp){
       color: [
         {
           minvalue: "0",
-          maxvalue: "50",
+          maxvalue: valorminimo,
           code: "#F2726F"
         },
         {
-          minvalue: "50",
-          maxvalue: "75",
+          minvalue: valorminimo,
+          maxvalue: valormaximo,
           code: "#FFC533"
         },
         {
-          minvalue: "75",
+          minvalue: valorminimo,
           maxvalue: "100",
           code: "#62B58F"
         }

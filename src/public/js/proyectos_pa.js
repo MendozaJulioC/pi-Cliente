@@ -180,7 +180,7 @@ async function busca_proyect(){
                          <td colspan="2" style="text-align: center;">${Math.ceil(datos.data[index].eficacia_ve)}%</td>
                        </tr>
                        <tr>
-                         <th colspan="2">Observación P/B/S</th>
+                         <th colspan="2">Descripción</th>
                          <th colspan="2">Observación Seguimiento</th>
                        </tr>
                        <tr>

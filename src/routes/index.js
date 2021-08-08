@@ -75,6 +75,9 @@ router.get('/obra-fisica/dep', isAuthenticated, getObraDep)
 router.get('/obra-fisica/dep/detalle/:cod_dep', isAuthenticated, getObraDepDetalle)
 router.get('/obra-fisica/geo', isAuthenticated, getObrasGeo)
 
-      
+
+ const {getGeneralPI, getGeneralPI_Lineas} = require('../controllers/taskPiGoogle')
+ router.get('/pi/google',isAuthenticated, getGeneralPI)
+ router.get('/pi/google/lineas',isAuthenticated, getGeneralPI_Lineas)
 
 module.exports = router;
