@@ -1583,9 +1583,10 @@ async function proyecto_fisico(cod){
     fetch(`https://sse-pdm.herokuapp.com/pa/api/avances/ejecucion/${cod}`)
     .then(res=> res.json())
     .then(response=>{
-      let avanxcefisicoproject= parseFloat((response.data[0].porc_eficacia_proyecto)*100); 
-      let avancexfinanciero= parseFloat((response.data[0].porc_ejec_financiera)*100);proyecto_financiero(avancexfinanciero)
-      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].porc_ejec_financiera))*0.50 )*100
+      let avanxcefisicoproject= ((response.data[0].porc_eficacia_proyecto)*100); 
+      let avancexfinanciero= parseFloat((response.data[0].ejec_financiera)*100);
+      proyecto_financiero(avancexfinanciero)*100
+      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].ejec_financiera))*0.50 )*100
       //console.log("fisico ",avanxcefisicoproject);
       //console.log("financiero ",avancexfinanciero);
       //console.log("ffp ",ffp);
