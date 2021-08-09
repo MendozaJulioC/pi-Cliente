@@ -3,58 +3,72 @@ var mes=0,  minimovalue=0, maximovalue=0; var vigencia=0;
 
 
 async function detalleAvance(){
-  try {
-        fetch(`/pi/google`)
+  try { var fecha=0; var mes=0
+        let AvancePI=[]
+        let CortePlan=[]
+        let CumplimientoPI=[]
+        //fetch(`/pi/google`)
+        fetch(`https://sse-pdm.herokuapp.com/pi/api/generalpi`)
         .then( res=> res.json())
         .then(response=>{
-          //console.log(response.cumplehoy);
-            triadaInicial2(response.cumplehoy)
-            const dataSource = {
-                chart: {
-                    caption: "<strong>Avance Cuatrienio y Cumplimiento Año</strong>",
-                    subcaption: "<b>Plan de Desarrollo  Medellín Futuro</b> ",
-                    xaxisname: "Cortes de Seguimiento",
-                    yaxisname: "Total Desempeño",
-                    numbersuffix: "%",
-                    valuefontsize: "14",
-                    formatnumberscale: "0",
-                    adjustdiv: "0",
-                    yaxismaxvalue: "100",
-                    numdivlines: "4",
-                    showvalues: "1",
-                    animation: "1",
-                    plottooltext:
-                        "<b>$dataValue</b> Desempeño <b>$seriesName</b> en $label",
-                    theme: "zune",
-                    drawcrossline: "1"
-                },
-                categories: [
-                {
-                category: response.corte
+          let fechaOrigen= '2021-06-30'
+          let tam = response.data.length;
+          for(let i =0; i<tam;i++){
+            AvancePI.push ({ "value" :  (response.data[i].avance) })  
+            CortePlan.push({ "label" :  (response.data[i].corte).substr(0,10) })
+            CumplimientoPI.push ({ "value" : response.data[i].cumplimiento })  
+            var fecha = response.data[i].corte
+            let fechacorte=fecha.substr(0,10)
+            if(fechacorte == fechaOrigen){
+              triadaInicial2(response.data[i].cumplimiento)
             }
+          }
+          const dataSource = {
+            chart: {
+              caption: "<strong>Avance Cuatrienio y Cumplimiento Año</strong>",
+              subcaption: "<b>Plan de Desarrollo  Medellín Futuro</b> ",
+              xaxisname: "Cortes de Seguimiento",
+              yaxisname: "Total Desempeño",
+              numbersuffix: "%",
+              valuefontsize: "16",
+              formatnumberscale: "0",
+              adjustdiv: "0",
+              yaxismaxvalue: "100",
+              numdivlines: "4",
+              showvalues: "1",
+              animation: "1",
+              plottooltext:
+                "<b>$dataValue</b> Desempeño <b>$seriesName</b> en $label",
+              theme: "zune",
+                drawcrossline: "1"
+              },
+                categories: [
+              {
+                category: CortePlan
+              }
             ],
             dataset: [
             {
-                seriesname: "Avance",
-                data: response.avance
+              seriesname: "Avance",
+              data: AvancePI
             },
             {
-                seriesname: "Cumplimiento",
-                data: response.cumplimiento
+              seriesname: "Cumplimiento",
+              data: CumplimientoPI
             }
-            ]
+          ]
         };
         FusionCharts.ready(function() {
-            var myChart = new FusionCharts({
-            type: "mscolumn2d",
-            renderAt: "chart-avancegeneral",
-            width: "100%",
-            height: "100%",
-            dataFormat: "json",
-            dataSource
-            }).render();
-        });
-        })
+          var myChart = new FusionCharts({
+          type: "mscolumn2d",
+          renderAt: "chart-avancegeneral",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+    })
   } catch (error) {
   }
 }
@@ -62,9 +76,23 @@ async function detalleAvance(){
 async function detalleAvanceLinea(){
     try {
 
-        fetch(`/pi/google/lineas`)
+      let NomPIL=[]; let AvanceJun2021=[]; let CumplimientoJun21=[]; let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
+      let AvanceDic20=[]; let CumplimientoDic20=[];
+      fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
+       // fetch(`/pi/google/lineas`)
         .then( res=> res.json())
         .then(response=>{
+         // console.log(response.data);
+          let tam = response.data.length;
+          for(let z =0; z<tam;z++){
+              AvanceDic20.push({"value" :  parseFloat(response.data[z].Avance2020_12_31)})
+              CumplimientoDic20.push({"value" :  parseFloat(response.data[z].Cumplimiento2020_12_31) })
+              AvanceJun2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_06_30) })  
+              CumplimientoJun21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_06_30) }) 
+              ProyecAvanDic21.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31_P) }) 
+              ProyecCumpDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31_P) }) 
+              NomPIL.push({ "label" : response.data[z].nom_linea })
+         }
 
             const dataSource = {
                 chart: {
@@ -83,33 +111,33 @@ async function detalleAvanceLinea(){
                 },
                 categories: [
                   {
-                    category: response.linea
+                    category: NomPIL
                   }
                 ],
                 dataset: [
                     {
                         seriesname: "Avance Dic 2020",
-                        data:response.avanceDic20
+                        data:AvanceDic20
                     },
                     {
                         seriesname: "Cumplimiento Dic 2020",
-                        data:response.cumplimientoDic20
+                        data:CumplimientoDic20
                     },
                     {
                         seriesname: "Avance Junio 2021",
-                        data:response.avanceJun21
+                        data:AvanceJun2021
                     },
                     {
                         seriesname: "Cumplimiento Junio 2021",
-                        data: response.cumplimientoJun21
+                        data: CumplimientoJun21
                     },
                     {
                         seriesname: "Proyección Avance Dic 2021",
-                        data: response.proyeccAvanceDic21
+                        data: ProyecAvanDic21
                     },
                     {
                         seriesname: "Proyección Cumplimiento Dic 2021",
-                        data: response.proyeccCumplDic2021
+                        data: ProyecCumpDic21
                     } 
                   
                 ]
@@ -135,6 +163,7 @@ async function detalleAvanceLinea(){
 }
 
 async function triadaInicial2(datos){
+ // console.log(datos);
     let mes=0; let valormaximo=0; let valorminimo=0;
     var fechaPA = new Date('06/30/2021');
     mes = fechaPA.getMonth(fechaPA)+1
@@ -143,7 +172,7 @@ async function triadaInicial2(datos){
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mes}`)
     .then(res=>res.json())
     .then(response=>{
-        
+     //   console.log(response);
         valorminimo = (response.data[0].rojo);
         valormaximo = (response.data[0].verde);
         const dataSource = {

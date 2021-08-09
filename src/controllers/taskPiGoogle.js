@@ -11,27 +11,22 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 
 const getGeneralPI = async (req, res)=>{
-
     reportPI = await googlesheet.getGoogleSheetPI();
    // console.log('task ',reportPI);
     let AvancePI=[]; let CumplimientoPI=[]; let CortePlan=[];let cumpleHoy=0;
     for (let z=0; z<reportPI.length;z++){
-   
         if(reportPI[z].Avance!= '#DIV/0!'){
            // console.log((reportPI[z].Avance ));
             AvancePI.push ({ "value" :  (reportPI[z].Avance) })  
-            CortePlan.push({ "label" : reportPI[z].Corte })
+            CortePlan.push({ "label" :  reportPI[z].Corte })
         }
         if(reportPI[z].Avance !='0'){
             CumplimientoPI.push ({ "value" : reportPI[z].Cumplimiento })  
-
         }
         
        if(reportPI[z].Corte== '2021-06-30'){
            cumpleHoy= reportPI[z].Cumplimiento 
-
         }
-  
    }
    res.status(200).json({
     Autor:"Alcaldía de Medellin - Departamento Administrativo de Planeación ",
@@ -46,11 +41,7 @@ const getGeneralPI = async (req, res)=>{
   
 }
 
-
-
-
 const getGeneralPI_Lineas = async (req, res)=>{
-
     reportPIL = await googlesheet.getGoogleSheetPI_Lineas();
    //console.log('task ',reportPIL);
     let NomPIL=[]; let AvanceJun2021=[]; let CumplimientoJun21=[]; let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
@@ -62,12 +53,7 @@ const getGeneralPI_Lineas = async (req, res)=>{
         CumplimientoJun21.push ({ "value" :  parseFloat(reportPIL[z].Cumplimiento2021_06_30) }) 
         ProyecAvanDic21.push ({ "value" :  parseFloat(reportPIL[z].Avance2021_12_31_P) }) 
         ProyecCumpDic21.push ({ "value" :  parseFloat(reportPIL[z].Cumplimiento2021_12_31_P) }) 
-
-
         NomPIL.push({ "label" : reportPIL[z].NomLinea })
-       
-       
-  
    }
    res.status(200).json({
     Autor:"Alcaldía de Medellin - Departamento Administrativo de Planeación ",
