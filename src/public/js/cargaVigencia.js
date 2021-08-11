@@ -695,7 +695,7 @@ async function reporteSec(value, nombre){
       //console.log(data.data);
       for (let x = 0; x <data.data.length; x++) {
         reportes.push([
-         /*data.data[x].cod_dep,*/ data.data[x].dpendencias,data.data[x].fecha,data.data[x].logro,data.data[x].cifras
+         /*data.data[x].cod_dep,*/ data.data[x].fecha,data.data[x].dpendencias,data.data[x].logro,data.data[x].cifras
         ])
       }
 
