@@ -5,7 +5,6 @@ const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2
   })
 
-
 const vigencia= async(req,res)=>{
   try {
      let inverTotal= document.getElementById('totalVIgencia');
@@ -82,9 +81,14 @@ const vigencia= async(req,res)=>{
             dataSource
           }).render();
         });
+
+
     })
    
     garficaTotalCmuna()
+
+  
+ 
 
     
   }catch (error) {console.log(error)}
@@ -371,7 +375,6 @@ const mapaVogencia = async (req, res) => {
 
 
 
-
 function getColor(d) {
   return d > 400000000000  ? '#005a32' :
          d > 350000000000  ? '#238b45' :
@@ -469,8 +472,8 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
     buttons: false,
     timer: 4000
   });
-
-
+  //console.log(value);
+  reporteSec(value, nombre)
     nom_comuna=nombre
     document.getElementById('mapaprueba').innerHTML= value
     document.getElementById('nombre_comuna').innerHTML= nombre
@@ -631,6 +634,7 @@ async function depterriotiomodal(value){
        });
       }
 
+    datos.sort((a,b)=> b.value-a.value)
       const dataSource = {
         chart: {
           caption: "Inversión realizada por las Dependencias",
@@ -676,4 +680,73 @@ async function dowloadGEO (){
   };
   html2pdf().from(invoice).set(opt).save();
 
+}
+
+
+
+async function reporteSec(value, nombre){
+  try {
+    let reportes=[];
+    document.getElementById('logrocomunareportado').innerHTML= nombre
+    const url = `https://sse-pdm.herokuapp.com/geo/api/logros/${value}`
+    fetch(url)
+    .then(res=>res.json())
+    .then (data=>{
+      //console.log(data.data);
+      for (let x = 0; x <data.data.length; x++) {
+        reportes.push([
+         /*data.data[x].cod_dep,*/ data.data[x].dpendencias,data.data[x].fecha,data.data[x].logro,data.data[x].cifras
+        ])
+      }
+
+
+      document.getElementById('table_reporte').innerHTML="";
+      var tableLogros=  $('#table_reporte').DataTable({
+        data:reportes,
+        columns:[
+          {title: "Fecha"},
+          {title: "Dependencias"},
+          {title: "Logros"},
+          {title: "Cifras"},
+        ],
+        scrollColapse: true,
+        fixedColumns: {
+          heightMatch: 'none'
+        }, fixedHeader: true,
+        stateSave: false,
+        language: {
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "emptyTable":     "No hay datos para este tipo de proyectos",
+          "zeroRecords": "Nothing found - sorry",
+          "info": "Vistas página _PAGE_ of _PAGES_",
+          "infoEmpty": "No hay registros Disponibles",
+          "infoFiltered": "(filtered from _MAX_ total registros)", 
+          "zeroRecords": "No hay datos para este tipo de proyectos",
+        paginate: {
+          first: "Primera",
+          last: "Última",
+          next: "Siguiente",
+          previous: "Anterior"
+        },
+        sProcessing:"Procesando..."
+       },
+        responsive:"true",
+        dom:'frtlp',
+        bDestroy: true,
+        columnDefs: [
+          {/*Fecha*/          width: "15px",   targets: 0, className: "text-center"    },
+          {/*Dependencia*/    width: "15px",   targets: 1, className: "text-center"    },
+          {/*Logros*/         width: "50px",   targets: 2, className: "text-center"    },
+          {/*Cifras*/         width: "50px",   targets: 3, className: "text-center"    },
+          
+          
+         ],   
+           bDestroy: true
+       });
+      })
+
+  
+  } catch (error) {
+    console.error(error);
+  }
 }
