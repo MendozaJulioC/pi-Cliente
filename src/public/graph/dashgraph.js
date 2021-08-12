@@ -173,9 +173,9 @@ async function _avance_financiero(){
     fetch('https://sse-pdm.herokuapp.com/pa/api/avancefinanciero')
     .then(res=>res.json())
     .then(datos=>{
-      porc_avance_financiero((datos.data[0].pptoejecutado/datos.data[0].pptoajustado))
+      porc_avance_financiero(parseFloat(datos.data[0].pptoejecutado/datos.data[0].pptoajustado))
       graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseFloat(datos.data[0].pptoejecutado))
-      detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
+      detallePpto(parseFloat(datos.data[0].compromisos),parseFloat(datos.data[0].disponible),parseFloat( datos.data[0].ordenado), parseFloat(datos.data[0].total))
      
     })
   } catch (error) {

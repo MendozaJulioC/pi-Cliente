@@ -123,9 +123,9 @@ async function _avance_financiero(dep){
       fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefinanciero/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
-        porc_avance_financiero(datos.data[0].pptoejecutado/datos.data[0].pptoajustado) 
-        graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseInt(datos.data[0].pptoejecutado))
-        detallePpto(datos.data[0].compromisos, datos.data[0].disponible, datos.data[0].ordenado, datos.data[0].total)
+        porc_avance_financiero(parseFloat(datos.data[0].pptoejecutado/datos.data[0].pptoajustado) )
+        graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseFloat(datos.data[0].pptoejecutado))
+        detallePpto(parseFloat(datos.data[0].compromisos),parseFloat (datos.data[0].disponible), parseFloat(datos.data[0].ordenado), parseFloat(datos.data[0].total))
       })
     } catch (error) {
       console.log('Error porc_avance_financiero ',error )
@@ -562,13 +562,13 @@ async function total_proyectos_dep(dep){
           value: Math.round (parseFloat(datos.data[0].poai_ini_inst))
         },
         {
-          value: (parseInt(datos.data[0].poai_pp))
+          value: (parseFloat(datos.data[0].poai_pp))
         },
         {
-          value: (parseInt(datos.data[0].poai_saldos_no_exec))
+          value: (parseFloat(datos.data[0].poai_saldos_no_exec))
         },
         {
-          value: (parseInt(datos.data[0].poai_saldos_pendientes))
+          value: (parseFloat(datos.data[0].poai_saldos_pendientes))
         }
       ]
     },
@@ -576,16 +576,16 @@ async function total_proyectos_dep(dep){
       seriesname: "Ppto. Ajustado",
       data: [
         {
-          value: (parseInt(datos.data[0].ajustado_ini_inst))
+          value: (parseFloat(datos.data[0].ajustado_ini_inst))
         },
         {
-          value: (parseInt(datos.data[0].ajustado_pp))
+          value: (parseFloat(datos.data[0].ajustado_pp))
         },
         {
-          value: (parseInt(datos.data[0].ajustado_saldos_no_exec))
+          value: (parseFloat(datos.data[0].ajustado_saldos_no_exec))
         },
         {
-          value: (parseInt(datos.data[0].ajustado_saldos_pendientes))
+          value: (parseFloat(datos.data[0].ajustado_saldos_pendientes))
         }
       ]
     }
@@ -1583,7 +1583,7 @@ async function proyecto_fisico(cod){
     fetch(`https://sse-pdm.herokuapp.com/pa/api/avances/ejecucion/${cod}`)
     .then(res=> res.json())
     .then(response=>{
-      let avanxcefisicoproject= ((response.data[0].porc_eficacia_proyecto)*100); 
+      let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
       let avancexfinanciero= parseFloat((response.data[0].ejec_financiera)*100);
       proyecto_financiero(avancexfinanciero)*100
       let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].ejec_financiera))*0.50 )*100
