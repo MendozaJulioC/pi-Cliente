@@ -1,3 +1,5 @@
+//import { response } from "express";
+
 //import fetch from "node-fetch"
 var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0
 var nomarchivopdf='';
@@ -35,6 +37,8 @@ async function dep_estado(cod_dep){
   total_proyectos_dep(cod_dep)
   plan_accion_dep(cod_dep)
   contadorSemDep(cod_dep)
+ 
+
 }
 async function _avancePDM(cod_dep){
     try {
@@ -123,7 +127,7 @@ async function _avance_financiero(dep){
       fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefinanciero/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
-        porc_avance_financiero(parseFloat(datos.data[0].pptoejecutado/datos.data[0].pptoajustado) )
+        porc_avance_financiero(parseFloat(parseFloat(datos.data[0].pptoejecutado)/parseFloat(datos.data[0].pptoajustado)) )
         graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseFloat(datos.data[0].pptoejecutado))
         detallePpto(parseFloat(datos.data[0].compromisos),parseFloat (datos.data[0].disponible), parseFloat(datos.data[0].ordenado), parseFloat(datos.data[0].total))
       })
@@ -208,7 +212,7 @@ async function porc_avance_financiero(avance){
 function graphPDA(poai, pptoajustado, ordenado){
     const dataSource = {
       chart: {
-        caption: " Ejecución Financiera ",
+        caption: " Ejecución Financiera",
         yaxisname: "(mill de $)",
         showvalues: "1",
         formatnumberscale: "0",
@@ -222,17 +226,17 @@ function graphPDA(poai, pptoajustado, ordenado){
       data: [
         {
           label: "Ppto. Inicial",
-          value: Math.ceil(poai),
+          value: (poai), 
           "color": "#009FE3"
         },
         {
           label: "Ppto. Ajustado",
-          value: Math.ceil(pptoajustado),
+          value: (pptoajustado),
           "color": "#009AB2"
         },
         {
           label: "Ppto. Ordenado",
-          value: Math.ceil(ordenado) ,
+          value: (ordenado) ,
           "color": "#EE7518"
         }
       ]
@@ -818,7 +822,7 @@ async function plan_accion_dep(dep){
 
 async function   nuevatabla(valores1, valores2, valores3,valores4, valores5){
 document.getElementById('table_tipo1').innerHTML=""
-  var table1 = $('#table_tipo1').DataTable({
+var table1 = $('#table_tipo1').DataTable({
     data: valores1,
     columns: [
       { title: "Línea" },
@@ -1786,4 +1790,138 @@ window.onload= function(){
 
 
 
+async function listvalstat_dep(){
 
+  
+  try {
+    let dep = document.getElementById('inputGroupSelectDependencia').value;
+    let valorlista=[];
+    fetch(`https://sse-pdm.herokuapp.com/dep/api/valstat-dep/${dep}`)
+    .then(res=> res.json())
+    .then(response=>{
+      let tam= response.data.length;
+      document.getElementById('cod_depe_vs').innerHTML=response.data[0].cod_dependencia;
+      for (let index = 0; index < tam; index++) {
+        valorlista.push([
+          response.data[index].cod_proyecto,
+          response.data[index].cod_val_stat,
+          response.data[index].nom_val_stat,
+          response.data[index].u_medida,
+          response.data[index].q_plan,
+          response.data[index].q_real,
+          response.data[index].eficacia_ve,
+          response.data[index].obs_val_stat,
+          response.data[index].cod_siufp_catal,
+          response.data[index].obs_cod_siufp
+        ]);
+      }
+      tablavalstatdep(valorlista)
+    })
+  } catch (error) {console.error('Error: ', error);}
+}
+
+
+async function tablavalstatdep(listado){
+try {
+
+  document.getElementById('table_valstat_dep').innerHTML="";
+  var table1 = $('#table_valstat_dep').DataTable({
+  data: listado,
+    columns: [
+      { title: "Proyecto" },
+      { title: "Cod_ValStat" },
+      { title: "Valor Estadístico" },
+      { title: "Medida" },
+      { title: "Q_Plan" },
+      { title: "Q_Real" },
+      { title: "Eficacia" },
+      { title: "Observación" },
+      { title: "SUIFP" },
+      { title: "Obs. SUIFP" }
+    ]  ,   
+      scrollCollapse: true, 
+
+    fixedColumns: {
+      heightMatch: 'none'
+    }, fixedHeader: true,
+    stateSave: true,
+    language: {
+      "lengthMenu": "Mostrar _MENU_ registros por página",
+      "emptyTable":     "No hay datos para este tipo de proyectos",
+      "zeroRecords": "Nothing found - sorry",
+      "info": "Vistas página _PAGE_ of _PAGES_",
+      "infoEmpty": "No hay registros Disponibles",
+      "infoFiltered": "(filtered from _MAX_ total registros)", 
+      "zeroRecords": "No hay datos para este tipo de proyectos",
+    paginate: {
+      first: "Primera",
+      last: "Última",
+      next: "Siguiente",
+      previous: "Anterior"
+    },
+    sProcessing:"Procesando..."
+   },
+   responsive:"true",
+  dom:'Bfrtlp',
+
+ bDestroy: true,
+ buttons:[
+  {
+    extend: 'excelHtml5',
+    text  : '<i class="fa fa-file-excel-o"></i>' ,
+    title : "Plan_De_Accion",
+    tittleAttr: 'Exportar a Excel',
+    className: 'btn btn-success',
+    autoFilter: true,
+    sheetName: 'Valores Estadisticos'
+   },
+   {
+    extend: 'pdfHtml5',
+    text  : '<i class="fa fa-file-pdf-o"></i>' ,
+    title : "Plan_De_Accion",
+    tittleAttr: 'Exportar a PDF',
+    className: 'btn btn-danger',
+    orientation: 'landscape',
+    pageSize: 'LEGAL',
+    messageTop: 'PDF created by Unidad de SegumientoPlan de Desarrollo-DAP.'
+   },
+   {
+    extend: 'print',
+    text  : '<i class="fa fa-print"></i>' ,
+    title : "Plan_De_Accion",
+    tittleAttr: 'Imprimir',
+    className: 'btn btn-info'
+   },  {
+    extend: 'csvHtml5',
+    text: '<i class="fa fa-file-text"></i>',
+    title : "Plan_De_Accion",
+    className: 'btn btn-warning',
+    exportOptions: {
+        modifier: {
+            search: 'none'
+        }
+    }
+}],
+  columnDefs: [
+      {/*Línea */       width: "5px",   targets: 0, className: "text-center"    },
+      {/*Componente*/   width: "5px",   targets: 1, className: "text-center"    },
+      {/*Programa*/     width: "5px",   targets: 2, className: "text-center"    },
+      {/*BPIN  */       width: "50px",  targets: 3, className: "text-center"    },
+      {/*Proyecto*/     width: "500px", targets: 4, className: "text-left"      },
+      {/*Eficacia*/     width: "10px",  targets: 5, className: "text-center"    },
+      {/*%Ejec  */      width: "70px",  targets: 6, className: "text-center"    },
+      {/*POAI  */       width: "70px",  targets: 7, className: "text-center"    },
+      {/*Ajustado*/     width: "70px",  targets: 8, className: "text-center"    },
+      {/*Financiera*/   width: "70px",  targets: 9, className: "text-center"    },
+   
+    
+      
+     ],   
+       bDestroy: true
+   });
+} catch (error) {
+  
+}
+jQuery.noConflict();
+$('#ModaListVE').modal('show'); 
+}
