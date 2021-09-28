@@ -15,7 +15,7 @@ async function _main(){
  
 }
 function corteplan(){
-  fecha = new Date('06/30/2021');
+  fecha = new Date('08/31/2021');
   document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   //mespa = fecha.getMonth(fecha)+1
   vigencia = fecha.getFullYear(fecha)
@@ -66,7 +66,7 @@ swal( {
 
 async function _PASemaf (){
   try {
-    fecha = new Date('06/30/2021');
+    fecha = new Date('08/31/2021');
     mespa = fecha.getMonth(fecha)+1
     vigencia = fecha.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
@@ -184,7 +184,7 @@ async function _avance_financiero(){
 }
 async function porc_avance_financiero(avance){  
 try {
-  var fechaPA = new Date('06/30/2021');
+  var fechaPA = new Date('08/31/2021');
   mespa = fechaPA.getMonth(fechaPA)+1
   vigencia = fechaPA.getFullYear(fecha)
   fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
