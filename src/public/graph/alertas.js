@@ -119,13 +119,18 @@ async function alertasGraph(){
             "avance": avance,
             "color" : colorfondo
           })
-          valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,"",
-                          gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-                          (avance).toFixed(2),(gris+rojo+amarillo+verde)
-                      ] )
+
+if(datos.data[i].cod_dep>700 && datos.data[i].cod_dep<950 && datos.data[i].cod_dep!=800){
+  valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,"",
+  gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+  rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+  amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+  verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+  (avance).toFixed(2),(gris+rojo+amarillo+verde)
+] )
+}
+          
+
       }
      valores.sort((b, a) =>  b.avance - a.avance )
      valores2.sort((b, a) =>  a.avance - b.avance )
