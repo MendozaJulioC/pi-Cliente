@@ -11,7 +11,7 @@ async function detalleAvance(){
         fetch(`https://sse-pdm.herokuapp.com/pi/api/generalpi`)
         .then( res=> res.json())
         .then(response=>{
-          let fechaOrigen= '2021-06-30'
+          let fechaOrigen= '2021-08-31'
           let tam = response.data.length;
           for(let i =0; i<tam;i++){
             AvancePI.push ({ "value" :  (response.data[i].avance) })  
