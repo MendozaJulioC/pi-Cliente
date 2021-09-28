@@ -137,7 +137,7 @@ async function _avance_financiero(dep){
 }
 async function _PASemaf (){
   try {
-    var fechaPA = new Date('06/30/2021');
+    var fechaPA = new Date('08/31/2021');
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
@@ -151,7 +151,7 @@ async function _PASemaf (){
 }
 async function porc_avance_financiero(avance){  
   try {
-    var fechaPA = new Date('06/30/2021');
+    var fechaPA = new Date('08/31/2021');
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
