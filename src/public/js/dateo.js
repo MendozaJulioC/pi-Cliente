@@ -580,13 +580,13 @@ async function triadaInicial(datos){
       trendpoints: {
         point: [
           {
-            startvalue: document.getElementById('maximo-corte').value,
+            startvalue: 41.6 ,//document.getElementById('maximo-corte').value,
             displayvalue: "Esperado",
             thickness: "2",
             color: "#E15A26",
             usemarker: "1",
             markerbordercolor: "#E15A26",
-            markertooltext: document.getElementById('maximo-corte').value+"%"
+            markertooltext: 41.6+"%"//document.getElementById('maximo-corte').value+"%"
           }
         ]
       }
