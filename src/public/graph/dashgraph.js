@@ -1,4 +1,4 @@
-var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0;
+var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -100,6 +100,8 @@ async function _avancePDM(){
 }
 async function graphPDM(total){
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
+  let esperado=(mes/48)*100
+  console.log(mes);
   try {
     const dataSource = {
       chart: {
@@ -143,13 +145,13 @@ async function graphPDM(total){
       trendpoints: {
         point: [
           {
-            startvalue: 41.6 ,//document.getElementById('maximo-corte').value,
+            startvalue: esperado ,//document.getElementById('maximo-corte').value,
             displayvalue: "Esperado",
             thickness: "2",
             color: "#E15A26",
             usemarker: "1",
             markerbordercolor: "#E15A26",
-            markertooltext: 41.6+"%"//document.getElementById('maximo-corte').value+"%"
+            markertooltext: esperado.toFixed(2)+"%"//document.getElementById('maximo-corte').value+"%"
           }
         ]
       }
