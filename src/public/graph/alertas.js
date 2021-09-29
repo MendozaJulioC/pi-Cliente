@@ -120,15 +120,15 @@ async function alertasGraph(){
             "color" : colorfondo
           })
 
-if(datos.data[i].cod_dep>700 && datos.data[i].cod_dep<950 && datos.data[i].cod_dep!=800){
-  valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,"",
-  gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-  rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-  amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-  verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
-  (avance).toFixed(2),(gris+rojo+amarillo+verde)
-] )
-}
+          if(datos.data[i].cod_dep>700 && datos.data[i].cod_dep!=908 && datos.data[i].cod_dep!=800 && datos.data[i].cod_dep!=954 && datos.data[i].cod_dep!=955  && datos.data[i].cod_dep!=957 && datos.data[i].cod_dep<958){
+            valores2.push([ datos.data[i].cod_dep, datos.data[i].nombre_dep,"",
+            gris,( (gris/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+            rojo,( (rojo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+            amarillo,( (amarillo/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+            verde,( (verde/ (gris+rojo+amarillo+verde))*100 ).toFixed(2)+"%",  
+            (avance).toFixed(2),(gris+rojo+amarillo+verde)
+          ] )
+          }
           
 
       }
