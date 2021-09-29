@@ -57,14 +57,14 @@ async function _avancePDM(){
     .then(res=>res.json())
     .then(datos=>{
       //avancePDMtarget(datos.data[0].total_plan)
-      triadaInicial(datos.data[0].total_plan)
+      triadaInicial(datos.data[0].total_plan, mes)
       })
   } catch (error) {
     console.error('Error _avancePDM ',error )
   }
 }
 
-/*
+
 async function avancePDMtarget(avanceplan){
   const dataSource = {
     chart: {
@@ -111,7 +111,7 @@ async function avancePDMtarget(avanceplan){
  // graphInicial()
 }
 
-/*
+
 async function graphInicial(){
   try {
     var dateo=[];
@@ -164,7 +164,7 @@ async function graphInicial(){
   }
   //avance_linea_dep()
 };
-*/ 
+
 async function _Components(){
   try {
     let avance_Comp1=[]; let avance_Comp3=[];
@@ -395,52 +395,9 @@ async function graphCompL5(avanceComp5){
 
 
 
-/*
-async function avance_linea_dep(){
-  try {
-    let info=[];
-    fetch('https://sse-pdm.herokuapp.com/dep/api/dependencias/avance')
-    .then(res=>res.json())
-    .then(datos=>{
-      let tam = datos.data.length;
-         for(let i =0; i<tam;i++){
-        if (((datos.data[i].avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#00af91"}
-        else if (((datos.data[i].avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"} 
-        else {colorsemaf="#ffc764"}
-        info.push({
-           "label" : datos.data[i].nombre_dep,
-           "value": (datos.data[i].avance/datos.data[i].peso)*100,
-           "color": colorsemaf,
-        })
-      }
-      info.sort((a, b) =>  b.value - a.value )
-      const dataSource = {
-        chart: {
-          caption: "% Avance cuatrienial por Dependencias PDM",
-          yaxisname: "Dependencias",
-          aligncaptionwithcanvas: "0",
-          theme: "gammel",
-          numbersuffix: "%"
-        },
-        data: info
-      };
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "bar2d",
-          renderAt: "chart-avance-dep",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-    })
-  } catch (error) {
-    console.error('Error _avancePDM ',error )
-  }
  
-}
-*/
+
+
 
 async function contadorSemaforo(){
   try {
@@ -538,7 +495,8 @@ async function estado_sem_pordep(codsemaforo) {
 }
 
 
-async function triadaInicial(datos){
+async function triadaInicial(datos, mes){
+ let esperado= (mes/48)*100;
   const dataSource = {
       chart: {
         caption: "% Avance Cuatrienial PDM",
@@ -580,13 +538,13 @@ async function triadaInicial(datos){
       trendpoints: {
         point: [
           {
-            startvalue: 41.6 ,//document.getElementById('maximo-corte').value,
+            startvalue: esperado.toFixed(2),//document.getElementById('maximo-corte').value,
             displayvalue: "Esperado",
             thickness: "2",
             color: "#E15A26",
             usemarker: "1",
             markerbordercolor: "#E15A26",
-            markertooltext: 41.6+"%"//document.getElementById('maximo-corte').value+"%"
+            markertooltext: esperado.toFixed(2)+"%"//document.getElementById('maximo-corte').value+"%"
           }
         ]
       }
