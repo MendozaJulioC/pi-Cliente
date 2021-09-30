@@ -77,6 +77,7 @@ async function detalleAvanceLinea(){
     try {
 
       let NomPIL=[]; let AvanceJun2021=[]; let CumplimientoJun21=[]; let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
+      let AvanceAgo2021=[]; let CumplimientoAgo21=[];
       let AvanceDic20=[]; let CumplimientoDic20=[];
       fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
        // fetch(`/pi/google/lineas`)
@@ -89,6 +90,10 @@ async function detalleAvanceLinea(){
               CumplimientoDic20.push({"value" :  parseFloat(response.data[z].Cumplimiento2020_12_31) })
               AvanceJun2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_06_30) })  
               CumplimientoJun21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_06_30) }) 
+
+              AvanceAgo2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_08_31) })  
+              CumplimientoAgo21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_08_31) }) 
+
               ProyecAvanDic21.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31_P) }) 
               ProyecCumpDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31_P) }) 
               NomPIL.push({ "label" : response.data[z].nom_linea })
@@ -132,6 +137,14 @@ async function detalleAvanceLinea(){
                         data: CumplimientoJun21
                     },
                     {
+                        seriesname: "Avance Agosto 2021",
+                        data:AvanceAgo2021
+                    },
+                    {
+                        seriesname: "Cumplimiento Agosto 2021",
+                        data: CumplimientoAgo21
+                    },
+                    {
                         seriesname: "Proyección Avance Dic 2021",
                         data: ProyecAvanDic21
                     },
@@ -163,7 +176,7 @@ async function detalleAvanceLinea(){
 }
 
 async function triadaInicial2(datos){
- // console.log(datos);
+ console.log(datos);
     let mes=0; let valormaximo=0; let valorminimo=0;
     var fechaPA = new Date('08/31/2021');
     mes = fechaPA.getMonth(fechaPA)+1
