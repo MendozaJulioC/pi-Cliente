@@ -101,7 +101,7 @@ async function _avancePDM(){
 async function graphPDM(total){
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
   let esperado=(mes/48)*100
-  console.log(mes);
+  //console.log(mes);
   try {
     const dataSource = {
       chart: {
@@ -351,15 +351,25 @@ async function detallePpto(compromisos, disponible, ordenado , total){
 }
 async function columnGeo(){
   try {
+    let geoinver=[]
       fetch(`https://sse-pdm.herokuapp.com/geo/api/territorio`)
       .then(res=>res.json())
       .then(datos=>{
+        //console.log(datos.data);
+        for (let index = 0; index < datos.data.length; index++) {
+          
+          geoinver.push({
+            label: datos.data[index].nom_comuna,
+            value: datos.data[index].total,
+
+          })
+        }
       const dataSource = {
           chart: {
             caption: "Inversión Pública por Comunas y Corregimientos",
             subcaption: "(millones de pesos)",
             xaxisname: "Territorio",
-            yaxisname: "cifras en millones de pesos",
+            yaxisname: "cifras en pesos",
             showvalues: "1",
             formatnumberscale: "0",
             numberprefix: "$",
@@ -374,102 +384,13 @@ async function columnGeo(){
                                   <td>$label</td>
                                 </tr>
                                 <tr style="color:white" >
-                                  <th>Inversión (en millones de pesos)</th>
+                                  <th>Inversión</th>
                                   <td>$dataValue</td>
                                 </tr>
                               </table>
                             </div>`,
           },
-          data: [
-            {
-              label: "Popular",
-              value: Math.ceil(parseInt(datos.data[0].popular)/1000000),
-          
-              link: "j-showAlert-Apple,$810K"
-            },
-            {
-              label: "Santa Cruz",
-              value: Math.ceil(parseInt(datos.data[0].santa_cruz)/1000000)
-        
-            },
-            {
-              label: "Manrique",
-              value: Math.ceil(parseInt(datos.data[0].manrique)/1000000)
-           
-            },
-            {
-              label: "Aranjuez",
-              value: Math.ceil(parseInt(datos.data[0].aranjuez)/1000000) 
-            },
-            {
-              label: "Castilla",
-              value: Math.ceil(parseInt(datos.data[0].castilla)/1000000) 
-            },
-            {
-              label: "Doce de Octubre",
-              value: Math.ceil(parseInt(datos.data[0].doce_de_octubre)/1000000)
-            },
-            {
-              label: "Robledo",
-              value: Math.ceil(parseInt(datos.data[0].robledo)/1000000) 
-            },
-            {
-              label: "Villa Hermosa",
-              value: Math.ceil(parseInt(datos.data[0].villa_hermosa)/1000000) 
-            },
-            {
-              label: "Buenos Aires",
-              value: Math.ceil(parseInt(datos.data[0].buenos_aires)/1000000)
-            },
-            {
-              label: "La Candelaria",
-              value: Math.ceil(parseInt(datos.data[0].la_candelaria)/1000000) 
-            },
-            {
-              label: "Laureles Estadio",
-              value: Math.ceil(parseInt(datos.data[0].laureles_estadio)/1000000)
-            },
-            {
-              label: "La América",
-              value: Math.ceil(parseInt(datos.data[0].la_america)/1000000) 
-            },
-            {
-              label: "San Javier",
-               value: Math.ceil(parseInt(datos.data[0].san_javier)/1000000) 
-            },
-            {
-              label: "El Poblado",
-              value: Math.ceil(parseInt(datos.data[0].el_poblado)/1000000) 
-            },
-            {
-              label: "Guayabal",
-              value: Math.ceil(parseInt(datos.data[0].guayabal)/1000000) 
-            },
-            {
-              label: "Belén",
-              value: Math.ceil(parseInt(datos.data[0].belen)/1000000) 
-            },
-            {
-              label: "Palmitas",
-              value: Math.ceil(parseInt(datos.data[0].palmitas)/1000000) ,color:"#00853E"
-            },
-            {
-              label: "San Cristóbal",
-              value: Math.ceil(parseInt(datos.data[0].san_cristobal)/1000000) ,color:"#00853E"
-            },
-            {
-              label: "Altavista",
-              value: Math.ceil(parseInt(datos.data[0].altavista)/1000000) ,color:"#00853E"
-            },
-            {
-              label: "San Antonio",
-               value: Math.ceil(parseInt(datos.data[0].san_antonio)/1000000) ,color:"#00853E"
-            },
-            {
-              label: "Santa Elena",
-              value: Math.ceil(parseInt(datos.data[0].santa_elena)/1000000) ,color:"#00853E"
-            }
-          ]
+          data: geoinver,
         };
         FusionCharts.ready(function() {
           var myChart = new FusionCharts({
