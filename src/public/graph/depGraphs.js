@@ -1,7 +1,7 @@
 //import { response } from "express";
 
 //import fetch from "node-fetch"
-var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0
+var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
 var nomarchivopdf='';
 var table4={};
 const formatter = new Intl.NumberFormat('en-US', {
@@ -43,6 +43,7 @@ async function dep_estado(cod_dep){
 }
 async function _avancePDM(cod_dep){
     try {
+      
       fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
@@ -56,7 +57,28 @@ async function _avancePDM(cod_dep){
 }
 async function graphPDM(total){
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
+    fecha = new Date('08/31/2021');
+    document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
+    //mespa = fecha.getMonth(fecha)+1
+    vigencia = fecha.getFullYear(fecha)
+    switch (vigencia) {
+      case 2020:
+        mes= fecha.getMonth(fecha)+1
+      break;
+      case 2021:
+        mes= fecha.getMonth(fecha)+13
+      break;
+      case 2022:
+        mes= fecha.getMonth(fecha)+25
+      break;
+      case 2023:
+        mes= fecha.getMonth(fecha)+37
+      break;
+      default:
+      break;
+    }
     try {
+      let esperado= (mes/48)*100
       const dataSource = {
         chart: {
           caption: "% Avance cuatrienial PDM",
@@ -98,13 +120,13 @@ async function graphPDM(total){
         trendpoints: {
           point: [
             {
-              startvalue: document.getElementById('maximo-corte').value,
+              startvalue: esperado.toFixed(2),//document.getElementById('maximo-corte').value,
               displayvalue: "Esperado",
               thickness: "2",
               color: "#E15A26",
               usemarker: "1",
               markerbordercolor: "#E15A26",
-              markertooltext: document.getElementById('maximo-corte').value+"%"
+              markertooltext:  esperado.toFixed(2)+"%"
             }
           ]
         }
