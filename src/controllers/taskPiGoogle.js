@@ -24,7 +24,7 @@ const getGeneralPI = async (req, res)=>{
             CumplimientoPI.push ({ "value" : reportPI[z].Cumplimiento })  
         }
         
-       if(reportPI[z].Corte== '2021-06-30'){
+       if(reportPI[z].Corte== '2021-08-31'){
            cumpleHoy= reportPI[z].Cumplimiento 
         }
    }
