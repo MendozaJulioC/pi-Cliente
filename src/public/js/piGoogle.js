@@ -6,7 +6,7 @@ async function detalleAvance(){
   try { var fecha=0; var mes=0
         let AvancePI=[]
         let CortePlan=[]
-        let CumplimientoPI=[]
+        let CumplimientoPI=[]; let tipo_corte=[];
         //fetch(`/pi/google`)
         fetch(`https://sse-pdm.herokuapp.com/pi/api/generalpi`)
         .then( res=> res.json())
@@ -14,11 +14,14 @@ async function detalleAvance(){
           let fechaOrigen= '2021-08-31'
           let tam = response.data.length;
           for(let i =0; i<tam;i++){
+
             AvancePI.push ({ "value" :  (response.data[i].avance) })  
             CortePlan.push({ "label" :  (response.data[i].corte).substr(0,10) })
+
             CumplimientoPI.push ({ "value" : response.data[i].cumplimiento })  
             var fecha = response.data[i].corte
             let fechacorte=fecha.substr(0,10)
+
             if(fechacorte == fechaOrigen){
               triadaInicial2(response.data[i].cumplimiento)
             }
@@ -31,6 +34,9 @@ async function detalleAvance(){
               yaxisname: "Total Desempeño",
               numbersuffix: "%",
               valuefontsize: "16",
+              labelfontsize:"16",
+              legendItemFontSize: "14",
+              legendIconScale: "1",
               formatnumberscale: "0",
               adjustdiv: "0",
               yaxismaxvalue: "100",
@@ -90,10 +96,8 @@ async function detalleAvanceLinea(){
               CumplimientoDic20.push({"value" :  parseFloat(response.data[z].Cumplimiento2020_12_31) })
               AvanceJun2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_06_30) })  
               CumplimientoJun21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_06_30) }) 
-
               AvanceAgo2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_08_31) })  
               CumplimientoAgo21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_08_31) }) 
-
               ProyecAvanDic21.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31_P) }) 
               ProyecCumpDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31_P) }) 
               NomPIL.push({ "label" : response.data[z].nom_linea })
@@ -108,7 +112,10 @@ async function detalleAvanceLinea(){
                   formatnumberscale: "1",
                   numbersuffix: "%",
                   showvalues:"1",
-                  valuefontsize: "14",
+                  valuefontsize: "20",
+                  labelfontsize: "12",
+                  legendItemFontSize: "12",
+                  legendIconScale: "1",
                   plottooltext:
                     "<b>$dataValue</b> Desempeño reportado <b>$seriesName</b> en $label",
                   theme: "zune",
