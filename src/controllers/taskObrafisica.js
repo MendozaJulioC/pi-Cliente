@@ -1,281 +1,714 @@
+async function inicia(){
+    estado()
+    comunas()
+    sumaobrasgeo()
+    alertaobra()
+    tipo_etapa()
+    tipo_intervencion()
+    let x= document.getElementById('dep-hito');
+    x.style.display='none'
+}
 
-<!DOCTYPE html>
-<html lang="es">
-  <head >
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js" integrity="sha512-ICHkAOXzVDEkL5xkXjAWRV/hx6Bq4ID/uhRcnj9zS7QCdCbhVtfgjwt/vTfUBtW1wzBkErImU0huK3LDVeEr8g==" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
-    <link rel="stylesheet" href="/css/geo.css">
-    <link rel="stylesheet" href="/css/leaflet.label.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <style>  #container { padding-left: 100px; padding-right: 100px; padding-top: 5px; padding-bottom: 2px; } tr { height: 2px;}
-            footer {background-color: rgb(60, 58, 58) ; padding: 10px;text-align: center;color: white;}
-    </style>
-    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+const comunas = async (req, res)=>{
+    var container = L.DomUtil.get('map1');
+    if(container != null){
+        container._leaflet_id = null;
+    }
+    var map1 = L.map('map1', {
+        // Set latitude and longitude of the map center (required)
+        center: [6.2508, -75.5738],
+        // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
+        zoom: 13,
+        
 
+      });
+      // Create a Tile Layer and add it to the map
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map1);
 
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.umber.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.ocean.js"></script>
-   
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js" integrity="sha512-ICHkAOXzVDEkL5xkXjAWRV/hx6Bq4ID/uhRcnj9zS7QCdCbhVtfgjwt/vTfUBtW1wzBkErImU0huK3LDVeEr8g==" crossorigin="anonymous"></script>
-
-    <title> <%= title %> </title>
-    <%- include ('../partials/head.html') %>
-  </head>
-  <%- include ('../partials/menuplapp.html') %>
-<body onload="inicia()">
-  
-  <div id="container" class="mt-5" >
-    <div class="row mt-5">
-      <div class="col-md-12 mt-4  shadow-sm bg-white rounded mb-2">
-        <h6 class="text-muted" style="text-align: center;font-size: 34px;line-height: 20px;font-weight: 100;color: #73879C;
-                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                  <p style="align-items: center;"> <img src="/img/logo.png" style="width: 10%;" alt=""></p>
-                  Seguimiento a la Obra Física  
-        </h6>
-        <h6 id="vigencia" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-        </h6>
-      </div>
-     
-      <div class="col-md-3 shadow-sm mb-1 p-3 mt-2 bg-white rounded ">
-        <div class="card border-light shadow-sm p-3  bg-white rounded" style="width: auto;height: 460px;">
-          <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
-                      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Obras  </h5>
-          <h5  class="row justify-content-center align-items-center minh-100 text-center"
-            style=" width: 100%; height: 150px;text-align: center;font-size: 140px;line-height: 20px;font-weight: 600;color: #511281;
-                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  <%= total_obras %>
-          </h5>
-          <div>
-          
-            <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 130px;font-weight: 300;color: #511281;
-                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Inversión  </h5>
-                  <h5 style=" width: 100%; height: 10px;text-align: center;font-size: 26px;line-height: 110px;font-weight: 4  00;color: #511281;
-                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><%= total_inver %>  
-                 </h5>
-          
-          </div>
-        </div>
-      </div>
+    let geo_url=""; 
+    geo_url=`https://www.medellin.gov.co/mapas/rest/services/ServiciosCiudad/CartografiaBase/MapServer/11/query?where=1%3D1&text=&objectIds=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&resultOffset=&parameterValues=&rangeValues=&f=geojson`
  
-      <div class="col-md-4 shadow-sm mb-1 p-3 mt-2 bg-white rounded ">
-        <div class="card border-light shadow-sm p-3  bg-white rounded">
-          <div id="chartdiv" class="row justify-content-center align-items-center minh-100" style="width: 100%;height: 420px;" ></div>
-        </div>
-      </div>
+    fetch(geo_url)
+    .then(res=>res.json())
+    .then(data => {
+      //document.getElementById('total').innerHTML= new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(valor))
+      let geojsonlayer2 = L.geoJson(data, {
+            onEachFeature: async function (feature, layer) {
+            let poputcontentMap=  ` <p class="card-title">` + feature.properties.NOMBRE +` </p>`
+            layer.bindPopup(poputcontentMap)
+         }
+       }).addTo(map1)
+        map1.fitBounds(geojsonlayer2.getBounds(),  {maxZoom: 15})
+        L.Control.Watermark = L.Control.extend({
+        onAdd: function(map1) {
+          var img = L.DomUtil.create('img');
+          img.src = '/img/logo.png';
+          img.style.width = '100px';
+          return img;
+        },
+        onRemove: function(map1) {
+            // Nothing to do here
+        }
+        });
+        L.control.watermark = function(opts) {
+        return new L.Control.Watermark(opts);
+        }
+        L.control.watermark({ position: 'bottomleft' }).addTo(map1);
+    });
+    map1.whenReady(() => {
+        setTimeout(() => {map1.invalidateSize();}, 200);
+    })
+ }
 
-      <div class="col-md-5 shadow-sm mb-1 p-3 mt-2 bg-white rounded ">
-        <div class="card border-light shadow-sm p-3  bg-white rounded">
-          <div id="estadomain" style="width: 100%; height: 430px;"> </div>
-        </div>
-      </div>
+async function estado(){
+  try {
+    fetch(`/obra-fisica/etapa`)
+    .then(res=> res.json())
+    .then(response=>{
 
-      <div class="col-md-6 shadow-sm mb-1 p-3 mt-2 bg-white rounded ">
-        <div class="card border-light shadow-sm p-3  bg-white rounded">
-          <div id="depobra" style=" width: auto; height: 620px; "></div>
-        </div>
-      </div>
-
-      <div class="col-md-6 shadow-sm mb-1 p-3 mt-2 bg-white rounded ">
-        <div class="row">
-          <div class="col-md-8">
-            <div   id="tipointervencion" style="width: auto;height: 620px;"></div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="row justify-content-center align-items-center minh-100 ">
-              <div id="chart-tema" style="width: auto;height: 620px;"></div>
-            </div>
-           </div>
-          </div>
-      </div>
-<!-- 
-
-<div class="col-md-12 shadow-sm mb-1 p-3 mt-2 bg-white rounded">
-        <a name="" id="" class="btn btn-info" href="https://public.tableau.com/app/profile/gabriela.planeacion/viz/Control_Privado_Marzo312021/Control_General" 
-        target="_blank" role="button">
-         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-up-right" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M6.364 13.5a.5.5 0 0 0 .5.5H13.5a1.5 1.5 0 0 0 1.5-1.5v-10A1.5 1.5 0 0 0 13.5 1h-10A1.5 1.5 0 0 0 2 2.5v6.636a.5.5 0 1 0 1 0V2.5a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-.5.5H6.864a.5.5 0 0 0-.5.5z"/>
-          <path fill-rule="evenodd" d="M11 5.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793l-8.147 8.146a.5.5 0 0 0 .708.708L10 6.707V10.5a.5.5 0 0 0 1 0v-5z"/>
-        </svg>Ampliar Tableau</a>
-      </div>
-
--->
+      const dataSource = {
+        chart: {
+          caption: "Etapas",
+          subcaption: "Estado actual de la obra",
+          showpercentvalues: "0",
+          defaultcenterlabel: "Estado",
+          aligncaptionwithcanvas: "0",
+          captionpadding: "0",
+          formatnumberscale: "0",
+          doughnutRadius:"70%",
+          baseFontSize:"1.5rem",
+          plottooltext:
+            "<b>$percentValue</b> <b>$label</b>",
+          centerlabel: "<b>$label</b> $value",
+          theme: "zune"
+        },
+        data: response.data
+      };
       
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "doughnut2d",
+          renderAt: "estadomain",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
 
-    <div class="col-md-6 shadow-sm mb-1 p-3 mt-2 bg-white rounded">
-      <div class="card-deck "> 
-            <div class="card border-light  shadow-sm p-3 mb-4 bg-white rounded">
-              <div class="card-body ">
-                  <div id="map1" style=" width: 100%; height: 700px; " ></div>
-              </div>
-            </div>
-         
-        </div>
-      </div>
+    })
+  } catch (error) {
+    console.error('Error estado: ', error)
+  }
+}
 
-      <div class="col-md-6 shadow-sm mb-1 p-3 mt-2 bg-white rounded">
-        <div class="card-deck ">
-            <div class="card border-light  shadow-sm p-3 mb-4 bg-white rounded">
-              <div class="card-body ">
-                <div id="geoobra" style=" width: 100%; height: 700px; " ></div>
-              </div>
-            </div>
-            </div>
-      </div>
-    </div>
-  </div>
+async function sumaobrasgeo()
+{
+  try {
+  
+    fetch(`/obra-fisica/geo`)
+    .then(res=>res.json())
+    .then(response=>{
+    //console.log(response.data);
+      const dataSource = {
+        chart: {
+          caption: "Número de Obras en el Territorio",
+          yaxisname: "Número de Intervenciones",
+          aligncaptionwithcanvas: "0",
+          plottooltext: "<b>$dataValue</b> leads received",
+          theme: "ocean",
+          labelDisplay: "rotate",
+          slantLabel: "1"
+        },
+        data: response.data
+  };
+  FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "column2d",
+          renderAt: "geoobra",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource,
+          events: {
+            'dataplotClick': function(evt) {
+              graficageodepobra( evt)
+              window.showAlert = function(str) {
+              };
+            }
+          }
+        }).render();
+  });
 
-  <footer>
-    <div >
-      <% if (user[0].email=='juliomendoza.medellin@gmail.com' || user[0].email=='gabriel.vasco@medellin.gov.co'  ) { %>
-        <a class="btn btn-primary" onclick="actualizabd()" role="button"> Actualizar BD</a>
-      <% } %>
-    </div>
-  </footer>
+    })
+
+    
+  } catch (error) {
+    console.error('Error sumaobrasgeo: ', error)
+  }
  
+  sumaobrasdep()
+}
 
-
-<!-- Modal -->
-<div class="modal fade" id="obraModal" tabindex="-1" aria-labelledby="obraModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div id="invoiceOFproyect">
-      <div class="modal-content">
-        <div class="modal-header row justify-content-center align-items-center minh-100 text-center">
-          <h5 id="obraModalLabel"  style="text-align: center;font-size: 40px;line-height: 50px;font-weight: 300;color: #511281;
-                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-          </h5>
-        
-        </div>
-       
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12">
-              <h5 class="modal-header row justify-content-center align-items-center minh-100 text-center" id="total_ivnersion_dep" 
-              style="text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
-              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" >
-            </h5>
-            </div>
-            <div class="col-md-12">
-              <h2 class="modal-header row justify-content-center align-items-center minh-100 text-center" id="corteOF" 
-              style="text-align: center;font-size: 16px;line-height: 30px;font-weight: 200;color: #511281;
-              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" >
-            </h2>
-            </div>
-            <div class="col-md-6" id="dep-tipo" style="width: auto; height: 300px;"></div>
-            <div class="col-md-6" id="dep-alerta" style="width: auto; height: 300px;"></div>
-            <div class="col-md-12 mt-2" id="dep-etapa" style="width: auto; height: 300px;"></div>
-            <div class="col-md-12 mt-2" id="dep-hito" style="width: auto; height: 300px;"></div>
-           <div class="col-md-12 mt-2" id="num-obras-dep-geo" style="width: auto; height: 300px;"></div>
-          </div>
-        </div>
+async function sumaobrasdep()
+{
+  fetch(`/obra-fisica/dep`)
+  .then(res=>res.json())
+  .then(response=>{
+    const dataSource = {
+      chart: {
+        caption: "Obras por dependencias",
+        subcaption: "Número de obras",
+        xaxisname: "Dependencias",
+        yaxisname: "Obras",
+        placevaluesinside: "0",
+        showvalues: "1",
+        valuefontcolor: "#0c4271",
+        plottooltext: "<b>$seriesName</b>  $label  <b>$dataValue</b>",
+        labeldisplay: "Rotate",
+        theme: "ocean",
+      },
+      data: 
+       response.data
+    };
     
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <!--
-          <div class="col-md-2">
-            <button class="btn btn-danger btn-sm" id="downloadQproyect"  onclick="dowloadOF()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-              </svg>
-            </button>
-          </div>
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "bar2d",
+        renderAt: "depobra",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource,
+        events: {
+          'dataplotClick': function(evt) {
+            graficadepobra( evt)
+            window.showAlert = function(str) {
+            };
+          }
+        }
+      }).render();
+    });
+  })
+ 
+  
+      
+}
 
 
-          -->
 
-        </div>
-      </div>
+async function graficadepobra(data){
+  //console.log(data);
+  let nom_dep= data.data.id
+  let cod_dep= (data.data.link).substring(12,15);
+  document.getElementById('obraModalLabel').innerHTML=nom_dep
+  let corte=''
+  fetch(`/obra-fisica/dep/detalle/${cod_dep}`)
+  .then(res=>res.json())
+  .then(response=>{
+      let inversion_dep =response.inversion
+       corte = response.corte
+       const dataSource = {
+        chart: {
+          caption: "Tipo de Intervención",
+          subcaption: "número de obras",
+          xaxisname: "obras",
+          yaxisname: "Tipo",
+          showvalues:"1",
+          theme: "umber"
+        },
+        data: response.data
+      };
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "column2d",
+          renderAt: "dep-tipo",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+      document.getElementById('total_ivnersion_dep').innerHTML= inversion_dep
+      //  console.log(corte);
+      document.getElementById('corteOF').innerHTML= corte.substring(0, 10)
+      depmodal_alerta(response.alerta)
+      depetapamodal(response.etapa)
+      obrascomunasdep(cod_dep)
+      if(cod_dep=='741'){  hitograpg(response.hitos)}
+  })
+  
+    jQuery.noConflict();
+    $('#obraModal').modal('show'); 
+}
 
-    </div>
-   
-   
-  </div>
-</div>
 
-<div class="modal fade" id="obraModalDep" tabindex="-1" aria-labelledby="obraModalDepLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div id="invoiceOFproyect">
-      <div class="modal-content">
-        <div class="modal-header row justify-content-center align-items-center minh-100 text-center">
-          <h5 id="geoModalLabel"  style="text-align: center;font-size: 40px;line-height: 50px;font-weight: 300;color: #511281;
-                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-          </h5>
-        </div>
-       
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12">
-              <h2 class="modal-header row justify-content-center align-items-center minh-100 text-center" id="corteOFcomuna" 
-              style="text-align: center;font-size: 24px;line-height: 10px;font-weight: 100;color: #511281;
-              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" >
-            </h2>
-            </div>
-            <div class="col-md-12" id="dep-geo" style="width: auto; height: 300px;"></div>
-            <div class="col-md-6 mt-1" id="geo-alerta" style="width: auto; height: 300px;"></div>
-            <div class="col-md-6 mt-1" id="geo-intervencion" style="width: auto; height: 300px;"></div>
-          </div>
-        </div>
+async function depmodal_alerta(data){
+  if(data.length==0){
+       data= [{
+          label:"Sin Alertas actuales",
+          value: 0
+      }]} 
+  let x= document.getElementById('dep-hito');
+  x.style.display='none'
+  const dataSource = {
+    chart: {
+      caption: "Tipo de Alerta",
+      subcaption: "número de obras",
+      xaxisname: "alerta",
+      yaxisname: "total",
+      showvalues:"1",
+     // numbersuffix: "K",
+      theme: "umber"
+    },
+    data: data
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bar2d",
+      renderAt: "dep-alerta",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+}
+
+async function depetapamodal(etapa){
+  const dataSource = {
+    chart: {
+      captionalignment: "right",
+      caption: "Etapas",
+      subcaption: "Estado actual de las obras",
+      xaxisname: "etapas",
+      yaxisname: "número de obras",
+     // numbersuffix: "K",
+     showvalues:"1",
+      theme: "umber"
+    },
+    data: etapa
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "column2d",
+      renderAt: "dep-etapa",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+}
+
+async function hitograpg(hitos)
+{
+  try {
+    let x= document.getElementById('dep-hito');
+    x.style.display='block'
+    const dataSource = {
+      chart: {
+        captionalignment: "right",
+        caption: "Detalle Obras",
+        subcaption: "Número de obras",
+        xaxisname: "obra",
+        yaxisname: "total",
+        theme: "umber",
+        showvalues:"1",
+        labelDisplay: "rotate",
+        slantLabel: "1",
+      },
+      data:hitos
+    };
     
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <!--
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "column2d",
+        renderAt: "dep-hito",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+    
+    
+  } catch (error) {
+    console.error('Error hitograph'. error)
+  }
+}
 
-  <div class="col-md-2">
-            <button class="btn btn-danger btn-sm" id="downloadQproyect"  onclick="dowloadOF()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-              </svg>
-            </button>
-          </div>
 
-          -->
+async function alertaobra(){
+ try {
+  fetch(`/obra-fisica/alerta`)
+  .then(res=> res.json())
+  .then(response=>{
+  
+    const dataSource = {
+      chart: {
+        caption: "Alertas",
+        yaxisname: "Número de Obras",
+        aligncaptionwithcanvas: "0",
+        plottooltext: "<b>$dataValue</b> $label",
+        theme: "zune"
+      },
+      data: response.data
+    };
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "bar2d",
+        renderAt: "chartdiv",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+  })
+   
+ } catch (error) {
+   console.error('Error alertaobra: ', error)
+ }
+ 
+}
+
+
+async function tipo_etapa(){
+
+try {
+  fetch(`/obra-fisica/temas`)
+  .then(res=> res.json())
+  .then(datos=>{
+    //console.log('Temas: ',datos);
+    const dataSource = {
+      chart: {
+        caption: "Distribución por temática",
+        subcaption: "Número de obras por tema",
+        decimals: "1",
+        showvalues: "1",
+        plottooltext: "$label: <b>$dataValue</b>",
+        plotfillalpha: "70",
+        theme: "ocean",
+        streamlineddata: "0"
+      },
+      data: datos.data
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "funnel",
+        renderAt: "tipointervencion",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+  })
+} catch (error) {
+  console.error('Error tipo_tema: ', error)
+}
+
+
+  
+}
+
+
+async function  tipo_intervencion(){
+  try {
+  fetch(`/obra-fisica/tipo`)
+  .then(res=> res.json())
+  .then(response=>{
+  //  console.log(response.data);
+    const dataSource = {
+      chart: {
+        caption: "Obras por tipo de intervención",
+        subcaption: "Número de obras",
+        xaxisname: "Tipo",
+        yaxisname: "Obras",
+        labelDisplay: "rotate",
+        slantLabel: "1",
+       
+        theme: "ocean"
+      },
+      data: response.data
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "column2d",
+        renderAt: "chart-tema",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+
+  })    
+
+  } catch (error) {
+    console.error('Error tipo_intervencion: ', error)
+  }
+
+ 
+  
+}
+
+
+function style2(valor) {
+  return {
+      fillColor: getColor(valor),
+      weight: 2,
+      opacity: 1,
+      color: 'blue',
+      dashArray: '3',
+      fillOpacity: 0.7
+  };
+}
+
+
+async function actualizabd(){
+   try {
+    swal("Iniciamos el proceso de actualización... Espera!!!", {
+      icon: "info",
+      button:false,
+      timer: 1000000,
+    });
+    fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/update`)
+    .then(res=> res.json())
+    .then(datos=>{
+      swal("Listo!", "La base de datos ha sido actualizada!", "success");
+    })
+   } catch (error) {
+     console.error('Error ', error);
+   }
+}
+
+
+
+
+async function dowloadOF (){
+  const invoice = this.document.getElementById('invoiceOFproyect');
+  // console.log(invoice);
+  //console.log(window);
+  var opt = {
+    margin:       1,
+    filename:     'ReporteObraFísica.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 3 , letterRending:true },
+    pagebreak: { mode: 'avoid-all', before: '#page2el' },
+    jsPDF:        { unit: 'in', format: 'a3', orientation: 'portrait' }
+  };
+  html2pdf().from(invoice).set(opt).save();
+
+}
+  
+async function graficageodepobra(data){
+  //  console.log(data);
+  let nom_comuna= data.data.id
+  let data_index= (data.data.dataIndex)+1
+  //let cod_dep= (data.data.link).substring(12,15);
+  document.getElementById('obraModalLabel').innerHTML=nom_comuna
+  let corte=''
+  let dateo=[]
+  if(data_index>16){
+   switch (data_index) {
+     case 17:data_index=50;break;
+     case 18:data_index=60;break;
+     case 19:data_index=70;break;
+     case 20:data_index=80;break;
+     case 21:data_index=90;break;
+     default:break;
+   }
+  }
+  fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo/territorio/${data_index}`)
+    .then(res=>res.json())
+    .then(response=>{
+      //console.log(response);
+      for (let index = 0; index < response.data.length; index++) {
+        dateo.push({
+          label:  response.data[index].nom_cortp,
+          value:  response.data[index].num_obras
+         })
+       }
+       //let inversion_dep =response.inversion
+       //corte = response.corte
+       const dataSource = {
+        chart: {
+          caption: 'Total Obras por Dependencias en '+nom_comuna,
+          subcaption: "número de obras",
+          xaxisname: "Dependencias",
+          yaxisname: "obras",
+          showvalues:"1",
+          theme: "umber"
+        },
+        data: dateo
+      };
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "column2d",
+          renderAt: "dep-geo",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+      document.getElementById('geoModalLabel').innerHTML=nom_comuna
+      alertageo(data_index)
+    })
+    jQuery.noConflict();
+    $('#obraModalDep').modal('show'); 
+}
+
+
+async function alertageo (geo){
+  let alerta=[];
+  let cortecomuna='';
+  fetch(` https://sse-pdm.herokuapp.com/obrafisica/api/geo/alerta/${geo}`)
+ .then(res=>res.json())
+ .then(response=>{
+    if(response.length==0){
+      alerta= [{
+      label:"Sin Alertas actuales",
+      value: 0
+    }]} 
+    cortecomuna= response.data[0].corte
+    for (let index = 0; index < response.data.length; index++) {
+      if (response.data[index].cod_alerta!=0) {
+        alerta.push({
+          label:  response.data[index].alerta,
+          value:  response.data[index].total_alerta,
+          color : " #e6550d"
+        })
+      }
+    }
+   const dataSource = {
+    chart: {
+      caption: "Alertas",
+      yaxisname: "Número de Obras",
+      aligncaptionwithcanvas: "0",
+      plottooltext: "<b>$dataValue</b> $label",
+      theme: "umber",
+      showvalues:"1",
+    },
+    data: alerta
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bar2d",
+      renderAt: "geo-alerta",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  document.getElementById('corteOFcomuna').innerHTML= cortecomuna.substring(0,10)
+  intervenciongeo(geo)
+ })
+
+}
+
+
+async function intervenciongeo(geo){
+  let intervencion=[];
+  try {
+    fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo/intervencion/${geo}`)
+    .then(res=>res.json())
+    .then(response=>{
+
+      for (let index = 0; index < response.data.length; index++) {
+      intervencion.push({
+        label: response.data[index].tipo_intervencion,
+        value: response.data[index].total_intervencion
+      })
         
-        </div>
-      </div>
+      }
+      const dataSource = {
+        chart: {
+          caption: "Obras por tipo de intervención",
+          subcaption: "Número de obras",
+          xaxisname: "Tipo",
+          yaxisname: "Obras",
+          labelDisplay: "rotate",
+          slantLabel: "1",
+          showvalues:"1",
+          theme: "umber"
+        },
+        data: intervencion
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "column2d",
+          renderAt: "geo-intervencion",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+    })
+  } catch (error) {
+    console.error('Error intervenciongeo: ', error);
+    
+  }
 
-    </div>
-   
-   
-  </div>
-</div>
-</body>
-  <%- include ('../partials/scriptsHome.html')%>
-  <script src="/js/htmltoexcel.js"></script>
-  <script src="/js/obraFisica.js"></script>
-  <script src="/js/transversal.js" ></script>
-  <script src="/js/leaflet.label.js"></script>
-  <script src="/js/leaflet.label-src.js"></script>
-  <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-  <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-  <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-  <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-  <script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-  <script src="https://www.amcharts.com/lib/4/core.js"></script>
-  <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-  <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-  <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
-  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+}
 
-</html>
+async function obrascomunasdep(cod_dep){
+  try {
+    let geointervenciondep=[];
+    fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo/dependencia/${cod_dep}`)
+    .then(res=> res.json())
+    .then(response=>{
+      //console.log(response.data);
+        for (let index = 0; index < response.data.length; index++) {
+          geointervenciondep.push({
+            label: response.data[index].nom_comuna,
+            value: response.data[index].tot_obra
+          })
+        }
+
+        const dataSource = {
+          chart: {
+            caption: "Número de Obras por Territorio",
+            subcaption: "Número de obras",
+            xaxisname: "Territorio",
+            yaxisname: "Obras",
+            labelDisplay: "rotate",
+            slantLabel: "1",
+            showvalues:"1",
+            theme: "umber"
+          },
+          data: geointervenciondep
+        };
+        
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "column2d",
+            renderAt: "num-obras-dep-geo",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
 
 
 
+    })
 
-
+  } catch (error) {
+    console.error('Error ');
+    
+  }
+}
