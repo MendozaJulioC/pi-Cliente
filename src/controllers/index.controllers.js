@@ -113,6 +113,15 @@ const getAlertas = async(req, res)=>{
         console.error('Error getAlertas ', e);
     }
 }
+const getAlertasPA = async(req, res)=>{
+    try {
+        res.render('./alerta_pa/alerta_pa.html', {
+            title: "Alerta-PA"
+        })
+    } catch (e) {
+        console.error('Error getAlertasPA', e);
+    }
+}
 const getSiem = async(req, res)=>{
     try {
         res.render('./siem/siem.html', {
@@ -124,4 +133,4 @@ const getSiem = async(req, res)=>{
     }
 }
 module.exports = {  getHome, getDash, getGeneral, getContacto, getSiem,
-                    getIndicador, getEstructura, getComponente, getPrograma, getAlertas}
+                    getIndicador, getEstructura, getComponente, getPrograma, getAlertas, getAlertasPA}
