@@ -206,8 +206,8 @@ let cod_dep= (data.data.link).substring(12,15);
 document.getElementById('obraModalLabel').innerHTML=nom_dep
 let corte=''
 fetch(`/obra-fisica/dep/detalle/${cod_dep}`)
-  .then(res=>res.json())
-  .then(response=>{
+.then(res=>res.json())
+.then(response=>{
     let inversion_dep =response.inversion
      corte = response.corte
      const dataSource = {
@@ -232,12 +232,14 @@ fetch(`/obra-fisica/dep/detalle/${cod_dep}`)
       }).render();
     });
     document.getElementById('total_ivnersion_dep').innerHTML= inversion_dep
-      console.log(corte);
+    //  console.log(corte);
     document.getElementById('corteOF').innerHTML= corte.substring(0, 10)
     depmodal_alerta(response.alerta)
     depetapamodal(response.etapa)
+    obrascomunasdep(cod_dep)
     if(cod_dep=='741'){  hitograpg(response.hitos)}
-  })
+})
+
   jQuery.noConflict();
   $('#obraModal').modal('show'); 
 }
@@ -660,4 +662,53 @@ try {
   
 }
 
+}
+
+async function obrascomunasdep(cod_dep){
+try {
+  let geointervenciondep=[];
+  fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo/dependencia/${cod_dep}`)
+  .then(res=> res.json())
+  .then(response=>{
+    //console.log(response.data);
+      for (let index = 0; index < response.data.length; index++) {
+        geointervenciondep.push({
+          label: response.data[index].nom_comuna,
+          value: response.data[index].tot_obra
+        })
+      }
+
+      const dataSource = {
+        chart: {
+          caption: "Número de Obras por Territorio",
+          subcaption: "Número de obras",
+          xaxisname: "Territorio",
+          yaxisname: "Obras",
+          labelDisplay: "rotate",
+          slantLabel: "1",
+          showvalues:"1",
+          theme: "umber"
+        },
+        data: geointervenciondep
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "column2d",
+          renderAt: "num-obras-dep-geo",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+
+
+
+  })
+
+} catch (error) {
+  console.error('Error ');
+  
+}
 }
