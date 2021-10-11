@@ -616,7 +616,7 @@ try {
     //console.log(data.data);
     for (let x = 0; x <data.data.length; x++) {
       reportes.push([
-       /*data.data[x].cod_dep,*/ data.data[x].fecha,data.data[x].dpendencias,data.data[x].logro,data.data[x].cifras
+       /*data.data[x].cod_dep,data.data[x].fecha,*/data.data[x].dpendencias,data.data[x].logro,data.data[x].cifras
       ])
     }
 
@@ -625,10 +625,10 @@ try {
     var tableLogros=  $('#table_reporte').DataTable({
       data:reportes,
       columns:[
-        {title: "Fecha"},
+        //{title: "Fecha"},
         {title: "Dependencias"},
         {title: "Logros"},
-        {title: "Cifras"},
+        {title: "Cifras"}
       ],
       scrollColapse: true,
       fixedColumns: {
@@ -655,10 +655,10 @@ try {
       dom:'frtlp',
       bDestroy: true,
       columnDefs: [
-        {/*Fecha*/          width: "15px",   targets: 0, className: "text-center"    },
-        {/*Dependencia*/    width: "15px",   targets: 1, className: "text-center"    },
-        {/*Logros*/         width: "50px",   targets: 2, className: "text-center"    },
-        {/*Cifras*/         width: "50px",   targets: 3, className: "text-center"    },
+      //  {/*Fecha*/          width: "15px",   targets: 0, className: "text-center"    },
+        {/*Dependencia*/    width: "15px",   targets: 0, className: "text-center"    },
+        {/*Logros*/         width: "50px",   targets: 1, className: "text-center"    },
+        {/*Cifras*/         width: "50px",   targets: 2, className: "text-center"    },
         
         
        ],   
