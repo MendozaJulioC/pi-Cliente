@@ -1,9 +1,10 @@
 //import { response } from "express";
-
 //import fetch from "node-fetch"
 var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
 var nomarchivopdf='';
 var table4={};
+var fechaPA = new Date('08/31/2021');
+
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -12,6 +13,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 async function _main(){
   let dep = document.getElementById('inputGroupSelectDependencia').value
     _avancePDM(dep)
+    _PASemaf()
     _avance_financiero(dep)
     porc_avance_fisico(dep)
     tipoinversion(dep)
@@ -22,6 +24,7 @@ async function _main(){
     total_proyectos_dep(dep)
     plan_accion_dep()
     //contadorSemDep(cod)
+    _cumplimiento_dependencia(dep)
 }
 async function dep_estado(cod_dep){
 
@@ -38,6 +41,8 @@ async function dep_estado(cod_dep){
   total_proyectos_dep(cod_dep)
   plan_accion_dep(cod_dep)
   contadorSemDep(cod_dep)
+  _cumplimiento_dependencia(cod_dep)
+  _PASemaf()
  
 
 }
@@ -160,7 +165,7 @@ async function _avance_financiero(dep){
 }
 async function _PASemaf (){
   try {
-    var fechaPA = new Date('08/31/2021');
+  
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
@@ -174,7 +179,7 @@ async function _PASemaf (){
 }
 async function porc_avance_financiero(avance){  
   try {
-    var fechaPA = new Date('08/31/2021');
+  
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
@@ -1605,6 +1610,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
   jQuery.noConflict();
   $('#exampleModal3').modal('show'); 
 }
+
 async function proyecto_fisico(cod){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pa/api/avances/ejecucion/${cod}`)
@@ -1947,4 +1953,75 @@ try {
 }
 jQuery.noConflict();
 $('#ModaListVE').modal('show'); 
+}
+
+
+async function _cumplimiento_dependencia(dep){
+
+
+try {
+  
+fetch(`https://sse-pdm.herokuapp.com/dep/api/cumplimiento/${dep}`)
+.then(res=> res. json())
+.then(response=>{
+ 
+  let cumplimientodep= (parseFloat(response.data[0].avancepond) /parseFloat(response.data[0].programado) )*100
+
+  const dataSource = {
+    chart: {
+      caption: "% Cumplimiento PDM",
+      lowerlimit: "0",
+      upperlimit: "100",
+      showvalue: "1",
+      numbersuffix: "%",
+      theme: "gammel",
+      showtooltip: "0",
+      valuefontsize: "25"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: valorminimo,
+          code: "#F2726F"
+        },
+        {
+          minvalue: valorminimo,
+          maxvalue: valormaximo,
+          code: "#FFC533"
+        },
+        {
+          minvalue: valorminimo,
+          maxvalue: "100",
+          code: "#62B58F"
+        }
+      ]
+    },
+    dials: {
+      dial: [
+        {
+          value: cumplimientodep
+        }
+      ]
+    }
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "angulargauge",
+      renderAt: "avance-dep",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  })
+
+} catch (error) {
+  console.error('Error  _cumplimiento_dependencia', error);
+  
+}
+
+  
+
 }
