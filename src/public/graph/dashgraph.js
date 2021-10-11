@@ -14,8 +14,12 @@ async function _main(){
  
  
 }
+
+var fecha= new Date('08/31/2021');
+var fechaPA = new Date('08/31/2021');
+
 function corteplan(){
-  fecha = new Date('08/31/2021');
+  
   document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   //mespa = fecha.getMonth(fecha)+1
   vigencia = fecha.getFullYear(fecha)
@@ -91,7 +95,9 @@ async function _avancePDM(){
     .then(res=>res.json())
     .then(datos=>{
         graphPDM(datos.data[0].total_plan)
-    
+        let cumplimiento= (parseFloat(datos.data[0].avancepond/datos.data[0].programado)*100).toFixed(2)
+
+        graphCumplimientoPDM(cumplimiento)
       })
       
   } catch (error) {
@@ -170,6 +176,17 @@ async function graphPDM(total){
     console.log('Error graphPDM: ', error)
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 async function _avance_financiero(){
   try {
     fetch('https://sse-pdm.herokuapp.com/pa/api/avancefinanciero')
@@ -186,7 +203,7 @@ async function _avance_financiero(){
 }
 async function porc_avance_financiero(avance){  
 try {
-  var fechaPA = new Date('08/31/2021');
+ 
   mespa = fechaPA.getMonth(fechaPA)+1
   vigencia = fechaPA.getFullYear(fecha)
   fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
@@ -261,8 +278,9 @@ try {
 }
 
 
-  }
- function graphPDA(poai, pptoajustado, ordenado){
+}
+
+ async function graphPDA(poai, pptoajustado, ordenado){
   const dataSource = {
     chart: {
       caption: " Ejecución Financiera ",
@@ -669,3 +687,84 @@ async function ejecfinanciera(){
     jQuery.noConflict();
      $('#ejecfinancieraModal').modal('show'); ;
 }
+
+
+
+async function graphCumplimientoPDM(avance){  
+  try {
+ 
+    mespa = fechaPA.getMonth(fechaPA)+1
+    vigencia = fechaPA.getFullYear(fecha)
+    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    .then(res=>res.json())
+    .then(response=>{
+  
+      valorminimo = (response.data[0].rojo)-0.01;
+      valormaximo = (response.data[0].verde);
+  
+  
+     // console.log(valorminimo);
+      porc_avance_fisico(valorminimo, valormaximo)
+  
+  
+      const dataSource = {
+        chart: {
+          caption: "% Cumplimiento PDM",
+          lowerlimit: "0",
+          upperlimit: "100",
+          showvalue: "1",
+          numbersuffix: "%",
+          theme: "gammel",
+          showtooltip: "0",
+          valuefontsize: "25"
+        },
+        colorrange: {
+          color: [
+            {
+              minvalue: 0,
+              maxvalue:valorminimo,
+              code: "#F2726F"
+          },
+          {
+              minvalue: valorminimo,
+              maxvalue: valormaximo,
+              code: "#FFC533"
+          },
+          {
+              minvalue: valorminimo,
+              maxvalue: 100,
+              code: "#62B58F"
+          }
+          ]
+          },
+          dials: {
+            dial: [
+              {
+                value: (avance)
+              }
+            ]
+          }
+        };
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "angulargauge",
+            renderAt: "cumplimientovigencia",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
+     
+  
+    })
+  
+  
+  
+  } catch (error) {
+    console.error(error);
+    
+  }
+  
+  
+  }
