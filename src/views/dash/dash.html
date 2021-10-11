@@ -26,7 +26,6 @@
       <br><br>
       <div class="col-md-12 mt-5  shadow-lg p-3 mb-5 bg-white rounded">
         <div class="card-body shadow-lg">
-
           <div class="row">
 
             <div class="col-sm-2 ">
@@ -34,6 +33,7 @@
               font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Corte : </b> 
               <span id="fecha_corte"></span>.</span>  
             </div>
+
             <div class="col-sm-3">
               <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
                   font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Porcentajes en los Rangos de avance para este período del seguimiento del PDM 
@@ -53,38 +53,50 @@
         </div>
       </div>
 
-      <div class="col-md-4 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
-        <div class="card-body">
-          <div class="mt-lg-3" id="canvas" style="height: 350px;  width:100%;"></div>
-        </div>
-        <div class="card-footer mt-2" style="background-color: white;">
-          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
-            <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
-          </a>
-        </div>
-      </div>
+  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <div class="mt-lg-3" id="canvas" style="height: 350px;  width:100%;"></div>
+    </div>
+    <div class="card-footer mt-2" style="background-color: white;">
+      <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+        <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
+      </a>
+    </div>
+  </div>
+  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <div class="mt-lg-3" id="cumplimientovigencia" style="height: 350px;  width:100%;"></div>
+    </div>
+    <div class="card-footer mt-2" style="background-color: white;">
+      <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
+        <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
+      </a>
+    </div>
+  </div>
 
-      <div class="col-md-4 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
-        <div class="card-body">
-          <div class="mt-lg-3" id="chart-ejecfisica" style="height: 350px;  width:100%;"></div>
-        </div>
-        <div class="card-footer mt-2" style="background-color: white;">
-          <a  class="btn btn-light" style="font-size: xx-small;" type="button"  onclick="ejecfisica()"> 
-            <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución física por dependencias</i>
-          </a>
-        </div>
-      </div>
+  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <div class="mt-lg-3" id="chart-ejecfisica" style="height: 350px;  width:100%;"></div>
+    </div>
+    <div class="card-footer mt-2" style="background-color: white;">
+      <a  class="btn btn-light" style="font-size: xx-small;" type="button"  onclick="ejecfisica()"> 
+        <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución física por dependencias</i>
+      </a>
+    </div>
+  </div>
 
-      <div class="col-md-4 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
-        <div class="card-body">
-          <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 350px;  width:100%;"></div>
-        </div>
-        <div class="card-footer mt-2" style="background-color: white;">
-          <a  class="btn btn-light" style="font-size: xx-small;" type="button"   onclick="ejecfinanciera()"> 
-            <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución financiera  por dependencias</i>
-          </a>
-        </div>
-      </div>
+  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 350px;  width:100%;"></div>
+    </div>
+    <div class="card-footer mt-2" style="background-color: white;">
+      <a  class="btn btn-light" style="font-size: xx-small;" type="button"   onclick="ejecfinanciera()"> 
+        <i class="fa fa-search" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Ejecución financiera  por dependencias</i>
+      </a>
+    </div>
+  </div>
+
+     
 
     </div>
 
