@@ -29,7 +29,7 @@
         <%- include ('../partials/rangos.html')%>
         <div class="col-md-9 mt-4  shadow-lg p-3   mb-1 bg-white rounded">
            <div class="card-body">
-               <div id="chart-container" style="width: auto; height: 950px;"></div>
+               <div id="chart-container" style="width: auto; height: 980px;"></div>
           </div>
         </div> 
         <div class="col-md-1"> </div>
@@ -53,20 +53,37 @@
                 <div id="gris" style="width: auto; height: 120px;"></div>
               </div> 
               <div class="col-md-12 mt-4  shadow-sm p-3    bg-white rounded">
-                <div  style="width: auto; height: 120px;"><a name="" id="" class="btn btn-danger btn-block" onclick="alerta_rojos()" role="button">
-                  
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-thermometer-low" viewBox="0 0 24 24">
-                    <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585a1.5 1.5 0 0 1 1 1.415z"/>
-                    <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"/>
-                  </svg>
-                  
-                  Reporte Rojos</a></div>
+                <div  style="width: auto; height: 120px;">
+                  <a name="" id="" class="btn btn-danger btn-block" onclick="alerta_rojos()" role="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-thermometer-low" viewBox="0 0 24 24">
+                      <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585a1.5 1.5 0 0 1 1 1.415z"/>
+                      <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"/>
+                    </svg>
+                    Reporte Rojos
+                  </a>
+              </div>
               </div> 
           </div>
         </div> 
+     
 
-        <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
-          <div class="card-body">
+   <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
+      <button class="btn btn-warning btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-thermometer-low" viewBox="0 0 24 24">
+          <path d="M9.5 12.5a1.5 1.5 0 1 1-2-1.415V9.5a.5.5 0 0 1 1 0v1.585a1.5 1.5 0 0 1 1 1.415z"/>
+          <path d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"/>
+        </svg>
+        Ranking por Cumplimiento
+      </button>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+         <div id="rankcumplimiento" style="width: auto; height: 950px;"></div>
+        </div>
+      </div>
+   </div>
+
+    <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
+      <div class="card-body">
             <table  class="table table-sm table-responsive-sm table-hover  "  style="font-size: small; width: 100%;">
               <thead class="thead-inverse" style=" padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: rgb(0,123,255);color: white;">
                 <tr>
@@ -81,12 +98,11 @@
                 </tr>
               </thead>
               <tbody id="tabla_alerta" class="table-hover tbody-inverse"></tbody>
+              <table id="alerta_table" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
             </table>
           </div> 
         </div>
-        <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
-          <table id="alerta_table" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
-        </div>
+   
 
       <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
         <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 130px;font-weight: 400;color: #ba135d;
