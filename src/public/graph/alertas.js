@@ -3,13 +3,14 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   minimumFractionDigits: 2
 })
-var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
+var mes=0, vigencia=0, minimovalue=0, maximovalue=0; valorminimo=0;valormaximo=0;
 var colorfondo='';
 let valores=[]; let valores2=[]; let valores3=[];
 
 async function dateomain(){
-   setTimeout(function(){ avance_linea_dep()   }, 4000);
+  setTimeout(function(){ avance_linea_dep()   }, 4000);
   semaforo_inicial()
+  getalerta()
 }
 
 async function semaforo_inicial(){
@@ -21,6 +22,9 @@ async function semaforo_inicial(){
     rojo(response.data[0].rojo)
     amarillo(response.data[0].amarillo)
     verde(response.data[0].verde)
+
+
+
   })
 }
 async function avance_linea_dep(){
@@ -30,7 +34,7 @@ async function avance_linea_dep(){
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
-         for(let i =0; i<tam;i++){
+      for(let i =0; i<tam;i++){
         if (((datos.data[i].avance/datos.data[i].peso)*100)>=maximovalue){colorsemaf="#58AC84"}
         else if (((datos.data[i].avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#F06764"} 
         else {colorsemaf="#FFBD2E"}
@@ -47,6 +51,8 @@ async function avance_linea_dep(){
           caption: "% Avance cuatrienial por Dependencias PDM",
           yaxisname: "Dependencias",
           aligncaptionwithcanvas: "0",
+          valuefontsize: "20",
+          labelfontsize:"16",
           theme: "zune",
           numbersuffix: "%"
         },
@@ -54,7 +60,7 @@ async function avance_linea_dep(){
       };
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
-          type: "bar2d",
+          type: "bar3d",
           renderAt: "chart-container",
           width: "100%",
           height: "100%",
@@ -69,6 +75,7 @@ async function avance_linea_dep(){
           }
         }).render();
       });
+      
     })
   } catch (error) {
     console.error('Error _avancePDM ',error )
@@ -695,3 +702,91 @@ try {
 
 }
 
+
+
+
+
+
+async function getalerta(){
+  try {
+    
+    fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/corte`)
+    .then(res=>res.json())
+    .then(response=>{
+      let cortealerta= new Date(response.data[0].corte) 
+      mespa = cortealerta.getMonth(cortealerta)+1
+      vigencia = cortealerta.getFullYear(cortealerta)
+      fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/valor/${mespa}`)
+      .then(res=>res.json())
+      .then(response=>{
+        let rojo = response.data[0].rojo
+        let verde = response.data[0].verde
+      cumple_linea_dep(rojo, verde, vigencia)
+        
+      })
+    })
+  } catch (error) {
+    console.error('Error getalerta ', error);
+  }
+}
+
+
+async function cumple_linea_dep(rojo, verde, vigencia){
+  try {
+      let infocumple=[];
+      var cump=0;
+      let colorsemafcumple=''
+      fetch(`https://sse-pdm.herokuapp.com/dep/api/rank/cumplimiento`)
+      .then(res=>res.json())
+      .then(response=>{
+        let tam = response.data.length;
+        for(let i =0; i<tam;i++){
+        
+          if(response.data[i].avance >0){
+         
+            cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2021)*100)
+           
+            if (cumpverde>=parseFloat(verde)){colorsemafcumple="#58AC84"}
+            else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
+            else {colorsemafcumple="#FFBD2E"}
+            infocumple.push({
+              "label" : response.data[i].nombre_dep,
+              "value": ((response.data[i].avance/response.data[i].programado2021)*100),
+              "color": colorsemafcumple,
+              // "link": "j-showAlert-"+response.data[i].cod_responsable_reporte
+            })
+          }
+        
+        }
+       infocumple.sort((a, b) =>  b.value -a.value )
+
+
+     
+        const dataSource = {
+          chart: {
+            caption: "% Cumplimiento Anual PDM",
+            labelfontsize:"16",
+            showvalues: "1",
+            valuefontsize: "20",
+            numbersuffix: "%",
+            theme: "zune"
+          },
+          data: infocumple
+        };
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "bar3d",
+            renderAt: "rankcumplimiento",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
+      })
+  } catch (error) {
+    console.error('Erro',error )
+  }
+  
+
+}
