@@ -14,7 +14,7 @@ async function alertamain(){
 
 async function getalerta(){
   try {
-    fetch(`http://localhost:7000/pa/api/alerta/corte`)
+    fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/corte`)
     .then(res=>res.json())
     .then(response=>{
       let cortealerta= new Date(response.data[0].corte) 
@@ -22,7 +22,7 @@ async function getalerta(){
       vigencia = cortealerta.getFullYear(cortealerta)
     
 
-      fetch(`http://localhost:7000/pa/api/alerta/valor/${mespa}`)
+      fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/valor/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
         let alertavalor =  response.data[0].alerta
@@ -40,7 +40,7 @@ async function getalerta(){
 async  function alerta_financiera(alerta){
   try {
     let valor_alertafinanciera=[] 
-    fetch(`http://localhost:7000/pa/api/alerta/financiera/${alerta}`)
+    fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/financiera/${alerta}`)
     .then(res=> res.json()).then(response=>{
       document.getElementById('finanzas').innerHTML=  response.data.length
       for (let index = 0; index < response.data.length; index++) {
@@ -158,7 +158,7 @@ async  function alerta_financiera(alerta){
 async  function alerta_fisica(alerta){
   try {
     let valor_alertafinanciera=[] 
-    fetch(`http://localhost:7000/pa/api/alerta/fisica/${alerta}`)
+    fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/fisica/${alerta}`)
     .then(res=> res.json()).then(response=>{
       document.getElementById('fisica').innerHTML=  response.data.length
       document.getElementById('rangoalertafisica').innerHTML=(alerta*100).toFixed(2)+'%'
@@ -289,7 +289,7 @@ async function alertafisicofinan(alerta){
   try {
     //console.log(alerta);
     let valor_alertafiafin=[] 
-    fetch(`http://localhost:7000/pa/api/alerta/finanfisica/${alerta}`)
+    fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/finanfisica/${alerta}`)
     .then(res=>res.json())
     .then(response=>{
       document.getElementById('alertafisfin').innerHTML=response.data.length
@@ -425,7 +425,7 @@ async function alertafisicofinan(alerta){
 async function alertaponderado(){
   try {
     let alertasponds=[];
-    fetch(`http://localhost:7000/pa/api/alerta/ponderado`)
+    fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/ponderado`)
     .then(res=>res.json())
     .then(response=>{
 
