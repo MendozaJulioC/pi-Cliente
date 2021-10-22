@@ -68,8 +68,8 @@
       <div class="mt-lg-3" id="cumplimientovigencia" style="height: 350px;  width:100%;"></div>
     </div>
     <div class="card-footer mt-2" style="background-color: white;">
-      <a  class="btn btn-light" style="font-size: xx-small;" type="button"  href="/general"> 
-        <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true"> Plan de Desarrollo 2020-2023</i>
+      <a  class="btn btn-light" style="font-size: xx-small;" type="button"   onclick="getalerta()"> 
+        <i class="fa fa-pencil-square-o" style=" width:100%; height:16px; font-size: small;"aria-hidden="true">% Cumplimiento por Dependencias</i>
       </a>
     </div>
   </div>
@@ -211,6 +211,26 @@ Modal %ejec financiera por dependencias
   </div>
   </div>
 </div>  
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal %Cumplimiento por dependencias
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="modal fade bd-cumplimiento-modal " id="cumplimientoModal" tabindex="-1" role="dialog" aria-labelledby="cumplimientoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content modal-xl">
+      <div class="modal-header">
+        <span> <h4  class="modal-title text-muted" > % Cumplimiento por Dependencias</h4> </span> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" >
+        <div class="mt-lg-3" id="rankcumplimiento" style="height: 950px;  width:100%;"></div>
+     </div>
+  </div>
+  </div>
+</div>
+
 
 </body>
 
