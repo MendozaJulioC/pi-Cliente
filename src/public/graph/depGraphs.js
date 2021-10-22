@@ -4,6 +4,7 @@ var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; 
 var nomarchivopdf='';
 var table4={};
 var fechaPA = new Date('08/31/2021');
+var fecha= new Date('08/31/2021');
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -62,7 +63,7 @@ async function _avancePDM(cod_dep){
 }
 async function graphPDM(total){
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
-    fecha = new Date('08/31/2021');
+ 
     document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
     //mespa = fecha.getMonth(fecha)+1
     vigencia = fecha.getFullYear(fecha)
@@ -1820,8 +1821,6 @@ window.onload= function(){
 
 
 async function listvalstat_dep(){
-
-  
   try {
     let dep = document.getElementById('inputGroupSelectDependencia').value;
     let valorlista=[];
@@ -1957,33 +1956,28 @@ $('#ModaListVE').modal('show');
 
 
 async function _cumplimiento_dependencia(dep){
-
-
-try {
-  
-fetch(`https://sse-pdm.herokuapp.com/dep/api/cumplimiento/${dep}`)
-.then(res=> res. json())
-.then(response=>{
- 
-  let cumplimientodep= (parseFloat(response.data[0].avancepond) /parseFloat(response.data[0].programado) )*100
-
-  const dataSource = {
-    chart: {
-      caption: "% Cumplimiento PDM",
-      lowerlimit: "0",
-      upperlimit: "100",
-      showvalue: "1",
-      numbersuffix: "%",
-      theme: "gammel",
-      showtooltip: "0",
-      valuefontsize: "25"
-    },
-    colorrange: {
-      color: [
-        {
-          minvalue: "0",
-          maxvalue: valorminimo,
-          code: "#F2726F"
+  try {
+    fetch(`https://sse-pdm.herokuapp.com/dep/api/cumplimiento/${dep}`)
+    .then(res=> res. json())
+    .then(response=>{
+      let cumplimientodep= (parseFloat(response.data[0].avancepond) /parseFloat(response.data[0].programado) )*100
+      const dataSource = {
+      chart: {
+        caption: "% Cumplimiento PDM",
+        lowerlimit: "0",
+        upperlimit: "100",
+        showvalue: "1",
+        numbersuffix: "%",
+        theme: "gammel",
+        showtooltip: "0",
+        valuefontsize: "25"
+      },
+      colorrange: {
+        color: [
+          {
+            minvalue: "0",
+            maxvalue: valorminimo,
+            code: "#F2726F"
         },
         {
           minvalue: valorminimo,
@@ -2017,10 +2011,10 @@ fetch(`https://sse-pdm.herokuapp.com/dep/api/cumplimiento/${dep}`)
   });
   })
 
-} catch (error) {
-  console.error('Error  _cumplimiento_dependencia', error);
-  
-}
+  } catch (error) {
+    console.error('Error  _cumplimiento_dependencia', error);
+    
+  }
 
   
 
