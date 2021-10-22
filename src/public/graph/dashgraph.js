@@ -768,3 +768,90 @@ async function graphCumplimientoPDM(avance){
   
   
   }
+
+
+  async function getalerta(){
+    try {
+      
+      fetch(`http://localhost:7000/pa/api/alerta/corte`)
+      .then(res=>res.json())
+      .then(response=>{
+        let cortealerta= new Date(response.data[0].corte) 
+        mespa = cortealerta.getMonth(cortealerta)+1
+        vigencia = cortealerta.getFullYear(cortealerta)
+        fetch(`http://localhost:7000/pa/api/alerta/valor/${mespa}`)
+        .then(res=>res.json())
+        .then(response=>{
+          let rojo = response.data[0].rojo
+          let verde = response.data[0].verde
+        cumple_linea_dep(rojo, verde, vigencia)
+          
+        })
+      })
+    } catch (error) {
+      console.error('Error getalerta ', error);
+    }
+  }
+  
+  
+  async function cumple_linea_dep(rojo, verde, vigencia){
+    try {
+  
+  let infocumple=[];
+  var cump=0;
+  let colorsemafcumple=''
+      fetch(`http://localhost:7000/dep/api/rank/cumplimiento`)
+      .then(res=>res.json())
+      .then(response=>{
+        let tam = response.data.length;
+        for(let i =0; i<tam;i++){
+      // if(response.data[i].avance!=0){
+         cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2021)*100)
+         console.log(cumpverde, parseFloat(verde)); 
+        if (cumpverde>=parseFloat(verde)){colorsemafcumple="#58AC84"}
+        else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
+        else {colorsemafcumple="#FFBD2E"}
+     //  }
+  
+   
+          infocumple.push({
+              "label" : response.data[i].nombre_dep,
+              "value": (response.data[i].avance/response.data[i].programado2021)*100,
+              "color": colorsemafcumple,
+             // "link": "j-showAlert-"+response.data[i].cod_responsable_reporte
+          })
+        }
+        infocumple.sort((a, b) =>  b.value -a.value )
+        const dataSource = {
+          chart: {
+            caption: "% Cumplimiento Anual PDM",
+            labelfontsize:"16",
+            showvalues: "1",
+            valuefontsize: "20",
+            numbersuffix: "%",
+            theme: "zune"
+          },
+          data: infocumple
+        };
+        
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "bar3d",
+            renderAt: "rankcumplimiento",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
+        
+      })
+  
+    } catch (error) {
+      console.error('Erro',error )
+    }
+    jQuery.noConflict();
+    $('#cumplimientoModal').modal('show'); 
+  
+  }
+  
