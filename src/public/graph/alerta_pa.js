@@ -43,6 +43,7 @@ async  function alerta_financiera(alerta){
     fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/financiera/${alerta}`)
     .then(res=> res.json()).then(response=>{
       document.getElementById('finanzas').innerHTML=  response.data.length
+      medidafisica(alerta)
       for (let index = 0; index < response.data.length; index++) {
           valor_alertafinanciera.push([
               response.data[index].cod_dependencia,
@@ -1062,4 +1063,223 @@ function buscavalstat(nomproyecto, cod, ejec){
     } catch (error) {
     console.log('Error groProyect', error)      
     }
+  }
+
+
+  async function medidafisica(alerta)
+  {
+    try {
+      fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+      .then(res=>res.json())
+      .then(response=>{
+  
+        valorminimo = (response.data[0].rojo)-0.01;
+        valormaximo = (response.data[0].verde);
+      const dataSource = {
+        chart: {
+          caption: 'Alerta % Ejecución   <'+ (alerta*100).toFixed(2)+'%',
+          subcaption: "Rangos Plan de Acción",
+          numbersuffix: "%",
+          valuefontsize: "12",
+          labelfontsize:"12",
+          theme: "fusion",
+          plottooltext:
+            "Porcentaje de ejecución $datavalue establecido como alerta para lo esperado  de $targetDataValue"
+        },
+        colorrange: {
+          color: [
+            {
+              minvalue: "0",
+              maxvalue: valorminimo,
+              code: "#F2726F"
+            },
+            {
+              minvalue: valorminimo,
+              maxvalue: valormaximo,
+              code: "#FFC533"
+            },
+            {
+              minvalue: valorminimo,
+              maxvalue: "100",
+              code: "#62B58F"
+            }
+          ]
+        },
+        value: (alerta*100).toFixed(2),
+        target: valorminimo+0.01
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "hbullet",
+          renderAt: "muestrafinanciera", 
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+
+      FusionCharts.ready(function() {
+        var myChart2 = new FusionCharts({
+          type: "hbullet",
+          renderAt: "muestrafinanciera2", 
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+
+      medidafisfin(alerta)
+    })
+      
+    } catch (error) {
+      
+    }
+  }
+
+  async function medidafisfin(alerta)
+  {
+
+    const dataSource = {
+      chart: {
+        caption: " %Ejec. Financiera >80% vs  %Ejec Física <"+ (alerta*100).toFixed(2)+'%',
+
+    
+        numbersuffix: "%",
+        drawcrossline: "1",
+        theme: "gammel",
+        showvalues: "1",
+        valuefontsize: "12",
+        labelfontsize:"8",
+      },
+      categories: [
+        {
+          category: [
+            {
+              label: "Alerta"
+            },
+           
+           
+          ]
+        }
+      ],
+      dataset: [
+        {
+          seriesname: "%Ejec. Financiera",
+          data: [
+            {
+              value: "80",
+             color: "#62B58F"
+            }
+          ]
+        },
+        {
+          seriesname: "%Ejec. Física",
+          data: [
+            {
+              value:  (alerta*100).toFixed(2),
+             // color: "#F2726F"
+            }
+          ]
+        }
+      ]
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "overlappedbar2d",
+        renderAt: "chart-fisfin",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+    
+    mediponds()
+  }
+
+
+  async function mediponds(){
+    try {
+      fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+      .then(res=>res.json())
+      .then(response=>{
+  
+        valorminimo = (response.data[0].rojo)-0.01;
+        valormaximo = (response.data[0].verde);
+      const dataSource = {
+        chart: {
+         
+          subcaption: "Rangos Plan de Acción",
+          numbersuffix: "%",
+          valuefontsize: "12",
+          labelfontsize:"12",
+          theme: "fusion",
+          plottooltext:
+            "Porcentaje de ejecución $datavalue establecido como alerta para lo esperado  de % Cumplimiento"
+        },
+        colorrange: {
+          color: [
+            {
+              minvalue: 0,
+              maxvalue: valorminimo,
+              code: "#F2726F",
+              label: "Bajo{br}Average",
+            
+            },
+            {
+              minvalue: valorminimo,
+              maxvalue: valormaximo,
+              code: "#FFC533",
+              label: "Average",
+           
+            },
+            {
+
+          
+
+              minvalue: valormaximo,
+              maxvalue: 100,
+              code: "#62B58F",
+              label: "Cumpliendo",
+        
+            }
+          ]
+        },
+        pointers: {
+          pointer: [
+            {
+              value: valorminimo+0.01 ,
+            }
+          ]
+        },
+        value: valorminimo,
+        target: valorminimo
+      };
+      
+   
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "hlineargauge",
+          renderAt: "chart-pond",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+
+    })
+      
+    } catch (error) {
+      
+
+    };
+    
+ 
+    
+    
   }
