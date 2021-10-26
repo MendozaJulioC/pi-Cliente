@@ -773,13 +773,13 @@ async function graphCumplimientoPDM(avance){
   async function getalerta(){
     try {
       
-      fetch(`http://localhost:7000/pa/api/alerta/corte`)
+      fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/corte`)
       .then(res=>res.json())
       .then(response=>{
         let cortealerta= new Date(response.data[0].corte) 
         mespa = cortealerta.getMonth(cortealerta)+1
         vigencia = cortealerta.getFullYear(cortealerta)
-        fetch(`http://localhost:7000/pa/api/alerta/valor/${mespa}`)
+        fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/valor/${mespa}`)
         .then(res=>res.json())
         .then(response=>{
           let rojo = response.data[0].rojo
@@ -800,7 +800,7 @@ async function graphCumplimientoPDM(avance){
   let infocumple=[];
   var cump=0;
   let colorsemafcumple=''
-      fetch(`http://localhost:7000/dep/api/rank/cumplimiento`)
+      fetch(`https://sse-pdm.herokuapp.com/dep/api/rank/cumplimiento`)
       .then(res=>res.json())
       .then(response=>{
         let tam = response.data.length;
