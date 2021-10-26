@@ -131,7 +131,7 @@ async  function alerta_financiera(alerta){
                   }
               }],
               columnDefs: [
-                            {/*cod_ind */  width: "10px", targets: 0, className: "text-center", searchable: false,orderable: false   },
+                            {/*cod_ind */  width: "10px", targets: 0, className: "text-center"  },
                             {/*nom_ind */  width: "90px", targets: 1  },
                             {/*ampliar*/  width: "70px",  targets: 2, className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
                             {/*meta    */  width: "10px", targets: 3, className: "text-center"},
@@ -256,7 +256,7 @@ async  function alerta_fisica(alerta){
               }],
            
               columnDefs: [
-                  {/*cod_ind */  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false   },
+                  {/*cod_ind */  width: "10px",  targets: 0, className: "text-center"  },
                   {/*nom_ind */  width: "90px", targets: 1  },
                   {/*ampliar*/  width: "70px",  targets: 2, className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
                   {/*meta  */    width: "10px",  targets: 2, className: "text-center"},
@@ -387,7 +387,7 @@ async function alertafisicofinan(alerta){
       }],
    
       columnDefs: [
-          {/*cod_ind */  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false   },
+          {/*cod_ind */  width: "10px",  targets: 0, className: "text-center" },
           {/*nom_ind */  width: "90px", targets: 1  },
             {/*ampliar*/  width: "70px",  targets: 2, className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
           {/*meta  */    width: "10px",  targets: 3, className: "text-center"},
