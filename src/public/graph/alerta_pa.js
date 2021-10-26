@@ -521,16 +521,16 @@ async function alertaponderado(){
     }],
  
     columnDefs: [
-        {/*cod_ind */  width: "10px",  targets: 0, className: "text-center", searchable: false,orderable: false   },
+        {/*cod_ind */  width: "10px",  targets: 0, className: "text-center"   },
         {/*nom_ind */  width: "90px", targets: 1  },
         {/*ampliar*/  width: "70px",  targets: 2, className: "text-center" , data: "cod_dep", defaultContent: `<button class='btn btn-link'><i class="fa fa-search-plus fa-2x" style="color: #28527a;"></i></button>`  , searchable: false,orderable: false   } ,
-        {/*meta  */    width: "10px",  targets: 2, className: "text-center"},
-        {/*unidad  */  width: "200px",  targets: 3},
-        {/*sentido */  width: "70px",  targets: 4, className: "text-center"},
-        {/*avance  */  width: "70px",  targets: 5, className: "text-center"          },
-        {/*%obser  */  width: "10px", targets: 6, className: "text-center"          },
+        {/*meta  */    width: "10px",  targets: 3, className: "text-center"},
+        {/*unidad  */  width: "200px",  targets: 4},
+        {/*sentido */  width: "70px",  targets: 5, className: "text-center"},
+        {/*avance  */  width: "70px",  targets: 6, className: "text-center"          },
         {/*%obser  */  width: "10px", targets: 7, className: "text-center"          },
         {/*%obser  */  width: "10px", targets: 8, className: "text-center"          },
+        {/*%obser  */  width: "10px", targets: 9, className: "text-center"          }
        ],   
          bDestroy: true,
          order: [[ 1, 'asc' ]], createdRow: function(row, data){
