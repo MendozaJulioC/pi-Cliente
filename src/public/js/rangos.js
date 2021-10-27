@@ -1,5 +1,5 @@
 function corteplan(){
-  var fecha = new Date('08/31/2021');
+  var fecha = new Date('09/30/2021');
   document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   // mes = fecha.getMonth(fecha)
   vigencia = fecha.getFullYear(fecha)
