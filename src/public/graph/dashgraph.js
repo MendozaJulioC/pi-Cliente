@@ -15,8 +15,8 @@ async function _main(){
  
 }
 
-var fecha= new Date('08/31/2021');
-var fechaPA = new Date('08/31/2021');
+var fecha= new Date('09/30/2021');
+var fechaPA = new Date('09/30/2021');
 
 function corteplan(){
   
@@ -70,7 +70,7 @@ swal( {
 
 async function _PASemaf (){
   try {
-    fecha = new Date('08/31/2021');
+    fecha = new Date('09/30/2021');
     mespa = fecha.getMonth(fecha)+1
     vigencia = fecha.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
