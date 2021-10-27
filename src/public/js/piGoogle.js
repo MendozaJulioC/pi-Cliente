@@ -11,7 +11,7 @@ async function detalleAvance(){
         fetch(`https://sse-pdm.herokuapp.com/pi/api/generalpi`)
         .then( res=> res.json())
         .then(response=>{
-          let fechaOrigen= '2021-08-31'
+          let fechaOrigen= '2021-09-30'
           let tam = response.data.length;
           for(let i =0; i<tam;i++){
 
@@ -185,7 +185,7 @@ async function detalleAvanceLinea(){
 async function triadaInicial2(datos){
  console.log(datos);
     let mes=0; let valormaximo=0; let valorminimo=0;
-    var fechaPA = new Date('08/31/2021');
+    var fechaPA = new Date('09/30/2021');
     mes = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fechaPA)
       
