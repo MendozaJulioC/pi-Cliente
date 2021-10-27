@@ -3,8 +3,8 @@
 var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
 var nomarchivopdf='';
 var table4={};
-var fechaPA = new Date('08/31/2021');
-var fecha= new Date('08/31/2021');
+var fechaPA = new Date('09/30/2021');
+var fecha= new Date('09/30/2021');
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
