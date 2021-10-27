@@ -26,8 +26,7 @@
   <div id="container" class="container-fluid mt-4 ">
      <div class="row">
         <div class="col-md-12 mt-4  shadow-lg p-3  mt-2   mb-1 bg-white rounded" style="height: 190px;">
-        
-            <div class="card-body  ">
+          <div class="card-body  ">
                 <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
                   font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
                   <p style="align-items: center;"> <img src="/img/logo.png" style="width: 9%;" alt=""></p>Alertas Plan de Acción
@@ -37,17 +36,52 @@
                 </h6>
               </div>
        
-        </div> 
+        </div>
+        
+        
         <div class="col-md-12 mt-2  shadow-lg p-3 mb-1 rounded" >
         <div class="card-body"style="height: 720px;" >
           <div class="row">
+
+
             <div class="card col-md-6"   style="  border-radius: 20px;height: 680px;" >
               <div class="row">
                 <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
                   <div class="card text-center">
                     <div class="card-header">
                       <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
-                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Proyectos con Ejecución financiera menor a: <span id="rangoalertafinanciera" style="color: #da24bb;">  </span>
+                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Deficiente desempeño de los proyectos menor a: <span id="rangoalertafisica" style="color: #da24bb;">  </span></h5>
+                      </h5>
+                    </div>
+                    <div class="card-body">
+                      <div id="muestrafinanciera2" style="width: 100%; height: 160px;"></div>
+                        <hr>
+                        <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
+                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                          Deficiente desempeño en la obtención de los productos/bienes/servicios asociados a los proyectos. <br>
+                          Número de proyectos que su porcentaje de ejecución física se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
+                        </p>
+                        <br>
+                        <h5 id="fisica" class="row justify-content-center align-items-center minh-100 text-center"
+                          style=" width: 100%; height: 150px;text-align: center;font-size: 120px;line-height: 20px;font-weight: 600;color: #bb1717;
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  
+                        </h5>
+                      </div>
+                      <div class="card-footer text-muted">
+                        <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                          </svg>
+                        </button> 
+                      </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
+                  <div class="card text-center">
+                    <div class="card-header">
+                      <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
+                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Escasa utilización ($) menor a: <span id="rangoalertafinanciera" style="color: #da24bb;">  </span>
                       </h5>
                     </div>
                     <div class="card-body">
@@ -55,6 +89,7 @@
                         <hr>
                         <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
                           font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                          Escasa utilización de los recursos financieros en los proyectos. <br>
                           Número de proyectos que su porcentaje de ejecución financiera se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
                         </p>
                         <br>
@@ -71,41 +106,16 @@
                         </button> 
                       </div>
                     </div>
-                  </div>
+                </div>
 
                   <!--    -->
-                  <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                    <div class="card text-center">
-                      <div class="card-header">
-                        <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
-                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Proyectos con Ejecución física menor a: <span id="rangoalertafisica" style="color: #da24bb;">  </span></h5>
-                        </h5>
-                      </div>
-                      <div class="card-body">
-                        <div id="muestrafinanciera2" style="width: 100%; height: 160px;"></div>
-                          <hr>
-                          <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
-                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                            Número de proyectos que su porcentaje de ejecución física se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
-                          </p>
-                          <br>
-                          <h5 id="fisica" class="row justify-content-center align-items-center minh-100 text-center"
-                            style=" width: 100%; height: 150px;text-align: center;font-size: 120px;line-height: 20px;font-weight: 600;color: #bb1717;
-                              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  
-                          </h5>
-                        </div>
-                        <div class="card-footer text-muted">
-                          <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                            </svg>
-                          </button> 
-                        </div>
-                      </div>
-                    </div>
+                 
+
+
+                    
                   </div>
                 
-                </div>
+            </div>
       
      <!--    -->
 
@@ -116,7 +126,7 @@
                           <div class="card text-center">
                             <div class="card-header">
                               <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 28px;line-height: 30px;font-weight: 300;color: #511281;
-                                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Proyectos con %Ejec. Financiera >80% y %Ejec Física <  <span id="rangoalerta" style="color: #da24bb;">  </span>
+                                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Alta ejecución financiera y bajo desempeño <  <span id="rangoalerta" style="color: #da24bb;">  </span>
                                </h5>
                             </div>
                             <div class="card-body">
@@ -154,7 +164,7 @@
                             <div class="card text-center">
                               <div class="card-header">
                                 <h5 class="card-title" style=" width: 100%; height: 50px;text-align: center;font-size: 28px;line-height: 30px;font-weight: 300;color: #511281;
-                                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Proyectos con %Físico/Financiero Ponderado  < 40%
+                                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desequilibrio en el desempeño versus la ejecución ($)
                               </h5>
                               </div>
                               <div class="card-body">
@@ -199,25 +209,25 @@
         <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
           <div class="collapse" id="collapseExample">
             <div class="card card-body">
-               <h3>Alerta Ejecución Financiera</h3>
+               <h3>Escasa utilización ($)</h3>
               <table id="alerta_financiera" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
             </div>
           </div>
           <div class="collapse" id="collapseExample2">
             <div class="card card-body">
-              <h3>Alerta Ejecución física</h3>
+              <h3>Deficiente desempeño de los proyectos</h3>
               <table id="alerta_fisica" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
             </div>
           </div>
           <div class="collapse" id="collapseExample3">
             <div class="card card-body">
-              <h3>Alerta %Ejec. Financiera >80% y %Ejec Física baja</h3>
+              <h3>Alta ejecución financiera y bajo desempeño</h3>
               <table id="alerta_fisica_finan" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
             </div>
           </div>
           <div class="collapse" id="collapseExample4">
             <div class="card card-body">
-              <h3>Alerta Físico/Financiero Ponderado  < 40%</h3>
+              <h3>Desequilibrio en el desempeño versus la ejecución ($)</h3>
               <table id="alerta_ponds" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
             </div>
           </div>
