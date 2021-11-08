@@ -3,14 +3,32 @@
 var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
 var nomarchivopdf='';
 var table4={};
-var fechaPA = new Date('09/30/2021');
-var fecha= new Date('09/30/2021');
+var fechaPA =""; //new Date('09/30/2021');
+var fecha= "";//new Date('09/30/2021'); 
+
+async function getCorteAvancePI(){
+  try {
+    fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+    .then(res=>res.json())
+    .then(response=>{
+      let corteavance= new Date(response.data[0].corte) 
+      let mesavance = corteavance.getMonth(corteavance)+1
+      let vigencia = corteavance.getFullYear(corteavance)
+      fecha= corteavance;
+      fechaPA=corteavance
+    })
+  } catch (error) {
+    console.error('Error getalerta ', error);
+  }
+}
+getCorteAvancePI()
 
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 2
 })
+
 async function _main(){
   let dep = document.getElementById('inputGroupSelectDependencia').value
     _avancePDM(dep)
