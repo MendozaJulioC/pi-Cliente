@@ -1,40 +1,49 @@
-var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0
+var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
+var fecha='';var fechaPA = '';
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
   minimumFractionDigits: 2
 })
 async function _main(){
-  corteplan()
-   porc_avance_fisico()
-  _avance_financiero()
+  porc_avance_fisico()
   tipoinversion()
   columnDependencias()
-  _PASemaf()
- 
- 
 }
 
-var fecha= new Date('09/30/2021');
-var fechaPA = new Date('09/30/2021');
+async function getCorteAvancePI(){
+  try {
+    fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+    .then(res=>res.json())
+    .then(response=>{
+      let corteavance= new Date(response.data[0].corte) 
+      let mesavance = corteavance.getMonth(corteavance)+1
+      let vigencia = corteavance.getFullYear(corteavance)
+      fecha= corteavance;
+      fechaPA=corteavance
+       corteplan(mesavance, vigencia, corteavance)   
+       _PASemaf (mesavance,vigencia, corteavance)
+    })
+  } catch (error) {
+    console.error('Error getalerta ', error);
+  }
+}
 
-function corteplan(){
-  
-  document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
-  //mespa = fecha.getMonth(fecha)+1
-  vigencia = fecha.getFullYear(fecha)
+function corteplan(mesavance, vigenciaavance, corteavance)  {
+  document.getElementById('fecha_corte').innerHTML= corteavance.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
+  let vigencia = vigenciaavance //corteavance.getFullYear(corteavance)
   switch (vigencia) {
     case 2020:
-      mes= fecha.getMonth(fecha)+1
+      mes= corteavance.getMonth(corteavance)+1
     break;
     case 2021:
-      mes= fecha.getMonth(fecha)+13
+      mes= corteavance.getMonth(corteavance)+13
     break;
     case 2022:
-      mes= fecha.getMonth(fecha)+25
+      mes= corteavance.getMonth(corteavance)+25
     break;
     case 2023:
-      mes= fecha.getMonth(fecha)+37
+      mes= corteavance.getMonth(corteavance)+37
     break;
     default:
     break;
@@ -56,38 +65,29 @@ function corteplan(){
     document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
     document.getElementById('maximo-corte').value= maximovalue
     _avancePDM()
-   
-  
   })
-swal( {
-  title: "SSE-PDM!",
-  text: "Cargando espere un momento!",
-  icon: "info",
-  buttons: false,
-  timer: 4000
-});
+  swal( {
+    title: "SSE-PDM!",
+    text: "Cargando espere un momento!",
+    icon: "info",
+    buttons: false,
+    timer: 5000
+  });
 }
 
-async function _PASemaf (){
+async function _PASemaf (mes, vigencia, corte){
   try {
-    fecha = new Date('09/30/2021');
-    mespa = fecha.getMonth(fecha)+1
-    vigencia = fecha.getFullYear(fecha)
+    mespa = mes+1//fecha.getMonth(fecha)+1
+    vigencia = vigencia//fecha.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
-
       valorminimo = (response.data[0].rojo);
       valormaximo = (response.data[0].verde);
-
     })
   } catch (error) {
-    
   }
-
-
 }
-
 
 async function _avancePDM(){
   try {
@@ -96,14 +96,13 @@ async function _avancePDM(){
     .then(datos=>{
         graphPDM(datos.data[0].total_plan)
         let cumplimiento= (parseFloat(datos.data[0].avancepond/datos.data[0].programado)*100).toFixed(2)
-
         graphCumplimientoPDM(cumplimiento)
       })
-      
   } catch (error) {
     console.log('Error _avancePDM ',error )
   }
 }
+
 async function graphPDM(total){
   //aqui un fetch para consultar el porcentaje de ejecución del pdm
   let esperado=(mes/48)*100
@@ -144,7 +143,6 @@ async function graphPDM(total){
           {
             value: total,
             tooltext: "<b>$value%</b>"
-          
           }
         ]
       },
@@ -172,20 +170,11 @@ async function graphPDM(total){
         dataSource
       }).render();
     });
+    _avance_financiero()
   } catch (error) {
     console.log('Error graphPDM: ', error)
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 async function _avance_financiero(){
   try {
@@ -195,92 +184,77 @@ async function _avance_financiero(){
       porc_avance_financiero(parseFloat(datos.data[0].pptoejecutado/datos.data[0].pptoajustado))
       graphPDA(parseFloat(datos.data[0].poai), parseFloat(datos.data[0].pptoajustado),parseFloat(datos.data[0].pptoejecutado))
       detallePpto(parseFloat(datos.data[0].compromisos),parseFloat(datos.data[0].disponible),parseFloat( datos.data[0].ordenado), parseFloat(datos.data[0].total))
-     
     })
   } catch (error) {
     console.log('Error porc_avance_financiero ',error )
   }
 }
+
 async function porc_avance_financiero(avance){  
 try {
- 
-  mespa = fechaPA.getMonth(fechaPA)+1
-  vigencia = fechaPA.getFullYear(fecha)
-  fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
-  .then(res=>res.json())
-  .then(response=>{
-
-    valorminimo = (response.data[0].rojo)-0.01;
-    valormaximo = (response.data[0].verde);
-
-
-   // console.log(valorminimo);
-    porc_avance_fisico(valorminimo, valormaximo)
-
-
-    const dataSource = {
-      chart: {
-        caption: "% Ejecución Financiera Plan de Acción",
-        lowerlimit: "0",
-        upperlimit: "100",
-        showvalue: "1",
-        numbersuffix: "%",
-        theme: "gammel",
-        showtooltip: "0",
-        valuefontsize: "25"
-      },
-      colorrange: {
-        color: [
-          {
-            minvalue: 0,
-            maxvalue:valorminimo,
-            code: "#F2726F"
+    mespa = fechaPA.getMonth(fechaPA)+1
+    vigencia = fechaPA.getFullYear(fecha)
+    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    .then(res=>res.json())
+    .then(response=>{
+      valorminimo = (response.data[0].rojo)-0.01;
+      valormaximo = (response.data[0].verde);
+      porc_avance_fisico(valorminimo, valormaximo)
+      const dataSource = {
+        chart: {
+          caption: "% Ejecución Financiera Plan de Acción",
+          lowerlimit: "0",
+          upperlimit: "100",
+          showvalue: "1",
+          numbersuffix: "%",
+          theme: "gammel",
+          showtooltip: "0",
+          valuefontsize: "25"
         },
-        {
-            minvalue: valorminimo,
-            maxvalue: valormaximo,
-            code: "#FFC533"
-        },
-        {
-            minvalue: valorminimo,
-            maxvalue: 100,
-            code: "#62B58F"
-        }
-        ]
-        },
-        dials: {
-          dial: [
+        colorrange: {
+          color: [
             {
-              value: (avance)*100
-            }
+              minvalue: 0,
+              maxvalue:valorminimo,
+              code: "#F2726F"
+          },
+          {
+              minvalue: valorminimo,
+              maxvalue: valormaximo,
+              code: "#FFC533"
+          },
+          {
+              minvalue: valorminimo,
+              maxvalue: 100,
+              code: "#62B58F"
+          }
           ]
-        }
-      };
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "angulargauge",
-          renderAt: "chart-ejecfinanciera",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
-   
-
-  })
-
-
-
-} catch (error) {
-  console.error(error);
-  
+          },
+          dials: {
+            dial: [
+              {
+                value: (avance)*100
+              }
+            ]
+          }
+        };
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "angulargauge",
+            renderAt: "chart-ejecfinanciera",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
+      })
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-
-}
-
- async function graphPDA(poai, pptoajustado, ordenado){
+async function graphPDA(poai, pptoajustado, ordenado){
   const dataSource = {
     chart: {
       caption: " Ejecución Financiera ",
@@ -367,23 +341,21 @@ async function detallePpto(compromisos, disponible, ordenado , total){
   });
   columnGeo()
 }
+
 async function columnGeo(){
   try {
     let geoinver=[]
       fetch(`https://sse-pdm.herokuapp.com/geo/api/territorio`)
       .then(res=>res.json())
       .then(datos=>{
-        //console.log(datos.data);
         for (let index = 0; index < datos.data.length; index++) {
-          
           geoinver.push({
             label: datos.data[index].nom_comuna,
             value: datos.data[index].total,
-
           })
         }
-      const dataSource = {
-          chart: {
+        const dataSource = {
+           chart: {
             caption: "Inversión Pública por Comunas y Corregimientos",
             subcaption: "(millones de pesos)",
             xaxisname: "Territorio",
@@ -428,7 +400,6 @@ async function columnGeo(){
 
 async function porc_avance_fisico(valorminimo, valormaximo){
   try {
-    // console.log(valorminimo);
     fetch('https://sse-pdm.herokuapp.com/pa/api/avancefisico')
     .then(res=>res.json())
     .then(datos=>{
@@ -485,8 +456,7 @@ async function porc_avance_fisico(valorminimo, valormaximo){
     console.log('Error _avancePDM ',error )
   }
 }
-async function tipoinversion()
-{
+async function tipoinversion(){
   try {
    fetch(`https://sse-pdm.herokuapp.com/geo/api/tipo-inversion`)
    .then(res=>res.json())
@@ -536,6 +506,7 @@ async function tipoinversion()
     console.log('Error tipoinversion', error)
   }
 }
+
 async function columnDependencias(){
   var valores=[];
   fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias`)
@@ -553,10 +524,8 @@ async function columnDependencias(){
     const dataSource = {
     chart: {
       caption: "Inversión Pública por Dependencias",
-    
       xaxisname: "Dependencias",
       yaxisname: "cifras en millones de pesos",
-      //numbersuffix: "$",
       numberprefix: "$",
       theme: "zune",
       labeldisplay: "ROTATE",
@@ -603,13 +572,11 @@ async function ejecfisica(){
           "label" : datos.data[i].nom_dependencia,
           "value": (datos.data[i].porc_ejecfisica)*100,
           "color": colorsemaf
-     
          })
       }
       infofisicadep.sort((a, b) => b.value - a.value)
       const dataSource = {
         chart: {
-         
           aligncaptionwithcanvas: "0",
           numbersuffix: "%",
           plottooltext: "<b>$dataValue</b> leads received",
@@ -617,7 +584,6 @@ async function ejecfisica(){
         },
         data: infofisicadep
       };
-      
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
           type: "bar2d",
@@ -628,16 +594,14 @@ async function ejecfisica(){
           dataSource
         }).render();
       });
-      
      })
-     
    } catch (error) {
      console.error('Error ejecfisica :>> ', error);
    }
    jQuery.noConflict();
     $('#ejecfisicaModal').modal('show'); 
-
 }
+
 async function ejecfinanciera(){
     try {
       let infofisicadep=[];
@@ -653,13 +617,11 @@ async function ejecfinanciera(){
            "label" : datos.data[i].nom_dependencia,
            "value": (datos.data[i].porcexec_financiera)*100,
            "color":colorsemaf
-      
           })
        }
        infofisicadep.sort((a, b) => b.value - a.value)
        const dataSource = {
          chart: {
-          
            aligncaptionwithcanvas: "0",
            numbersuffix: "%",
            plottooltext: "<b>$dataValue</b> leads received",
@@ -667,7 +629,6 @@ async function ejecfinanciera(){
          },
          data: infofisicadep
        };
-       
        FusionCharts.ready(function() {
          var myChart = new FusionCharts({
            type: "bar2d",
@@ -678,9 +639,7 @@ async function ejecfinanciera(){
            dataSource
          }).render();
        });
-       
       })
-      
     } catch (error) {
       console.error('Error ejecfinanciera :>> ', error);
     }
@@ -688,25 +647,16 @@ async function ejecfinanciera(){
      $('#ejecfinancieraModal').modal('show'); ;
 }
 
-
-
 async function graphCumplimientoPDM(avance){  
   try {
- 
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
-  
       valorminimo = (response.data[0].rojo)-0.01;
       valormaximo = (response.data[0].verde);
-  
-  
-     // console.log(valorminimo);
       porc_avance_fisico(valorminimo, valormaximo)
-  
-  
       const dataSource = {
         chart: {
           caption: "% Cumplimiento PDM",
@@ -736,8 +686,8 @@ async function graphCumplimientoPDM(avance){
               code: "#62B58F"
           }
           ]
-          },
-          dials: {
+        },
+        dials: {
             dial: [
               {
                 value: (avance)
@@ -755,24 +705,14 @@ async function graphCumplimientoPDM(avance){
             dataSource
           }).render();
         });
-     
-  
     })
-  
-  
-  
   } catch (error) {
     console.error(error);
-    
   }
-  
-  
-  }
+}
 
-
-  async function getalerta(){
-    try {
-      
+async function getalerta(){
+  try {
       fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/corte`)
       .then(res=>res.json())
       .then(response=>{
@@ -784,8 +724,7 @@ async function graphCumplimientoPDM(avance){
         .then(response=>{
           let rojo = response.data[0].rojo
           let verde = response.data[0].verde
-        cumple_linea_dep(rojo, verde, vigencia)
-          
+          cumple_linea_dep(rojo, verde, vigencia)
         })
       })
     } catch (error) {
@@ -793,16 +732,14 @@ async function graphCumplimientoPDM(avance){
     }
   }
   
-  
-  async function cumple_linea_dep(rojo, verde, vigencia){
-    try {
-  
-  let infocumple=[];
-  var cump=0;
-  let colorsemafcumple=''
-      fetch(`https://sse-pdm.herokuapp.com/dep/api/rank/cumplimiento`)
-      .then(res=>res.json())
-      .then(response=>{
+async function cumple_linea_dep(rojo, verde, vigencia){
+  try {
+    let infocumple=[];
+    var cump=0;
+    let colorsemafcumple=''
+    fetch(`https://sse-pdm.herokuapp.com/dep/api/rank/cumplimiento`)
+    .then(res=>res.json())
+    .then(response=>{
         let tam = response.data.length;
         for(let i =0; i<tam;i++){
       // if(response.data[i].avance!=0){
@@ -812,9 +749,7 @@ async function graphCumplimientoPDM(avance){
         else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
         else {colorsemafcumple="#FFBD2E"}
      //  }
-  
-   
-          infocumple.push({
+        infocumple.push({
               "label" : response.data[i].nombre_dep,
               "value": (response.data[i].avance/response.data[i].programado2021)*100,
               "color": colorsemafcumple,
@@ -833,7 +768,6 @@ async function graphCumplimientoPDM(avance){
           },
           data: infocumple
         };
-        
         FusionCharts.ready(function() {
           var myChart = new FusionCharts({
             type: "bar3d",
@@ -844,14 +778,13 @@ async function graphCumplimientoPDM(avance){
             dataSource
           }).render();
         });
-        
       })
-  
     } catch (error) {
       console.error('Erro',error )
     }
     jQuery.noConflict();
     $('#cumplimientoModal').modal('show'); 
-  
   }
+
+  getCorteAvancePI()
   
