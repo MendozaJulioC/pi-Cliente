@@ -1,8 +1,8 @@
 //import fetch from "node-fetch";
 var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
+var fecha='';
 async function dateomain(){
   corteplan()
-  _avancePDM()
   _Components()
   contadorSemaforo()
   swal("Espere mientras cargamos la información!",{
@@ -11,11 +11,18 @@ async function dateomain(){
     timer: 4000,
   });
 }
+
 async  function corteplan(){
-  var fecha = new Date('09/30/2021');
-  document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
-  // mes = fecha.getMonth(fecha)
-  vigencia = fecha.getFullYear(fecha)
+ // var fecha = new Date('09/30/2021');
+  fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+  .then(res=>res.json())
+  .then(response=>{
+    let corteavance= new Date(response.data[0].corte) 
+    let vigencia = corteavance.getFullYear(corteavance)
+    fecha= corteavance;
+    vigencia = fecha.getFullYear(fecha)
+    document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
+   //mes = fecha.getMonth(fecha)
   switch (vigencia) {
     case 2020:
       mes= fecha.getMonth(fecha)+1
@@ -36,20 +43,21 @@ async  function corteplan(){
     "mesplan" : mes,
     "vigencia": vigencia
   }
-  fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte`,{
-    method:'POST',
-    body: JSON.stringify(parametros), // data can be `string` or {object}!
-    headers:{
-        'Content-Type': 'application/json'
-    }
-  }).then(res=> res.json())
-  .then(response=>{
-    minimovalue= (response.data[0].rojo)*100;
-    maximovalue =(response.data[0].verde)*100;
-    document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
-    document.getElementById('maximo-corte').value= maximovalue
+    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte`,{
+      method:'POST',
+      body: JSON.stringify(parametros), // data can be `string` or {object}!
+      headers:{
+          'Content-Type': 'application/json'
+      }
+    }).then(res=> res.json())
+    .then(response=>{
+      minimovalue= (response.data[0].rojo)*100;
+      maximovalue =(response.data[0].verde)*100;
+      document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
+      document.getElementById('maximo-corte').value= maximovalue
+      _avancePDM()
+    })
   })
-  alert('SSE-PDM...')
 }
 async function _avancePDM(){
   try {
@@ -57,13 +65,12 @@ async function _avancePDM(){
     .then(res=>res.json())
     .then(datos=>{
       //avancePDMtarget(datos.data[0].total_plan)
-      triadaInicial(datos.data[0].total_plan, mes)
+        triadaInicial(datos.data[0].total_plan, mes)
       })
   } catch (error) {
     console.error('Error _avancePDM ',error )
   }
 }
-
 
 async function avancePDMtarget(avanceplan){
   const dataSource = {
@@ -110,7 +117,6 @@ async function avancePDMtarget(avanceplan){
   });
  // graphInicial()
 }
-
 
 async function graphInicial(){
   try {
@@ -393,12 +399,6 @@ async function graphCompL5(avanceComp5){
   });
 };
 
-
-
- 
-
-
-
 async function contadorSemaforo(){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/contador` )
@@ -494,7 +494,6 @@ async function estado_sem_pordep(codsemaforo) {
   }
 }
 
-
 async function triadaInicial(datos, mes){
  let esperado= (mes/48)*100;
   const dataSource = {
@@ -512,7 +511,7 @@ async function triadaInicial(datos, mes){
         color: [
           {
             minvalue: 0,
-           maxvalue: document.getElementById('minimo-corte').value,
+            maxvalue: document.getElementById('minimo-corte').value,
             code: "#F2726F"
           },
           {
@@ -549,7 +548,6 @@ async function triadaInicial(datos, mes){
         ]
       }
     };
-    
     FusionCharts.ready(function() {
       var myChart = new FusionCharts({
         type: "angulargauge",
@@ -560,5 +558,4 @@ async function triadaInicial(datos, mes){
         dataSource
       }).render();
     });
-    
 }
