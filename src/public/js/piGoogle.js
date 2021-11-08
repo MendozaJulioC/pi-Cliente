@@ -1,4 +1,3 @@
-const e = require("cors");
 
 var mes=0,  minimovalue=0, maximovalue=0; var vigencia=0;
 let fechaOrigen= '';
