@@ -169,7 +169,6 @@ const getObraEtapas= async(req, res)=>{
     }
 }
 
-
 const getObraDep=async (req, res)=>{
     try {
         let dep=[], obra=[], ejecutada=[];
@@ -195,7 +194,6 @@ const getObraDep=async (req, res)=>{
     } catch (error) {
     }
 }
-
 
 const getObraDepDetalle=async(req, res)=>{
     try {
@@ -290,8 +288,7 @@ const getObrasGeo= async(req, res)=>{
                     link: "j-showAlert-"+response.data[index].cod_comuna
                 })
             }
-        
-        res.status(200).json({
+            res.status(200).json({
             Autor:"Alcaldía de Medellin - Departamento Administrativo de Planeación ",
             alizacion:"Mensual",
             Version: "1.0",
