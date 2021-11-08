@@ -23,7 +23,7 @@ async function indi(){
     const dataSource = {
       chart: {
         caption: "Avance Cuatrienial PDM",
-        subcaption: "Mes "+ mes + " del Plan",
+       // subcaption: "Mes "+ mes + " del Plan",
         numbersuffix: "%",
         theme: "fusion",
         valuefontsize: "25",
