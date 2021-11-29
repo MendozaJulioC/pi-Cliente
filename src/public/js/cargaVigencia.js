@@ -644,7 +644,7 @@ async function tipoinvercomuna(comuna){
     
     let nombres=[];
     let valores=[];
-    fetch(`http://localhost:7001/obrafisica/api/geo/territorio/${comuna}`)
+    fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo/territorio/${comuna}`)
     .then(res=>res.json())
     .then(response=>{
 
