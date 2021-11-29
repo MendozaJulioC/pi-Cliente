@@ -1,3 +1,6 @@
+
+
+
 var Q_Color=[]
 var Min=0; var Max=0; var Q1=0; var Q2=0; var Q3=0; var MQ1=0;  var MQ2=0; var MQ3=0;
 var nom_comuna ="";
@@ -107,6 +110,8 @@ const vigencia= async(req,res)=>{
         });
     })
     garficaTotalCmuna()
+    let x= document.getElementById('detalle');
+    x.style.display='none'
   }catch (error) {console.log(error)}
 }
 
@@ -118,7 +123,7 @@ const garficaTotalCmuna = async(req, res)=>{
     .then(datos=>{
       for (let index = 0; index < datos.data.length; index++) {
         geoinver.push({
-          label: datos.data[index].nom_comuna,
+          label: datos.data[index].nombre,
           value: datos.data[index].total,
         })
       }
@@ -167,10 +172,12 @@ const garficaTotalCmuna = async(req, res)=>{
 }
  
 const mapaVogencia = async (req, res) => {
+
   var container = L.DomUtil.get('map');
   if(container != null){
       container._leaflet_id = null;
   }
+  
   // Initialize the map and assign it to a variable for later use
   var map = L.map('map', {
     // Set latitude and longitude of the map center (required)
@@ -234,10 +241,14 @@ const geojson_url = "https://sse-pdm.herokuapp.com/geo/api/inversion/maps"
                       <tr>
                         <td>Consultar</td>
                         <td>
-                        <a name="" id="" class="btn btn-sm btn-success btn-block" onclick="pruebaevento( '${feature.properties.CODIGO }', '${feature.properties.NOMBRE }',${feature.properties.Vigencia2021},${feature.properties.inver_localizada_2021},${feature.properties.inver_ciudad_2021}, ${feature.properties.inver_pp_2021})"  data-toggle="modal" data-target="#exampleModalmapa" role="button">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                           <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                          </svg> Ampliar
+                        <a name="" id="" class="btn btn-sm btn-success btn-block" 
+                                    onclick="pruebaevento( '${feature.properties.CODIGO }','${feature.properties.NOMBRE }',
+                                       ${feature.properties.Vigencia2021},${feature.properties.inver_localizada_2021},${feature.properties.inver_ciudad_2021}, ${feature.properties.inver_pp_2021})" 
+                                          
+                                    role="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                    </svg> Ampliar
                         </a>
                         </td>
                       </tr>
@@ -358,22 +369,24 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
     buttons: false,
     timer: 4000
   });
-  //console.log(value);
-  reporteSec(value, nombre)
+ 
+
     nom_comuna=nombre
     document.getElementById('mapaprueba').innerHTML= value
     document.getElementById('nombre_comuna').innerHTML= nombre
-    var container = L.DomUtil.get('map2');
-    if(container != null){
-        container._leaflet_id = null;
+
+    var container2 = L.DomUtil.get('map2');
+    if(container2 != null){
+        container2._leaflet_id = null;
     }
+
     var map2 = L.map('map2', {
       // Set latitude and longitude of the map center (required)
       center: [6.2269, -75.5459204],
       // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-      zoom: 11,
-      //maxZoom: 12,  
-      //minZoom: 12
+      //zoom: 11,
+      maxZoom: 12,  
+      minZoom: 12
     });
       var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://maps.stamen.com/#terrain/12/6.2580/-75.5542">maps.stamen.com</a> contributors'
@@ -387,7 +400,6 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       .then(data => {
      
         document.getElementById('total').innerHTML= new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(valor))
-      
          let geojsonlayer2 = L.geoJson(data, {
            style: style2(valor),
            onEachFeature: async function (feature, layer) {
@@ -396,9 +408,6 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
              <!-aquí podemos colocar una imagen-->     
             <div class="card-body">
                <h5 class="card-title">` + nombre + `</h5>
-           
-        
-               
                <table class="table table-hover table-inverse table-responsive">
                  <tbody>
                    <tr>
@@ -418,22 +427,16 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
                      <td>` + new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(valor)) + ` </td>
                    </tr>
                    <tr>
-                
                    </tr>
                  </tbody>
                </table>
              </div>
            </div>`
              layer.bindPopup(popupContent3)
-          
-
            }
-        
          }).addTo(map2)
-
+         reporteSec(value, nombre)
          map2.fitBounds(geojsonlayer2.getBounds(),  {maxZoom: 15})
-
-
           L.Control.Watermark = L.Control.extend({
           onAdd: function(map2) {
           var img = L.DomUtil.create('img');
@@ -441,7 +444,7 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
           img.style.width = '100px';
           return img;
           },
-          onRemove: function(map2) {
+            onRemove: function(map2) {
               // Nothing to do here
           }
           });
@@ -449,14 +452,13 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
           return new L.Control.Watermark(opts);
           }
           L.control.watermark({ position: 'bottomleft' }).addTo(map2);
-
       });
-      
-      map2.whenReady(() => {
-       
-        setTimeout(() => {map2.invalidateSize();}, 200);
-         jQuery.noConflict();
-        $('#Modalmapa').modal('show');    
+    map2.whenReady(() => {
+        setTimeout(() => {map2.invalidateSize();}, 300);
+      jQuery.noConflict();
+      let x= document.getElementById('detalle');
+      x.style.display='block'
+     
     })
     const dataSource = {
       chart: {
@@ -503,11 +505,14 @@ async function pruebaevento(value, nombre, valor, localizada, ciudad, pp){
       }).render();
     });
     depterriotiomodal(value) 
+  
+   
 }
 
 async function depterriotiomodal(value){
   try {
     let comuna = parseInt(value)
+    tipoinvercomuna(comuna)
     var datos=[];
     fetch(`https://sse-pdm.herokuapp.com/geo/api/comuna/dep-inversion/${comuna}`)
     .then(res=> res.json())
@@ -569,6 +574,7 @@ async function dowloadGEO (){
 }
 
 async function reporteSec(value, nombre){
+ 
   try {
     let reportes=[];
     document.getElementById('logrocomunareportado').innerHTML= nombre
@@ -582,9 +588,7 @@ async function reporteSec(value, nombre){
          /*data.data[x].cod_dep,data.data[x].fecha,*/data.data[x].dpendencias,data.data[x].logro,data.data[x].cifras
         ])
       }
-
-
-      document.getElementById('table_reporte').innerHTML="";
+       document.getElementById('table_reporte').innerHTML="";
       var tableLogros=  $('#table_reporte').DataTable({
         data:reportes,
         columns:[
@@ -616,7 +620,7 @@ async function reporteSec(value, nombre){
        },
         responsive:"true",
         dom:'frtlp',
-        bDestroy: true,
+       
         columnDefs: [
         //  {/*Fecha*/          width: "15px",   targets: 0, className: "text-center"    },
           {/*Dependencia*/    width: "15px",   targets: 0, className: "text-center"    },
@@ -633,6 +637,97 @@ async function reporteSec(value, nombre){
   } catch (error) {
     console.error(error);
   }
+}
+
+async function tipoinvercomuna(comuna){
+  try {
+    
+    let nombres=[];
+    let valores=[];
+    fetch(`http://localhost:7001/obrafisica/api/geo/territorio/${comuna}`)
+    .then(res=>res.json())
+    .then(response=>{
+
+      console.log(response.data);
+      for (let index = 0; index < response.data.length; index++) {
+       nombres.push(response.data[index].nom_cortp)
+       valores.push(response.data[index].num_obras) 
+      }
+      obracomuna(nombres, valores)
+    })
+  
+   
+  } catch (error) {
+    console.error('Error tipoinvercomuna: ', error);
+    
+  }
+
+}
+
+ function obracomuna(nombres, valores){
+  
+  var dom = document.getElementById("chartcomuna");
+  var myChart = echarts.init(dom);
+  var app = {};
+  
+  var option;
+  
+  
+  
+  option = {
+    title: {
+      text: "Obra Física",
+     subtext:"Número de Obras por Dependencias",
+      left: "center",
+      top: "0",
+      textStyle: {
+        fontSize: 20,
+        fontFamily: "sans-serif",
+        fontWeight: "lighter"
+      },
+      subtextStyle: {
+        fontSize: 14
+      }
+    },
+    grid: {
+
+      containLabel: true
+    },
+    
+    
+    xAxis: {
+      type: 'category',
+      data: nombres,
+      axisLabel: {
+        rotate: 45
+      }
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data:valores,
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(180, 180, 180, 0.2)'
+        },  label: {
+          show: true,
+          position: 'inside'
+        },
+      }
+    ]
+  };
+  console.log(option);
+  if (option && typeof option === 'object') {
+      myChart.setOption(option);
+      
+  }
+  window.addEventListener('resize',function(){
+    myChart.resize();
+  })
+
 }
 
 rangomapa()
