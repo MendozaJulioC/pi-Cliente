@@ -32,6 +32,8 @@ const getDependencias = async (req, res) => {
             }
             return 0;
           });
+
+        
            res.render('./dependencias/dependencia.html', {
             title: "Dependencias-PDM",
             message,  dependencias
