@@ -164,7 +164,7 @@ async function detalleAvanceLinea(){
           },
 
 
-          ,
+          
           {
             seriesname: "Avance Octubre 2021",
             data:AvanceOct2021
