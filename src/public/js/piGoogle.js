@@ -85,7 +85,9 @@ async function detalleAvanceLinea(){
     let NomPIL=[]; let AvanceJun2021=[]; let CumplimientoJun21=[]; let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
     let AvanceAgo2021=[]; let CumplimientoAgo21=[];
     let AvanceSep2021=[]; let CumplimientoSep21=[];
+    let AvanceOct2021=[]; let CumplimientoOct21=[];
     let AvanceDic20=[]; let CumplimientoDic20=[];
+
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
     .then( res=> res.json())
@@ -101,6 +103,10 @@ async function detalleAvanceLinea(){
         CumplimientoAgo21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_08_31) }) 
         AvanceSep2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_09_30) })  
         CumplimientoSep21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_09_30) }) 
+
+        AvanceOct2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_10_31) })  
+        CumplimientoOct21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_10_31) }) 
+        
         ProyecAvanDic21.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31_P) }) 
         ProyecCumpDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31_P) }) 
         NomPIL.push({ "label" : response.data[z].nom_linea })
@@ -156,6 +162,20 @@ async function detalleAvanceLinea(){
             seriesname: "Cumplimiento Septiembre 2021",
             data: CumplimientoSep21
           },
+
+
+          ,
+          {
+            seriesname: "Avance Octubre 2021",
+            data:AvanceOct2021
+          },
+          {
+            seriesname: "Cumplimiento Octubre 2021",
+            data: CumplimientoOct21
+          },
+
+
+
           {
             seriesname: "Proyección Avance Dic 2021",
             data: ProyecAvanDic21
