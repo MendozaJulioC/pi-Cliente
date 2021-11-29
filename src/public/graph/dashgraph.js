@@ -350,7 +350,7 @@ async function columnGeo(){
       .then(datos=>{
         for (let index = 0; index < datos.data.length; index++) {
           geoinver.push({
-            label: datos.data[index].nom_comuna,
+            label: datos.data[index].nombre,
             value: datos.data[index].total,
           })
         }
@@ -363,7 +363,7 @@ async function columnGeo(){
             showvalues: "1",
             formatnumberscale: "0",
             numberprefix: "$",
-            theme: "ocean",
+            theme: "zune",
             labeldisplay: "ROTATE",
             decimalSeparator: ",",
             thousandSeparator: ".",
@@ -520,7 +520,7 @@ async function columnDependencias(){
               color: "#009AB2"
         });
     }
-    valores.sort((a, b) => a.value - b.value)
+    valores.sort((a, b) => b.value - a.value)
     const dataSource = {
     chart: {
       caption: "Inversión Pública por Dependencias",
