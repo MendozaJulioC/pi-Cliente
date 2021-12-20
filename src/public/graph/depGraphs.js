@@ -71,7 +71,7 @@ async function _avancePDM(cod_dep){
       fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
-       let avance_dep = (datos.data[0].avance/datos.data[0].peso)*100
+       let avance_dep = (datos.data[0].avance_cuatrienio)
           graphPDM(avance_dep)
         })
         _PASemaf()
