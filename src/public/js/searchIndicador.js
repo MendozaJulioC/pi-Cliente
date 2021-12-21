@@ -135,16 +135,16 @@ async function _getBuscaNombreIndicador(){
             document.getElementById('_responsable_reporte').value= datos.data[0].responsable_reporte
             document.getElementById('_observaciones').value= datos.data[0].observaciones
             //enviar datos a gráficas
-            if (datos.data[0].tipo_ind=='Resultado'){
+           // if (datos.data[0].tipo_ind=='Resultado'){
               let avance = (datos.data[0].avance_cuatrienio)*100
              _graphAvanceIndicador(avance)
              semaforo(avance)
-            }else{
+            /*}else{
               let avance = (datos.data[0].pesoxavnt/datos.data[0].peso )*100
               _graphAvanceIndicador(avance)
               semaforo(avance)
             }
-             
+             */
             }
           else{
             alert('Por favor verifica el código del Indicador')
