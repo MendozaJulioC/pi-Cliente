@@ -71,7 +71,8 @@ async function _avancePDM(cod_dep){
       fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
-       let avance_dep = (datos.data[0].avance_cuatrienio)
+       let avance_dep = (datos.data[0].avance/datos.data[0].peso)
+      alert(avance_dep)
           graphPDM(avance_dep)
         })
         _PASemaf()
@@ -136,7 +137,7 @@ async function graphPDM(total){
         dials: {
           dial: [
             {
-              value: total,
+              value: total*100,
               tooltext: "<b>$value %</b> Valor Esperado"
             }
           ]
