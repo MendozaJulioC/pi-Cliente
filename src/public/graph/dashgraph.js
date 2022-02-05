@@ -30,6 +30,7 @@ async function getCorteAvancePI(){
 }
 
 function corteplan(mesavance, vigenciaavance, corteavance)  {
+  corteavance.setDate(31)
   document.getElementById('fecha_corte').innerHTML= corteavance.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   let vigencia = vigenciaavance //corteavance.getFullYear(corteavance)
   switch (vigencia) {
