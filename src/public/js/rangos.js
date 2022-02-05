@@ -8,7 +8,8 @@ async function getCorteAvancePI(){
       let corteavance= new Date(response.data[0].corte) ;
       let mesavance = corteavance.getMonth(corteavance)+1
       let vigencia = corteavance.getFullYear(corteavance)
-       corteplan(mesavance, vigencia, corteavance)   
+      let dia= corteavance.getDay(corteavance)
+       corteplan(mesavance, vigencia, corteavance, dia)   
     })
   } catch (error) {
     console.error('Error getalerta ', error);
@@ -19,8 +20,11 @@ async function getCorteAvancePI(){
 getCorteAvancePI()
  
  
- async function corteplan(mesavance, vigenciaavance, corte){
+ async function corteplan(mesavance, vigenciaavance, corte, dia){
   //var fecha = new Date('09/30/2021');
+  corte.setDate(31)
+
+  //document.getElementById('fecha-corte').innerHTML=fecha
   document.getElementById('fecha_corte').innerHTML= corte.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   //let   mes = mesavance//corte.getMonth(corte)
     let vigencia = vigenciaavance//corte.getFullYear(corte)
