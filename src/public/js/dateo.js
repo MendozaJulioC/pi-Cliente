@@ -19,8 +19,12 @@ async  function corteplan(){
   .then(response=>{
     let corteavance= new Date(response.data[0].corte) 
     let vigencia = corteavance.getFullYear(corteavance)
-    fecha= corteavance;
+    
+    corteavance.setDate(31);
+    fecha= corteavance
+
     vigencia = fecha.getFullYear(fecha)
+ 
     document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
    //mes = fecha.getMonth(fecha)
   switch (vigencia) {
@@ -60,6 +64,7 @@ async  function corteplan(){
   })
 }
 async function _avancePDM(){
+
   try {
     fetch('https://sse-pdm.herokuapp.com/pi/api/total')
     .then(res=>res.json())
@@ -73,6 +78,7 @@ async function _avancePDM(){
 }
 
 async function avancePDMtarget(avanceplan){
+
   const dataSource = {
     chart: {
       caption: "Avance Cuatrienial PDM",
@@ -495,7 +501,9 @@ async function estado_sem_pordep(codsemaforo) {
 }
 
 async function triadaInicial(datos, mes){
+
  let esperado= (mes/48)*100;
+
   const dataSource = {
       chart: {
         caption: "% Avance Cuatrienial PDM",
