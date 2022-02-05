@@ -19,7 +19,7 @@ async function detalleAvance(){
             let tam = response.data.length;
             for(let i =0; i<tam;i++){
               AvancePI.push ({ "value" :  (response.data[i].avance) })  
-              CortePlan.push({ "label" :  (response.data[i].corte).substr(0,10) })
+              CortePlan.push({ "label" :  `${response.data[i].corte.substr(0,10)}(${response.data[i].tipo_corte}) `})
               CumplimientoPI.push ({ "value" : response.data[i].cumplimiento })  
               var fecha = response.data[i].corte
               let fechacorte=fecha.substr(0,10)
@@ -27,10 +27,13 @@ async function detalleAvance(){
                 triadaInicial2(response.data[i].cumplimiento)
               }
             }
+
+          
+
           const dataSource = {
             chart: {
             caption: "<strong>Avance Cuatrienio y Cumplimiento Año</strong>",
-            subcaption: "<b>Plan de Desarrollo  Medellín Futuro</b> ",
+            subcaption: "<b>Plan de Desarrollo  Medellín Futuro</b> <br> (N)Corte Normal  (P)Corte Proyectado ",
             xaxisname: "Cortes de Seguimiento",
             yaxisname: "Total Desempeño",
             numbersuffix: "%",
@@ -86,6 +89,7 @@ async function detalleAvanceLinea(){
     let AvanceAgo2021=[]; let CumplimientoAgo21=[];
     let AvanceSep2021=[]; let CumplimientoSep21=[];
     let AvanceOct2021=[]; let CumplimientoOct21=[];
+    let AvanceDic2021=[]; let CumplimientoDic21=[];
     let AvanceDic20=[]; let CumplimientoDic20=[];
 
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
@@ -106,6 +110,9 @@ async function detalleAvanceLinea(){
 
         AvanceOct2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_10_31) })  
         CumplimientoOct21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_10_31) }) 
+
+        AvanceDic2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31) })  
+        CumplimientoDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31) }) 
         
         ProyecAvanDic21.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31_P) }) 
         ProyecCumpDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31_P) }) 
@@ -174,6 +181,15 @@ async function detalleAvanceLinea(){
             data: CumplimientoOct21
           },
 
+ 
+          {
+            seriesname: "Avance Diciembre 2021",
+            data:AvanceDic2021
+          },
+          {
+            seriesname: "Cumplimiento Diciembre 2021",
+            data: CumplimientoDic21
+          },
 
 
           {
