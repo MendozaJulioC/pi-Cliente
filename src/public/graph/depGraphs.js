@@ -72,7 +72,7 @@ async function _avancePDM(cod_dep){
       .then(res=>res.json())
       .then(datos=>{
        let avance_dep = (datos.data[0].avance/datos.data[0].peso)
-  
+      //alert(avance_dep)
           graphPDM(avance_dep)
         })
         _PASemaf()
@@ -1637,9 +1637,9 @@ async function proyecto_fisico(cod){
     .then(res=> res.json())
     .then(response=>{
       let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
-      let avancexfinanciero= parseFloat((response.data[0].ejec_financiera)*100);
+      let avancexfinanciero= parseFloat((response.data[0].porc_ejec_financiera)*100);
       proyecto_financiero(avancexfinanciero)*100
-      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].ejec_financiera))*0.50 )*100
+      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].porc_ejec_financiera))*0.50 )*100
       //console.log("fisico ",avanxcefisicoproject);
       //console.log("financiero ",avancexfinanciero);
       //console.log("ffp ",ffp);
@@ -1715,6 +1715,8 @@ async function proyecto_fisico(cod){
  
 }
 async function proyecto_financiero(avancexfinanciero){
+
+
   const dataSource = {
     chart: {
       caption: "% Ejecución Financiera ",
