@@ -1,426 +1,388 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+  <head>
+      <meta charset="UTF-8">
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
 
-     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
-    <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.candy.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
-    <%- include ('../partials/head.html') %>
-    <style>  #container { padding-left: 50px; padding-right: 60px; padding-top: 5px; padding-bottom: 2px; } tr { height: 2px; }</style>
-</head>
-<%- include ('../partials/menuplapp.html')%>
-<body onload="alertamain()">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+      <%- include ('../partials/head.html') %>
+      <style>  #container { padding-left: 50px; padding-right: 60px; padding-top: 5px; padding-bottom: 2px; } tr { height: 2px; }</style>
+  </head>
+  <%- include ('../partials/menuplapp.html')%>
+  <body onload="alertamain()">
 
-  <div id="container" class="container-fluid mt-4 ">
-     <div class="row">
-        <div class="col-md-12 mt-4  shadow-lg p-3  mt-2   mb-1 bg-white rounded" style="height: 190px;">
-          <div class="card-body  ">
-                <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
-                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                  <p style="align-items: center;"> <img src="/img/logo.png" style="width: 9%;" alt=""></p>Alertas Plan de Acción
-                </h6>
-                <h6 id="vigencia" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
-                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                </h6>
-              </div>
-       
-        </div>
-        
-        
-        <div class="col-md-12 mt-2  shadow-lg p-3 mb-1 rounded" >
-        <div class="card-body"style="height: 720px;" >
-          <div class="row">
-
-
-            <div class="card col-md-6"   style="  border-radius: 20px;height: 680px;" >
-              <div class="row">
-                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                  <div class="card text-center">
-                    <div class="card-header">
-                      <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
-                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Deficiente desempeño de los proyectos menor a: <span id="rangoalertafisica" style="color: #da24bb;">  </span></h5>
-                      </h5>
-                    </div>
-                    <div class="card-body">
-                      <div id="muestrafinanciera2" style="width: 100%; height: 160px;"></div>
-                        <hr>
-                        <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
-                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                          Deficiente desempeño en la obtención de los productos/bienes/servicios asociados a los proyectos. <br>
-                          Número de proyectos que su porcentaje de ejecución física se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
-                        </p>
-                        <br>
-                        <h5 id="fisica" class="row justify-content-center align-items-center minh-100 text-center"
-                          style=" width: 100%; height: 150px;text-align: center;font-size: 120px;line-height: 20px;font-weight: 600;color: #bb1717;
-                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  
-                        </h5>
-                      </div>
-                      <div class="card-footer text-muted">
-                        <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                          </svg>
-                        </button> 
-                      </div>
-                    </div>
+    <div id="container" class="container-fluid mt-4 ">
+      <div class="row">
+          <div class="col-md-12 mt-4  shadow-lg p-3  mt-3   mb-1 bg-white rounded" style="height: 300px;">
+            <div class="card-body  ">
+                  <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                    <p style="align-items: center;"> <img src="/img/logo.png" style="width: 9%;" alt=""></p>
+                    <br>
+                    <p style="text-align: center;font-size: 38px;line-height: 20px;font-weight: 600;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Alertas Plan de Acción</p>
+                  </h6>
+                  <h6 id="vigencia" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
+                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                  </h6>
                 </div>
-
-                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                  <div class="card text-center">
-                    <div class="card-header">
-                      <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 30px;line-height: 30px;font-weight: 300;color: #511281;
-                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Escasa utilización ($) menor a: <span id="rangoalertafinanciera" style="color: #da24bb;">  </span>
-                      </h5>
-                    </div>
-                    <div class="card-body">
-                      <div id="muestrafinanciera" style="width: 100%; height: 160px;"></div>
-                        <hr>
-                        <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
-                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                          Escasa utilización de los recursos financieros en los proyectos. <br>
-                          Número de proyectos que su porcentaje de ejecución financiera se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
-                        </p>
-                        <br>
-                        <h5 id="finanzas" class="row justify-content-center align-items-center minh-100 text-center mt-4"
-                          style=" width: 100%; height: 120px;text-align: center;font-size: 120px;line-height: 20px;font-weight: 600;color: #bb1717;
-                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> 
-                        </h5>
-                      </div>
-                      <div class="card-footer text-muted">
-                        <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                          </svg>
-                        </button> 
-                      </div>
-                    </div>
-                </div>
-
-                  <!--    -->
-                 
-
-
-                    
-                  </div>
-                
             </div>
-      
-     <!--    -->
-
-
-                <div class="card col-md-6   "style="  border-radius: 20px;" >
-                    <div class="row">
-                        <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                          <div class="card text-center">
-                            <div class="card-header">
-                              <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 28px;line-height: 30px;font-weight: 300;color: #511281;
-                                          font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Alta ejecución financiera y bajo desempeño <  <span id="rangoalerta" style="color: #da24bb;">  </span>
-                               </h5>
+          
+          
+          <div class="col-md-12 mt-2 shadow-lg p-3 mb-1 rounded" >
+            <div class="card-body mt-4"style="height: 800px;" >
+              <div class="row">
+                <div class="card col-md-6 shadow-lg"   style="  border-radius: 20px;height: 790px;" >
+                  <div class="row">
+                    <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
+                      <div class="card text-center">
+                        <div class="card-header">
+                          <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Deficiente desempeño de los proyectos menor a: <span id="rangoalertafisica" style="color: #da24bb;">  </span></h5>
+                          </h5>
+                        </div>
+                        <div class="card-body">
+                          <div id="muestrafinanciera2" style="width: 100%; height: 160px;"></div>
+                            <hr>
+                            <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 14px;line-height: 30px;font-weight: 300;color: #1e2525;
+                              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                              Deficiente desempeño en la obtención de los productos/bienes/servicios asociados a los proyectos. <br>
+                              Número de proyectos que su porcentaje de ejecución física se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
+                            </p>
+                            <br><br><br>
+                            <div class="mt-4 shadow-lg">
+                                <h5 id="fisica" class="row justify-content-center align-items-center minh-100 text-center" style=" width: 100%; height: 150px;text-align: center;font-size: 100px;line-height: 20px;font-weight: 600;color: #bb1717;font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  
+                                </h5>
                             </div>
-                            <div class="card-body">
-                              <div id="chart-fisfin" style="width: 100%; height: 160px;"></div>
-                                <hr>
-                                <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
-                                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                                  Número de proyectos que  con % Ejecución Financiera  mayor a 80% y  su ejecución física se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
-                                </p>
-                                <br>
-                                <h5  id="alertafisfin" class="row justify-content-center align-items-center minh-100 text-center"
-                                style=" width: 100%; height: 150px;text-align: center;font-size: 120px;line-height: 20px;font-weight: 600;color: #bb1717;
-                                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  
-                              </h5>
-                              </div>
-                              <div class="card-footer text-muted">
-                                <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                          </div>
+                          <div class="card-footer text-muted">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <button class="btn btn-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
                                     <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
                                   </svg>
                                 </button> 
                               </div>
+                              <div class="col-md-6">
+                                <button class="btn btn-danger btn-block" type="button" onclick="alertafisicamodal()">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-graph-down-arrow" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"/>
+                                  </svg>
+                                </button> 
+                              </div>
                             </div>
-
-
-
-                    
-
-
                           </div>
-
-
-                          <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-  
-                            <div class="card text-center">
-                              <div class="card-header">
-                                <h5 class="card-title" style=" width: 100%; height: 50px;text-align: center;font-size: 28px;line-height: 30px;font-weight: 300;color: #511281;
-                                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desequilibrio en el desempeño versus la ejecución ($)
-                              </h5>
-                              </div>
-                              <div class="card-body">
-                                <div id="chart-pond" style="width: 100%; height: 160px;"></div>
-                                  <hr>
-                                  <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
-                                    font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
-                                    Número de proyectos que presentan un cumplimiento <span> <em>  <strong> ([%Ejec_finan]*0,5+[%Ejec_Física]*0,5) </strong>   </em> </span>  menor al 40% 
-                                  </p>
-                                  <br>
-                                  <h5 id="alertaponds" class="row justify-content-center align-items-center minh-100 text-center"
-                                  style=" width: 100%; height: 150px;text-align: center;font-size: 120px;line-height: 20px;font-weight: 600;color: #bb1717;
-                                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> 
-                              </h5>
-                                </div>
-                                <div class="card-footer text-muted">
-                                  <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
-                                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
-                                    </svg>
-                          
-                                  </button>
-                                </div>
-                              </div>
-
-                          </div>
-                    
+                        </div>
                     </div>
-                
+
+                    <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
+                      <div class="card text-center">
+                        <div class="card-header">
+                          <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
+                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Escasa utilización ($) menor a: <span id="rangoalertafinanciera" style="color: #da24bb;">  </span>
+                          </h5>
+                        </div>
+                        <div class="card-body">
+                          <div id="muestrafinanciera" style="width: 100%; height: 160px;"></div>
+                            <hr>
+                            <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
+                              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                              Escasa utilización de los recursos financieros en los proyectos. <br>
+                              Número de proyectos que su porcentaje de ejecución financiera se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
+                            </p>
+                            <br><br><br>
+                        
+                            <div class="mt-5 shadow-lg">
+                              <h5 id="finanzas" class="row justify-content-center align-items-center minh-100 text-center mt-4"
+                              style=" width: 100%; height: 120px;text-align: center;font-size: 100px;line-height: 20px;font-weight: 600;color: #bb1717;
+                                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> 
+                            </h5>
+                            </div>
+                        
+                          </div>
+                          <div class="card-footer text-muted">
+                            <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-down-arrow" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"/>
+                              </svg>
+                            </button> 
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="card col-md-6  shadow-lg  "style="  border-radius: 20px;" >
+                  <div class="row">
+                    <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
+                      <div class="card text-center">
+                        <div class="card-header">
+                          <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
+                                              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Alta ejecución financiera y bajo desempeño <  <span id="rangoalerta" style="color: #da24bb;">  </span>
+                                  </h5>
+                                </div>
+                                <div class="card-body">
+                                  <div id="chart-fisfin" style="width: 100%; height: 160px;"></div>
+                                    <hr>
+                                    <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
+                                      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                                      Número de proyectos que  con % Ejecución Financiera  mayor a 80% y  su ejecución física se encuentra por debajo al rango de alerta establecido para el mes de corte de el reporte
+                                    </p>
+                                    <br><br><br>
+                                    <div class="mt-4 shadow-lg">
+                                      <h5  id="alertafisfin" class="row justify-content-center align-items-center minh-100 text-center"
+                                      style=" width: 100%; height: 150px;text-align: center;font-size: 100px;line-height: 20px;font-weight: 600;color: #bb1717;
+                                              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  
+                                    </h5>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer text-muted">
+                                    <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                                      </svg>
+                                    </button> 
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
+                                <div class="card text-center">
+                                  <div class="card-header">
+                                    <h5 class="card-title" style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
+                                            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desequilibrio en el desempeño vs. la ejecución ($)
+                                  </h5>
+                                  </div>
+                                  <div class="card-body">
+                                    <div id="chart-pond" style="width: 100%; height: 160px;"></div>
+                                      <hr>
+                                      <p class="card-text mb-5" style=" width: 100%; height: 20px;text-align: justify; font-size: 16px;line-height: 30px;font-weight: 300;color: #1e2525;
+                                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+                                        Número de proyectos que presentan un cumplimiento <span> <em>  <strong> ([%Ejec_finan]*0,5+[%Ejec_Física]*0,5) </strong>   </em> </span>  menor al 40% 
+                                      </p>
+                                      <br><br><br>
+                                      <div class="mt-4 shadow-lg">
+                                        <h5 id="alertaponds" class="row justify-content-center align-items-center minh-100 text-center"
+                                        style=" width: 100%; height: 150px;text-align: center;font-size: 100px;line-height: 20px;font-weight: 600;color: #bb1717;
+                                        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> 
+                                    </h5>
+                                      </div>
+
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                      <button class="btn btn-outline-info btn-block" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#C32BAD" class="bi bi-file-earmark-spreadsheet" viewBox="0 0 16 16">
+                                          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z"/>
+                                        </svg>
+                              
+                                      </button>
+                                    </div>
+                                  </div>
+
+                              </div>
+                        
+                        </div>
+                    
                 </div>
 
-
-
-             
-
-
               </div>
-          
-          </div> 
-        </div>
-
-        <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
-          <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-               <h3>Escasa utilización ($)</h3>
-              <table id="alerta_financiera" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
-            </div>
+            </div> 
           </div>
-          <div class="collapse" id="collapseExample2">
-            <div class="card card-body">
-              <h3>Deficiente desempeño de los proyectos</h3>
-              <table id="alerta_fisica" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
-            </div>
-          </div>
-          <div class="collapse" id="collapseExample3">
-            <div class="card card-body">
-              <h3>Alta ejecución financiera y bajo desempeño</h3>
-              <table id="alerta_fisica_finan" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
-            </div>
-          </div>
-          <div class="collapse" id="collapseExample4">
-            <div class="card card-body">
-              <h3>Desequilibrio en el desempeño versus la ejecución ($)</h3>
-              <table id="alerta_ponds" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
-            </div>
-          </div>
-        </div>
-    </div> 
-  </div>
 
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-   
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Modal semaforo
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="modal fade bd-example-modal " id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span> <h4  class="modal-title" id="nom_depencia_query"></h4> </span> 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
-        <div class="form-row">
-          <table id="alerta_modal" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
-        </div>
-     </div>
-   </div>
-  </div>
-</div>
-
-
-<div class="modal fade bd-example-modal " id="exampleModal15" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel15" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span> <h4  class="modal-title">Reporte Indicadores en Rojo</h4> </span> 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
-        <div class="form-row">
           <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
-    
-        </div>
-        </div>
-     </div>
-   </div>
-  </div>
-</div>
-
-
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <h3>Escasa utilización ($)</h3>
+                <table id="alerta_financiera" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
+              </div>
+            </div>
+            <div class="collapse" id="collapseExample2">
+              <div class="card card-body">
+                <h3>Deficiente desempeño de los proyectos</h3>
+                <table id="alerta_fisica" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
+              </div>
+            </div>
+            <div class="collapse" id="collapseExample3">
+              <div class="card card-body">
+                <h3>Alta ejecución financiera y bajo desempeño</h3>
+                <table id="alerta_fisica_finan" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
+              </div>
+            </div>
+            <div class="collapse" id="collapseExample4">
+              <div class="card card-body">
+                <h3>Desequilibrio en el desempeño versus la ejecución ($)</h3>
+                <table id="alerta_ponds" class="table table-striped table-bordered table-sm " style="font-size: small;font-size:small " width="100%"></table>
+              </div>
+            </div>
+          </div>
+      </div> 
+    </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Modal valstat
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="modal fade bd-example-modal " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">SSE-PDM</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" >
-       <div class="form-row">
-        <div class="col-md-2">
-          <button class="btn btn-danger btn-sm" id="download">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-            </svg>
-        </button>
+  <div class="modal fade bd-example-modal " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">SSE-PDM</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="row" id="invoice">
-          <div class="col-md-12">
-            <h2 class="text-muted text-center">Ficha Seguimiento Proyectos de Inversión</h2>
-            <h4 class="text-muted " style="text-align: center;font-size: 18px;line-height: 18px;font-weight: 600;color: #73879C;
-              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span id="cod1"></span> - <span id="nom1"></span>
-            </h4>
-            <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
-              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="tipo_proyecto"></span>
+        <div class="modal-body" >
+        <div class="form-row">
+          <div class="col-md-2">
+            <button class="btn btn-danger btn-sm" id="download">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+              </svg>
+          </button>
+          </div>
+          <div class="row" id="invoice">
+            <div class="col-md-12">
+              <h2 class="text-muted text-center">Ficha Seguimiento Proyectos de Inversión</h2>
+              <h4 class="text-muted " style="text-align: center;font-size: 18px;line-height: 18px;font-weight: 600;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span id="cod1"></span> - <span id="nom1"></span>
+              </h4>
+              <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="tipo_proyecto"></span>
+              </h5>
+              <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="corte1"></span>
             </h5>
-            <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="corte1"></span>
-          </h5>
 
-            <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
-              <thead class="thead-inverse">
-                <tr  style="background-color:gray ;text-align: center;">
-                  <th colspan="6" >Estructura Plan de Desarrollo</th>
-                </tr>
-                <tr>
-                  <th style="text-align: center;">Cod.Línea</th>
-                  <th style="text-align: center;">Línea</th>
-                  <th style="text-align: center;">Cod. Componente</th>
-                  <th style="text-align: center;">Componente</th>
-                  <th style="text-align: center;">Cod. Programa</th>
-                  <th style="text-align: center;">Programa</th>
-                </tr>
-                <tr>
-                  <td  style="text-align: center;" id="cod_linea1"> </td>
-                  <td  style="text-align: center;" id="nom_linea1"> </td>
-                  <td  style="text-align: center;" id="cod_componente1"> </td>
-                  <td  style="text-align: center;" id="nom_componente1"> </td>
-                  <td  style="text-align: center;" id="cod_programa1"> </td>
-                  <td  style="text-align: center;" id="nom_programa1"> </td>
-                 </tr>
-                <tr  style="background-color:gray ;text-align: center;">
-                  <th colspan="6" >Descripción Presupuestal</th>
-                </tr>
-                <tr style="background-color: rgb(204,211,212);">
-                  <th colspan="2" style="text-align: center;">POAI </th>
-                  <th colspan="2" style="text-align: center;">Presupuesto Ajustado </th>
-                  <th colspan="2" style="text-align: center;">Ejecución </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="2" style="text-align: center;" id="poai1" >  </td>
-                  <td colspan="2" style="text-align: center;" id="ppto_ajustado1"></td>
-                  <td colspan="2" style="text-align: center;"><span id="ejec1"> </span></td>
-                </tr>
+              <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+                <thead class="thead-inverse">
+                  <tr  style="background-color:gray ;text-align: center;">
+                    <th colspan="6" >Estructura Plan de Desarrollo</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;">Cod.Línea</th>
+                    <th style="text-align: center;">Línea</th>
+                    <th style="text-align: center;">Cod. Componente</th>
+                    <th style="text-align: center;">Componente</th>
+                    <th style="text-align: center;">Cod. Programa</th>
+                    <th style="text-align: center;">Programa</th>
+                  </tr>
+                  <tr>
+                    <td  style="text-align: center;" id="cod_linea1"> </td>
+                    <td  style="text-align: center;" id="nom_linea1"> </td>
+                    <td  style="text-align: center;" id="cod_componente1"> </td>
+                    <td  style="text-align: center;" id="nom_componente1"> </td>
+                    <td  style="text-align: center;" id="cod_programa1"> </td>
+                    <td  style="text-align: center;" id="nom_programa1"> </td>
+                  </tr>
+                  <tr  style="background-color:gray ;text-align: center;">
+                    <th colspan="6" >Descripción Presupuestal</th>
+                  </tr>
+                  <tr style="background-color: rgb(204,211,212);">
+                    <th colspan="2" style="text-align: center;">POAI </th>
+                    <th colspan="2" style="text-align: center;">Presupuesto Ajustado </th>
+                    <th colspan="2" style="text-align: center;">Ejecución </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" style="text-align: center;" id="poai1" >  </td>
+                    <td colspan="2" style="text-align: center;" id="ppto_ajustado1"></td>
+                    <td colspan="2" style="text-align: center;"><span id="ejec1"> </span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-12"> <hr>  </div>
+            <div class="col-md-4">  <div  id="chart-1" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-4">  <div  id="chart-2" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-4"> <div  id="chart-3" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-12"> <hr> <br> </div>
+            <div class="col-md-12">
+              <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+                <tbody id="valStat">
               </tbody>
+              </table>
+            </div>
+            <div class="col-md-12 html2pdf__page-break"></div>
+            <div class="col-md-12"><div   id="chart-geoproyect" style="height: 310px;  width:85%;"></div></div>
+            <div class="col-md-12">
+              <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
+                <thead class="thead-inverse" style="background: rgb(178,177,167);">
+                  <tr>
+                    <th style="text-align: center;" colspan="2">Tabla Distribución de la Inversión realizada por el Proyecto</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;" colspan="2"><span id="nomprodetalle"></span></th>
+                  </tr>
+                  <tr>
+                    <th  style="text-align: center;">Comuna</th>
+                    <th style="text-align: center;">Inversión</th>
+                  </tr>
+                </thead>
+              <tbody id="inv_territorio_project"> </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2" style="text-align: right; font-size: xx-small;"> Fuente: Unidad de Seguimiento al Plan de Desarrollo Municipal </th>       
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: right; font-size: xx-small;"> Departamento Administrativo de Planeación </th>
+                </tr>
+              </tfoot>
             </table>
           </div>
-          <div class="col-md-12"> <hr>  </div>
-          <div class="col-md-4">  <div  id="chart-1" style="height: 200px;  width:90%;"></div></div>
-          <div class="col-md-4">  <div  id="chart-2" style="height: 200px;  width:90%;"></div></div>
-          <div class="col-md-4"> <div  id="chart-3" style="height: 200px;  width:90%;"></div></div>
-          <div class="col-md-12"> <hr> <br> </div>
-          <div class="col-md-12">
-            <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
-              <tbody id="valStat">
-             </tbody>
-            </table>
-          </div>
-          <div class="col-md-12 html2pdf__page-break"></div>
-          <div class="col-md-12"><div   id="chart-geoproyect" style="height: 310px;  width:85%;"></div></div>
-          <div class="col-md-12">
-            <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
-              <thead class="thead-inverse" style="background: rgb(178,177,167);">
-                <tr>
-                  <th style="text-align: center;" colspan="2">Tabla Distribución de la Inversión realizada por el Proyecto</th>
-                </tr>
-                <tr>
-                  <th style="text-align: center;" colspan="2"><span id="nomprodetalle"></span></th>
-                </tr>
-                <tr>
-                  <th  style="text-align: center;">Comuna</th>
-                  <th style="text-align: center;">Inversión</th>
-                </tr>
-              </thead>
-            <tbody id="inv_territorio_project"> </tbody>
-            <tfoot>
-              <tr>
-                <th colspan="2" style="text-align: right; font-size: xx-small;"> Fuente: Unidad de Seguimiento al Plan de Desarrollo Municipal </th>       
-              </tr>
-              <tr>
-                <th colspan="2" style="text-align: right; font-size: xx-small;"> Departamento Administrativo de Planeación </th>
-              </tr>
-            </tfoot>
-          </table>
-         </div>
+        </div>
       </div>
+    </div>
     </div>
   </div>
   </div>
- </div>
-</div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal %top fisica por dependencias
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <div class="modal fade bd-ejecfisica-modal " id="alertaejecfisicaModal" tabindex="-1" role="dialog" aria-labelledby="alertaejecfisicaModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span> <h4  class="modal-title text-muted" > Número Total de Alertas  por Dependencias</h4> </span> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <div class="mt-lg-3" id="chart-CountAlertDep" style="height: 550px;  width:100%;"></div>
+      </div>
+    </div>
+    </div>
+  </div>  
 
-</body>
-<%- include ('../partials/scriptsHome.html')%>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-
-<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
-
-<script src="/graph/alerta_pa.js"></script>
+  </body>
+  <%- include ('../partials/scriptsHome.html')%>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+  <script src="/graph/alerta_pa.js"></script>
   <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
   <script src="/js/proyectos_pa.js"></script>
-
 </html>
 
 
