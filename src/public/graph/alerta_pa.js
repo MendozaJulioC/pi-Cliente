@@ -1,4 +1,4 @@
-var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
+var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0; let vlr_alerta=0;
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -26,12 +26,13 @@ async function getalerta(){
       .then(res=>res.json())
       .then(response=>{
         let alertavalor =  response.data[0].alerta
+        vlr_alerta = alertavalor;
         document.getElementById('rangoalertafinanciera').innerHTML=(alertavalor*100).toFixed(2)+'%'
         alerta_financiera(alertavalor);
         alerta_fisica(alertavalor)
         alertafisicofinan(alertavalor)
       })
-    })
+    })  
   } catch (error) {
     console.error('Error getalerta ', error);
   }
@@ -39,6 +40,7 @@ async function getalerta(){
 
 async  function alerta_financiera(alerta){
   try {
+   
     let valor_alertafinanciera=[] 
     fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/financiera/${alerta}`)
     .then(res=> res.json()).then(response=>{
@@ -52,7 +54,7 @@ async  function alerta_financiera(alerta){
               response.data[index].nom_proyecto,
               (response.data[index].poai),
               response.data[index].ppto_ajustado,
-              (response.data[index].ejec_financiera*100).toFixed(2),
+              (response.data[index].porc_ejec_financiera*100).toFixed(2),
               (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
                       response.data[index].tipo_iniciativa
             ]);
@@ -97,7 +99,7 @@ async  function alerta_financiera(alerta){
                 {
                   extend: 'excelHtml5',
                   text  : '<i class="fa fa-file-excel-o"></i>' ,
-                  title : "Alerta_Baja_Ejecucion_Financiera",
+                title : "Alerta_Baja_Ejecucion_Financiera",
                   tittleAttr: 'Exportar a Excel',
                   className: 'btn btn-success',
                   autoFilter: true,
@@ -288,7 +290,7 @@ async  function alerta_fisica(alerta){
 
 async function alertafisicofinan(alerta){
   try {
-    //console.log(alerta);
+   
     let valor_alertafiafin=[] 
     fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/finanfisica/${alerta}`)
     .then(res=>res.json())
@@ -305,7 +307,7 @@ async function alertafisicofinan(alerta){
           response.data[index].nom_proyecto,
           (response.data[index].poai),
           response.data[index].ppto_ajustado,
-          (response.data[index].ejec_financiera*100).toFixed(2),
+          (response.data[index].porc_ejec_financiera*100).toFixed(2),
           (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
         
         ])
@@ -323,11 +325,8 @@ async function alertafisicofinan(alerta){
           { title: "Ppto. Ajustado" },
           { title: "% Ejecución Financiera" },
           { title: "% Eficacia" },
-        
-          
         ]  ,   
         scrollCollapse: true, 
-
         fixedColumns: {
           heightMatch: 'none'
         }, fixedHeader: true,
@@ -444,6 +443,7 @@ async function alertaponderado(){
           (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
           (response.data[index].ponderado*100).toFixed(2)
         ])
+       
     }
     var tableAlertaPond = $('#alerta_ponds').DataTable({
       data: alertasponds,
@@ -582,7 +582,7 @@ function buscavalstat(nomproyecto, cod, ejec){
   
       document.getElementById('poai1').innerHTML = formatter.format(datos.data[0].y_dev_poai);
       document.getElementById('ppto_ajustado1').innerHTML = formatter.format(datos.data[0].y_dev_pptoajustado);
-      document.getElementById('ejec1').innerHTML = (ejec);
+      document.getElementById('ejec1').innerHTML = formatter.format(datos.data[0].y_dev_ejecucion);
       proyecto_fisico(cod)
       for (let index = 0; index < tam; index++) {
        tablaValStat += `<tr style="background-color:gray ;">
@@ -638,8 +638,9 @@ function buscavalstat(nomproyecto, cod, ejec){
         .then(res=> res.json())
         .then(response=>{
           let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
-          let avancexfinanciero= parseFloat((response.data[0].ejec_financiera)*100);
-         proyecto_financiero(avancexfinanciero)*100
+          let avancexfinanciero= parseFloat((response.data[0].porc_ejec_financiera)*100);
+          console.log(avancexfinanciero);
+         proyecto_financiero(avancexfinanciero)
           let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].ejec_financiera))*0.50 )*100
           //console.log("fisico ",avanxcefisicoproject);
           //console.log("financiero ",avancexfinanciero);
@@ -718,6 +719,7 @@ function buscavalstat(nomproyecto, cod, ejec){
    
   }
   async function proyecto_financiero(avancexfinanciero){
+    
     const dataSource = {
       chart: {
         caption: "% Ejecución Financiera ",
@@ -1275,11 +1277,76 @@ function buscavalstat(nomproyecto, cod, ejec){
     })
       
     } catch (error) {
-      
-
     };
     
- 
+  }
+
+
+
+  async function alertafisicamodal()
+  {
+    try {
+    let countalertdep=[];
+      fetch(`https://sse-pdm.herokuapp.com/pa/pi/alerta/cuentadepfisica/${vlr_alerta}`).
+      then(res=>res.json()).then(response=>{
+
+
+      for (let index = 0; index < response.data.length; index++) {
+     countalertdep.push(
+          {  label : response.data[index].nom_dependencia,
+              value: parseInt(response.data[index].total_dep)
+          })
+        
+      }
+
+
+
+pintalertcountdep(countalertdep)
+jQuery.noConflict();
+$('#alertaejecfisicaModal').modal('show'); 
+        
+      })
+
+    } catch (error) {
+      console.error('Error alertafisicamodal');
+      
+    }
+  
+}
+  
+async function pintalertcountdep(countalertdep){
+  try {
     
+    const dataSource = {
+      chart: {
+        caption: "Deficiente desempeño",
+        subcaption: "Número de proyectos",
+        yaxisname: "Total de proyectos en alerta",
+        
+        showvalues: "1",
+        theme: "gammel"
+      },
+      data: 
+        countalertdep
+      
+    };
+    
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "bar2d",
+        renderAt: "chart-CountAlertDep",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+    
+  
+
+    
+  } catch (error) {
+    console.error('Errror pintalertcountdep');
     
   }
+}
