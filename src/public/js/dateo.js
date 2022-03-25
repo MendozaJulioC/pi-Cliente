@@ -20,7 +20,9 @@ async  function corteplan(){
     let corteavance= new Date(response.data[0].corte) 
     let vigencia = corteavance.getFullYear(corteavance)
     
-    corteavance.setDate(31);
+  let dia = corteavance.getDate()
+   corteavance.setDate(dia+1)
+
     fecha= corteavance
 
     vigencia = fecha.getFullYear(fecha)
