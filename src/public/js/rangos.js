@@ -8,7 +8,8 @@ async function getCorteAvancePI(){
       let corteavance= new Date(response.data[0].corte) ;
       let mesavance = corteavance.getMonth(corteavance)+1
       let vigencia = corteavance.getFullYear(corteavance)
-      let dia= corteavance.getDay(corteavance)
+      let dia= corteavance.getDate(corteavance)
+      
        corteplan(mesavance, vigencia, corteavance, dia)   
     })
   } catch (error) {
@@ -21,29 +22,30 @@ getCorteAvancePI()
  
  
  async function corteplan(mesavance, vigenciaavance, corte, dia){
-  //var fecha = new Date('09/30/2021');
-  corte.setDate(31)
+  corte.setDate(dia+1)
 
-  //document.getElementById('fecha-corte').innerHTML=fecha
-  document.getElementById('fecha_corte').innerHTML= corte.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
-  //let   mes = mesavance//corte.getMonth(corte)
-    let vigencia = vigenciaavance//corte.getFullYear(corte)
-    switch (vigencia) {
-      case 2020:
-        mes= corte.getMonth(corte)+1
+  document.getElementById('fecha_corte').innerHTML = corte.toLocaleDateString("en-US", {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  })
+  let vigencia = vigenciaavance //corte.getFullYear(corte)
+  switch (vigencia) {
+    case 2020:
+      mes = corte.getMonth(corte) + 1
       break;
-      case 2021:
-        mes= corte.getMonth(corte)+13
+    case 2021:
+      mes = corte.getMonth(corte) + 13
       break;
-      case 2022:
-        mes= corte.getMonth(corte)+25
+    case 2022:
+      mes = corte.getMonth(corte) + 25
       break;
-      case 2023:
-        mes= corte.getMonth(corte)+37
+    case 2023:
+      mes = corte.getMonth(corte) + 37
       break;
-      default:
+    default:
       break;
-    }
+  }
     
     let parametros={
       "mesplan" : mes,
