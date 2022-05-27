@@ -17,15 +17,19 @@ async function detalleAvance(){
             let corteavance= new Date(datos.data[0].corte) 
             fechaOrigen=  (datos.data[0].corte).substr(0,10)
             let tam = response.data.length;
+
             for(let i =0; i<tam;i++){
-              AvancePI.push ({ "value" :  (response.data[i].avance) })  
-              CortePlan.push({ "label" :  `${response.data[i].corte.substr(0,10)}(${response.data[i].tipo_corte}) `})
-              CumplimientoPI.push ({ "value" : response.data[i].cumplimiento })  
-              var fecha = response.data[i].corte
-              let fechacorte=fecha.substr(0,10)
-              if(fechacorte == fechaOrigen){
-                triadaInicial2(response.data[i].cumplimiento)
+              if ((response.data[i].tipo_corte) != 'P') {
+                AvancePI.push ({ "value" :  (response.data[i].avance) })  
+                CortePlan.push({ "label" :  `${response.data[i].corte.substr(0,10)}(${response.data[i].tipo_corte}) `})
+                CumplimientoPI.push ({ "value" : response.data[i].cumplimiento })  
+                var fecha = response.data[i].corte
+                let fechacorte=fecha.substr(0,10)
+                if(fechacorte == fechaOrigen){
+                  triadaInicial2(response.data[i].cumplimiento)
+                }
               }
+             
             }
 
           
@@ -91,6 +95,7 @@ async function detalleAvanceLinea(){
     let AvanceOct2021=[]; let CumplimientoOct21=[];
     let AvanceDic2021=[]; let CumplimientoDic21=[];
     let AvanceDic20=[]; let CumplimientoDic20=[];
+    let AvanceFeb22=[]; let CumplimientoFeb22=[];
 
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
@@ -101,21 +106,14 @@ async function detalleAvanceLinea(){
       for(let z =0; z<tam;z++){
         AvanceDic20.push({"value" :  parseFloat(response.data[z].Avance2020_12_31)})
         CumplimientoDic20.push({"value" :  parseFloat(response.data[z].Cumplimiento2020_12_31) })
-        AvanceJun2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_06_30) })  
-        CumplimientoJun21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_06_30) }) 
-        AvanceAgo2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_08_31) })  
-        CumplimientoAgo21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_08_31) }) 
-        AvanceSep2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_09_30) })  
-        CumplimientoSep21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_09_30) }) 
-
-        AvanceOct2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_10_31) })  
-        CumplimientoOct21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_10_31) }) 
-
+      
         AvanceDic2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31) })  
         CumplimientoDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31) }) 
-        
-        ProyecAvanDic21.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31_P) }) 
-        ProyecCumpDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31_P) }) 
+      
+
+        AvanceFeb22.push ({ "value" :  parseFloat(response.data[z].Avance2022_02_28) }) 
+        CumplimientoFeb22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_02_28) }) 
+
         NomPIL.push({ "label" : response.data[z].nom_linea })
       }
       const dataSource = {
@@ -146,43 +144,6 @@ async function detalleAvanceLinea(){
             data:CumplimientoDic20
           },
           {
-            seriesname: "Avance Junio 2021",
-            data:AvanceJun2021
-          },
-          {
-            seriesname: "Cumplimiento Junio 2021",
-            data: CumplimientoJun21
-          },
-          {
-            seriesname: "Avance Agosto 2021",
-            data:AvanceAgo2021
-          },
-          {
-            seriesname: "Cumplimiento Agosto 2021",
-            data: CumplimientoAgo21
-          },
-          {
-            seriesname: "Avance Septiembre 2021",
-            data:AvanceSep2021
-          },
-          {
-            seriesname: "Cumplimiento Septiembre 2021",
-            data: CumplimientoSep21
-          },
-
-
-          
-          {
-            seriesname: "Avance Octubre 2021",
-            data:AvanceOct2021
-          },
-          {
-            seriesname: "Cumplimiento Octubre 2021",
-            data: CumplimientoOct21
-          },
-
- 
-          {
             seriesname: "Avance Diciembre 2021",
             data:AvanceDic2021
           },
@@ -190,16 +151,18 @@ async function detalleAvanceLinea(){
             seriesname: "Cumplimiento Diciembre 2021",
             data: CumplimientoDic21
           },
-
-
           {
-            seriesname: "Proyección Avance Dic 2021",
-            data: ProyecAvanDic21
+            seriesname: "Avance Febrero 2022",
+            data:AvanceFeb22
           },
           {
-            seriesname: "Proyección Cumplimiento Dic 2021",
-            data: ProyecCumpDic21
-          } 
+            seriesname: "Cumplimiento Febrero 2022",
+            data: CumplimientoFeb22
+          }
+
+
+
+         
         ]
       };
       FusionCharts.ready(function() {
