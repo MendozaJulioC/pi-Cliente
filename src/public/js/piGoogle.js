@@ -56,21 +56,13 @@ async function detalleAvance(){
             theme: "zune",
               drawcrossline: "1"
             },
-              categories: [
-            {
-              category: CortePlan
-            }
-          ],
-            dataset: [
-            {
-              seriesname: "Avance",
-              data: AvancePI
-            },
-            {
-              seriesname: "Cumplimiento",
-              data: CumplimientoPI
-            }
-          ]
+              categories: [{category: CortePlan}],
+              dataset: [{seriesname: "Avance",data: AvancePI},
+                        {
+                          seriesname: "Cumplimiento",
+                          data: CumplimientoPI
+                        }
+              ]
         };
         FusionCharts.ready(function() {
           var myChart = new FusionCharts({
@@ -89,13 +81,16 @@ async function detalleAvance(){
 
 async function detalleAvanceLinea(){
   try {
-    let NomPIL=[]; let AvanceJun2021=[]; let CumplimientoJun21=[]; let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
+    let NomPIL=[]; 
+    //let AvanceJun2021=[]; let CumplimientoJun21=[]; 
+    //let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
     let AvanceAgo2021=[]; let CumplimientoAgo21=[];
     let AvanceSep2021=[]; let CumplimientoSep21=[];
     let AvanceOct2021=[]; let CumplimientoOct21=[];
     let AvanceDic2021=[]; let CumplimientoDic21=[];
     let AvanceDic20=[]; let CumplimientoDic20=[];
     let AvanceFeb22=[]; let CumplimientoFeb22=[];
+    let AvanceAbr22=[]; let CumplimientoAbr22=[];
 
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
@@ -110,9 +105,11 @@ async function detalleAvanceLinea(){
         AvanceDic2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31) })  
         CumplimientoDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31) }) 
       
-
         AvanceFeb22.push ({ "value" :  parseFloat(response.data[z].Avance2022_02_28) }) 
         CumplimientoFeb22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_02_28) }) 
+
+        AvanceAbr22.push ({ "value" :  parseFloat(response.data[z].Avance2022_04_30) }) 
+        CumplimientoAbr22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_04_30) }) 
 
         NomPIL.push({ "label" : response.data[z].nom_linea })
       }
@@ -159,10 +156,15 @@ async function detalleAvanceLinea(){
             seriesname: "Cumplimiento Febrero 2022",
             data: CumplimientoFeb22
           }
-
-
-
-         
+          ,
+          {
+            seriesname: "Avance Abril 2022",
+            data:AvanceAbr22
+          },
+          {
+            seriesname: "Cumplimiento Abril 2022",
+            data: CumplimientoAbr22
+          }
         ]
       };
       FusionCharts.ready(function() {
