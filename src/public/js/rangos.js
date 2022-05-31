@@ -5,6 +5,7 @@ async function getCorteAvancePI(){
     fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
+      
       let corteavance= new Date(response.data[0].corte) ;
       let mesavance = corteavance.getMonth(corteavance)+1
       let vigencia = corteavance.getFullYear(corteavance)
@@ -19,7 +20,7 @@ async function getCorteAvancePI(){
  
  
 getCorteAvancePI()
- 
+
  
  async function corteplan(mesavance, vigenciaavance, corte, dia){
   corte.setDate(dia+1)
@@ -39,6 +40,7 @@ getCorteAvancePI()
       break;
     case 2022:
       mes = corte.getMonth(corte) + 25
+    
       break;
     case 2023:
       mes = corte.getMonth(corte) + 37

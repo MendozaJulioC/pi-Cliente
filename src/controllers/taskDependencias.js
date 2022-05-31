@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt');
 const passport = require('passport')
 
 
-
-
-
 const getDependencias = async (req, res) => {
     try {
      

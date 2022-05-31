@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ejercicios para desarrollo front consumiendo API´s # pi-Cliente",
   "main": "index.js",
   "scripts": {
     "style": "node_modules/bootstrap/dist/css/boostrap.css",
@@ -42,5 +42,13 @@
     "nodemon": "^2.0.3",
     "style-loader": "^1.1.3",
     "timeago.js": "^4.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MendozaJulioC/pi-Cliente.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MendozaJulioC/pi-Cliente/issues"
+  },
+  "homepage": "https://github.com/MendozaJulioC/pi-Cliente#readme"
 }
