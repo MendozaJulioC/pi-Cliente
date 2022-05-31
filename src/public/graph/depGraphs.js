@@ -5,7 +5,7 @@ var nomarchivopdf='';
 var table4={};
 var fechaPA =""; //new Date('09/30/2021');
 var fecha= "";//new Date('09/30/2021'); 
-
+var dia='';//
 async function getCorteAvancePI(){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
@@ -14,6 +14,7 @@ async function getCorteAvancePI(){
       let corteavance= new Date(response.data[0].corte) 
       let mesavance = corteavance.getMonth(corteavance)+1
       let vigencia = corteavance.getFullYear(corteavance)
+      dia= corteavance.getDate(corteavance)
       fecha= corteavance;
       fechaPA=corteavance
     })
