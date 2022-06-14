@@ -132,5 +132,18 @@ const getSiem = async(req, res)=>{
         
     }
 }
+
+
+const getPlanAccion = async(req, res)=>{
+    try {
+        res.render('./plan_accion/plan_a.html', {
+            title: "SIEM-PDM"
+        })
+    } catch (error) {
+        console.error('Error getPlanAccion', error);
+    }
+}
 module.exports = {  getHome, getDash, getGeneral, getContacto, getSiem,
-                    getIndicador, getEstructura, getComponente, getPrograma, getAlertas, getAlertasPA}
+                    getIndicador, getEstructura, getComponente, getPrograma, getAlertas, getAlertasPA,
+                    getPlanAccion
+                }

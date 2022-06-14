@@ -1,11 +1,11 @@
-//import { response } from "express";
-//import fetch from "node-fetch"
+
 var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
 var nomarchivopdf='';
 var table4={};
 var fechaPA =""; //new Date('09/30/2021');
 var fecha= "";//new Date('09/30/2021'); 
 var dia='';//
+
 async function getCorteAvancePI(){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
@@ -45,6 +45,37 @@ async function _main(){
     plan_accion_dep()
     //contadorSemDep(cod)
     _cumplimiento_dependencia(dep)
+    _detalle_ejec_financiera(dep)
+}
+async function _detalle_ejec_financiera(dep){
+  try {
+ 
+    fetch(`https://sse-pdm.herokuapp.com/pa/detalle/financiero/${dep}`)
+    .then(res=>res.json())
+    .then(datos=>{
+
+      let analisis='';
+      document.getElementById('analisispp').innerHTML= analisis
+      //console.log(datos.data[0].porc_pp_finan);
+     _grapPPfinancieroDep(datos.data[0].porc_pp_finan)
+     _grapPtoInstDep(datos.data[0].porc_loc_finan)
+     _graphFisicoDep(datos.data[0].porc_fisico_inst)
+     _graphPorcFisicoPP(datos.data[0].porc_fisico_pp)
+     let ajustadopp= formatter.format(datos.data[0].total_pp_pptoajustado)
+     let ejecucionpp = formatter.format(datos.data[0].total_pp_ejecucion)
+     let porc_pp = ((datos.data[0].porc_pp_finan)*100).toFixed(2)
+     let por_pp_fisico =((datos.data[0].porc_fisico_pp)*100).toFixed(2)
+     
+
+     analisis+=`Del presupuesto asignado al Presupuesto Participativo por un valor de <b>${ajustadopp}</b>,se ejecutó <b>${ejecucionpp}</b> correspondiente a un <b>${porc_pp}%</b> de la ejecución financiera,
+     con esta ejecución se logró un avance físico del <b> ${por_pp_fisico}%</b> de las metas programadas de los proyectos de presupuesto participativo para el año`
+     document.getElementById('analisispp').innerHTML= analisis
+    })
+   
+
+  } catch (error) {
+    console.error('Error _detalle_ejec_financiera', error);
+  }
 }
 async function dep_estado(cod_dep){
 
@@ -63,6 +94,7 @@ async function dep_estado(cod_dep){
   contadorSemDep(cod_dep)
   _cumplimiento_dependencia(cod_dep)
   _PASemaf()
+  _detalle_ejec_financiera(cod_dep)
  
 
 }
@@ -82,6 +114,7 @@ async function _avancePDM(cod_dep){
     }
 }
 async function graphPDM(total){
+
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
 fecha.setDate(dia+1)
     document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
@@ -208,7 +241,7 @@ async function porc_avance_financiero(avance){
     .then(response=>{
         const dataSource = {
           chart: {
-            caption: "% Ejecución Financiera",
+            caption: "% Ejecución Total Financiera",
             lowerlimit: "0",
             upperlimit: "100",
             showvalue: "1",
@@ -258,6 +291,7 @@ async function porc_avance_financiero(avance){
   } catch (error) {
   }
 }
+
 function graphPDA(poai, pptoajustado, ordenado){
     const dataSource = {
       chart: {
@@ -272,7 +306,7 @@ function graphPDA(poai, pptoajustado, ordenado){
         decimalSeparator: ",",
         thousandSeparator: "."
       },
-      data: [
+      data: [ 
         {
           label: "Ppto. Inicial",
           value: (poai), 
@@ -495,9 +529,10 @@ async function porc_avance_fisico(dep){
       fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefisico/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
+        
           const dataSource = {
             chart: {
-              caption: "% Ejecución Física",
+              caption: "% Ejecución Total Física",
               lowerlimit: "0",
               upperlimit: "100",
               showvalue: "1",
@@ -1716,8 +1751,6 @@ async function proyecto_fisico(cod){
  
 }
 async function proyecto_financiero(avancexfinanciero){
-
-
   const dataSource = {
     chart: {
       caption: "% Ejecución Financiera ",
@@ -1838,9 +1871,6 @@ window.onload= function(){
 
   })
 }
-
-
-
 
 async function listvalstat_dep(){
   try {
@@ -2031,6 +2061,7 @@ async function _cumplimiento_dependencia(dep){
       dataSource
     }).render();
   });
+
   })
 
   } catch (error) {
@@ -2040,4 +2071,230 @@ async function _cumplimiento_dependencia(dep){
 
   
 
+}
+
+async function   _grapPPfinancieroDep(valor){
+  try {
+
+   //document.getElementById('canvas-dep-pp-financiero').innerHTML=(valor*100).toFixed(2)
+
+   const dataSource = {
+    chart: {
+      caption: "% Presupuesto Participativo",
+      lowerlimit: "0",
+      upperlimit: "100",
+      showvalue: "1",
+      numbersuffix: "%",
+      theme: "gammel",
+      showtooltip: "0",
+      valuefontsize: "25"
+    },
+    colorrange: {
+      color: [
+        {
+          minvalue: "0",
+          maxvalue: valorminimo,
+          code: "#F2726F"
+      },
+      {
+        minvalue: valorminimo,
+        maxvalue: valormaximo,
+        code: "#FFC533"
+      },
+      {
+        minvalue: valorminimo,
+        maxvalue: "100",
+        code: "#62B58F"
+      }
+    ]
+  },
+  dials: {
+    dial: [
+      {
+        value: (valor*100).toFixed(2)
+      }
+    ]
+  }
+};
+FusionCharts.ready(function() {
+  var myChart = new FusionCharts({
+    type: "angulargauge",
+    renderAt: "canvas-dep-pp-financiero",
+    width: "100%",
+    height: "100%",
+    dataFormat: "json",
+    dataSource
+  }).render();
+});
+
+
+  } catch (error) {
+  console.error('Error ', error);
+  }
+}
+
+
+async function _grapPtoInstDep(valor){
+  try {
+      const dataSource = {
+        chart: {
+          caption: "% Presupuesto Iniciativa Institucional",
+          lowerlimit: "0",
+          upperlimit: "100",
+          showvalue: "1",
+          numbersuffix: "%",
+          theme: "gammel",
+          showtooltip: "0",
+          valuefontsize: "25"
+        },
+        colorrange: {
+          color: [
+            {
+              minvalue: "0",
+              maxvalue: valorminimo,
+              code: "#F2726F"
+          },
+          {
+            minvalue: valorminimo,
+            maxvalue: valormaximo,
+            code: "#FFC533"
+          },
+          {
+            minvalue: valorminimo,
+            maxvalue: "100",
+            code: "#62B58F"
+          }
+        ]
+      },
+      dials: {
+        dial: [
+          {
+            value: (valor*100).toFixed(2)
+          }
+        ]
+      }
+    };
+    FusionCharts.ready(function() {
+      var myChart = new FusionCharts({
+        type: "angulargauge",
+        renderAt: "avance-dep-inst-financiero",
+        width: "100%",
+        height: "100%",
+        dataFormat: "json",
+        dataSource
+      }).render();
+    });
+
+  } catch (error) {
+    console.error('Error _grapPtoInstDep', error);
+  }
+}
+async function _graphFisicoDep(valor){
+  try {
+    const dataSource = {
+      chart: {
+        caption: "% Ejecución Fisíca Iniciativa Institucional",
+        lowerlimit: "0",
+        upperlimit: "100",
+        showvalue: "1",
+        numbersuffix: "%",
+        theme: "gammel",
+        showtooltip: "0",
+        valuefontsize: "25"
+      },
+      colorrange: {
+        color: [
+          {
+            minvalue: "0",
+            maxvalue: valorminimo,
+            code: "#F2726F"
+        },
+        {
+          minvalue: valorminimo,
+          maxvalue: valormaximo,
+          code: "#FFC533"
+        },
+        {
+          minvalue: valorminimo,
+          maxvalue: "100",
+          code: "#62B58F"
+        }
+      ]
+    },
+    dials: {
+      dial: [
+        {
+          value: (valor*100).toFixed(2)
+        }
+      ]
+    }
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "angulargauge",
+      renderAt: "canvas-dep-fisica-inst",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+
+  } catch (error) {
+    console.error('Error  _graphFisicoDep', error);
+  }
+}
+async function _graphPorcFisicoPP(valor){
+  try {
+    const dataSource = {
+      chart: {
+        caption: "% Ejecución Fisíca Presupuesto Partcipativo",
+        lowerlimit: "0",
+        upperlimit: "100",
+        showvalue: "1",
+        numbersuffix: "%",
+        theme: "gammel",
+        showtooltip: "0",
+        valuefontsize: "25"
+      },
+      colorrange: {
+        color: [
+          {
+            minvalue: "0",
+            maxvalue: valorminimo,
+            code: "#F2726F"
+        },
+        {
+          minvalue: valorminimo,
+          maxvalue: valormaximo,
+          code: "#FFC533"
+        },
+        {
+          minvalue: valorminimo,
+          maxvalue: "100",
+          code: "#62B58F"
+        }
+      ]
+    },
+    dials: {
+      dial: [
+        {
+          value: (valor*100).toFixed(2)
+        }
+      ]
+    }
+  };
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "angulargauge",
+      renderAt: "avance-dep-pp-fisica",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  } catch (error) {
+    console.error('Error _graphPorcFisicoPP', error);
+  }
 }

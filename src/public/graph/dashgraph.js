@@ -204,7 +204,7 @@ try {
       porc_avance_fisico(valorminimo, valormaximo)
       const dataSource = {
         chart: {
-          caption: "% Ejecución Financiera Plan de Acción",
+          caption: "% Ejecución  Financiera Plan de Acción",
           lowerlimit: "0",
           upperlimit: "100",
           showvalue: "1",
@@ -458,6 +458,7 @@ async function porc_avance_fisico(valorminimo, valormaximo){
     console.log('Error _avancePDM ',error )
   }
 }
+
 async function tipoinversion(){
   try {
    fetch(`https://sse-pdm.herokuapp.com/geo/api/tipo-inversion`)

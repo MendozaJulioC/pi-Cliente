@@ -28,6 +28,10 @@
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--tarjetas de datos generales de los tipos de inversion-->
     <br>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<%- include ('../partials/rangos.html') %>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
     <div class="card text-center shadow bg-light-gray rounded mb-0 mt-5">
       <div class="card-deck ">
         <div class="card-body ">
@@ -45,35 +49,137 @@
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--tarjetas de datos generales de los tipos de inversion-->
     <div class="card text-center shadow mt-2 mb-1">
+      <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información Avance y Cumplimiento Plan Indicativo</h1>
          <div class="row">
-          <div class="col-md-3 mt-4 ">
+         
+
+          <div class="col-md-6 mt-2 p-1  mb-2  rounded">
             <div class="card-body">
               <div class="mt-lg-3" id="canvas-dep" style="height: 250px;  width:100%;"></div>
             </div>
           </div>
-          <div class="col-md-3 mt-4 ">
+       
+          <div class="col-md-6 mt-2   mb-2   rounded">
             <div class="card-body">
               <div class="mt-lg-3" id="avance-dep" style="height: 250px;  width:100%;"></div>
             </div>
           </div>
-          <div class="col-md-3 mt-4  ">
-            <div class="card-body">
-              <div class="mt-lg-3" id="chart-ejecfisica-dep" style="height: 250px;  width:100%;"></div>
-            </div>
-          
-          </div>
-          <div class="col-md-3 mt-4  ">
-            <div class="card-body">
-               <div class="mt-lg-3" id="chart-ejecfinanciera-dep" style="height: 250px;  width:100%;"></div>
-            </div>
-           
-          </div>
+        
+        
         </div>
       </div>
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<%- include ('../partials/rangos.html') %>
-  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
+
+<!-- Ejecución Física-->
+<div class="card text-center shadow mt-2 mb-1">
+  <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información de la Ejecución Física</h1>
+ 
+  <div class="row">
+    <div class="col-md-4 mt-4  ">
+      <div class="card-body">
+        <div class="mt-lg-3" id="chart-ejecfisica-dep" style="height: 250px;  width:100%;"></div>
+      </div>
+    
+    </div>
+   <div class="col-md-4 mt-4 ">
+     <div class="card-body">
+       <div class="mt-lg-3" id="canvas-dep-fisica-inst" style="height: 250px;  width:100%;"></div>
+     </div>
+   </div>
+   <div class="col-md-4 mt-4 ">
+     <div class="card-body">
+       <div class="mt-lg-3" id="avance-dep-pp-fisica" style="height: 250px;  width:100%;"></div>
+     </div>
+   </div>
+
+ 
+ </div>
+</div>
+<!-- Ejecución Financiera -->
+<div class="card text-center shadow mt-2 mb-1">
+  <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información de la Ejecución Financiera</h1>
+ 
+  <div class="row">
+    <div class="col-md-4 mt-4  ">
+      <div class="card-body">
+         <div class="mt-lg-3" id="chart-ejecfinanciera-dep" style="height: 250px;  width:100%;"></div>
+      </div>
+     
+    </div>
+    <div class="col-md-4 mt-4 ">
+      <div class="card-body">
+        <div class="mt-lg-3" id="avance-dep-inst-financiero" style="height: 250px;  width:100%;"></div>
+      </div>
+    </div>
+   <div class="col-md-4 mt-4 ">
+     <div class="card-body">
+       <div class="mt-lg-3" id="canvas-dep-pp-financiero" style="height: 250px;  width:100%;"></div>  
+     </div>
+   </div>
+
+
+  <div class="col-md-12">
+    <hr>
+    <div class="card-body">
+      <p style="text-align: left;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" id="analisispp"></p>
+    </div>
+  
+  </div>
+ </div>
+
+</div>
+
+
+
+ <!--tarjetas de datos generales de los tipos de inversion-->
+ <div class="card text-center shadow mt-2 mb-1">
+  <div class="row">
+ 
+    <div class="col-md-4  mt-2  mb-2 ">
+      <div class="card-body">
+         <div class="mt-lg-3" id="canvas-pa2-dep" style="height: 150px;  width:100%;"></div>
+      <div class="table-responsive-sm">
+        <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
+          <thead style="background-color: #B2B1A7;"> 
+            <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
+            <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
+            <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
+            <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
+          </thead> 
+          <tbody id="tbl_comp">
+            <tr>
+              <td  id="compromisos-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
+              <td  id="disponible-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
+              <td  id="ordenado-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
+              <td  id="total-dep"  style="font-weight: 400; width: 44px; text-align: center;"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+    <div class="col-md-4  mt-2  mb-2 ">
+      <div class="card-body">
+         <div class="mt-lg-3" id="canvas-pa1-dep" style="height: 280px;  width:100%;"></div>
+      </div>
+    </div>
+   <div class="col-md-4  mt-2 mb-2 ">
+     <div class="card-body">
+      <div id="chart-proyectos-dep" style="height: 280px;  width:100%;"></div>
+     </div>
+
+    </div>
+   </div>
+</div>
+
+
+
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
   <div class="card ">
   <div class="row">
@@ -89,6 +195,7 @@
   </div>
   </div>
 </div>
+
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
    <!--semaforo-->
    <div class="row">
@@ -144,46 +251,7 @@
   </div>
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <!--tarjetas de datos generales de los tipos de inversion-->
-    <div class="card text-center shadow mt-2 mb-1">
-      <div class="row">
-     
-        <div class="col-md-4  mt-2  mb-2 ">
-          <div class="card-body">
-             <div class="mt-lg-3" id="canvas-pa2-dep" style="height: 150px;  width:100%;"></div>
-          <div class="table-responsive-sm">
-            <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
-              <thead style="background-color: #B2B1A7;"> 
-                <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
-                <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
-                <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
-                <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
-              </thead> 
-              <tbody id="tbl_comp">
-                <tr>
-                  <td  id="compromisos-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                  <td  id="disponible-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                  <td  id="ordenado-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
-                  <td  id="total-dep"  style="font-weight: 400; width: 44px; text-align: center;"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          </div>
-        </div>
-        <div class="col-md-4  mt-2  mb-2 ">
-          <div class="card-body">
-             <div class="mt-lg-3" id="canvas-pa1-dep" style="height: 280px;  width:100%;"></div>
-          </div>
-        </div>
-       <div class="col-md-4  mt-2 mb-2 ">
-         <div class="card-body">
-          <div id="chart-proyectos-dep" style="height: 280px;  width:100%;"></div>
-         </div>
- 
-        </div>
-       </div>
-    </div>
+   
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
   <div class="card text-center shadow mt-2 mb-1">
