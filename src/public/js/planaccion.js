@@ -131,7 +131,7 @@ async function avancefinaninst(){
         .then(datos=>{
             const dataSource = {
                 chart: {
-                  caption: "% Ejecución Financiera Iniciativa Instituional del Plan de Acción",
+                  caption: "% Ejecución Financiera Iniciativa Institucional del Plan de Acción",
                   lowerlimit: "0",
                   upperlimit: "100",
                   showvalue: "1",
