@@ -4,7 +4,7 @@ const router = Router();
 const { isAuthenticated, notAuthenticated }= require('../helpers/auth');
 
 const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, 
-    getComponente, getPrograma, getAlertas, getSiem , getAlertasPA, getPlanAccion} = require('../controllers/index.controllers');
+    getComponente, getPrograma, getAlertas, getSiem , getAlertasPA, getPlanAccion, getAlertPP} = require('../controllers/index.controllers');
     router.get('/',notAuthenticated, getHome);
     router.get('/dash',isAuthenticated, getDash)
     router.get('/general', isAuthenticated,getGeneral)
@@ -17,6 +17,7 @@ const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura,
     router.get('/alertas-pa', isAuthenticated,getAlertasPA)
     router.get('/indicadores/siem', isAuthenticated,getSiem)
     router.get('/plan_a', isAuthenticated,getPlanAccion)
+    .get('/alert/pp', isAuthenticated,getAlertPP)
 
   
 const {getLinea1,  getLinea2, getLinea3, getLinea4, getLinea5}= require('../controllers/taskL');
@@ -83,6 +84,12 @@ router.get('/obra-fisica/geo', isAuthenticated, getObrasGeo)
  const {getGeneralPI, getGeneralPI_Lineas} = require('../controllers/taskPiGoogle')
  router.get('/pi/google',isAuthenticated, getGeneralPI)
  router.get('/pi/google/lineas',isAuthenticated, getGeneralPI_Lineas)
+
+
+
+
+
+
         
 
 module.exports = router;

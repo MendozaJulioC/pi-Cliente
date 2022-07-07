@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+      <meta charset="UTF-8">
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.gammel.js"></script>
+      <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.zune.js"></script>
+    
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+      <%- include ('../partials/head.html') %>
+      <style>  #container { padding-left: 50px; padding-right: 60px; padding-top: 5px; padding-bottom: 2px; } tr { height: 2px; }</style>
+  </head>
+  <%- include ('../partials/menuplapp.html')%>
+  <body onload="_main()">
+ 
+    <div id="container" class="container-fluid mt-2 ">
+      <div class="row">
+        <div class="col-md-12 mt-4  shadow-lg p-3  mt-2   mb-1 rounded" style="height: 290px;">
+          <div class="card-body  ">
+            <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+              <p style="align-items: center;"> <img src="/img/logonuevo.jpg" style="width: 18%;" alt=""></p>
+            
+              <p style="text-align: center;font-size: 38px;line-height: 20px;font-weight: 100;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Alertas Presupuesto Participativo</p>
+            </h6>
+            <h6 id="vigencia" class="text-muted" style="text-align: center;font-size: 18px;line-height: 20px;font-weight: 600;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
+            </h6>
+          </div>
+        </div>
+            <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+             <%- include ('../partials/rangopa.html') %>
+            <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <div class="col-md-6 mt-4 shadow-lg rounded">
+          <div class="card-body shadow-sm p3">
+            <div class="card-body"  id="ejecfinanpp" style="width: 100%; height: 290px;">Ejec Fisica PA</div>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 shadow-lg rounded">
+          <div class="card-body shadow-sm p3">
+            <div class="card-body " id="ejecfisicainst" style="width: 100%; height: 290px;">Ejecfisica Inst</div>
+          </div>
+          </div>
+          <div class="col-md-6  mt-4 shadow-lg rounded">
+            <div class="card-body shadow-sm p3">
+              <form >
+                <fieldset style="padding:20px; border:2px solid #6e6b97; ">
+                  <legend class="legend1">Ranking Ejecución Física Presupuesto Participativo</legend>
+                  <div class="card-body " id="rankppfisico" style="width: 100%; height: 590px;">Ejecfisica PP</div>
+                </fieldset>
+               
+              </form>
+         
+            </div>
+            </div>
+            <div class="col-md-6  mt-4 shadow-lg rounded">
+              <div class="card-body shadow-sm p3">
+                <form >
+                  <fieldset style="padding:20px; border:2px solid #6e6b97; ">
+                    <legend class="legend1">Ranking Ejecución Financiera Presupuesto Participativo</legend>
+                    <div class="card-body " id="rankppfinan" style="width: 100%; height: 590px;">Ejec Finan PP</div>
+                  </fieldset>
+                 
+                </form>
+           
+              </div>
+              </div>
+      </div>
+    </div>
+
+
+
+  
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal valstat
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <div class="modal fade bd-example-modal " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">SSE-PDM</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+        <div class="form-row">
+          <div class="col-md-2">
+            <button class="btn btn-danger btn-sm" id="download">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+              </svg>
+          </button>
+          </div>
+          <div class="row" id="invoice">
+            <div class="col-md-12">
+              <h2 class="text-muted text-center">Ficha Seguimiento Proyectos de Inversión</h2>
+              <h4 class="text-muted " style="text-align: center;font-size: 18px;line-height: 18px;font-weight: 600;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span id="cod1"></span> - <span id="nom1"></span>
+              </h4>
+              <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="tipo_proyecto"></span>
+              </h5>
+              <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="corte1"></span>
+            </h5>
+
+              <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+                <thead class="thead-inverse">
+                  <tr  style="background-color:gray ;text-align: center;">
+                    <th colspan="6" >Estructura Plan de Desarrollo</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;">Cod.Línea</th>
+                    <th style="text-align: center;">Línea</th>
+                    <th style="text-align: center;">Cod. Componente</th>
+                    <th style="text-align: center;">Componente</th>
+                    <th style="text-align: center;">Cod. Programa</th>
+                    <th style="text-align: center;">Programa</th>
+                  </tr>
+                  <tr>
+                    <td  style="text-align: center;" id="cod_linea1"> </td>
+                    <td  style="text-align: center;" id="nom_linea1"> </td>
+                    <td  style="text-align: center;" id="cod_componente1"> </td>
+                    <td  style="text-align: center;" id="nom_componente1"> </td>
+                    <td  style="text-align: center;" id="cod_programa1"> </td>
+                    <td  style="text-align: center;" id="nom_programa1"> </td>
+                  </tr>
+                  <tr  style="background-color:gray ;text-align: center;">
+                    <th colspan="6" >Descripción Presupuestal</th>
+                  </tr>
+                  <tr style="background-color: rgb(204,211,212);">
+                    <th colspan="2" style="text-align: center;">POAI </th>
+                    <th colspan="2" style="text-align: center;">Presupuesto Ajustado </th>
+                    <th colspan="2" style="text-align: center;">Ejecución </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2" style="text-align: center;" id="poai1" >  </td>
+                    <td colspan="2" style="text-align: center;" id="ppto_ajustado1"></td>
+                    <td colspan="2" style="text-align: center;"><span id="ejec1"> </span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-12"> <hr>  </div>
+            <div class="col-md-4">  <div  id="chart-1" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-4">  <div  id="chart-2" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-4"> <div  id="chart-3" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-12"> <hr> <br> </div>
+            <div class="col-md-12">
+              <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+                <tbody id="valStat">
+              </tbody>
+              </table>
+            </div>
+            <div class="col-md-12 html2pdf__page-break"></div>
+            <div class="col-md-12"><div   id="chart-geoproyect" style="height: 310px;  width:85%;"></div></div>
+            <div class="col-md-12">
+              <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
+                <thead class="thead-inverse" style="background: rgb(178,177,167);">
+                  <tr>
+                    <th style="text-align: center;" colspan="2">Tabla Distribución de la Inversión realizada por el Proyecto</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;" colspan="2"><span id="nomprodetalle"></span></th>
+                  </tr>
+                  <tr>
+                    <th  style="text-align: center;">Comuna</th>
+                    <th style="text-align: center;">Inversión</th>
+                  </tr>
+                </thead>
+              <tbody id="inv_territorio_project"> </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2" style="text-align: right; font-size: xx-small;"> Fuente: Unidad de Seguimiento al Plan de Desarrollo Municipal </th>       
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: right; font-size: xx-small;"> Departamento Administrativo de Planeación </th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal %top fisica por dependencias
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <div class="modal fade bd-ejecfisica-modal " id="alertaejecfisicaModal" tabindex="-1" role="dialog" aria-labelledby="alertaejecfisicaModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span> <h4  class="modal-title text-muted" > Número Total de Alertas  por Dependencias</h4> </span> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <div class="mt-lg-3" id="chart-CountAlertDep" style="height: 550px;  width:100%;"></div>
+      </div>
+    </div>
+    </div>
+  </div>  
+
+  </body>
+  <%- include ('../partials/scriptsHome.html')%>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+
+  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js"></script>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+  <script src="/js/proyectos_pp.js"></script>
+</html>
+
+
+

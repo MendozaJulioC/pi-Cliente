@@ -137,13 +137,24 @@ const getSiem = async(req, res)=>{
 const getPlanAccion = async(req, res)=>{
     try {
         res.render('./plan_accion/plan_a.html', {
-            title: "SIEM-PDM"
+            title: "Plan Acción"
         })
     } catch (error) {
         console.error('Error getPlanAccion', error);
     }
 }
+
+const getAlertPP= async (rq, res)=>{
+    try {
+        res.render('./alerta_pp/alertpp.html', {
+            title: "Alertas PP"
+        })
+
+    } catch (error) {
+        console.error('Error getAlertPP', error);
+    }
+}
 module.exports = {  getHome, getDash, getGeneral, getContacto, getSiem,
                     getIndicador, getEstructura, getComponente, getPrograma, getAlertas, getAlertasPA,
-                    getPlanAccion
+                    getPlanAccion, getAlertPP
                 }
