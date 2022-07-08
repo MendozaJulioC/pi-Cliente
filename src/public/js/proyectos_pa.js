@@ -207,8 +207,8 @@ async function proyecto_fisicoqp(cod){
     .then(res=> res.json())
     .then(response=>{
       let avanxcefisicoproject= parseFloat((response.data[0].porc_eficacia_proyecto)*100); 
-      let avancexfinanciero= parseFloat((response.data[0].porc_ejec_financiera)*100);proyecto_financieroqp(avancexfinanciero)
-      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].porc_ejec_financiera))*0.50 )*100
+      let avancexfinanciero= parseFloat((response.data[0].ejec_financiera)*100);proyecto_financieroqp(avancexfinanciero)
+      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].ejec_financiera))*0.50 )*100
       //console.log("fisico ",avanxcefisicoproject);
       //console.log("financiero ",avancexfinanciero);
       //console.log("ffp ",ffp);
@@ -231,7 +231,7 @@ async function proyecto_fisicoqp(cod){
           upperlimit: "100",
           showvalue: "1",
           numbersuffix: "%",
-          theme: "fusion",
+          theme: "gammel",
           showtooltip: "0"
         },
         colorrange: {
@@ -292,7 +292,7 @@ async function proyecto_financieroqp(avancexfinanciero){
       upperlimit: "100",
       showvalue: "1",
       numbersuffix: "%",
-      theme: "fusion",
+      theme: "gammel",
       showtooltip: "0"
     },
     colorrange: {
@@ -344,7 +344,7 @@ async function fifaponqp(ffp){
       upperlimit: "100",
       showvalue: "1",
       numbersuffix: "%",
-      theme: "fusion",
+      theme: "gammel",
       showtooltip: "0"
     },
     colorrange: {

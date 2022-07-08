@@ -22,16 +22,14 @@
     <%- include ('../partials/srciptgraph.html') %>
   </head>
   <%- include ('../partials/menuplapp.html') %>
-<body onload=" _main()" >
-  <div id="container"  >
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <body onload=" _main()" >
+    <div id="container"  >
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--tarjetas de datos generales de los tipos de inversion-->
     <br>
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<%- include ('../partials/rangos.html') %>
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-
+    <%- include ('../partials/rangos.html') %>
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="card text-center shadow bg-light-gray rounded mb-0 mt-5">
       <div class="card-deck ">
         <div class="card-body ">
@@ -46,139 +44,125 @@
         </div>
       </div>
     </div>
-<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <!--tarjetas de datos generales de los tipos de inversion-->
     <div class="card text-center shadow mt-2 mb-1">
       <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
       font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información Avance y Cumplimiento Plan Indicativo</h1>
          <div class="row">
-         
-
           <div class="col-md-6 mt-2 p-1  mb-2  rounded">
             <div class="card-body">
               <div class="mt-lg-3" id="canvas-dep" style="height: 250px;  width:100%;"></div>
             </div>
           </div>
-       
           <div class="col-md-6 mt-2   mb-2   rounded">
             <div class="card-body">
               <div class="mt-lg-3" id="avance-dep" style="height: 250px;  width:100%;"></div>
             </div>
           </div>
-        
+        </div>
+    </div>
+    <!-- Ejecución Física-->
+    <div class="card text-center shadow mt-2 mb-1">
+        <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información de la Ejecución Física</h1>
+      
+        <div class="row">
+          <div class="col-md-4 mt-4  ">
+            <div class="card-body">
+              <div class="mt-lg-3" id="chart-ejecfisica-dep" style="height: 250px;  width:100%;"></div>
+            </div>
+          
+          </div>
+        <div class="col-md-4 mt-4 ">
+          <div class="card-body">
+            <div class="mt-lg-3" id="canvas-dep-fisica-inst" style="height: 250px;  width:100%;"></div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-4 ">
+          <div class="card-body">
+            <div class="mt-lg-3" id="avance-dep-pp-fisica" style="height: 250px;  width:100%;"></div>
+          </div>
+        </div>
+
+      
+      </div>
+    </div>
+    <!-- Ejecución Financiera -->
+    <div class="card text-center shadow mt-2 mb-1">
+        <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+        font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información de la Ejecución Financiera</h1>
+      
+        <div class="row">
+          <div class="col-md-4 mt-4  ">
+            <div class="card-body">
+              <div class="mt-lg-3" id="chart-ejecfinanciera-dep" style="height: 250px;  width:100%;"></div>
+            </div>
+          
+          </div>
+          <div class="col-md-4 mt-4 ">
+            <div class="card-body">
+              <div class="mt-lg-3" id="avance-dep-inst-financiero" style="height: 250px;  width:100%;"></div>
+            </div>
+          </div>
+        <div class="col-md-4 mt-4 ">
+          <div class="card-body">
+            <div class="mt-lg-3" id="canvas-dep-pp-financiero" style="height: 250px;  width:100%;"></div>  
+          </div>
+        </div>
+
+
+        <div class="col-md-12">
+          <hr>
+          <div class="card-body">
+            <p style="text-align: left;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
+            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" id="analisispp"></p>
+          </div>
         
         </div>
       </div>
 
-
-<!-- Ejecución Física-->
-<div class="card text-center shadow mt-2 mb-1">
-  <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
-  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información de la Ejecución Física</h1>
- 
-  <div class="row">
-    <div class="col-md-4 mt-4  ">
-      <div class="card-body">
-        <div class="mt-lg-3" id="chart-ejecfisica-dep" style="height: 250px;  width:100%;"></div>
-      </div>
-    
     </div>
-   <div class="col-md-4 mt-4 ">
-     <div class="card-body">
-       <div class="mt-lg-3" id="canvas-dep-fisica-inst" style="height: 250px;  width:100%;"></div>
-     </div>
-   </div>
-   <div class="col-md-4 mt-4 ">
-     <div class="card-body">
-       <div class="mt-lg-3" id="avance-dep-pp-fisica" style="height: 250px;  width:100%;"></div>
-     </div>
-   </div>
+    <!--tarjetas de datos generales de los tipos de inversion-->
+    <div class="card text-center shadow mt-2 mb-1">
+        <div class="row">
+      
+          <div class="col-md-4  mt-2  mb-2 ">
+            <div class="card-body">
+              <div class="mt-lg-3" id="canvas-pa2-dep" style="height: 150px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
+                <thead style="background-color: #B2B1A7;"> 
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
+                </thead> 
+                <tbody id="tbl_comp">
+                  <tr>
+                    <td  id="compromisos-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="disponible-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="ordenado-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
+                    <td  id="total-dep"  style="font-weight: 400; width: 44px; text-align: center;"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-4  mt-2  mb-2 ">
+            <div class="card-body">
+              <div class="mt-lg-3" id="canvas-pa1-dep" style="height: 280px;  width:100%;"></div>
+            </div>
+          </div>
+        <div class="col-md-4  mt-2 mb-2 ">
+          <div class="card-body">
+            <div id="chart-proyectos-dep" style="height: 280px;  width:100%;"></div>
+          </div>
 
- 
- </div>
-</div>
-<!-- Ejecución Financiera -->
-<div class="card text-center shadow mt-2 mb-1">
-  <h1 class="mt-4" style="text-align: center;font-size: 28px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
-  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Información de la Ejecución Financiera</h1>
- 
-  <div class="row">
-    <div class="col-md-4 mt-4  ">
-      <div class="card-body">
-         <div class="mt-lg-3" id="chart-ejecfinanciera-dep" style="height: 250px;  width:100%;"></div>
-      </div>
-     
+          </div>
+        </div>
     </div>
-    <div class="col-md-4 mt-4 ">
-      <div class="card-body">
-        <div class="mt-lg-3" id="avance-dep-inst-financiero" style="height: 250px;  width:100%;"></div>
-      </div>
-    </div>
-   <div class="col-md-4 mt-4 ">
-     <div class="card-body">
-       <div class="mt-lg-3" id="canvas-dep-pp-financiero" style="height: 250px;  width:100%;"></div>  
-     </div>
-   </div>
-
-
-  <div class="col-md-12">
-    <hr>
-    <div class="card-body">
-      <p style="text-align: left;font-size: 18px;line-height: 20px;font-weight: 150;color:rgb(28, 55, 85);
-      font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;" id="analisispp"></p>
-    </div>
-  
-  </div>
- </div>
-
-</div>
-
-
-
- <!--tarjetas de datos generales de los tipos de inversion-->
- <div class="card text-center shadow mt-2 mb-1">
-  <div class="row">
- 
-    <div class="col-md-4  mt-2  mb-2 ">
-      <div class="card-body">
-         <div class="mt-lg-3" id="canvas-pa2-dep" style="height: 150px;  width:100%;"></div>
-      <div class="table-responsive-sm">
-        <table  class="table table-sm table-responsive-sm table-hover" style="font-size: small;">
-          <thead style="background-color: #B2B1A7;"> 
-            <th style="font-weight: 400; width: 44px; text-align: center;">Compromisos</th>
-            <th style="font-weight: 400; width: 44px; text-align: center;">Disponible</th>
-            <th style="font-weight: 400; width: 44px; text-align: center;">Ordenado</th>
-            <th style="font-weight: 400; width: 44px; text-align: center;">Total</th>
-          </thead> 
-          <tbody id="tbl_comp">
-            <tr>
-              <td  id="compromisos-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
-              <td  id="disponible-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
-              <td  id="ordenado-dep" style="font-weight: 400; width: 44px; text-align: center;"></td>
-              <td  id="total-dep"  style="font-weight: 400; width: 44px; text-align: center;"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-    <div class="col-md-4  mt-2  mb-2 ">
-      <div class="card-body">
-         <div class="mt-lg-3" id="canvas-pa1-dep" style="height: 280px;  width:100%;"></div>
-      </div>
-    </div>
-   <div class="col-md-4  mt-2 mb-2 ">
-     <div class="card-body">
-      <div id="chart-proyectos-dep" style="height: 280px;  width:100%;"></div>
-     </div>
-
-    </div>
-   </div>
-</div>
-
-
-
-
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <div class="card  shadow-sm p-3 mb-1 bg-white rounded text-center mt-2 mb-2">
   <div class="card ">
@@ -376,7 +360,7 @@
    </div>
   </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-</div>
+    </div>
 <div class="card-body ">
   <div class="col-12 col-12-mobilep form-group input-group justify-content-center" role="group">
     <button type="button" class="btn btn-outline-info mr-2" ><i class="fa fa-sellsy fa-1x" style="width: 20px; height: 20px;"></i></button>
@@ -419,44 +403,43 @@ Modal valstat
               <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
               font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="corte1"></span>
             </h5>
-
               <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
-                <thead class="thead-inverse">
-                  <tr  style="background-color:gray ;text-align: center;">
-                    <th colspan="6" >Estructura Plan de Desarrollo</th>
-                  </tr>
-                  <tr>
-                    <th style="text-align: center;">Cod.Línea</th>
-                    <th style="text-align: center;">Línea</th>
-                    <th style="text-align: center;">Cod. Componente</th>
-                    <th style="text-align: center;">Componente</th>
-                    <th style="text-align: center;">Cod. Programa</th>
-                    <th style="text-align: center;">Programa</th>
-                  </tr>
-                  <tr>
-                    <td  style="text-align: center;" id="cod_linea1"> </td>
-                    <td  style="text-align: center;" id="nom_linea1"> </td>
-                    <td  style="text-align: center;" id="cod_componente1"> </td>
-                    <td  style="text-align: center;" id="nom_componente1"> </td>
-                    <td  style="text-align: center;" id="cod_programa1"> </td>
-                    <td  style="text-align: center;" id="nom_programa1"> </td>
-                   </tr>
-                  <tr  style="background-color:gray ;text-align: center;">
-                    <th colspan="6" >Descripción Presupuestal</th>
-                  </tr>
-                  <tr style="background-color: rgb(204,211,212);">
-                    <th colspan="2" style="text-align: center;">POAI </th>
-                    <th colspan="2" style="text-align: center;">Presupuesto Ajustado </th>
-                    <th colspan="2" style="text-align: center;">Ejecución </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="2" style="text-align: center;" id="poai1" >  </td>
-                    <td colspan="2" style="text-align: center;" id="ppto_ajustado1"></td>
-                    <td colspan="2" style="text-align: center;"><span id="ejec1"> </span></td>
-                  </tr>
-                </tbody>
+                  <thead class="thead-inverse">
+                    <tr  style="background-color:gray ;text-align: center;">
+                      <th colspan="6" >Estructura Plan de Desarrollo</th>
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;">Cod.Línea</th>
+                      <th style="text-align: center;">Línea</th>
+                      <th style="text-align: center;">Cod. Componente</th>
+                      <th style="text-align: center;">Componente</th>
+                      <th style="text-align: center;">Cod. Programa</th>
+                      <th style="text-align: center;">Programa</th>
+                    </tr>
+                    <tr>
+                      <td  style="text-align: center;" id="cod_linea1"> </td>
+                      <td  style="text-align: center;" id="nom_linea1"> </td>
+                      <td  style="text-align: center;" id="cod_componente1"> </td>
+                      <td  style="text-align: center;" id="nom_componente1"> </td>
+                      <td  style="text-align: center;" id="cod_programa1"> </td>
+                      <td  style="text-align: center;" id="nom_programa1"> </td>
+                    </tr>
+                    <tr  style="background-color:gray ;text-align: center;">
+                      <th colspan="6" >Descripción Presupuestal</th>
+                    </tr>
+                    <tr style="background-color: rgb(204,211,212);">
+                      <th colspan="2" style="text-align: center;">POAI </th>
+                      <th colspan="2" style="text-align: center;">Presupuesto Ajustado </th>
+                      <th colspan="2" style="text-align: center;">Ejecución </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2" style="text-align: center;" id="poai1" >  </td>
+                      <td colspan="2" style="text-align: center;" id="ppto_ajustado1"></td>
+                      <td colspan="2" style="text-align: center;"><span id="ejec1"> </span></td>
+                    </tr>
+                  </tbody>
               </table>
             </div>
             <div class="col-md-12"> <hr>  </div>

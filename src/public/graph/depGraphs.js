@@ -77,6 +77,7 @@ async function _detalle_ejec_financiera(dep){
     console.error('Error _detalle_ejec_financiera', error);
   }
 }
+
 async function dep_estado(cod_dep){
 
   let terminal = document.getElementById("inputGroupSelectDependencia");
@@ -98,6 +99,7 @@ async function dep_estado(cod_dep){
  
 
 }
+
 async function _avancePDM(cod_dep){
     try {
       
@@ -113,6 +115,7 @@ async function _avancePDM(cod_dep){
       console.log('Error _avancePDM ',error )
     }
 }
+
 async function graphPDM(total){
 
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
@@ -204,6 +207,7 @@ fecha.setDate(dia+1)
       console.log('Error graphPDM: ', error)
     }
 }
+
 async function _avance_financiero(dep){
     try {
       fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefinanciero/dep/${dep}`)
@@ -217,6 +221,7 @@ async function _avance_financiero(dep){
       console.log('Error porc_avance_financiero ',error )
     }
 }
+
 async function _PASemaf (){
   try {
   
@@ -231,6 +236,7 @@ async function _PASemaf (){
   } catch (error) {
   }
 }
+
 async function porc_avance_financiero(avance){  
   try {
   
@@ -335,6 +341,7 @@ function graphPDA(poai, pptoajustado, ordenado){
       }).render();
     });
 }
+
 async function detallePpto(compromisos, disponible, ordenado , total){
     document.getElementById('compromisos-dep').innerHTML=  formatter.format((compromisos));
     document.getElementById('disponible-dep').innerHTML=  formatter.format((disponible));
@@ -378,6 +385,7 @@ async function detallePpto(compromisos, disponible, ordenado , total){
       }).render();
     });
 }
+
 async function columnGeo(dep){
     try {
         fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias/territorio/${dep}`)
@@ -524,6 +532,7 @@ async function columnGeo(dep){
       console.log('Error columnGeo: ', error)
     }
 }
+
 async function porc_avance_fisico(dep){
     try {
       fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefisico/dep/${dep}`)
@@ -583,6 +592,7 @@ async function porc_avance_fisico(dep){
       console.log('Error _avancePDM ',error )
     }
 }
+
 async function tipoinversion(dep){
    try {
      fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias/tipo-inversion/${dep}`)
@@ -597,6 +607,7 @@ async function tipoinversion(dep){
       console.log('Error tipoinversion', error)
     }
 }
+
 function stopEnterKey(evt) {
     var evt = (evt) ? evt : ((event) ? event : null);
     var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
@@ -694,6 +705,7 @@ FusionCharts.ready(function() {
     console.log('Error total_proyectos', error)
   }
 }
+
 async function avance_linea_dep(dep, nom_dep){
   try {
     let valores =[];
@@ -737,6 +749,7 @@ async function avance_linea_dep(dep, nom_dep){
      console.log('Error tipoinversion', error)
    }
 }
+
 async function avance_componente_dep(dep , nom_dep){
   try {
     let valores =[];
@@ -780,6 +793,7 @@ async function avance_componente_dep(dep , nom_dep){
     console.log('Error avance_componente_dep', error)
   }
 }
+
 async function avance_prgs_dep(dep, nom_dep){
   try {
     let info=[];
@@ -823,6 +837,7 @@ async function avance_prgs_dep(dep, nom_dep){
     console.log('Error avance_prgs_dep', error)
   }
 }
+
 async function plan_accion_dep(dep){  
  let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[];
 
@@ -1217,9 +1232,7 @@ var table1 = $('#table_tipo1').DataTable({
   } ); 
 }
 
-
-
- function buscavalstat(nomproyecto, cod, ejec){
+async function buscavalstat(nomproyecto, cod, ejec){
  
 try {
 
@@ -1288,6 +1301,7 @@ try {
 jQuery.noConflict();
   $('#exampleModal2').modal('show'); ;
 }
+
 async function geoProyect( nom, cod){
   try {
     fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias/proyectos/${cod}`)
@@ -1532,6 +1546,7 @@ async function geoProyect( nom, cod){
   console.log('Error groProyect', error)      
   }
 }
+
 async function contadorSemDep(cod){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/contador/dependencias/${cod}` )
@@ -1593,6 +1608,7 @@ async function contadorSemDep(cod){
     console.log('Error contadorSemaforo ',error)
   }
 }
+
 async function estado_sem_dep(cod_dep,codsemaforo) {
   try {
     let parametros={
@@ -1673,9 +1689,9 @@ async function proyecto_fisico(cod){
     .then(res=> res.json())
     .then(response=>{
       let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
-      let avancexfinanciero= parseFloat((response.data[0].porc_ejec_financiera)*100);
+      let avancexfinanciero= parseFloat((response.data[0].ejec_financiera)*100);
       proyecto_financiero(avancexfinanciero)*100
-      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].porc_ejec_financiera))*0.50 )*100
+      let ffp = ( (parseFloat(response.data[0].porc_eficacia_proyecto))*0.50   +  (parseFloat(response.data[0].ejec_financiera))*0.50 )*100
       //console.log("fisico ",avanxcefisicoproject);
       //console.log("financiero ",avancexfinanciero);
       //console.log("ffp ",ffp);
@@ -1750,6 +1766,7 @@ async function proyecto_fisico(cod){
  
  
 }
+
 async function proyecto_financiero(avancexfinanciero){
   const dataSource = {
     chart: {
@@ -1801,6 +1818,7 @@ async function proyecto_financiero(avancexfinanciero){
   });
 
 }
+
 async function fifapon(ffp){
   const dataSource = {
     chart: {
@@ -1899,7 +1917,6 @@ async function listvalstat_dep(){
     })
   } catch (error) {console.error('Error: ', error);}
 }
-
 
 async function tablavalstatdep(listado){
 try {
@@ -2006,7 +2023,6 @@ jQuery.noConflict();
 $('#ModaListVE').modal('show'); 
 }
 
-
 async function _cumplimiento_dependencia(dep){
   try {
     fetch(`https://sse-pdm.herokuapp.com/dep/api/cumplimiento/${dep}`)
@@ -2075,9 +2091,7 @@ async function _cumplimiento_dependencia(dep){
 
 async function   _grapPPfinancieroDep(valor){
   try {
-
    //document.getElementById('canvas-dep-pp-financiero').innerHTML=(valor*100).toFixed(2)
-
    const dataSource = {
     chart: {
       caption: "% Presupuesto Participativo",
@@ -2132,7 +2146,6 @@ FusionCharts.ready(function() {
   console.error('Error ', error);
   }
 }
-
 
 async function _grapPtoInstDep(valor){
   try {
@@ -2189,6 +2202,7 @@ async function _grapPtoInstDep(valor){
     console.error('Error _grapPtoInstDep', error);
   }
 }
+
 async function _graphFisicoDep(valor){
   try {
     const dataSource = {
@@ -2244,6 +2258,7 @@ async function _graphFisicoDep(valor){
     console.error('Error  _graphFisicoDep', error);
   }
 }
+
 async function _graphPorcFisicoPP(valor){
   try {
     const dataSource = {
