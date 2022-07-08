@@ -26,17 +26,7 @@
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
   <%- include ('../partials/head.html') %>
-  <style>
-    #container {
-      padding-left: 50px;
-      padding-right: 60px;
-      padding-top: 5px;
-      padding-bottom: 2px;
-    }
-
-    tr {
-      height: 2px;
-    }
+  <style>#container {padding-left: 50px;padding-right: 60px;padding-top: 5px;padding-bottom: 2px;}tr {height: 2px;}
   </style>
 </head>
 <%- include ('../partials/menuplapp.html')%>
@@ -45,7 +35,7 @@
 
   <div id="container" class="container-fluid mt-2">
     <div class="row">
-      <div class="row">
+ 
         <div class="col-md-12 mt-4  shadow-lg p-3  mt-2   mb-1 rounded" style="height: auto;">
           <div class="card-body  ">
             <h6 class="text-muted" style="text-align: center;font-size: 20px;line-height: 20px;font-weight: 200;color: #73879C;
@@ -57,15 +47,10 @@
            
           </div>
         </div>
-
-
-      <div class="col-md-12 mt-2 shadow-lg p-3 mb-1 rounded">
-        <div class="card-body " style="height: 680px;">
-          <div class="row">
-            <div class="card col-md-6 shadow-lg" style="  border-radius: 20px;height: 600px;">
+         <div class="card col-md-12 shadow-lg" style="  border-radius: 20px;height: 600px;">
               <div class="row">
-                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                  <div class="card text-center">
+                <div class="col-md-3  mb-1 p-3 mt-2 bg-white rounded ">
+                  <div class="card w-80 text-center">
                     <div class="card-header">
                       <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
                             font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Deficiente
@@ -116,8 +101,8 @@
                   </div>
                 </div>
 
-                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                  <div class="card text-center">
+                <div class="col-md-3  mb-1 p-3 mt-2 bg-white rounded ">
+                  <div class="card w-80 text-center">
                     <div class="card-header">
                       <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
                             font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Escasa utilización
@@ -156,13 +141,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div class="card col-md-6  shadow-lg  " style="  border-radius: 20px;">
-              <div class="row">
-                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                  <div class="card text-center">
+                <div class="col-md-3 mb-1 p-3 mt-2 bg-white rounded ">
+                  <div class="card w-80 text-center">
                     <div class="card-header">
                       <h5 style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
                                               font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
@@ -199,8 +180,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6  mb-1 p-3 mt-2 bg-white rounded ">
-                  <div class="card text-center">
+
+                <div class="col-md-3  mb-1 p-3 mt-2 bg-white rounded ">
+                  <div class="card w-80 text-center">
                     <div class="card-header">
                       <h5 class="card-title" style=" width: 100%; height: 50px;text-align: center;font-size: 20px;line-height: 30px;font-weight: 300;color: #511281;
                                             font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">
@@ -240,45 +222,46 @@
                 </div>
 
               </div>
-
             </div>
 
-          </div>
-        </div>
-      </div>
 
-      <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <h3>Escasa utilización ($)</h3>
-            <table id="alerta_financiera" class="table table-striped table-bordered table-sm " style="font-size: small;"
-              width="100%"></table>
-          </div>
-        </div>
-        <div class="collapse" id="collapseExample2">
-          <div class="card card-body">
-            <h3>Deficiente desempeño de los proyectos</h3>
-            <table id="alerta_fisica" class="table table-striped table-bordered table-sm "
-              style="font-size: small;font-size:small " width="100%"></table>
-          </div>
-        </div>
-        <div class="collapse" id="collapseExample3">
-          <div class="card card-body">
-            <h3>Alta ejecución financiera y bajo desempeño</h3>
-            <table id="alerta_fisica_finan" class="table table-striped table-bordered table-sm "
-              style="font-size: small;font-size:small " width="100%"></table>
-          </div>
-        </div>
-        <div class="collapse" id="collapseExample4">
-          <div class="card card-body">
-            <h3>Desequilibrio en el desempeño versus la ejecución ($)</h3>
-            <table id="alerta_ponds" class="table table-striped table-bordered table-sm "
-              style="font-size: small;font-size:small " width="100%"></table>
-          </div>
-        </div>
-      </div>
+            <div class="col-md-12 mt-4  shadow-lg p-3 mb-1  rounded">
+              <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                  <h3>Escasa utilización ($)</h3>
+                  <table id="alerta_financiera" class="table table-striped table-bordered table-sm " style="font-size: small;"
+                    width="100%"></table>
+                </div>
+              </div>
+              <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                  <h3>Deficiente desempeño de los proyectos</h3>
+                  <table id="alerta_fisica" class="table table-striped table-bordered table-sm "
+                    style="font-size: small;font-size:small " width="100%"></table>
+                </div>
+              </div>
+              <div class="collapse" id="collapseExample3">
+                <div class="card card-body">
+                  <h3>Alta ejecución financiera y bajo desempeño</h3>
+                  <table id="alerta_fisica_finan" class="table table-striped table-bordered table-sm "
+                    style="font-size: small;font-size:small " width="100%"></table>
+                </div>
+              </div>
+              <div class="collapse" id="collapseExample4">
+                <div class="card card-body">
+                  <h3>Desequilibrio en el desempeño versus la ejecución ($)</h3>
+                  <table id="alerta_ponds" class="table table-striped table-bordered table-sm "
+                    style="font-size: small;font-size:small " width="100%"></table>
+                </div>
+              </div>
+            </div>
     </div>
   </div>
+   
+
+    
+ 
+
   <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Modal valstat
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->

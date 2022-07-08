@@ -56,7 +56,7 @@ async  function alerta_financiera(alerta){
               response.data[index].ppto_ajustado,
               (response.data[index].porc_ejec_financiera*100).toFixed(2),
               (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
-                      response.data[index].tipo_iniciativa
+              response.data[index].tipo_iniciativa
             ]);
                 
       }
@@ -428,23 +428,22 @@ async function alertaponderado(){
     fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/ponderado`)
     .then(res=>res.json())
     .then(response=>{
-
-          document.getElementById('alertaponds').innerHTML=response.data.length
-      //falta generar la tabla dinamica con los proyectos generados por la consulta
       for (let index = 0; index < response.data.length; index++) {
-        alertasponds.push([
-          response.data[index].cod_dependencia,
-          response.data[index].nom_dependencia,"",
-          response.data[index].cod_proyecto,
-          response.data[index].nom_proyecto,
-          (response.data[index].poai),
-          response.data[index].ppto_ajustado,
-          (response.data[index].ejec_financiera*100).toFixed(2),
-          (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
-          (response.data[index].ponderado*100).toFixed(2)
-        ])
-       
+        if(response.data[index].ponderado<=0.40){
+          alertasponds.push([
+            response.data[index].cod_dependencia,
+            response.data[index].nom_dependencia,"",
+            response.data[index].cod_proyecto,
+            response.data[index].nom_proyecto,
+            (response.data[index].poai),
+            response.data[index].ppto_ajustado,
+            (response.data[index].ejec_financiera*100).toFixed(2),
+            (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
+            (response.data[index].ponderado*100).toFixed(2)
+          ])
+        }
     }
+    document.getElementById('alertaponds').innerHTML=alertasponds.length
     var tableAlertaPond = $('#alerta_ponds').DataTable({
       data: alertasponds,
       columns: [
@@ -1283,36 +1282,25 @@ function buscavalstat(nomproyecto, cod, ejec){
 
 
 
-  async function alertafisicamodal()
-  {
+  async function alertafisicamodal() {
     try {
-    let countalertdep=[];
+      let countalertdep = [];
       fetch(`https://sse-pdm.herokuapp.com/pa/pi/alerta/cuentadepfisica/${vlr_alerta}`).
-      then(res=>res.json()).then(response=>{
-
-
-      for (let index = 0; index < response.data.length; index++) {
-     countalertdep.push(
-          {  label : response.data[index].nom_dependencia,
-              value: parseInt(response.data[index].total_dep)
+      then(res => res.json()).then(response => {
+        for (let index = 0; index < response.data.length; index++) {
+          countalertdep.push({
+            label: response.data[index].nom_dependencia,
+            value: parseInt(response.data[index].total_dep)
           })
-        
-      }
-
-
-
-pintalertcountdep(countalertdep)
-jQuery.noConflict();
-$('#alertaejecfisicaModal').modal('show'); 
-        
+        }
+        pintalertcountdep(countalertdep)
+        jQuery.noConflict();
+        $('#alertaejecfisicaModal').modal('show');
       })
-
     } catch (error) {
       console.error('Error alertafisicamodal');
-      
     }
-  
-}
+  }
   
 async function pintalertcountdep(countalertdep){
   try {
@@ -1324,7 +1312,7 @@ async function pintalertcountdep(countalertdep){
         yaxisname: "Total de proyectos en alerta",
         
         showvalues: "1",
-        theme: "gammel"
+        theme: "candy"
       },
       data: 
         countalertdep
