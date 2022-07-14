@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "engines": {
     "node": "16.14.0",
-    "npm":"8.3.1"
+    "npm":"8.3.1",
+    "stack": "heroku-22"
   },
   "description": "Ejercicios para desarrollo front consumiendo API´s # pi-Cliente",
   "main": "index.js",
