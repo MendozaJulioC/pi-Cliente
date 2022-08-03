@@ -84,13 +84,14 @@ async function detalleAvanceLinea(){
     let NomPIL=[]; 
     //let AvanceJun2021=[]; let CumplimientoJun21=[]; 
     //let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
-    let AvanceAgo2021=[]; let CumplimientoAgo21=[];
-    let AvanceSep2021=[]; let CumplimientoSep21=[];
-    let AvanceOct2021=[]; let CumplimientoOct21=[];
+    //let AvanceAgo2021=[]; let CumplimientoAgo21=[];
+    //let AvanceSep2021=[]; let CumplimientoSep21=[];
+   // let AvanceOct2021=[]; let CumplimientoOct21=[];
     let AvanceDic2021=[]; let CumplimientoDic21=[];
     let AvanceDic20=[]; let CumplimientoDic20=[];
     let AvanceFeb22=[]; let CumplimientoFeb22=[];
     let AvanceAbr22=[]; let CumplimientoAbr22=[];
+    let AvanceJun22=[];let CumplimientoJun22=[];
 
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
@@ -110,6 +111,9 @@ async function detalleAvanceLinea(){
 
         AvanceAbr22.push ({ "value" :  parseFloat(response.data[z].Avance2022_04_30) }) 
         CumplimientoAbr22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_04_30) }) 
+
+        AvanceJun22.push ({ "value" :  parseFloat(response.data[z].Avance2022_06_30) }) 
+        CumplimientoJun22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_06_30) }) 
 
         NomPIL.push({ "label" : response.data[z].nom_linea })
       }
@@ -164,6 +168,14 @@ async function detalleAvanceLinea(){
           {
             seriesname: "Cumplimiento Abril 2022",
             data: CumplimientoAbr22
+          }
+          ,{
+            seriesname: "Avance Junio 2022",
+            data:AvanceJun22
+          },
+          {
+            seriesname: "Cumplimiento JUnio 2022",
+            data: CumplimientoJun22
           }
         ]
       };
