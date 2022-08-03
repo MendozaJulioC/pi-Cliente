@@ -299,6 +299,7 @@ async function graphPDA(poai, pptoajustado, ordenado){
     }).render();
   });
 }
+
 async function detallePpto(compromisos, disponible, ordenado , total){
   document.getElementById('compromisos').innerHTML=  formatter.format((compromisos));
   document.getElementById('disponible').innerHTML=  formatter.format((disponible));
@@ -553,6 +554,7 @@ async function columnDependencias(){
   });
  })
 }
+
 function stopEnterKey(evt) {
       var evt = (evt) ? evt : ((event) ? event : null);
       var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
@@ -733,7 +735,7 @@ async function getalerta(){
     } catch (error) {
       console.error('Error getalerta ', error);
     }
-  }
+}
   
 async function cumple_linea_dep(rojo, verde, vigencia){
   try {
@@ -746,7 +748,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
         let tam = response.data.length;
         for(let i =0; i<tam;i++){
       // if(response.data[i].avance!=0){
-         cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2021)*100)
+         cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2022)*100)
          console.log(cumpverde, parseFloat(verde)); 
         if (cumpverde>=parseFloat(verde)){colorsemafcumple="#58AC84"}
         else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
@@ -754,7 +756,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
      //  }
         infocumple.push({
               "label" : response.data[i].nombre_dep,
-              "value": (response.data[i].avance/response.data[i].programado2021)*100,
+              "value": (response.data[i].avance/response.data[i].programado2022)*100,
               "color": colorsemafcumple,
              // "link": "j-showAlert-"+response.data[i].cod_responsable_reporte
           })
@@ -787,7 +789,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
     }
     jQuery.noConflict();
     $('#cumplimientoModal').modal('show'); 
-  }
+}
 
-  getCorteAvancePI()
+getCorteAvancePI()
   
