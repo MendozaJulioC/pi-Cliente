@@ -5,12 +5,9 @@ const formatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2
   })
 
-
-
 async function alertamain(){
   getalerta()
 }
-
 
 async function getalerta(){
   try {
@@ -20,8 +17,6 @@ async function getalerta(){
       let cortealerta= new Date(response.data[0].corte) 
       mespa = cortealerta.getMonth(cortealerta)+1
       vigencia = cortealerta.getFullYear(cortealerta)
-    
-
       fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/valor/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
@@ -54,11 +49,10 @@ async  function alerta_financiera(alerta){
               response.data[index].nom_proyecto,
               (response.data[index].poai),
               response.data[index].ppto_ajustado,
-              (response.data[index].porc_ejec_financiera*100).toFixed(2),
+              (response.data[index].ejec_financiera*100).toFixed(2),
               (response.data[index].porc_eficacia_proyecto*100).toFixed(2),
               response.data[index].tipo_iniciativa
-            ]);
-                
+            ]); 
       }
       let tableAlertaFinanciera= $('#alerta_financiera').DataTable({
         data: valor_alertafinanciera,
