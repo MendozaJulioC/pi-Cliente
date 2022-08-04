@@ -38,11 +38,12 @@ async function getCorteAvancePI() {
 
 async function _PASemaf(mes, vigencia, corte) {
   try {
-    mespa = mes + 1 //fecha.getMonth(fecha)+1
+    mespa = mes//fecha.getMonth(fecha)+1
     vigencia = vigencia //fecha.getFullYear(fecha)
     fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
       .then(res => res.json())
       .then(response => {
+        
         valorminimopa = (response.data[0].rojo);
         valormaximopa = (response.data[0].verde);
         porc_avance_fisico(valorminimopa, valormaximopa)
@@ -279,6 +280,7 @@ async function graphPDA(poai, pptoajustado, ordenado) {
 
 async function porc_avance_fisico(valorminimopa, valormaximopa) {
   try {
+
     fetch('https://sse-pdm.herokuapp.com/pa/api/avancefisico')
       .then(res => res.json())
       .then(datos => {
@@ -391,7 +393,7 @@ async function ejecFisicaInst() {
 }
 
 async function detallePpto(compromisos, disponible, ordenado, total) {
-  console.log(compromisos, disponible, ordenado, total);
+  //console.log(compromisos, disponible, ordenado, total);
   /*document.getElementById('compromisos').innerHTML=  formatter.format((compromisos));
   document.getElementById('disponible').innerHTML=  formatter.format((disponible));
   document.getElementById('ordenado').innerHTML=  formatter.format((ordenado));

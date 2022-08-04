@@ -30,11 +30,7 @@ async function detalleAvance(){
                   triadaInicial2(response.data[i].cumplimiento)
                 }
               }
-             
             }
-
-          
-
           const dataSource = {
             chart: {
             caption: "<strong>Avance Cuatrienio y Cumplimiento Año</strong>",
@@ -95,11 +91,7 @@ async function detalleAvanceLinea(){
     let AvanceL3=[]; 
     let AvanceL4=[]; 
     let AvanceL5=[]; 
-    
-    
-    
 
- 
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
     .then( res=> res.json())
