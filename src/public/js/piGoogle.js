@@ -6,6 +6,7 @@ async function detalleAvance(){
   try { var fecha=0; var mes=0
         let AvancePI=[]
         let CortePlan=[]
+      
         let CumplimientoPI=[]; let tipo_corte=[];
         //fetch(`/pi/google`)
         fetch(`https://sse-pdm.herokuapp.com/pi/api/generalpi`)
@@ -21,7 +22,7 @@ async function detalleAvance(){
             for(let i =0; i<tam;i++){
               if ((response.data[i].tipo_corte) != 'P') {
                 AvancePI.push ({ "value" :  (response.data[i].avance) })  
-                CortePlan.push({ "label" :  `${response.data[i].corte.substr(0,10)}(${response.data[i].tipo_corte}) `})
+                CortePlan.push({ "label" :  `${response.data[i].corte.substr(0,10)}(${response.data[i].tipo_corte})`})
                 CumplimientoPI.push ({ "value" : response.data[i].cumplimiento })  
                 var fecha = response.data[i].corte
                 let fechacorte=fecha.substr(0,10)
@@ -81,116 +82,113 @@ async function detalleAvance(){
 
 async function detalleAvanceLinea(){
   try {
-    let NomPIL=[]; 
+      let CortePlan2=[]
+  
     //let AvanceJun2021=[]; let CumplimientoJun21=[]; 
     //let ProyecAvanDic21=[]; let ProyecCumpDic21=[];
     //let AvanceAgo2021=[]; let CumplimientoAgo21=[];
     //let AvanceSep2021=[]; let CumplimientoSep21=[];
    // let AvanceOct2021=[]; let CumplimientoOct21=[];
-    let AvanceDic2021=[]; let CumplimientoDic21=[];
-    let AvanceDic20=[]; let CumplimientoDic20=[];
-    let AvanceFeb22=[]; let CumplimientoFeb22=[];
-    let AvanceAbr22=[]; let CumplimientoAbr22=[];
-    let AvanceJun22=[];let CumplimientoJun22=[];
+    
+    let AvanceL1=[]; 
+    let AvanceL2=[]; 
+    let AvanceL3=[]; 
+    let AvanceL4=[]; 
+    let AvanceL5=[]; 
+    
+    
+    
 
+ 
     fetch(`https://sse-pdm.herokuapp.com/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
     .then( res=> res.json())
     .then(response=>{
       // console.log(response.data);
-      let tam = response.data.length;
-      for(let z =0; z<tam;z++){
-        AvanceDic20.push({"value" :  parseFloat(response.data[z].Avance2020_12_31)})
-        CumplimientoDic20.push({"value" :  parseFloat(response.data[z].Cumplimiento2020_12_31) })
-      
-        AvanceDic2021.push ({ "value" :  parseFloat(response.data[z].Avance2021_12_31) })  
-        CumplimientoDic21.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2021_12_31) }) 
-      
-        AvanceFeb22.push ({ "value" :  parseFloat(response.data[z].Avance2022_02_28) }) 
-        CumplimientoFeb22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_02_28) }) 
-
-        AvanceAbr22.push ({ "value" :  parseFloat(response.data[z].Avance2022_04_30) }) 
-        CumplimientoAbr22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_04_30) }) 
-
-        AvanceJun22.push ({ "value" :  parseFloat(response.data[z].Avance2022_06_30) }) 
-        CumplimientoJun22.push ({ "value" :  parseFloat(response.data[z].Cumplimiento2022_06_30) }) 
-
-        NomPIL.push({ "label" : response.data[z].nom_linea })
-      }
-      const dataSource = {
-        chart: {
-          caption: "Avance Cuatrienio y Cumplimiento Año por Línea Estratégica",
-          subcaption: "PDM 2020-2023",
-          xaxisname: "Seguimiento",
-          yaxisname: "Desempeño Alcanzado",
-          formatnumberscale: "1",
-          numbersuffix: "%",
-          showvalues:"1",
-          valuefontsize: "20",
-          labelfontsize: "12",
-          legendItemFontSize: "12",
-          legendIconScale: "1",
-          plottooltext:"<b>$dataValue</b> Desempeño reportado <b>$seriesName</b> en $label",
-          theme: "zune",
-          drawcrossline: "1"
-        },
-        categories: [{category: NomPIL}],
-        dataset: [
-          {
-            seriesname: "Avance Dic 2020",
-            data:AvanceDic20
-          },
-          {
-            seriesname: "Cumplimiento Dic 2020",
-            data:CumplimientoDic20
-          },
-          {
-            seriesname: "Avance Diciembre 2021",
-            data:AvanceDic2021
-          },
-          {
-            seriesname: "Cumplimiento Diciembre 2021",
-            data: CumplimientoDic21
-          },
-          {
-            seriesname: "Avance Febrero 2022",
-            data:AvanceFeb22
-          },
-          {
-            seriesname: "Cumplimiento Febrero 2022",
-            data: CumplimientoFeb22
+        fetch(`https://sse-pdm.herokuapp.com/pi/api/corteslineas`).then(res=> res.json())
+        .then(datos=>{        
+          for (let index = 0; index < datos.data.length; index++) {
+            CortePlan2.push({ "label" :  `${datos.data[index].corte.substr(0,10)}(${datos.data[index].tipo})`})
           }
-          ,
-          {
-            seriesname: "Avance Abril 2022",
-            data:AvanceAbr22
-          },
-          {
-            seriesname: "Cumplimiento Abril 2022",
-            data: CumplimientoAbr22
+          //console.log(CortePlan2)
+          console.log(response.data[0].cod_linea)
+          for (let x = 0; x < response.data.length; x++) {
+           if( response.data[x].cod_linea==1){AvanceL1.push({value: response.data[x].avance}) }
+           if( response.data[x].cod_linea==2){AvanceL2.push({value: response.data[x].avance})}
+           if( response.data[x].cod_linea==3){AvanceL3.push({value: response.data[x].avance})}
+           if( response.data[x].cod_linea==4){AvanceL4.push({value: response.data[x].avance})}
+           if( response.data[x].cod_linea==5){AvanceL5.push({value: response.data[x].avance})}
           }
-          ,{
-            seriesname: "Avance Junio 2022",
-            data:AvanceJun22
-          },
-          {
-            seriesname: "Cumplimiento JUnio 2022",
-            data: CumplimientoJun22
-          }
-        ]
-      };
-      FusionCharts.ready(function() {
-        var myChart = new FusionCharts({
-          type: "mscolumn2d",
-          renderAt: "chart-avancelineas",
-          width: "100%",
-          height: "100%",
-          dataFormat: "json",
-          dataSource
-        }).render();
-      });
+          const dataSource = {
+            chart: {
+              caption: "Avance por Líneas",
+              subcaption: "2020-2023",
+              xaxisname: "Cortes",
+              yaxisname: "Total Avance por Línea en cada corte",
+              formatnumberscale: "1",
+              numbersuffix: "%",
+              valuefontsize: "16",
+              labelfontsize:"16",
+              legendItemFontSize: "14",
+              legendIconScale: "1",
+              formatnumberscale: "0",
+              adjustdiv: "0",
+              yaxismaxvalue: "100",
+              numdivlines: "4",
+              showvalues: "1",
+              animation: "1",
+              plottooltext:
+                "<b>$dataValue</b>% Avance<b>$seriesName</b> en $label",
+              theme: "zune",
+              drawcrossline: "1",
+              showvalues: "1",
+            },
+            categories: [
+              {
+                category: CortePlan2
+              }
+            ],
+            dataset: [
+              {
+                seriesname: "Reactivación Económica y Valle del Software",
+                data: AvanceL1
+              },
+              {
+                seriesname: "Transformación Educativa y Cultural",
+                data: AvanceL2
+              },
+              {
+                seriesname: "Medellín me Cuida",
+                data: AvanceL3
+              } , {
+                seriesname: "Ecociudad",
+                data: AvanceL4
+              } ,
+              
+              {
+                seriesname: "Gobernanza y Gobernabilidad",
+                data: AvanceL5
+              }
+              // se púede agregar los cumplimientos 
+             
+            ]
+          };
+          
+          FusionCharts.ready(function() {
+            var myChart = new FusionCharts({
+              type: "mscolumn2d",
+              renderAt: "chart-avancelineas",
+              width: "100%",
+              height: "100%",
+              dataFormat: "json",
+              dataSource
+            }).render();
+          });
+
+        })
+    
     })
-  } catch (error) {console.error(error);}   
+    } catch (error) {console.error(error);}   
 }
 
 async function triadaInicial2(datos){
