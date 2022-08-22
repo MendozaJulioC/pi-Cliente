@@ -801,13 +801,13 @@ async function cumple_linea_dep(rojo, verde, vigencia){
         let tam = response.data.length;
         for(let i =0; i<tam;i++){
           if(response.data[i].avance >0){
-            cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2021)*100)
+            cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2022)*100)
             if (cumpverde>=parseFloat(verde)){colorsemafcumple="#58AC84"}
             else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
             else {colorsemafcumple="#FFBD2E"}
             infocumple.push({
               "label" : response.data[i].nombre_dep,
-              "value": ((response.data[i].avance/response.data[i].programado2021)*100),
+              "value": ((response.data[i].avance/response.data[i].programado2022)*100),
               "color": colorsemafcumple,
               // "link": "j-showAlert-"+response.data[i].cod_responsable_reporte
             })
