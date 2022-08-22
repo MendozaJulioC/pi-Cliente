@@ -689,6 +689,7 @@ async function ejecfisicarank() {
           })
         }
         infofisicadep.sort((a, b) => b.value - a.value)
+
         const dataSource = {
           chart: {
             aligncaptionwithcanvas: "0",
@@ -696,7 +697,8 @@ async function ejecfisicarank() {
             plottooltext: "<b>$dataValue</b> leads received",
             theme: "zune"
           },
-          data: infofisicadep
+          data: infofisicadep, 
+      
         };
         FusionCharts.ready(function () {
           var myChart = new FusionCharts({

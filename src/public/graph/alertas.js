@@ -3,7 +3,7 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD',
   minimumFractionDigits: 2
 })
-var mes=0, vigencia=0, minimovalue=0, maximovalue=0; valorminimo=0;valormaximo=0;
+var mes=0, vigencia=0, minimovalue=0, maximovalue=0; valorminimo=0;valormaximo=0;esperado=0;
 var colorfondo='';
 let valores=[]; let valores2=[]; let valores3=[];
 
@@ -11,6 +11,41 @@ async function dateomain(){
   setTimeout(function(){ avance_linea_dep()   }, 4000);
   semaforo_inicial()
   getalerta()
+  getCorteAvancePI()
+}
+
+async function getCorteAvancePI(){
+  try {
+    fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+    .then(res=>res.json())
+    .then(response=>{
+      let corteavance= new Date(response.data[0].corte) 
+      let vigencia = corteavance.getFullYear(corteavance)
+      fecha= corteavance;
+      fechaPA=corteavance
+     
+      
+       switch (vigencia) {
+         case 2020:
+           mes= corteavance.getMonth(corteavance)+1
+         break;
+         case 2021:
+           mes= corteavance.getMonth(corteavance)+13
+         break;
+         case 2022:
+           mes= corteavance.getMonth(corteavance)+25
+         break;
+         case 2023:
+           mes= corteavance.getMonth(corteavance)+37
+         break;
+         default:
+         break;
+       }
+        esperado=(mes/48)*100
+    })
+  } catch (error) {
+    console.error('Error getalerta ', error);
+  }
 }
 
 async function semaforo_inicial(){
@@ -27,6 +62,7 @@ async function semaforo_inicial(){
 
   })
 }
+
 async function avance_linea_dep(){
   try {
     let info=[];
@@ -56,11 +92,44 @@ async function avance_linea_dep(){
           theme: "zune",
           numbersuffix: "%"
         },
-        data: info
+        trendlines: [
+          {
+            line: [
+              {
+                startvalue: esperado,
+                color: "#5D62B5",
+                thickness: "3.5",
+              
+                displayvalue: "<b>Esperado</b>",
+                tooltext: "<b>Esperado Corte $startvalue%</b>",
+
+
+                dashed: "1",
+                dashLen: "5",
+                dashGap: "4"
+              },
+              {
+                startvalue: ((36/48)*100),
+                color: "#1E8449",
+                thickness: "2.5",
+              
+                displayvalue: "<b>Fin Vigencia </b>",
+                tooltext: "<b>Esperado Fin Vigencia $startvalue%</b>",
+
+
+                dashed: "1",
+                dashLen: "4",
+                dashGap: "2"
+              }
+            ]
+          }
+        ],
+        data: info,    
+     
       };
       FusionCharts.ready(function() {
         var myChart = new FusionCharts({
-          type: "bar3d",
+          type: "bar2d",
           renderAt: "chart-container",
           width: "100%",
           height: "100%",
@@ -76,7 +145,7 @@ async function avance_linea_dep(){
         }).render();
       });
       
-    })
+      })
   } catch (error) {
     console.error('Error _avancePDM ',error )
   }
@@ -86,6 +155,7 @@ async function avance_linea_dep(){
   _avancePDM()
   alertasGraph()
 }
+
 async function alertasGraph(){
   try {
     let tabla='';
@@ -273,6 +343,7 @@ async function alertasGraph(){
     console.error('Error alertasGraph ', error)
   }
 }
+
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -281,6 +352,7 @@ $(document).ready(function(){
     });
   });
 });
+
 async function _avancePDM(){
   try {
     fetch('https://sse-pdm.herokuapp.com/pi/api/total')
@@ -293,6 +365,7 @@ async function _avancePDM(){
     console.error('Error _avancePDM ',error )
   }
 }
+
 async function otragrafica(data){
   //console.log(data.data);
   let cod_dep = (data.data.link).substring(12,15)
@@ -313,7 +386,6 @@ async function otragrafica(data){
   }
 
 }
-
 
 async function noprogramadas(gris){
   const dataSource = {
@@ -349,6 +421,7 @@ async function noprogramadas(gris){
     }).render();
   });
 }
+
 async function rojo(rojo){
   const dataSource = {
     chart: {
@@ -383,6 +456,7 @@ async function rojo(rojo){
     }).render();
   });
 }
+
 async function amarillo(amarillo){
   const dataSource = {
     chart: {
@@ -417,6 +491,7 @@ async function amarillo(amarillo){
     }).render();
   });
 }
+
 async function verde(verde){
   const dataSource = {
     chart: {
@@ -452,6 +527,7 @@ async function verde(verde){
     }).render();
   });
 }
+
 async function hola (cod_dep,nom_dep,avance){
   try {
     document.getElementById('nom_depencia_query').innerHTML=nom_dep
@@ -559,157 +635,142 @@ async function hola (cod_dep,nom_dep,avance){
   $('#exampleModal5').modal('show'); 
 }
 
-
 async function alerta_rojos(){
-try {
-  swal("Reporte creado búsquelo al final de la página!");
-  let valoresRojos=[]
-  let avance=""
-  fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/rojos`)
-  .then(res=> res.json())
-  .then(response=>{
+  try {
+    swal("Reporte creado búsquelo al final de la página!");
+    let valoresRojos=[]
+    let avance=""
+    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/rojos`)
+    .then(res=> res.json())
+    .then(response=>{
 
-    for (let index = 0; index < response.data.length; index++) {
-      if (response.data[index].avance_cuatrienio== -1) {
-        avance = "N/A"
-      } else if(response.data[index].avance_cuatrienio== -2){
-        avance = "N/D"
-      } else{
-        avance = ((response.data[index].avance_cuatrienio)*100).toFixed(2)
+      for (let index = 0; index < response.data.length; index++) {
+        if (response.data[index].avance_cuatrienio== -1) {
+          avance = "N/A"
+        } else if(response.data[index].avance_cuatrienio== -2){
+          avance = "N/D"
+        } else{
+          avance = ((response.data[index].avance_cuatrienio)*100).toFixed(2)
+        }
+
+        valoresRojos.push([
+          response.data[index].cod_linea,
+          response.data[index].nom_linea,
+          response.data[index].cod_componente,
+          response.data[index].nom_componente,
+          response.data[index].cod_programa,
+          response.data[index].nom_programa,
+          response.data[index].tipo_ind,
+          response.data[index].cod_indicador,
+          response.data[index].nom_indicador, 
+          response.data[index].meta_plan,
+          response.data[index].cod_responsable_reporte,
+          response.data[index].nom_cortp,
+          avance,
+          response.data[index].observaciones_indicador
+        ])
       }
-
-      valoresRojos.push([
-        response.data[index].cod_linea,
-        response.data[index].nom_linea,
-        response.data[index].cod_componente,
-        response.data[index].nom_componente,
-        response.data[index].cod_programa,
-        response.data[index].nom_programa,
-        response.data[index].tipo_ind,
-        response.data[index].cod_indicador,
-        response.data[index].nom_indicador, 
-        response.data[index].meta_plan,
-        response.data[index].cod_responsable_reporte,
-        response.data[index].nom_cortp,
-        avance,
-        response.data[index].observaciones_indicador
-      ])
-    }
-    var tableRed= $('#alerta_rojos').DataTable( {
-      data: valoresRojos,
-      columns: [
-          { title: "Cod_Línea" },
-          { title: "Línea" },
-          { title: "cod_componente" }, 
-          { title: "Componente" }, 
-          { title: "cod_prg" },
-          { title: "Programa" },
-          { title: "Tipo_Ind" },
-          { title: "Cod_Ind" },
-          { title: "Nombre Indicador" },
-          { title: "Meta plan" },
-          { title: "Cod_dep" },
-          { title: "Responsable reporte" },
-         { title: "% Avance" },
-         { title: "Obesrvaciones" },
-        ] ,   
-      scrollCollapse: true, 
-      fixedColumns: {
-        heightMatch: 'none'
-    }, fixedHeader: true,
-      stateSave: true,
-        "language": {
-          "lengthMenu": "Mostrar _MENU_ registros por página",
-          "zeroRecords": "Nothing found - sorry",
-          "info": "Vistas página _PAGE_ of _PAGES_",
-          "infoEmpty": "No hay registros Disponibles",
-          "infoFiltered": "(filtered from _MAX_ total registros)", 
-          paginate: {
-            first: "Primera",
-            last: "Última",
-            next: "Siguiente",
-            previous: "Anterior"
+      var tableRed= $('#alerta_rojos').DataTable( {
+        data: valoresRojos,
+        columns: [
+            { title: "Cod_Línea" },
+            { title: "Línea" },
+            { title: "cod_componente" }, 
+            { title: "Componente" }, 
+            { title: "cod_prg" },
+            { title: "Programa" },
+            { title: "Tipo_Ind" },
+            { title: "Cod_Ind" },
+            { title: "Nombre Indicador" },
+            { title: "Meta plan" },
+            { title: "Cod_dep" },
+            { title: "Responsable reporte" },
+          { title: "% Avance" },
+          { title: "Obesrvaciones" },
+          ] ,   
+        scrollCollapse: true, 
+        fixedColumns: {
+          heightMatch: 'none'
+      }, fixedHeader: true,
+        stateSave: true,
+          "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "Nothing found - sorry",
+            "info": "Vistas página _PAGE_ of _PAGES_",
+            "infoEmpty": "No hay registros Disponibles",
+            "infoFiltered": "(filtered from _MAX_ total registros)", 
+            paginate: {
+              first: "Primera",
+              last: "Última",
+              next: "Siguiente",
+              previous: "Anterior"
+            },
+            sProcessing:"Procesando..."
           },
-          sProcessing:"Procesando..."
-        },
-        responsive:"true",
-        dom:'Bfrtlp',
-        buttons:[
-          {
-            extend: 'excelHtml5',
-            text  : '<i class="fa fa-file-excel-o"></i>' ,
-            title : "Alerta_Dependencias",
-            tittleAttr: 'Exportar a Excel',
-            className: 'btn btn-success',
-            autoFilter: true,
-            sheetName: 'Alerta Indicadores Rojos'
-           },
-           {
-            extend: 'pdfHtml5',
-            text  : '<i class="fa fa-file-pdf-o"></i>' ,
-            title : "Alerta_Dependencias",
-            tittleAttr: 'Exportar a PDF',
-            className: 'btn btn-danger',
-            orientation: 'landscape',
-            pageSize: 'LEGAL',
-            messageTop: 'PDF created by Unidad de SegumientoPlan de Desarrollo-DAP.'
-           },
-           {
-            extend: 'print',
-            text  : '<i class="fa fa-print"></i>' ,
-            title : "Alerta_Dependencias",
-            tittleAttr: 'Imprimir',
-            className: 'btn btn-info'
-           },  {
-            extend: 'csvHtml5',
-            text: '<i class="fa fa-file-text"></i>',
-            title : "Alerta_Dependencias",
-            className: 'btn btn-warning',
-            exportOptions: {
-                modifier: {
-                    search: 'none'
-                }
-            }
-        }],
-        columnDefs: [
-          {/*cod_linea */ width: "10px",  targets: 0,   className: "text-center"  },
-          {/*nom_linea*/  width: "100px", targets: 1,   className: "text-center"  },
-          {/*nom_dep*/    width: "10px", targets: 2 ,    className: "text-center"    },                
-          {/*nom_dep*/    width: "100px", targets: 3,                               },
-          {/*no_prg*/     width: "10px", targets: 4,   className: "text-center"  },
-          {/*no prg*/     width: "70px",  targets: 5,   className: "text-center"  },
-          {/*%no prg*/    width: "70px",  targets: 6,   className: "text-center"  },
-          {/*rojo*/       width: "70px",  targets: 7,   className: "text-center"  },
-          {/*%rojo*/      width: "100px",  targets: 8,   className: "text-center"  },
-          {/*rojo*/       width: "70px",  targets: 9,   className: "text-center"  },
-          {/*%rojo*/      width: "70px",  targets: 10,  className: "text-center"  },
-          {/*%rojo*/      width: "70px",  targets: 11,  className: "text-center"  },
-          {/*%rojo*/      width: "70px",  targets: 12,  className: "text-center"  },
-          {/*%rojo*/      width: "70px",  targets: 13,  className: "text-center"  },
-       
-      
-        ],bDestroy: true,
-       
-
-    });
-
-
-  
-  })
-} catch (error) {
-  console.error('Error alerta_rojos', error)
+          responsive:"true",
+          dom:'Bfrtlp',
+          buttons:[
+            {
+              extend: 'excelHtml5',
+              text  : '<i class="fa fa-file-excel-o"></i>' ,
+              title : "Alerta_Dependencias",
+              tittleAttr: 'Exportar a Excel',
+              className: 'btn btn-success',
+              autoFilter: true,
+              sheetName: 'Alerta Indicadores Rojos'
+            },
+            {
+              extend: 'pdfHtml5',
+              text  : '<i class="fa fa-file-pdf-o"></i>' ,
+              title : "Alerta_Dependencias",
+              tittleAttr: 'Exportar a PDF',
+              className: 'btn btn-danger',
+              orientation: 'landscape',
+              pageSize: 'LEGAL',
+              messageTop: 'PDF created by Unidad de SegumientoPlan de Desarrollo-DAP.'
+            },
+            {
+              extend: 'print',
+              text  : '<i class="fa fa-print"></i>' ,
+              title : "Alerta_Dependencias",
+              tittleAttr: 'Imprimir',
+              className: 'btn btn-info'
+            },  {
+              extend: 'csvHtml5',
+              text: '<i class="fa fa-file-text"></i>',
+              title : "Alerta_Dependencias",
+              className: 'btn btn-warning',
+              exportOptions: {
+                  modifier: {
+                      search: 'none'
+                  }
+              }
+          }],
+          columnDefs: [
+            {/*cod_linea */ width: "10px",  targets: 0,   className: "text-center"  },
+            {/*nom_linea*/  width: "100px", targets: 1,   className: "text-center"  },
+            {/*nom_dep*/    width: "10px", targets: 2 ,    className: "text-center"    },                
+            {/*nom_dep*/    width: "100px", targets: 3,                               },
+            {/*no_prg*/     width: "10px", targets: 4,   className: "text-center"  },
+            {/*no prg*/     width: "70px",  targets: 5,   className: "text-center"  },
+            {/*%no prg*/    width: "70px",  targets: 6,   className: "text-center"  },
+            {/*rojo*/       width: "70px",  targets: 7,   className: "text-center"  },
+            {/*%rojo*/      width: "100px",  targets: 8,   className: "text-center"  },
+            {/*rojo*/       width: "70px",  targets: 9,   className: "text-center"  },
+            {/*%rojo*/      width: "70px",  targets: 10,  className: "text-center"  },
+            {/*%rojo*/      width: "70px",  targets: 11,  className: "text-center"  },
+            {/*%rojo*/      width: "70px",  targets: 12,  className: "text-center"  },
+            {/*%rojo*/      width: "70px",  targets: 13,  className: "text-center"  },
+          ],bDestroy: true,
+      });
+    })
+  } catch (error) {
+    console.error('Error alerta_rojos', error)
+  }
 }
-
-}
-
-
-
-
-
 
 async function getalerta(){
   try {
-    
     fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/corte`)
     .then(res=>res.json())
     .then(response=>{
@@ -721,15 +782,13 @@ async function getalerta(){
       .then(response=>{
         let rojo = response.data[0].rojo
         let verde = response.data[0].verde
-      cumple_linea_dep(rojo, verde, vigencia)
-        
+        cumple_linea_dep(rojo, verde, vigencia)
       })
     })
   } catch (error) {
     console.error('Error getalerta ', error);
   }
 }
-
 
 async function cumple_linea_dep(rojo, verde, vigencia){
   try {
@@ -741,11 +800,8 @@ async function cumple_linea_dep(rojo, verde, vigencia){
       .then(response=>{
         let tam = response.data.length;
         for(let i =0; i<tam;i++){
-        
           if(response.data[i].avance >0){
-         
             cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2021)*100)
-           
             if (cumpverde>=parseFloat(verde)){colorsemafcumple="#58AC84"}
             else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
             else {colorsemafcumple="#FFBD2E"}
@@ -790,3 +846,5 @@ async function cumple_linea_dep(rojo, verde, vigencia){
   
 
 }
+
+
