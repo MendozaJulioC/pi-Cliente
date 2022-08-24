@@ -16,6 +16,7 @@ async function _main() {
   //_avance_financiero()
   //tipoinversion()
   // columnDependencias()
+
 }
 
 async function getCorteAvancePI() {
@@ -768,4 +769,132 @@ async function ejecfinancierarank() {
   $('#ejecfinancieraModal').modal('show');;
 }
 
+
+async function graphbubble(){
+  try {
+
+    let datosbubble=[];
+    fetch(`https://sse-pdm.herokuapp.com/pa/bubble`)
+    .then(res => res.json())
+    .then(datos => {
+      let tam = datos.data.length;
+      for (let i = 0; i < tam; i++) {
+      
+        datosbubble.push({
+          "x": ((datos.data[i].porc_ejecfisica)*100).toFixed(2),
+          "y":  ((datos.data[i].ejefinan)*100).toFixed(2),
+          "z":  parseFloat(datos.data[i].pptoejecutado),
+          "name":  datos.data[i].nom_cortp
+        })
+      }
+
+      const dataSource = {
+        chart: {
+          theme: "gammel",
+          caption: "Ejecución Física & Ejecución Financiera",
+          subcaption: "Comportamniento",
+          xaxisminvalue: "0",
+          xaxismaxvalue: "100",
+          yaxisminvalue: "0",
+          yaxismaxvalue: "100",
+          xaxisname: "%Ejecución Física",
+          yaxisname: "%Ejecución Financiera",
+          plottooltext: "$name : Física $xvalue% - Financ. $yvalue% - Ejecutado: $zvalue",
+          drawquadrant: "1",
+          quadrantlabeltl: "Baja Ejec. Física / Alta Ejec. Financiera",
+          quadrantlabeltr: "Alta Ejec. Física / Alta Ejec. Financiera",
+          quadrantlabelbl: "Baja Ejec. Física / Baja Ejec. Financiera",
+          quadrantlabelbr: "Alta Ejec. Física / Baja Ejec. Financiera",
+          quadrantxval: "45",
+          quadrantyval: "45",
+          quadrantlinealpha: "45",
+          quadrantlinethickness: "3",
+          plotFillHoverColor: "#6baa01",
+          showValues: "1"
+        
+      
+        },
+        categories: [
+          {
+            category: [
+              {
+                label: "0",
+                x: "0"
+              },
+              {
+                label: "20%",
+                x: "20",
+                showverticalline: "1"
+              },
+              {
+                label: "40%",
+                x: "40",
+                showverticalline: "1"
+              },
+              {
+                label: "60%",
+                x: "60",
+                showverticalline: "1"
+              },
+              {
+                label: "80%",
+                x: "80",
+                showverticalline: "1"
+              },
+              {
+                label: "100%",
+                x: "100",
+                showverticalline: "1"
+              }
+            ]
+          }
+        ],
+        dataset: [
+          {
+            data: datosbubble
+          }
+        ],
+        trendlines: [
+          {
+            line: [
+              {
+                startvalue: "0",
+                endvalue: "45",
+                istrendzone: "1",
+                color: "#aaaaaa",
+                alpha: "14"
+              },
+              {
+                startvalue: "0",
+                endvalue: "45",
+                istrendzone: "1",
+                color: "#aaaaaa",
+                alpha: "7"
+              }
+            ]
+          }
+        ]
+      };
+      
+      FusionCharts.ready(function() {
+        var myChart = new FusionCharts({
+          type: "bubble",
+          renderAt: "bubledep",
+          width: "100%",
+          height: "100%",
+          dataFormat: "json",
+          dataSource
+        }).render();
+      });
+      
+
+
+    })
+
+  } catch (error) {
+    console.error('Eror grapgbubble', error);
+  }
+}
+
 getCorteAvancePI()
+graphbubble()
