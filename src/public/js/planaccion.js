@@ -808,7 +808,7 @@ async function ejecfinancierarank() {
 
 async function graphbubble(){
   try {
-    alert(valormaximopa)
+ 
 
     let datosbubble=[];
     fetch(`https://sse-pdm.herokuapp.com/pa/bubble`)
