@@ -31,6 +31,7 @@ async function getCorteAvancePI() {
         fechaPA = corteavance
         corteplan(mesavance, vigencia, corteavance)
         _PASemaf(mesavance, vigencia, corteavance)
+     
       })
   } catch (error) {
     console.error('Error getalerta ', error);
@@ -49,6 +50,7 @@ async function _PASemaf(mes, vigencia, corte) {
         valormaximopa = (response.data[0].verde);
         porc_avance_fisico(valorminimopa, valormaximopa)
         _avance_financiero()
+        graphbubble()
 
       })
   } catch (error) {}
@@ -698,6 +700,23 @@ async function ejecfisicarank() {
             plottooltext: "<b>$dataValue</b> leads received",
             theme: "zune"
           },
+          trendlines: [
+            {
+              line: [
+                {
+                  startvalue: valormaximopa,
+                  color: "#5D62B5",
+                  thickness: "2.5",
+                  displayvalue: "<b>Esperado</b>",
+                  tooltext: "<b>Esperado Corte $startvalue%</b>",
+                  dashed: "1",
+                  dashLen: "5",
+                  dashGap: "4"
+                },
+               
+              ]
+            }
+          ],
           data: infofisicadep, 
       
         };
@@ -749,6 +768,23 @@ async function ejecfinancierarank() {
             plottooltext: "<b>$dataValue</b> leads received",
             theme: "zune"
           },
+          trendlines: [
+            {
+              line: [
+                {
+                  startvalue: valormaximopa,
+                  color: "#5D62B5",
+                  thickness: "2.5",
+                  displayvalue: "<b>Esperado</b>",
+                  tooltext: "<b>Esperado Corte $startvalue%</b>",
+                  dashed: "1",
+                  dashLen: "5",
+                  dashGap: "4"
+                },
+               
+              ]
+            }
+          ],
           data: infofisicadep
         };
         FusionCharts.ready(function () {
@@ -772,6 +808,7 @@ async function ejecfinancierarank() {
 
 async function graphbubble(){
   try {
+    alert(valormaximopa)
 
     let datosbubble=[];
     fetch(`https://sse-pdm.herokuapp.com/pa/bubble`)
@@ -792,7 +829,7 @@ async function graphbubble(){
         chart: {
           theme: "gammel",
           caption: "Ejecución Física & Ejecución Financiera",
-          subcaption: "Comportamniento",
+          subcaption: "Comportamiento",
           xaxisminvalue: "0",
           xaxismaxvalue: "100",
           yaxisminvalue: "0",
@@ -805,9 +842,9 @@ async function graphbubble(){
           quadrantlabeltr: "Alta Ejec. Física / Alta Ejec. Financiera",
           quadrantlabelbl: "Baja Ejec. Física / Baja Ejec. Financiera",
           quadrantlabelbr: "Alta Ejec. Física / Baja Ejec. Financiera",
-          quadrantxval: "45",
-          quadrantyval: "45",
-          quadrantlinealpha: "45",
+          quadrantxval: valormaximopa,
+          quadrantyval: valormaximopa,
+          quadrantlinealpha: valormaximopa,
           quadrantlinethickness: "3",
           plotFillHoverColor: "#6baa01",
           showValues: "1"
@@ -859,14 +896,14 @@ async function graphbubble(){
             line: [
               {
                 startvalue: "0",
-                endvalue: "45",
+                endvalue: valormaximopa,
                 istrendzone: "1",
                 color: "#aaaaaa",
                 alpha: "14"
               },
               {
                 startvalue: "0",
-                endvalue: "45",
+                endvalue: valormaximopa,
                 istrendzone: "1",
                 color: "#aaaaaa",
                 alpha: "7"
@@ -897,4 +934,3 @@ async function graphbubble(){
 }
 
 getCorteAvancePI()
-graphbubble()
