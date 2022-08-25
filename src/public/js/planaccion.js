@@ -845,7 +845,8 @@ async function graphbubble(){
           quadrantxval: valormaximopa,
           quadrantyval: valormaximopa,
           quadrantlinealpha: valormaximopa,
-          quadrantlinethickness: "3",
+          quadrantlinethickness: "4",
+
           plotFillHoverColor: "#6baa01",
           showValues: "1"
         
@@ -896,18 +897,26 @@ async function graphbubble(){
             line: [
               {
                 startvalue: "0",
-                endvalue: valormaximopa,
+                endvalue: 30,
                 istrendzone: "1",
-                color: "#aaaaaa",
-                alpha: "14"
+                color: "#F41B02",
+                alpha: "10"
               },
               {
-                startvalue: "0",
+                startvalue: "30",
                 endvalue: valormaximopa,
-                istrendzone: "1",
-                color: "#aaaaaa",
-                alpha: "7"
-              }
+                istrendzone: "2",
+                color: "#EC6F60",
+                alpha: "5"
+              },
+              {
+                startvalue: "30",
+                endvalue: 30,
+                thickness: "1.5",
+                color: "#151313",
+                dashed:"1"
+             
+              },
             ]
           }
         ]
