@@ -1,11 +1,16 @@
 
+
 var fecha =0; let mespa=0; var valormaximo=0; var valorminimo=0;var vigencia=0; let mes=0;
 var nomarchivopdf='';
 var table4={};
 var fechaPA =""; //new Date('09/30/2021');
 var fecha= "";//new Date('09/30/2021'); 
 var dia='';//
-
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+})
 async function getCorteAvancePI(){
   try {
     fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
@@ -24,11 +29,7 @@ async function getCorteAvancePI(){
 }
 getCorteAvancePI()
 
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-})
+
 
 async function _main(){
   let dep = document.getElementById('inputGroupSelectDependencia').value
@@ -839,55 +840,16 @@ async function avance_prgs_dep(dep, nom_dep){
 }
 
 async function plan_accion_dep(dep){  
- let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[];
+ let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[]; let datosbubble=[];
 
   fetch(`https://sse-pdm.herokuapp.com/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
     let tam = datos.data.length; 
-    for(var i =0; i<(tam) ;i++){
-     if (datos.data[i].tipo_iniciativa==1){
-      valores1.push([ datos.data[i].cod_linea,
-        datos.data[i].cod_componente,
-        datos.data[i].cod_programa,
-        datos.data[i].cod_proyecto,
-        datos.data[i].nom_proyecto,
-        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
-        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
-        formatter.format(datos.data[i].poai),
-        formatter.format(datos.data[i].ppto_ajustado),
-        formatter.format(datos.data[i].ejecucion)
-      ]);
-     }
-    if (datos.data[i].tipo_iniciativa==2){
-      valores2.push([ datos.data[i].cod_linea,
-        datos.data[i].cod_componente,
-        datos.data[i].cod_programa,
-        datos.data[i].cod_proyecto,
-        datos.data[i].nom_proyecto,
-        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
-        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
-        formatter.format(datos.data[i].poai),
-        formatter.format(datos.data[i].ppto_ajustado),
-        formatter.format(datos.data[i].ejecucion)
-      ]);
-   }
-   if (datos.data[i].tipo_iniciativa==3){
-      valores3.push([ datos.data[i].cod_linea,
-        datos.data[i].cod_componente,
-        datos.data[i].cod_programa,
-        datos.data[i].cod_proyecto,
-        datos.data[i].nom_proyecto,
-        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
-        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
-        formatter.format(datos.data[i].poai),
-        formatter.format(datos.data[i].ppto_ajustado),
-        formatter.format(datos.data[i].ejecucion)
-      ]);
 
-    }
-    if (datos.data[i].tipo_iniciativa==4){
-        valores4.push([ datos.data[i].cod_linea,
+    for(var i =0; i<(tam) ;i++){
+      if (datos.data[i].tipo_iniciativa==1){
+        valores1.push([ datos.data[i].cod_linea,
           datos.data[i].cod_componente,
           datos.data[i].cod_programa,
           datos.data[i].cod_proyecto,
@@ -898,26 +860,158 @@ async function plan_accion_dep(dep){
           formatter.format(datos.data[i].ppto_ajustado),
           formatter.format(datos.data[i].ejecucion)
         ]);
-    }
-    if (datos.data[i].tipo_iniciativa==5){
-      valores5.push([ datos.data[i].cod_linea,
-        datos.data[i].cod_componente,
-        datos.data[i].cod_programa,
-        datos.data[i].cod_proyecto,
-        datos.data[i].nom_proyecto,
-        ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
-        ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
-        formatter.format(datos.data[i].poai),
-        formatter.format(datos.data[i].ppto_ajustado),
-        formatter.format(datos.data[i].ejecucion)
-      ]);
-  }
-  } 
+      }
+      if (datos.data[i].tipo_iniciativa==2){
+        valores2.push([ datos.data[i].cod_linea,
+          datos.data[i].cod_componente,
+          datos.data[i].cod_programa,
+          datos.data[i].cod_proyecto,
+          datos.data[i].nom_proyecto,
+          ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+          ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+          formatter.format(datos.data[i].poai),
+          formatter.format(datos.data[i].ppto_ajustado),
+          formatter.format(datos.data[i].ejecucion)
+        ]);
+      }
+      if (datos.data[i].tipo_iniciativa==3){
+        valores3.push([ datos.data[i].cod_linea,
+          datos.data[i].cod_componente,
+          datos.data[i].cod_programa,
+          datos.data[i].cod_proyecto,
+          datos.data[i].nom_proyecto,
+          ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+          ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+          formatter.format(datos.data[i].poai),
+          formatter.format(datos.data[i].ppto_ajustado),
+          formatter.format(datos.data[i].ejecucion)
+        ]);
+
+      }
+      if (datos.data[i].tipo_iniciativa==4){
+          valores4.push([ datos.data[i].cod_linea,
+            datos.data[i].cod_componente,
+            datos.data[i].cod_programa,
+            datos.data[i].cod_proyecto,
+            datos.data[i].nom_proyecto,
+            ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+            ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+            formatter.format(datos.data[i].poai),
+            formatter.format(datos.data[i].ppto_ajustado),
+            formatter.format(datos.data[i].ejecucion)
+          ]);
+      }
+      if (datos.data[i].tipo_iniciativa==5){
+        valores5.push([ datos.data[i].cod_linea,
+          datos.data[i].cod_componente,
+          datos.data[i].cod_programa,
+          datos.data[i].cod_proyecto,
+          datos.data[i].nom_proyecto,
+          ((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+          ((datos.data[i].ejecucion/datos.data[i].ppto_ajustado)*100).toFixed(2),
+          formatter.format(datos.data[i].poai),
+          formatter.format(datos.data[i].ppto_ajustado),
+          formatter.format(datos.data[i].ejecucion)
+        ]);
+      }
+      if(datos.data[i].tipo_iniciativa<=2){
+        let colorea =(datos.data[i].tipo_iniciativa==1 ?'#1976D2': '#FFEB3B')
+        datosbubble.push({
+            z:parseFloat(datos.data[i].ejecucion),
+            y:((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+            x:((datos.data[i].ejec_financiera)*100).toFixed(2),
+           name: datos.data[i].cod_proyecto,
+            color: colorea
+          })
+      }
+    } 
 //console.log(valores1);
   nuevatabla(valores1,valores2,valores3,valores4, valores5)
+  bubblegraph(datosbubble)
 
 })
 }
+
+async function bubblegraph(datosbubble){
+  const dataSource = {
+    chart: {
+      caption: "Ejecución Financiera & Eficacia",
+      subcaption: "Comportamiento ejecución de la Dependencia",
+      xaxisname: "% Ejecución Financiera",
+      yaxisname: "% Eficacia",
+      numberprefix: "%",
+      plotFillHoverColor: "#6baa01",
+      showValues:"1",
+      theme: "candy",
+      plottooltext: "$name : %Ejec.Física: $yvalue% de : $xvalue% ejecutado financieramente"
+    },
+    categories: [
+      {
+        verticallinealpha: "20",
+        category: [
+          {
+            label: "0",
+            x: "0"
+          },
+          {
+            label: "25",
+            x: "25",
+            showverticalline: "1"
+          },
+          {
+            label: "50",
+            x: "50",
+            showverticalline: "1"
+          },
+          {
+            label: "75",
+            x: "75",
+            showverticalline: "1"
+          },
+          {
+            label: "100",
+            x: "100",
+            showverticalline: "1"
+          }
+        ]
+      }
+    ],
+    dataset: [
+      {
+        data: datosbubble 
+      }
+    ],  trendlines: [
+      {
+        line: [
+          {
+            startvalue: "0",
+            endvalue: "50",
+            istrendzone: "1",
+            color: "##E53935",
+            alpha: "14"
+          }
+        ]
+      }
+    ]
+  };
+  
+  FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "bubble",
+      renderAt: "bubbledep",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+  });
+  
+}
+
+
+
+
+
 
 async function   nuevatabla(valores1, valores2, valores3,valores4, valores5){
 document.getElementById('table_tipo1').innerHTML=""
