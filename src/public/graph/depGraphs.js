@@ -32,7 +32,10 @@ getCorteAvancePI()
 
 
 async function _main(){
+
+
   let dep = document.getElementById('inputGroupSelectDependencia').value
+
     _avancePDM(dep)
     _PASemaf()
     _avance_financiero(dep)
@@ -43,7 +46,7 @@ async function _main(){
     avance_prgs_dep(dep)
     avance_componente_dep(dep)
     total_proyectos_dep(dep)
-    plan_accion_dep()
+    plan_accion_dep(dep)
     //contadorSemDep(cod)
     _cumplimiento_dependencia(dep)
     _detalle_ejec_financiera(dep)
@@ -841,7 +844,8 @@ async function avance_prgs_dep(dep, nom_dep){
 
 async function plan_accion_dep(dep){  
  let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[]; let datosbubble=[];
-
+ let seleccionado = document.getElementById('inputGroupSelectDependencia')
+ let nombredep = seleccionado.options[seleccionado.selectedIndex].text;
   fetch(`https://sse-pdm.herokuapp.com/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
@@ -927,16 +931,16 @@ async function plan_accion_dep(dep){
     } 
 //console.log(valores1);
   nuevatabla(valores1,valores2,valores3,valores4, valores5)
-  bubblegraph(datosbubble)
+  bubblegraph(datosbubble, nombredep)
 
 })
 }
 
-async function bubblegraph(datosbubble){
+async function bubblegraph(datosbubble, nombredep){
   const dataSource = {
     chart: {
       caption: "Ejecución Financiera & Eficacia",
-      subcaption: "Comportamiento ejecución de la Dependencia",
+      subcaption: `Comportamiento ejecución ${nombredep}`,
       xaxisname: "% Ejecución Financiera",
       yaxisname: "% Eficacia",
       numberprefix: "%",
