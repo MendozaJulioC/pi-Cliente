@@ -919,15 +919,24 @@ async function plan_accion_dep(dep){
         ]);
       }
       if(datos.data[i].tipo_iniciativa<=2){
-        let colorea =(datos.data[i].tipo_iniciativa==1 ?'#1976D2': '#FFEB3B')
+       
+       let colorea='';
+       // let colorea =(datos.data[i].tipo_iniciativa==1 ?'#884EA0': '#FFEB3B')
+       let eficacia = (datos.data[i].porc_eficacia_proyecto)*100
+       let financiera = (datos.data[i].ejec_financiera)*100
+        if (eficacia<= valormaximo && financiera <= valormaximo) {colorea = '#7B241C'}
+        if(eficacia<valormaximo && financiera>valormaximo){colorea='#F1948A'}
+        if(eficacia>valormaximo && financiera<valormaximo){colorea='#F39C12'}
+        if(eficacia>valormaximo && financiera>valormaximo){colorea='#28B463'}
         datosbubble.push({
             z:parseFloat(datos.data[i].ejecucion),
-            y:((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
-            x:((datos.data[i].ejec_financiera)*100).toFixed(2),
+            x:((datos.data[i].porc_eficacia_proyecto)*100).toFixed(2),
+            y:((datos.data[i].ejec_financiera)*100).toFixed(2),
            name: datos.data[i].cod_proyecto,
             color: colorea
           })
       }
+
     } 
 //console.log(valores1);
   nuevatabla(valores1,valores2,valores3,valores4, valores5)
@@ -939,19 +948,33 @@ async function plan_accion_dep(dep){
 async function bubblegraph(datosbubble, nombredep){
   const dataSource = {
     chart: {
-      caption: "Ejecución Financiera & Eficacia",
+      caption: "Ejecución Física vs Ejecución financiera",
       subcaption: `Comportamiento ejecución ${nombredep}`,
-      xaxisname: "% Ejecución Financiera",
-      yaxisname: "% Eficacia",
+      xaxisname: "% Ejecución Física",
+      yaxisname: "% Ejecución Financiera",
+      xaxisminvalue: "-10",
+      xaxismaxvalue: "100",
+      yaxisminvalue: "-10",
+      yaxismaxvalue: "120",
       numberprefix: "%",
-      plotFillHoverColor: "#6baa01",
+      plotFillHoverColor: "#73C6B6",
       showValues:"1",
-      theme: "candy",
-      plottooltext: "$name : %Ejec.Física: $yvalue% de : $xvalue% ejecutado financieramente"
+      theme: "gammel",
+      plottooltext: "<b>$name : </b> Con una Ejec. Financieran del $yvalue% se ha logrado el : $xvalue% de ejecución física",
+      drawquadrant: "1",
+      quadrantlabeltl: "Baja Ejec. Física / Alta Ejec. Financiera",
+      quadrantlabeltr: "Alta Ejec. Física / Alta Ejec. Financiera",
+      quadrantlabelbl: "Baja Ejec. Física / Baja Ejec. Financiera",
+      quadrantlabelbr: "Alta Ejec. Física / Baja Ejec. Financiera",
+      quadrantxval: valormaximo,
+      quadrantyval: valormaximo,
+      quadrantlinealpha: valormaximo,
+      quadrantlinethickness: "2"
     },
     categories: [
       {
-        verticallinealpha: "20",
+        verticallinealpha: "100",
+        
         category: [
           {
             label: "0",
@@ -984,15 +1007,22 @@ async function bubblegraph(datosbubble, nombredep){
       {
         data: datosbubble 
       }
-    ],  trendlines: [
+    ],   trendlines: [
       {
         line: [
           {
-            startvalue: "0",
+            startvalue: "-10",
+            endvalue: "40",
+            istrendzone: "1",
+            color: "#aaaaaa",
+            alpha: "14"
+          },
+          {
+            startvalue: "40",
             endvalue: "50",
             istrendzone: "1",
-            color: "##E53935",
-            alpha: "14"
+            color: "#aaaaaa",
+            alpha: "7"
           }
         ]
       }

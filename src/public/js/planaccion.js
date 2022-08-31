@@ -846,7 +846,6 @@ async function graphbubble(){
           quadrantyval: valormaximopa,
           quadrantlinealpha: valormaximopa,
           quadrantlinethickness: "4",
-
           plotFillHoverColor: "#6baa01",
           showValues: "1"
         
