@@ -115,16 +115,16 @@ async function _getBuscaNombreIndicador(){
             document.getElementById('descripcion_variable').value= datos.data[0].variable_operativa
             document.getElementById('meta_2020').value= datos.data[0].meta_2020
             document.getElementById('logro_2020').value= datos.data[0].logro_2020
-            document.getElementById('cumple_2020').value= datos.data[0].cumple_2020
+            document.getElementById('cumple_2020').value= ((datos.data[0].cumple_2020)*100).toFixed(2)+'%'
             document.getElementById('meta_2021').value= datos.data[0].meta_2021
             document.getElementById('logro_2021').value= datos.data[0].logro_2021
-            document.getElementById('cumple_2021').value= datos.data[0].cumple_2021
+            document.getElementById('cumple_2021').value= ((datos.data[0].cumple_2021)*100).toFixed(2)+'%'
             document.getElementById('meta_2022').value= datos.data[0].meta_2022
             document.getElementById('logro_2022').value= datos.data[0].logro_2022
-            document.getElementById('cumple_2022').value= datos.data[0].cumple_2022
+            document.getElementById('cumple_2022').value= ((datos.data[0].cumple_2022)*100).toFixed(2)+'%'
             document.getElementById('meta_2023').value= datos.data[0].meta_2023
             document.getElementById('logro_2023').value= datos.data[0].logro_2023
-            document.getElementById('cumple_2023').value= datos.data[0].cumple_2023
+            document.getElementById('cumple_2023').value= ((datos.data[0].cumple_2023)*100).toFixed(2)+'%'
             //3. Responsables y observaciones
             document.getElementById('fuente').value= datos.data[0].fuente
             document.getElementById('tipo_fuente').value= datos.data[0].tipo_fuente
@@ -210,19 +210,19 @@ async function _getBuscaNombreIndicador(){
         
                     document.getElementById('meta_2020').value= datos.data[0].meta_2020
                     document.getElementById('logro_2020').value= datos.data[0].logro_2020
-                    document.getElementById('cumple_2020').value= datos.data[0].cumple_2020
+                    document.getElementById('cumple_2020').value= ((datos.data[0].cumple_2020)*100).toFixed(2)+'%'
         
                     document.getElementById('meta_2021').value= datos.data[0].meta_2021
                     document.getElementById('logro_2021').value= datos.data[0].logro_2021
-                    document.getElementById('cumple_2021').value= datos.data[0].cumple_2021
+                    document.getElementById('cumple_2021').value= ((datos.data[0].cumple_2021)*100).toFixed(2)+'%'
         
                     document.getElementById('meta_2022').value= datos.data[0].meta_2022
                     document.getElementById('logro_2022').value= datos.data[0].logro_2022
-                    document.getElementById('cumple_2022').value= datos.data[0].cumple_2022
+                    document.getElementById('cumple_2022').value= ((datos.data[0].cumple_2022)*100).toFixed(2)+'%'
         
                     document.getElementById('meta_2023').value= datos.data[0].meta_2023
                     document.getElementById('logro_2023').value= datos.data[0].logro_2023
-                    document.getElementById('cumple_2023').value= datos.data[0].cumple_2023
+                    document.getElementById('cumple_2023').value= ((datos.data[0].cumple_2023)*100).toFixed(2)+'%'
         
         
         //3. Responsables y observaciones
