@@ -103,7 +103,7 @@ async function detalleAvanceLinea(){
             CortePlan2.push({ "label" :  `${datos.data[index].corte.substr(0,10)}(${datos.data[index].tipo})`})
           }
           //console.log(CortePlan2)
-          console.log(response.data[0].cod_linea)
+          //console.log(response.data[0].cod_linea)
           for (let x = 0; x < response.data.length; x++) {
            if( response.data[x].cod_linea==1){AvanceL1.push({value: response.data[x].avance}) }
            if( response.data[x].cod_linea==2){AvanceL2.push({value: response.data[x].avance})}
