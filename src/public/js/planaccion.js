@@ -50,7 +50,7 @@ async function _PASemaf(mes, vigencia, corte) {
         valormaximopa = (response.data[0].verde);
         porc_avance_fisico(valorminimopa, valormaximopa)
         _avance_financiero()
-        graphbubble()
+        graphbubble(valorminimopa, valormaximopa)
 
       })
   } catch (error) {}
@@ -806,7 +806,7 @@ async function ejecfinancierarank() {
 }
 
 
-async function graphbubble(){
+async function graphbubble(valorminimopa, valormaximop){
   try {
  
 
@@ -815,25 +815,41 @@ async function graphbubble(){
     .then(res => res.json())
     .then(datos => {
       let tam = datos.data.length;
+     
       for (let i = 0; i < tam; i++) {
+        let colorea='';
+      let eficacia = (datos.data[i].porc_ejecfisica)*100
+      let financiera = (datos.data[i].ejefinan)*100
+      console.log('Eficacia',eficacia)
+
+        if (eficacia<= valormaximop && financiera <= valormaximop) {colorea = '#7B241C'}
+        if(eficacia<valormaximop && financiera>valormaximop){colorea='#F1948A'}
+        if(eficacia>valormaximop && financiera<valormaximop){colorea='#F39C12'}
+        if(eficacia>valormaximop && financiera>valormaximop){colorea='#28B463'}
       
         datosbubble.push({
           "x": ((datos.data[i].porc_ejecfisica)*100).toFixed(2),
           "y":  ((datos.data[i].ejefinan)*100).toFixed(2),
           "z":  parseFloat(datos.data[i].pptoejecutado),
-          "name":  datos.data[i].nom_cortp
+          "name":  datos.data[i].nom_cortp,
+          "color": colorea
         })
-      }
 
+      }
+      console.log(valormaximop)
+
+
+
+console.log(datosbubble)
       const dataSource = {
         chart: {
           theme: "gammel",
           caption: "Ejecución Física & Ejecución Financiera",
           subcaption: "Comportamiento",
-          xaxisminvalue: "0",
+          xaxisminvalue: "-10",
           xaxismaxvalue: "100",
-          yaxisminvalue: "0",
-          yaxismaxvalue: "100",
+          yaxisminvalue: "-10",
+          yaxismaxvalue: "120",
           xaxisname: "%Ejecución Física",
           yaxisname: "%Ejecución Financiera",
           plottooltext: "$name : Física $xvalue% - Financ. $yvalue% - Ejecutado: $zvalue",
@@ -895,27 +911,19 @@ async function graphbubble(){
           {
             line: [
               {
-                startvalue: "0",
-                endvalue: 30,
+                startvalue: "-10",
+                endvalue: "40",
                 istrendzone: "1",
-                color: "#F41B02",
-                alpha: "10"
+                color: "#aaaaaa",
+                alpha: "14"
               },
               {
-                startvalue: "30",
-                endvalue: valormaximopa,
-                istrendzone: "2",
-                color: "#EC6F60",
-                alpha: "5"
-              },
-              {
-                startvalue: "30",
-                endvalue: 30,
-                thickness: "1.5",
-                color: "#151313",
-                dashed:"1"
-             
-              },
+                startvalue: "40",
+                endvalue: "50",
+                istrendzone: "1",
+                color: "#aaaaaa",
+                alpha: "7"
+              }
             ]
           }
         ]
