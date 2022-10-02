@@ -664,7 +664,7 @@ async function graphCumplimientoPDM(avance){
       porc_avance_fisico(valorminimo, valormaximo)
       const dataSource = {
         chart: {
-          caption: "% Cumplimiento JJJJ PDM",
+          caption: "% Cumplimiento PDM",
           lowerlimit: "0",
           upperlimit: "100",
           showvalue: "1",
