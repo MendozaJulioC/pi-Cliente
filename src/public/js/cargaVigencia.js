@@ -11,7 +11,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 
 async function rangomapa(){
-  fetch(`https://sse-pdm.herokuapp.com/geo/api/rangos/maps`)
+  fetch(`http://localhost:7001/geo/api/rangos/maps`)
   .then(res=>res.json())
   .then(response=>{
     for (let index = 0; index < 21; index++) {
@@ -44,7 +44,7 @@ const vigencia= async(req,res)=>{
      let ciudad = document.getElementById('inverCiudad');
      let pp = document.getElementById('pp');
      let fortInst= document.getElementById('fortInst');
-    fetch('https://sse-pdm.herokuapp.com/geo/api/tipo-inversion')
+    fetch('http://localhost:7001/geo/api/tipo-inversion')
     .then(res=>res.json())
     .then(datos=>{
       swal( {
@@ -118,7 +118,7 @@ const vigencia= async(req,res)=>{
 const garficaTotalCmuna = async(req, res)=>{
   try {
     let geoinver=[]
-    fetch(`https://sse-pdm.herokuapp.com/geo/api/territorio`)
+    fetch(`http://localhost:7001/geo/api/territorio`)
     .then(res=>res.json())
     .then(datos=>{
       for (let index = 0; index < datos.data.length; index++) {
@@ -194,11 +194,12 @@ const mapaVogencia = async (req, res) => {
   var tiles = new L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://maps.stamen.com/#terrain/11/6.2518/-75.5636">maps.stamen.com</a> contributors'
   }).addTo(map);
+  
   map.whenReady(() => {
     setTimeout(() => {map.invalidateSize();}, 300);
-})
+  })
 
-const geojson_url = "https://sse-pdm.herokuapp.com/geo/api/inversion/maps" 
+const geojson_url = "http://localhost:7001/geo/api/inversion/maps" 
 //  const geojson_url = "/GeoJson/Limite_Comuna_Corregimiento.geojson";
   fetch(geojson_url)
     .then(res => res.json())
@@ -262,6 +263,8 @@ const geojson_url = "https://sse-pdm.herokuapp.com/geo/api/inversion/maps"
       layer.bindTooltip( tooltipconten );
     }
   }).addTo(map)
+
+
   map.fitBounds(geojsonlayer.getBounds())
   var info = L.control();
   info.onAdd = function (map) {
@@ -514,7 +517,7 @@ async function depterriotiomodal(value){
     let comuna = parseInt(value)
     tipoinvercomuna(comuna)
     var datos=[];
-    fetch(`https://sse-pdm.herokuapp.com/geo/api/comuna/dep-inversion/${comuna}`)
+    fetch(`http://localhost:7001/geo/api/comuna/dep-inversion/${comuna}`)
     .then(res=> res.json())
     .then(response=>{
       let tam = response.data.length;
@@ -578,7 +581,7 @@ async function reporteSec(value, nombre){
   try {
     let reportes=[];
     document.getElementById('logrocomunareportado').innerHTML= nombre
-    const url = `https://sse-pdm.herokuapp.com/geo/api/logros/${value}`
+    const url = `http://localhost:7001/geo/api/logros/${value}`
     fetch(url)
     .then(res=>res.json())
     .then (data=>{
@@ -644,7 +647,7 @@ async function tipoinvercomuna(comuna){
     
     let nombres=[];
     let valores=[];
-    fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo/territorio/${comuna}`)
+    fetch(`http://localhost:7001/obrafisica/api/geo/territorio/${comuna}`)
     .then(res=>res.json())
     .then(response=>{
 

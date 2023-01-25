@@ -13,11 +13,11 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 async function getCorteAvancePI(){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+    fetch(`http://localhost:7001/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       let corteavance= new Date(response.data[0].corte) 
-      let mesavance = corteavance.getMonth(corteavance)+1
+      let mesavance = corteavance.getMonth(corteavance)
       let vigencia = corteavance.getFullYear(corteavance)
       dia= corteavance.getDate(corteavance)
       fecha= corteavance;
@@ -51,10 +51,11 @@ async function _main(){
     _cumplimiento_dependencia(dep)
     _detalle_ejec_financiera(dep)
 }
+
 async function _detalle_ejec_financiera(dep){
   try {
  
-    fetch(`https://sse-pdm.herokuapp.com/pa/detalle/financiero/${dep}`)
+    fetch(`http://localhost:7001/pa/detalle/financiero/${dep}`)
     .then(res=>res.json())
     .then(datos=>{
 
@@ -107,11 +108,11 @@ async function dep_estado(cod_dep){
 async function _avancePDM(cod_dep){
     try {
       
-      fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/${cod_dep}`)
+      fetch(`http://localhost:7001/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
        let avance_dep = (datos.data[0].avance/datos.data[0].peso)
-      //alert(avance_dep)
+   
           graphPDM(avance_dep)
         })
         _PASemaf()
@@ -123,7 +124,7 @@ async function _avancePDM(cod_dep){
 async function graphPDM(total){
 
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
-fecha.setDate(dia+1)
+fecha.setDate(dia)
     document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
     //mespa = fecha.getMonth(fecha)+1
     vigencia = fecha.getFullYear(fecha)
@@ -214,7 +215,7 @@ fecha.setDate(dia+1)
 
 async function _avance_financiero(dep){
     try {
-      fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefinanciero/dep/${dep}`)
+      fetch(`http://localhost:7001/pa/api/avancefinanciero/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
         porc_avance_financiero(parseFloat(parseFloat(datos.data[0].pptoejecutado)/parseFloat(datos.data[0].pptoajustado)) )
@@ -231,7 +232,7 @@ async function _PASemaf (){
   
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
       valorminimo = (response.data[0].rojo)-0.01;
@@ -246,7 +247,7 @@ async function porc_avance_financiero(avance){
   
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
         const dataSource = {
@@ -392,7 +393,7 @@ async function detallePpto(compromisos, disponible, ordenado , total){
 
 async function columnGeo(dep){
     try {
-        fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias/territorio/${dep}`)
+        fetch(`http://localhost:7001/geo/api/dependencias/territorio/${dep}`)
         .then(res=>res.json())
         .then(datos=>{
           const dataSource = {
@@ -539,7 +540,7 @@ async function columnGeo(dep){
 
 async function porc_avance_fisico(dep){
     try {
-      fetch(`https://sse-pdm.herokuapp.com/pa/api/avancefisico/dep/${dep}`)
+      fetch(`http://localhost:7001/pa/api/avancefisico/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
         
@@ -599,7 +600,7 @@ async function porc_avance_fisico(dep){
 
 async function tipoinversion(dep){
    try {
-     fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias/tipo-inversion/${dep}`)
+     fetch(`http://localhost:7001/geo/api/dependencias/tipo-inversion/${dep}`)
      .then(res=>res.json())
      .then(datos=> {
       document.getElementById('localizada').innerHTML = formatter.format(datos.data[0].localizada)
@@ -621,7 +622,7 @@ document.onkeypress = stopEnterKey;
 
 async function total_proyectos_dep(dep){
   try {
-     fetch(`https://sse-pdm.herokuapp.com/pa/api/tipo-iniciativa/dependencias/${dep}`)
+     fetch(`http://localhost:7001/pa/api/tipo-iniciativa/dependencias/${dep}`)
     .then(res=>res.json())
     .then(datos=>{
       document.getElementById('inst').innerHTML=  datos.data[0].ini_inst
@@ -713,7 +714,7 @@ FusionCharts.ready(function() {
 async function avance_linea_dep(dep, nom_dep){
   try {
     let valores =[];
-    fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/lineas/${dep}`)
+    fetch(`http://localhost:7001/dep/api/avance/lineas/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
@@ -757,7 +758,7 @@ async function avance_linea_dep(dep, nom_dep){
 async function avance_componente_dep(dep , nom_dep){
   try {
     let valores =[];
-    fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/componentes/${dep}`)
+    fetch(`http://localhost:7001/dep/api/avance/componentes/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
@@ -801,7 +802,7 @@ async function avance_componente_dep(dep , nom_dep){
 async function avance_prgs_dep(dep, nom_dep){
   try {
     let info=[];
-    fetch(`https://sse-pdm.herokuapp.com/dep/api/avance/programas/${dep}`)
+    fetch(`http://localhost:7001/dep/api/avance/programas/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
@@ -846,7 +847,7 @@ async function plan_accion_dep(dep){
  let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[]; let datosbubble=[];
  let seleccionado = document.getElementById('inputGroupSelectDependencia')
  let nombredep = seleccionado.options[seleccionado.selectedIndex].text;
-  fetch(`https://sse-pdm.herokuapp.com/pa/api/plan/dependencias/${dep}`)
+  fetch(`http://localhost:7001/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
     let tam = datos.data.length; 
@@ -946,6 +947,8 @@ async function plan_accion_dep(dep){
 }
 
 async function bubblegraph(datosbubble, nombredep){
+
+
   const dataSource = {
     chart: {
       caption: "Ejecución Física vs Ejecución financiera",
@@ -953,10 +956,10 @@ async function bubblegraph(datosbubble, nombredep){
       xaxisname: "% Ejecución Física",
       yaxisname: "% Ejecución Financiera",
       xaxisminvalue: "-10",
-      xaxismaxvalue: "100",
+      xaxismaxvalue: "120",
       yaxisminvalue: "-10",
       yaxismaxvalue: "120",
-      numberprefix: "%",
+    
       plotFillHoverColor: "#73C6B6",
       showValues:"1",
       theme: "gammel",
@@ -969,11 +972,11 @@ async function bubblegraph(datosbubble, nombredep){
       quadrantxval: valormaximo,
       quadrantyval: valormaximo,
       quadrantlinealpha: valormaximo,
-      quadrantlinethickness: "2"
+      quadrantlinethickness: "1"
     },
     categories: [
       {
-        verticallinealpha: "100",
+       
         
         category: [
           {
@@ -981,22 +984,27 @@ async function bubblegraph(datosbubble, nombredep){
             x: "0"
           },
           {
-            label: "25",
-            x: "25",
+            label: "20%",
+            x: "20",
             showverticalline: "1"
           },
           {
-            label: "50",
-            x: "50",
+            label: "40%",
+            x: "40",
             showverticalline: "1"
           },
           {
-            label: "75",
-            x: "75",
+            label: "60%",
+            x: "60",
             showverticalline: "1"
           },
           {
-            label: "100",
+            label: "80%",
+            x: "80",
+            showverticalline: "1"
+          },
+          {
+            label: "100%",
             x: "100",
             showverticalline: "1"
           }
@@ -1364,7 +1372,7 @@ async function buscavalstat(nomproyecto, cod, ejec){
  
 try {
 
-   fetch(`https://sse-pdm.herokuapp.com/pa/api/proyecto/${cod}`)
+   fetch(`http://localhost:7001/pa/api/proyecto/${cod}`)
   .then(res=>res.json())
   .then(datos=>{
     geoProyect(nomproyecto,cod)
@@ -1432,7 +1440,7 @@ jQuery.noConflict();
 
 async function geoProyect( nom, cod){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias/proyectos/${cod}`)
+    fetch(`http://localhost:7001/geo/api/dependencias/proyectos/${cod}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {
@@ -1677,7 +1685,7 @@ async function geoProyect( nom, cod){
 
 async function contadorSemDep(cod){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/contador/dependencias/${cod}` )
+    fetch(`http://localhost:7001/pi/api/semaforo-corte/contador/dependencias/${cod}` )
     .then(res => res.json())
     .then(response =>{
       let cardsemaforogris ='';
@@ -1743,7 +1751,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
         "cod_semaforo":codsemaforo,
         "cod_dependencia": cod_dep
     }
-  fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte/dependencia/tipo/ `,{
+  fetch(`http://localhost:7001/pi/api/semaforo-corte/dependencia/tipo/ `,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -1813,7 +1821,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
 
 async function proyecto_fisico(cod){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/pa/api/avances/ejecucion/${cod}`)
+    fetch(`http://localhost:7001/pa/api/avances/ejecucion/${cod}`)
     .then(res=> res.json())
     .then(response=>{
       let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
@@ -2022,7 +2030,7 @@ async function listvalstat_dep(){
   try {
     let dep = document.getElementById('inputGroupSelectDependencia').value;
     let valorlista=[];
-    fetch(`https://sse-pdm.herokuapp.com/dep/api/valstat-dep/${dep}`)
+    fetch(`http://localhost:7001/dep/api/valstat-dep/${dep}`)
     .then(res=> res.json())
     .then(response=>{
       let tam= response.data.length;
@@ -2153,7 +2161,7 @@ $('#ModaListVE').modal('show');
 
 async function _cumplimiento_dependencia(dep){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/dep/api/cumplimiento/${dep}`)
+    fetch(`http://localhost:7001/dep/api/cumplimiento/${dep}`)
     .then(res=> res. json())
     .then(response=>{
       let cumplimientodep= (parseFloat(response.data[0].avancepond) /parseFloat(response.data[0].programado) )*100

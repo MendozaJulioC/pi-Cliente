@@ -2,7 +2,7 @@
 async function getCorteAvancePA(){
     try {
       
-      fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+      fetch(`http://localhost:7001/pi/api/avance/corte`)
       .then(res=>res.json())
       .then(response=>{
         
@@ -10,7 +10,7 @@ async function getCorteAvancePA(){
         let mesavance = corteavance.getMonth(corteavance)+1
         let vigencia = corteavance.getFullYear(corteavance)
         let dia= corteavance.getDate(corteavance)
-        corteavance.setDate(dia+1)
+        corteavance.setDate(dia)
         document.getElementById('fecha_corte').innerHTML = corteavance.toLocaleDateString("en-US", {
           day: 'numeric',
           month: 'short',
@@ -53,7 +53,7 @@ async function getCorteAvancePA(){
         "vigencia": vigencia
       }
   
-      fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mesavance}`)
+      fetch(`http://localhost:7001/pa/semaforo-corte/${mesavance}`)
       
      
       .then(res=> res.json())

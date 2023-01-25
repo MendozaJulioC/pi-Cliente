@@ -18,42 +18,40 @@
 <body onload="_main()" >
   
   <div  id="container" >
-
-  
-
+<br><br>
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="row">
       <br><br>
-      <div class="col-md-12 mt-5  shadow-lg p-3 mb-5 bg-white rounded">
+      <div class="col-sm-12 col-md-12 col-lg-12 mt-5  shadow-lg p-3 mb-5 bg-white rounded">
         <div class="card-body shadow-lg">
           <div class="row">
 
-            <div class="col-sm-2 ">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-3 ">
               <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
               font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Corte : </b> 
               <span id="fecha_corte"></span>.</span>  
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-sm-12 col-md-4 col-lg-6 col-xl-3">
               <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
                   font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Porcentajes en los Rangos de avance para este período del seguimiento del PDM 
               </span> 
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-12 col-md-4 col-lg-6 col-xl-3">
               <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-arrow-down fa-2x" style="color: crimson;"></i>
               </span>   
               <input type="number" id="minimo-corte" style="font-size: medium; text-align: center; width:50%;border-color:#B4358B;" disabled> 
             </div>
-           <div class="col-sm-3">
+            <div class="col-sm-12 col-md-4 col-lg-6 col-xl-3">
               <input type="number" id="maximo-corte" style="font-size: medium; text-align: center; width: 50%;border-color:rgb( 88,172,133);" disabled>
               <i class="fa fa-arrow-up fa-2x" style="color: #00af91;"></i>
            </div>
           </div>
         </div>
       </div>
-
-  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+<!---->
+  <div class="col-sm-12 col-md-6  col-lg-6 col-xl-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-body">
       <div class="mt-lg-3" id="canvas" style="height: 350px;  width:100%;"></div>
     </div>
@@ -63,7 +61,7 @@
       </a>
     </div>
   </div>
-  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+  <div class="col-sm-12 col-md-6  col-lg-6 col-xl-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-body">
       <div class="mt-lg-3" id="cumplimientovigencia" style="height: 350px;  width:100%;"></div>
     </div>
@@ -74,7 +72,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+  <div class="col-sm-12 col-md-6  col-lg-6 col-xl-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-body">
       <div class="mt-lg-3" id="chart-ejecfisica" style="height: 350px;  width:100%;"></div>
     </div>
@@ -85,7 +83,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
+  <div class="col-sm-12 col-md-6  col-lg-6 col-xl-3 mt-2  shadow-sm p-3 mb-5 bg-white rounded">
     <div class="card-body">
       <div class="mt-lg-3" id="chart-ejecfinanciera" style="height: 350px;  width:100%;"></div>
     </div>
@@ -103,7 +101,7 @@
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="row">
         
-          <div class="col-md-4  mt-2 shadow-sm p-3 mb-3 bg-white rounded">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mt-2 shadow-sm p-3 mb-3 bg-white rounded">
             <div class="mt-lg-3" id="canvas-pa2" style="height: 200px;  width:100%;"></div>
             
               <div class="table-responsive-sm">
@@ -128,11 +126,11 @@
               </div>
           </div>
 
-          <div class="col-md-4  mt-2 shadow-sm p-3 mb-3 bg-white rounded">
+          <div class="col-sm-12 col-md-6 col-lg-6  col-xl-4 mt-2 shadow-sm p-3 mb-3 bg-white rounded">
             <div class="mt-lg-3" id="canvas-pa1" style="height: 260px;  width:100%;"></div>
           </div>
 
-          <div class="col-md-4 shadow-sm p-3 mb-3 bg-white rounded mt-1">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4 shadow-sm p-3 mb-3 bg-white rounded mt-1">
             <h4>Tipo de Inversión</h4>
             <div class="mt-lg-3" id="canvas-tipoInversion" style="height: 250px;  width:100%;"></div>
           
@@ -164,12 +162,16 @@
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="row">
-      <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <div class="col-md-12 shadow-sm p-3 mb-2 bg-white rounded mt-1">
         <div class="mt-lg-3" id="chart-geo" style="height: 600px;  width:100%;"></div>
       </div>
-      <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
+      <!--
+  <div class="col-md-6 shadow-sm p-3 mb-2 bg-white rounded mt-1">
         <div class="mt-lg-3" id="chart-dep" style="height: 600px;  width:100%;"></div>
       </div>
+
+      -->
+    
     </div>
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
   </div>

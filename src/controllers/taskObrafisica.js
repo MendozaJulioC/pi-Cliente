@@ -12,7 +12,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 const getAlertaObra = async (req, res)=>{
     try {
         let alertas=[]
-        fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/alertas`)
+        fetch(`http://localhost:7001/obrafisica/api/alertas`)
         .then(res=>res.json())
         .then(response=>{
             //console.log(response.data);
@@ -71,7 +71,7 @@ const getAlertaObra = async (req, res)=>{
 
 const getObras = async(req, res)=>{
     try {
-        fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/totales`)
+        fetch(`http://localhost:7001/obrafisica/api/totales`)
         .then(res=>res.json())
         .then(response=>{
             //console.log(response.data);
@@ -91,7 +91,7 @@ const getObras = async(req, res)=>{
 const getObraTema = async (req, res)=>{
     try {
         let temas=[]
-       fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/temas`)
+       fetch(`http://localhost:7001/obrafisica/api/temas`)
        .then(res=>res.json())
        .then(response=>{
             for (let index = 0; index < response.data.length; index++) {
@@ -118,7 +118,7 @@ const getObraTema = async (req, res)=>{
 const getObraTipo= async (req, res)=>{
    try {
     let tipo=[];
-    fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/intervencion`)
+    fetch(`http://localhost:7001/obrafisica/api/intervencion`)
     .then(res=>res.json())
     .then(response=>{
        for (let index = 0; index < response.data.length; index++) {
@@ -144,7 +144,7 @@ const getObraTipo= async (req, res)=>{
 const getObraEtapas= async(req, res)=>{
     try {
        let etapa=[];
-       fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/etapas`)
+       fetch(`http://localhost:7001/obrafisica/api/etapas`)
        .then(res=>res.json())
        .then(response=>{
            //console.log(' task ',response.data);
@@ -172,7 +172,7 @@ const getObraEtapas= async(req, res)=>{
 const getObraDep=async (req, res)=>{
     try {
         let dep=[], obra=[], ejecutada=[];
-        fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/obrasdep`)
+        fetch(`http://localhost:7001/obrafisica/api/obrasdep`)
         .then(res=>res.json())
         .then(response=>{
             for (let index = 0; index < response.data.length; index++) {
@@ -203,14 +203,14 @@ const getObraDepDetalle=async(req, res)=>{
         let alertas=[];
         let etapa=[];
         let hitos=[];
-        fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/total/dep/${dep}`)
+        fetch(`http://localhost:7001/obrafisica/api/total/dep/${dep}`)
         .then(res=>res.json())
         .then(response=>{
             total_inversion= formatter.format(parseFloat(response.data[0].total_dep) )
             corte = response.data[0].corte
             console.log('del fetch:_',corte);
             let tipo=[];
-            fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/intervencion/dep/${dep}`)
+            fetch(`http://localhost:7001/obrafisica/api/intervencion/dep/${dep}`)
             .then(res=>res.json())
             .then(datos=>{
                 //console.log(datos.data);
@@ -221,7 +221,7 @@ const getObraDepDetalle=async(req, res)=>{
                     })
                 }
                 tipo.sort((a,b)=>b.value-a.value)
-                fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/alerta/dep/${dep}`)
+                fetch(`http://localhost:7001/obrafisica/api/alerta/dep/${dep}`)
                 .then(res=>res.json())
                 .then(response=>{
                     for (let index = 0; index < response.data.length; index++) {
@@ -234,7 +234,7 @@ const getObraDepDetalle=async(req, res)=>{
                         }
                     }
 
-                fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/etapa/dep/${dep}`)
+                fetch(`http://localhost:7001/obrafisica/api/etapa/dep/${dep}`)
                 .then(res=>res.json())
                 .then(response=>{
                     for (let index = 0; index < response.data.length; index++) {
@@ -247,7 +247,7 @@ const getObraDepDetalle=async(req, res)=>{
                     }
                     // alertas.sort((a,b)=> b.value-a.value)
                     // etapa.sort((a,b)=>b.value-a.value)
-                fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/hitos/sif`)    
+                fetch(`http://localhost:7001/obrafisica/api/hitos/sif`)    
                 .then(res=>res.json())
                 .then(response=>{
                     for (let index = 0; index < response.data.length; index++) {
@@ -278,7 +278,7 @@ const getObrasGeo= async(req, res)=>{
     try {
        // geo= await googlesheet.geo_obras()
        let geo=[];
-       fetch(`https://sse-pdm.herokuapp.com/obrafisica/api/geo`)
+       fetch(`http://localhost:7001/obrafisica/api/geo`)
        .then(res=>res.json())
        .then(response=>{
             for (let index = 0; index < response.data.length; index++) {

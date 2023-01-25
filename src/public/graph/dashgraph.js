@@ -13,7 +13,7 @@ async function _main(){
 
 async function getCorteAvancePI(){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+    fetch(`http://localhost:7001/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       let corteavance= new Date(response.data[0].corte) 
@@ -31,7 +31,7 @@ async function getCorteAvancePI(){
 
 function corteplan(mesavance, vigenciaavance, corteavance)  {
   let dia = corteavance.getDate()
-   corteavance.setDate(dia+1)
+   corteavance.setDate(dia)
   document.getElementById('fecha_corte').innerHTML= corteavance.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
   let vigencia = vigenciaavance //corteavance.getFullYear(corteavance)
   switch (vigencia) {
@@ -54,7 +54,7 @@ function corteplan(mesavance, vigenciaavance, corteavance)  {
     "mesplan" : mes,
     "vigencia": vigencia
   }
-  fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte`,{
+  fetch(`http://localhost:7001/pi/api/semaforo-corte`,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -65,7 +65,7 @@ function corteplan(mesavance, vigenciaavance, corteavance)  {
     minimovalue= (response.data[0].rojo)*100;
     maximovalue =(response.data[0].verde)*100;
     document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
-    document.getElementById('maximo-corte').value= maximovalue
+    document.getElementById('maximo-corte').value= maximovalue.toFixed(2)
     _avancePDM()
   })
   swal( {
@@ -81,7 +81,7 @@ async function _PASemaf (mes, vigencia, corte){
   try {
     mespa = mes+1//fecha.getMonth(fecha)+1
     vigencia = vigencia//fecha.getFullYear(fecha)
-    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
       valorminimo = (response.data[0].rojo);
@@ -93,7 +93,7 @@ async function _PASemaf (mes, vigencia, corte){
 
 async function _avancePDM(){
   try {
-    fetch('https://sse-pdm.herokuapp.com/pi/api/total')
+    fetch('http://localhost:7001/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
         graphPDM(datos.data[0].total_plan)
@@ -180,7 +180,7 @@ async function graphPDM(total){
 
 async function _avance_financiero(){
   try {
-    fetch('https://sse-pdm.herokuapp.com/pa/api/avancefinanciero')
+    fetch('http://localhost:7001/pa/api/avancefinanciero')
     .then(res=>res.json())
     .then(datos=>{
       porc_avance_financiero(parseFloat(datos.data[0].pptoejecutado/datos.data[0].pptoajustado))
@@ -196,7 +196,7 @@ async function porc_avance_financiero(avance){
 try {
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
       valorminimo = (response.data[0].rojo)-0.01;
@@ -348,7 +348,7 @@ async function detallePpto(compromisos, disponible, ordenado , total){
 async function columnGeo(){
   try {
     let geoinver=[]
-      fetch(`https://sse-pdm.herokuapp.com/geo/api/territorio`)
+      fetch(`http://localhost:7001/geo/api/territorio`)
       .then(res=>res.json())
       .then(datos=>{
         for (let index = 0; index < datos.data.length; index++) {
@@ -403,7 +403,7 @@ async function columnGeo(){
 
 async function porc_avance_fisico(valorminimo, valormaximo){
   try {
-    fetch('https://sse-pdm.herokuapp.com/pa/api/avancefisico')
+    fetch('http://localhost:7001/pa/api/avancefisico')
     .then(res=>res.json())
     .then(datos=>{
         const dataSource = {
@@ -462,7 +462,7 @@ async function porc_avance_fisico(valorminimo, valormaximo){
 
 async function tipoinversion(){
   try {
-   fetch(`https://sse-pdm.herokuapp.com/geo/api/tipo-inversion`)
+   fetch(`http://localhost:7001/geo/api/tipo-inversion`)
    .then(res=>res.json())
    .then(datos=> {
     document.getElementById('tipo_localizada').innerHTML= formatter.format( datos.data[0].localizada/1000000);
@@ -513,7 +513,7 @@ async function tipoinversion(){
 
 async function columnDependencias(){
   var valores=[];
-  fetch(`https://sse-pdm.herokuapp.com/geo/api/dependencias`)
+  fetch(`http://localhost:7001/geo/api/dependencias`)
       .then(res=>res.json())
       .then(datos=>{
         let tam = datos.data.length;
@@ -565,7 +565,7 @@ document.onkeypress = stopEnterKey;
 async function ejecfisica(){
    try {
      let infofisicadep=[];
-     fetch(`https://sse-pdm.herokuapp.com/pa/api/ejecusion-fisica/dependencias`)
+     fetch(`http://localhost:7001/pa/api/ejecusion-fisica/dependencias`)
      .then(res=> res.json())
      .then(datos=>{
       let tam = datos.data.length;
@@ -610,7 +610,7 @@ async function ejecfisica(){
 async function ejecfinanciera(){
     try {
       let infofisicadep=[];
-      fetch(`https://sse-pdm.herokuapp.com/pa/api/ejecusion-financiera/dependencias`)
+      fetch(`http://localhost:7001/pa/api/ejecusion-financiera/dependencias`)
       .then(res=> res.json())
       .then(datos=>{
        let tam = datos.data.length;
@@ -656,7 +656,7 @@ async function graphCumplimientoPDM(avance){
   try {
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`https://sse-pdm.herokuapp.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
       valorminimo = (response.data[0].rojo)-0.01;
@@ -718,13 +718,13 @@ async function graphCumplimientoPDM(avance){
 
 async function getalerta(){
   try {
-      fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/corte`)
+      fetch(`http://localhost:7001/pa/api/alerta/corte`)
       .then(res=>res.json())
       .then(response=>{
         let cortealerta= new Date(response.data[0].corte) 
         mespa = cortealerta.getMonth(cortealerta)+1
         vigencia = cortealerta.getFullYear(cortealerta)
-        fetch(`https://sse-pdm.herokuapp.com/pa/api/alerta/valor/${mespa}`)
+        fetch(`http://localhost:7001/pa/api/alerta/valor/${mespa}`)
         .then(res=>res.json())
         .then(response=>{
           let rojo = response.data[0].rojo
@@ -742,7 +742,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
     let infocumple=[];
     var cump=0;
     let colorsemafcumple=''
-    fetch(`https://sse-pdm.herokuapp.com/dep/api/rank/cumplimiento`)
+    fetch(`http://localhost:7001/dep/api/rank/cumplimiento`)
     .then(res=>res.json())
     .then(response=>{
         let tam = response.data.length;

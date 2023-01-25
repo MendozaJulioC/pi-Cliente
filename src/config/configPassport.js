@@ -4,15 +4,12 @@ const LocalStrategy = require ('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 
-
-
 passport.use( new LocalStrategy({
     usernameField: 'username',
     passwordField:'password'
-    
 }, async (email, password, done)=>{
    let user=[];
-    fetch(`https://sse-pdm.herokuapp.com/auth/api/validatemail/${email}`)
+    fetch(`http://localhost:7001/auth/api/validatemail/${email}`)
     .then(res=> res.json())
     .then(respuesta =>{
         let tam = respuesta.data.length;
@@ -67,7 +64,7 @@ async function isMatch(password, user,done)
 }
 
 function finalFunction(id,done){
-    fetch(`https://sse-pdm.herokuapp.com/auth/api/id/${id}`)
+    fetch(`http://localhost:7001/auth/api/id/${id}`)
     .then(res=> res.json())
     .then(respuesta =>{
        if (respuesta.data) {
@@ -76,5 +73,8 @@ function finalFunction(id,done){
         return done(null, false, { message: 'Datos de inicio de session Errados  !!!'}  )   
        }
     })
+
+    
+
 }
 //module.exports= {}

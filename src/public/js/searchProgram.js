@@ -75,7 +75,7 @@ async function _getBuscaNombrePrograma(){
     let nom_Programa = document.getElementById('browser').value
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     try {
-        fetch(`https://sse-pdm.herokuapp.com/pi/api/programas/consulta/nombre/${nom_Programa}`)
+        fetch(`http://localhost:7001/pi/api/programas/consulta/nombre/${nom_Programa}`)
         .then(res=>res.json())
         .then(datos=>{
             let tabla='';
@@ -130,7 +130,7 @@ async function _getBuscaNombrePrograma(){
               pptoPrograma(datos.data[0].cod_programa)
               alerta_nomprograma(datos.data[0].nom_programa)
              _graphAvancePrograma(avanceprograma)
-             fetch(`https://sse-pdm.herokuapp.com/pi/api/programas/responsables/nombre/${nom_Programa}`)
+             fetch(`http://localhost:7001/pi/api/programas/responsables/nombre/${nom_Programa}`)
             .then(res=>res.json())
             .then(response=>{
               let peso3=0; let avance3=0;  let formula=0;
@@ -178,7 +178,7 @@ async function _getBuscaNombrePrograma(){
     let _total_indicador =0; let peso_total=0; let avancexpeso=0;
     if (cod_programa.length>=5){
         try {
-          fetch(`https://sse-pdm.herokuapp.com/pi/api/programas/consulta/codigo/${cod_programa}`)
+          fetch(`http://localhost:7001/pi/api/programas/consulta/codigo/${cod_programa}`)
             .then(res => res.json())
             .then(datos => {
               let tabla='';
@@ -235,7 +235,7 @@ async function _getBuscaNombrePrograma(){
                 pptoPrograma(datos.data[0].cod_programa)
                 _graphAvancePrograma(avanceprograma)
                 //responsables
-                  fetch(`https://sse-pdm.herokuapp.com/pi/api/programas/responsables/codigo/${cod_programa}`)
+                  fetch(`http://localhost:7001/pi/api/programas/responsables/codigo/${cod_programa}`)
                     .then(res=>res.json())
                     .then(response3=>{
                         let tabla3=''
@@ -272,7 +272,7 @@ async function _getBuscaNombrePrograma(){
 
  async function alerta_nomprograma(nom_Programa){
   try {
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/programas/semaforo-corte/alerta/${nom_Programa}`)
+    fetch(`http://localhost:7001/pi/api/programas/semaforo-corte/alerta/${nom_Programa}`)
     .then(res=> res.json())
     .then(response=>{
         const dataSource = {
@@ -330,7 +330,7 @@ async function _getBuscaNombrePrograma(){
 async function pptoPrograma(cod_programa){
   console.log(cod_programa);
   try {
-        fetch(`https://sse-pdm.herokuapp.com/pi/api/programa/ppto/${cod_programa}`)
+        fetch(`http://localhost:7001/pi/api/programa/ppto/${cod_programa}`)
         .then(res=> res.json())
         .then(datos=>{
           const dataSource = {

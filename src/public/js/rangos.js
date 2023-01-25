@@ -2,7 +2,7 @@
 async function getCorteAvancePI(){
   try {
     
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/avance/corte`)
+    fetch(`http://localhost:7001/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       
@@ -23,7 +23,7 @@ getCorteAvancePI()
 
  
  async function corteplan(mesavance, vigenciaavance, corte, dia){
-  corte.setDate(dia+1)
+  corte.setDate(dia)
 
   document.getElementById('fecha_corte').innerHTML = corte.toLocaleDateString("en-US", {
     day: 'numeric',
@@ -54,7 +54,7 @@ getCorteAvancePI()
       "vigencia": vigencia
     }
 
-    fetch(`https://sse-pdm.herokuapp.com/pi/api/semaforo-corte`,{
+    fetch(`http://localhost:7001/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
@@ -65,7 +65,7 @@ getCorteAvancePI()
         minimovalue= (response.data[0].rojo)*100;
       maximovalue =(response.data[0].verde)*100;
       document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
-      document.getElementById('maximo-corte').value= maximovalue
+      document.getElementById('maximo-corte').value= maximovalue.toFixed(2)
     })
 swal( {
     title: "SSE-PDM!",

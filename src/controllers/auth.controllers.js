@@ -7,7 +7,7 @@ const passport = require('passport')
 const getRegister = async(req, res )=>{
    try {
     const message = req.flash('message')[0]  ;
-       fetch(`https://sse-pdm.herokuapp.com/see/api/dependencias`)
+       fetch(`http://localhost:7001/see/api/dependencias`)
        .then(res=>res.json())
        .then(data=>{
            dep =data.data
@@ -41,7 +41,7 @@ const postRegister = async(req, res)=>{
         if (password !=  confirmpassword)  {errors.push({message:"Password no coinciden!!!"})}
         if (password.length<6 )  {errors.push({message:"Password debe contener más de 6 carateres!!!"})}
         if(errors.length>0){
-            fetch(`https://sse-pdm.herokuapp.com/see/api/dependencias`)
+            fetch(`http://localhost:7001/see/api/dependencias`)
             .then(res=>res.json())
             .then(data=>{
                 dep =data.data
@@ -55,7 +55,7 @@ const postRegister = async(req, res)=>{
             })
         } else{
             let hashPass = await bcrypt.hash(password,10);
-            fetch(`https://sse-pdm.herokuapp.com/auth/api/validatemail/${email}`)
+            fetch(`http://localhost:7001/auth/api/validatemail/${email}`)
             .then(res=>res.json())
             .then(respuesta=>{
                 validaEmail =respuesta.data
@@ -76,7 +76,7 @@ const postRegister = async(req, res)=>{
                         "tel_contacto": tel_contacto,
                         "dependencias": dependencias
                     }
-                    fetch('https://sse-pdm.herokuapp.com/auth/api/register',{
+                    fetch('http://localhost:7001/auth/api/register',{
                         method: "POST",
                         body: JSON.stringify(parametros),
                         headers: {
