@@ -11,13 +11,13 @@ async function alertamain(){
 
 async function getalerta(){
   try {
-    fetch(`http://localhost:7001/pa/api/alerta/corte`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/corte`)
     .then(res=>res.json())
     .then(response=>{
       let cortealerta= new Date(response.data[0].corte) 
       mespa = cortealerta.getMonth(cortealerta)+1
       vigencia = cortealerta.getFullYear(cortealerta)
-      fetch(`http://localhost:7001/pa/api/alerta/valor/${mespa}`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/valor/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
         let alertavalor =  response.data[0].alerta
@@ -37,7 +37,7 @@ async  function alerta_financiera(alerta){
   try {
    
     let valor_alertafinanciera=[] 
-    fetch(`http://localhost:7001/pa/api/alerta/financiera/${alerta}`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/financiera/${alerta}`)
     .then(res=> res.json()).then(response=>{
       document.getElementById('finanzas').innerHTML=  response.data.length
       medidafisica(alerta)
@@ -155,7 +155,7 @@ async  function alerta_financiera(alerta){
 async  function alerta_fisica(alerta){
   try {
     let valor_alertafinanciera=[] 
-    fetch(`http://localhost:7001/pa/api/alerta/fisica/${alerta}`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/fisica/${alerta}`)
     .then(res=> res.json()).then(response=>{
       document.getElementById('fisica').innerHTML=  response.data.length
       document.getElementById('rangoalertafisica').innerHTML=(alerta*100).toFixed(2)+'%'
@@ -286,7 +286,7 @@ async function alertafisicofinan(alerta){
   try {
    
     let valor_alertafiafin=[] 
-    fetch(`http://localhost:7001/pa/api/alerta/finanfisica/${alerta}`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/finanfisica/${alerta}`)
     .then(res=>res.json())
     .then(response=>{
       document.getElementById('alertafisfin').innerHTML=response.data.length
@@ -419,7 +419,7 @@ async function alertafisicofinan(alerta){
 async function alertaponderado(){
   try {
     let alertasponds=[];
-    fetch(`http://localhost:7001/pa/api/alerta/ponderado`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/ponderado`)
     .then(res=>res.json())
     .then(response=>{
       for (let index = 0; index < response.data.length; index++) {
@@ -554,7 +554,7 @@ function buscavalstat(nomproyecto, cod, ejec){
  
   try {
   
-     fetch(`http://localhost:7001/pa/api/proyecto/${cod}`)
+     fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/proyecto/${cod}`)
     .then(res=>res.json())
     .then(datos=>{
       geoProyect(nomproyecto,cod)
@@ -621,13 +621,13 @@ function buscavalstat(nomproyecto, cod, ejec){
   }
   async function proyecto_fisico(cod){
     try {
-      fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
   
         valorminimo = (response.data[0].rojo)-0.01;
         valormaximo = (response.data[0].verde);
-        fetch(`http://localhost:7001/pa/api/avances/ejecucion/${cod}`)
+        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/avances/ejecucion/${cod}`)
         .then(res=> res.json())
         .then(response=>{
           let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
@@ -817,7 +817,7 @@ function buscavalstat(nomproyecto, cod, ejec){
   }
   async function geoProyect( nom, cod){
     try {
-      fetch(`http://localhost:7001/geo/api/dependencias/proyectos/${cod}`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/dependencias/proyectos/${cod}`)
       .then(res=>res.json())
       .then(datos=>{
         const dataSource = {
@@ -1064,7 +1064,7 @@ function buscavalstat(nomproyecto, cod, ejec){
   async function medidafisica(alerta)
   {
     try {
-      fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
   
@@ -1199,7 +1199,7 @@ function buscavalstat(nomproyecto, cod, ejec){
 
   async function mediponds(){
     try {
-      fetch(`http://localhost:7001/pa/semaforo-corte/${mespa}`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
   
@@ -1279,7 +1279,7 @@ function buscavalstat(nomproyecto, cod, ejec){
   async function alertafisicamodal() {
     try {
       let countalertdep = [];
-      fetch(`http://localhost:7001/pa/pi/alerta/cuentadepfisica/${vlr_alerta}`).
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/pi/alerta/cuentadepfisica/${vlr_alerta}`).
       then(res => res.json()).then(response => {
         for (let index = 0; index < response.data.length; index++) {
           countalertdep.push({

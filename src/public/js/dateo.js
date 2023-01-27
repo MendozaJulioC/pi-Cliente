@@ -14,7 +14,7 @@ async function dateomain(){
 
 async  function corteplan(){
  // var fecha = new Date('09/30/2021');
-  fetch(`http://localhost:7001/pi/api/avance/corte`)
+  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
   .then(res=>res.json())
   .then(response=>{
     let corteavance= new Date(response.data[0].corte) 
@@ -49,7 +49,7 @@ async  function corteplan(){
     "mesplan" : mes,
     "vigencia": vigencia
   }
-    fetch(`http://localhost:7001/pi/api/semaforo-corte`,{
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
@@ -68,7 +68,7 @@ async  function corteplan(){
 async function _avancePDM(){
 
   try {
-    fetch('http://localhost:7001/pi/api/total')
+    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
       //avancePDMtarget(datos.data[0].total_plan)
@@ -129,7 +129,7 @@ async function avancePDMtarget(avanceplan){
 async function graphInicial(){
   try {
     var dateo=[];
-    fetch('http://localhost:7001/pi/api/total-avance-lineas')
+    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/total-avance-lineas')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -184,7 +184,7 @@ async function _Components(){
     let avance_Comp1=[]; let avance_Comp3=[];
     let avance_Comp2=[]; let avance_Comp4=[]; let avance_Comp5=[];
     let tabla='', tabla2='',  tabla3='',   tabla4='',  tabla5='';let colorsemaf;
-    fetch('http://localhost:7001/pi/api/total-componentes')
+    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/total-componentes')
     .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_comp1').innerHTML="";
@@ -409,7 +409,7 @@ async function graphCompL5(avanceComp5){
 
 async function contadorSemaforo(){
   try {
-    fetch(`http://localhost:7001/pi/api/semaforo-corte/contador` )
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/contador` )
     .then(res => res.json())
     .then(response =>{
       document.getElementById('total-gris').innerHTML= response.data[0].gris
@@ -458,7 +458,7 @@ async function contadorSemaforo(){
 async function estado_sem_pordep(codsemaforo) {
   try {
     let info=[];
-    fetch(`http://localhost:7001/pi/api/semaforo-corte/general/${codsemaforo} `)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/general/${codsemaforo} `)
     .then(res=> res.json()).
     then(datos=>{
       let tam = datos.data.length;

@@ -2,7 +2,7 @@
 async function getCorteAvancePI(){
   try {
     
-    fetch(`http://localhost:7001/pi/api/avance/corte`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       
@@ -54,7 +54,7 @@ getCorteAvancePI()
       "vigencia": vigencia
     }
 
-    fetch(`http://localhost:7001/pi/api/semaforo-corte`,{
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{

@@ -2,7 +2,7 @@
 async function getCorteAvancePA(){
     try {
       
-      fetch(`http://localhost:7001/pi/api/avance/corte`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
       .then(res=>res.json())
       .then(response=>{
         
@@ -53,7 +53,7 @@ async function getCorteAvancePA(){
         "vigencia": vigencia
       }
   
-      fetch(`http://localhost:7001/pa/semaforo-corte/${mesavance}`)
+      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mesavance}`)
       
      
       .then(res=> res.json())

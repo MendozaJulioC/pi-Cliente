@@ -11,7 +11,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 
 async function rangomapa(){
-  fetch(`http://localhost:7001/geo/api/rangos/maps`)
+  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/rangos/maps`)
   .then(res=>res.json())
   .then(response=>{
     for (let index = 0; index < 21; index++) {
@@ -44,7 +44,7 @@ const vigencia= async(req,res)=>{
      let ciudad = document.getElementById('inverCiudad');
      let pp = document.getElementById('pp');
      let fortInst= document.getElementById('fortInst');
-    fetch('http://localhost:7001/geo/api/tipo-inversion')
+    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/tipo-inversion')
     .then(res=>res.json())
     .then(datos=>{
       swal( {
@@ -118,7 +118,7 @@ const vigencia= async(req,res)=>{
 const garficaTotalCmuna = async(req, res)=>{
   try {
     let geoinver=[]
-    fetch(`http://localhost:7001/geo/api/territorio`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/territorio`)
     .then(res=>res.json())
     .then(datos=>{
       for (let index = 0; index < datos.data.length; index++) {
@@ -199,7 +199,7 @@ const mapaVogencia = async (req, res) => {
     setTimeout(() => {map.invalidateSize();}, 300);
   })
 
-const geojson_url = "http://localhost:7001/geo/api/inversion/maps" 
+const geojson_url = "http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/inversion/maps" 
 //  const geojson_url = "/GeoJson/Limite_Comuna_Corregimiento.geojson";
   fetch(geojson_url)
     .then(res => res.json())
@@ -517,7 +517,7 @@ async function depterriotiomodal(value){
     let comuna = parseInt(value)
     tipoinvercomuna(comuna)
     var datos=[];
-    fetch(`http://localhost:7001/geo/api/comuna/dep-inversion/${comuna}`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/comuna/dep-inversion/${comuna}`)
     .then(res=> res.json())
     .then(response=>{
       let tam = response.data.length;
@@ -581,7 +581,7 @@ async function reporteSec(value, nombre){
   try {
     let reportes=[];
     document.getElementById('logrocomunareportado').innerHTML= nombre
-    const url = `http://localhost:7001/geo/api/logros/${value}`
+    const url = `http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/logros/${value}`
     fetch(url)
     .then(res=>res.json())
     .then (data=>{
@@ -647,7 +647,7 @@ async function tipoinvercomuna(comuna){
     
     let nombres=[];
     let valores=[];
-    fetch(`http://localhost:7001/obrafisica/api/geo/territorio/${comuna}`)
+    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/geo/territorio/${comuna}`)
     .then(res=>res.json())
     .then(response=>{
 

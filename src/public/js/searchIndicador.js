@@ -76,7 +76,7 @@ async function _getBuscaNombreIndicador(){
     let nom_Indicador = document.getElementById('browser').value
    
     try {
-        fetch(`http://localhost:7001/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
+        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
         .then(res=>res.json())
         .then(datos=>{
   
@@ -165,7 +165,7 @@ async function _getBuscaNombreIndicador(){
     if (cod_Indicador.length>=5){
 
         try {
-            fetch(`http://localhost:7001/pi/api/indicador/${cod_Indicador}`)
+            fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/indicador/${cod_Indicador}`)
             .then(res => res.json())
             .then(datos => {
             
