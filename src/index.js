@@ -9,4 +9,4 @@ app.use(require('./routes/index'));
 //app.use(require('./controllers/task1'));
 //star server
 
-app.listen((process.env.PORT || 7500), function(){ console.log(`listening on * : ${process.env.PORT}`); }); 
+app.listen((process.env.AWS_PORT || 7500), function(){ console.log(`listening on * : ${process.env.AWS_PORT}`); }); 
