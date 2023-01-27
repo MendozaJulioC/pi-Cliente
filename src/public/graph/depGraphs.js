@@ -124,7 +124,7 @@ async function _avancePDM(cod_dep){
 async function graphPDM(total){
 
     //aqui un fetch para consultar el porcentaje de ejecución del pdm
-fecha.setDate(dia)
+fecha.setDate(dia+1)
     document.getElementById('fecha_corte').innerHTML= fecha.toLocaleDateString("en-US", { day:'numeric',month: 'short',year: 'numeric' })
     //mespa = fecha.getMonth(fecha)+1
     vigencia = fecha.getFullYear(fecha)

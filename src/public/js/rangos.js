@@ -23,7 +23,7 @@ getCorteAvancePI()
 
  
  async function corteplan(mesavance, vigenciaavance, corte, dia){
-  corte.setDate(dia)
+  corte.setDate(dia+1)
 
   document.getElementById('fecha_corte').innerHTML = corte.toLocaleDateString("en-US", {
     day: 'numeric',

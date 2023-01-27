@@ -10,7 +10,7 @@ async function getCorteAvancePA(){
         let mesavance = corteavance.getMonth(corteavance)+1
         let vigencia = corteavance.getFullYear(corteavance)
         let dia= corteavance.getDate(corteavance)
-        corteavance.setDate(dia)
+        corteavance.setDate(dia+1)
         document.getElementById('fecha_corte').innerHTML = corteavance.toLocaleDateString("en-US", {
           day: 'numeric',
           month: 'short',
