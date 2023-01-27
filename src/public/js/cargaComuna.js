@@ -57,7 +57,7 @@ function buscaComuna(){
 	    "vigencia":vigencia   
     }
     if(territorio!=0){  
-        fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/api/comuna/vigencia',{
+        fetch('http://api.avanzamedellin.info/api/comuna/vigencia',{
             method:'POST',
             body: JSON.stringify(parametros), // data can be `string` or {object}!
             headers:{
@@ -133,7 +133,7 @@ function ComunaDepVigencia(){
 	    "vigencia":vigencia   
     }
     if(territorio!=0){  
-        fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/api/comuna/dependencias',{
+        fetch('http://api.avanzamedellin.info/api/comuna/dependencias',{
             method:'POST',
             body: JSON.stringify(parametros), // data can be `string` or {object}!
             headers:{
@@ -313,7 +313,7 @@ async function proyectosxcomuna(bloque){
             "page"      :   bloque
         }
       
-        fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/api/comuna/proyectos/',{
+        fetch('http://api.avanzamedellin.info/api/comuna/proyectos/',{
             method: 'POST',
             body: JSON.stringify(parametros),
             headers:{

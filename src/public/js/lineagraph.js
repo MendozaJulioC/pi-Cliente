@@ -10,11 +10,11 @@ async function _buscaAvancelinea(linea){
   try {
     let tabla=''
    let avance_Dep_Line=[];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/line/${linea}`)
+    fetch(`http://api.avanzamedellin.info/pi/api/avance/line/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
       _graphAvanceIndicador(datos.data[0].sum)
-      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/responsables/line/${linea}`)
+      fetch(`http://api.avanzamedellin.info/pi/api/responsables/line/${linea}`)
       .then(res=>res.json())
       .then(response=>{
         let tam = response.data.length;
@@ -123,7 +123,7 @@ async function _graphAvanceIndicador(avance){
 };
 async function _graphCumplimientoPptal(linea){
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/line/financiera/${linea}`)
+    fetch(`http://api.avanzamedellin.info/pi/api/line/financiera/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {
@@ -185,7 +185,7 @@ async function componentelinea(linea){
   try {
     let avance_Comp=[]; 
     let tabla='';
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/componentes/avance/line/'+linea)
+    fetch('http://api.avanzamedellin.info/pi/api/componentes/avance/line/'+linea)
     .then(res=>res.json())
     .then(datos=>{
       document.getElementById('tbl_comp').innerHTML="";
@@ -238,7 +238,7 @@ async function programalinea(linea){
   try {
     let avance_Prg =[];
     let tabla_prg='';
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/programas/avance/line/${linea}`)
+    fetch(`http://api.avanzamedellin.info/pi/api/programas/avance/line/${linea}`)
     .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_programa').innerHTML="";
@@ -291,7 +291,7 @@ async function _tbl_Indicadores(linea)
 {
   try {
     let tabla3 ='';
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/line/indicadores/resumen/${linea}`)
+    fetch(`http://api.avanzamedellin.info/pi/api/line/indicadores/resumen/${linea}`)
     .then(res=>res.json())
     .then(response=>{
       let back_semafav='';
@@ -359,7 +359,7 @@ async function _tbl_Indicadores(linea)
 }
  async function alerta_linea(linea){
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/line/semafav/${linea}`)
+    fetch(`http://api.avanzamedellin.info/pi/api/line/semafav/${linea}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {

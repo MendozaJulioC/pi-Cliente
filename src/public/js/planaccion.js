@@ -21,7 +21,7 @@ async function _main() {
 
 async function getCorteAvancePI() {
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
+    fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
       .then(res => res.json())
       .then(response => {
         let corteavance = new Date(response.data[0].corte)
@@ -42,7 +42,7 @@ async function _PASemaf(mes, vigencia, corte) {
   try {
     mespa = mes//fecha.getMonth(fecha)+1
     vigencia = vigencia //fecha.getFullYear(fecha)
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
       .then(res => res.json())
       .then(response => {
         
@@ -58,7 +58,7 @@ async function _PASemaf(mes, vigencia, corte) {
 
 async function _avance_financiero() {
   try {
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/avancefinanciero')
+    fetch('http://api.avanzamedellin.info/pa/api/avancefinanciero')
       .then(res => res.json())
       .then(datos => {
         porc_avance_financiero(parseFloat(datos.data[0].pptoejecutado / datos.data[0].pptoajustado))
@@ -126,7 +126,7 @@ async function porc_avance_financiero(avance) {
 
 async function avancefinaninst() {
   try {
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/general/financiero/inst')
+    fetch('http://api.avanzamedellin.info/pa/general/financiero/inst')
       .then(res => res.json())
       .then(datos => {
         const dataSource = {
@@ -184,7 +184,7 @@ async function avancefinaninst() {
 
 async function ejecfinanpp() {
   try {
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/general/financiero/pp')
+    fetch('http://api.avanzamedellin.info/pa/general/financiero/pp')
       .then(res => res.json())
       .then(datos => {
         const dataSource = {
@@ -284,7 +284,7 @@ async function graphPDA(poai, pptoajustado, ordenado) {
 async function porc_avance_fisico(valorminimopa, valormaximopa) {
   try {
 
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/avancefisico')
+    fetch('http://api.avanzamedellin.info/pa/api/avancefisico')
       .then(res => res.json())
       .then(datos => {
         const dataSource = {
@@ -341,7 +341,7 @@ async function porc_avance_fisico(valorminimopa, valormaximopa) {
 
 async function ejecFisicaInst() {
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/general/fisico/institucional`).then(res => res.json())
+    fetch(`http://api.avanzamedellin.info/pa/general/fisico/institucional`).then(res => res.json())
       .then(response => {
         const dataSource = {
           chart: {
@@ -452,7 +452,7 @@ async function detallePpto(compromisos, disponible, ordenado, total) {
 
 async function ejefisicapp() {
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/general/fisico/pp`).then(res => res.json())
+    fetch(`http://api.avanzamedellin.info/pa/general/fisico/pp`).then(res => res.json())
       .then(response => {
 
         const dataSource = {
@@ -563,7 +563,7 @@ document.onkeypress = stopEnterKey;
 async function ejecfisica() {
   try {
     let infofisicadep = [];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/ejecusion-fisica/dependencias`)
+    fetch(`http://api.avanzamedellin.info/pa/api/ejecusion-fisica/dependencias`)
       .then(res => res.json())
       .then(datos => {
         let tam = datos.data.length;
@@ -613,7 +613,7 @@ async function graphCumplimientoPDM(avance) {
   try {
     mespa = fechaPA.getMonth(fechaPA) + 1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mespa}`)
+    fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
       .then(res => res.json())
       .then(response => {
         valorminimo = (response.data[0].rojo) - 0.01;
@@ -673,7 +673,7 @@ async function graphCumplimientoPDM(avance) {
 async function ejecfisicarank() {
   try {
     let infofisicadep = [];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/ejecusion-fisica/dependencias`)
+    fetch(`http://api.avanzamedellin.info/pa/api/ejecusion-fisica/dependencias`)
       .then(res => res.json())
       .then(datos => {
         let tam = datos.data.length;
@@ -742,7 +742,7 @@ async function ejecfisicarank() {
 async function ejecfinancierarank() {
   try {
     let infofisicadep = [];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/ejecusion-financiera/dependencias`)
+    fetch(`http://api.avanzamedellin.info/pa/api/ejecusion-financiera/dependencias`)
       .then(res => res.json())
       .then(datos => {
         let tam = datos.data.length;
@@ -811,7 +811,7 @@ async function graphbubble(valorminimopa, valormaximop){
  
 
     let datosbubble=[];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/bubble`)
+    fetch(`http://api.avanzamedellin.info/pa/bubble`)
     .then(res => res.json())
     .then(datos => {
       let tam = datos.data.length;

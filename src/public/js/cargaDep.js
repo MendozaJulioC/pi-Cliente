@@ -6,7 +6,7 @@ async function queryDep(){
     var depQuery =selectDep.options[selectDep.selectedIndex].value
     let dep_text = selectDep.options[selectDep.selectedIndex].text
     document.getElementById('nom_dep').innerHTML=dep_text
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/api/dependencias/'+depQuery)
+    fetch('http://api.avanzamedellin.info/api/dependencias/'+depQuery)
     .then(res=> res.json())
     .then(datos=>{
         am4core.useTheme(am4themes_animated);
@@ -102,7 +102,7 @@ async function queryDepVig(){
         "vigencia":vigQuery
     }
     var datos=[];
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/api/dependencias/vigencia',{
+    fetch('http://api.avanzamedellin.info/api/dependencias/vigencia',{
         method :'POST',
         body: JSON.stringify(parametros), // data can be `string` or {object}!
         headers:{

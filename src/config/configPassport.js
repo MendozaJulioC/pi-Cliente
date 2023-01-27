@@ -9,7 +9,7 @@ passport.use( new LocalStrategy({
     passwordField:'password'
 }, async (email, password, done)=>{
    let user=[];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/auth/api/validatemail/${email}`)
+    fetch(`http://api.avanzamedellin.info/auth/api/validatemail/${email}`)
     .then(res=> res.json())
     .then(respuesta =>{
         let tam = respuesta.data.length;
@@ -64,7 +64,7 @@ async function isMatch(password, user,done)
 }
 
 function finalFunction(id,done){
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/auth/api/id/${id}`)
+    fetch(`http://api.avanzamedellin.info/auth/api/id/${id}`)
     .then(res=> res.json())
     .then(respuesta =>{
        if (respuesta.data) {

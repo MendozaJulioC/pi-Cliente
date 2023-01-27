@@ -1,11 +1,12 @@
-var nomarchivopdf='';
 
+
+var nomarchivopdf='';
 
 async function query_valstat(){
   let valstat= document.getElementById('valstat').value
   try {
    let tablaValStadistico ='';
-   fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/valor-estadistico/${valstat} `)
+   fetch(`http://api.avanzamedellin.info/pa/api/valor-estadistico/${valstat} `)
    .then(res => res.json())
    .then(response =>{
     // console.log(response);
@@ -124,7 +125,7 @@ async function busca_proyect(){
   try {
     let cod = document.getElementById('bpin').value
     
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/proyecto/${cod}`)
+    fetch(`http://api.avanzamedellin.info/pa/api/proyecto/${cod}`)
    .then(res=>res.json())
    .then(datos=>{
     if(datos.data.length==0){
@@ -203,7 +204,7 @@ async function busca_proyect(){
 
 async function proyecto_fisicoqp(cod){
   try {
-     fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/avances/ejecucion/${cod}`)
+     fetch(`http://api.avanzamedellin.info/pa/api/avances/ejecucion/${cod}`)
     .then(res=> res.json())
     .then(response=>{
       let avanxcefisicoproject= parseFloat((response.data[0].porc_eficacia_proyecto)*100); 
@@ -390,7 +391,7 @@ async function fifaponqp(ffp){
   
 async function geoProyectqp( nom, cod){
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/geo/api/dependencias/proyectos/${cod}`)
+    fetch(`http://api.avanzamedellin.info/geo/api/dependencias/proyectos/${cod}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {

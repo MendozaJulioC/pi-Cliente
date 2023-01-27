@@ -9,10 +9,10 @@ async function detalleAvance(){
       
         let CumplimientoPI=[]; let tipo_corte=[];
         //fetch(`/pi/google`)
-        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/generalpi`)
+        fetch(`http://api.avanzamedellin.info/pi/api/generalpi`)
         .then( res=> res.json())
         .then(response=>{
-          fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
+          fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
           .then(res=>res.json())
           .then(datos=>{
             let corteavance= new Date(datos.data[0].corte) 
@@ -92,12 +92,12 @@ async function detalleAvanceLinea(){
     let AvanceL4=[]; 
     let AvanceL5=[]; 
 
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/genralpilineas`)
+    fetch(`http://api.avanzamedellin.info/pi/api/genralpilineas`)
     // fetch(`/pi/google/lineas`)
     .then( res=> res.json())
     .then(response=>{
       // console.log(response.data);
-        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/corteslineas`).then(res=> res.json())
+        fetch(`http://api.avanzamedellin.info/pi/api/corteslineas`).then(res=> res.json())
         .then(datos=>{        
           for (let index = 0; index < datos.data.length; index++) {
             CortePlan2.push({ "label" :  `${datos.data[index].corte.substr(0,10)}(${datos.data[index].tipo})`})
@@ -188,7 +188,7 @@ async function triadaInicial2(datos){
   var fechaPA = new Date('09/30/2021');
   mes = fechaPA.getMonth(fechaPA)+1
   vigencia = fechaPA.getFullYear(fechaPA)
-  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mes}`)
+  fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mes}`)
   .then(res=>res.json())
   .then(response=>{
     valorminimo = (response.data[0].rojo);

@@ -12,7 +12,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 const getAlertaObra = async (req, res)=>{
     try {
         let alertas=[]
-        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/alertas`)
+        fetch(`http://api.avanzamedellin.info/obrafisica/api/alertas`)
         .then(res=>res.json())
         .then(response=>{
             //console.log(response.data);
@@ -71,7 +71,7 @@ const getAlertaObra = async (req, res)=>{
 
 const getObras = async(req, res)=>{
     try {
-        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/totales`)
+        fetch(`http://api.avanzamedellin.info/obrafisica/api/totales`)
         .then(res=>res.json())
         .then(response=>{
             //console.log(response.data);
@@ -91,7 +91,7 @@ const getObras = async(req, res)=>{
 const getObraTema = async (req, res)=>{
     try {
         let temas=[]
-       fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/temas`)
+       fetch(`http://api.avanzamedellin.info/obrafisica/api/temas`)
        .then(res=>res.json())
        .then(response=>{
             for (let index = 0; index < response.data.length; index++) {
@@ -118,7 +118,7 @@ const getObraTema = async (req, res)=>{
 const getObraTipo= async (req, res)=>{
    try {
     let tipo=[];
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/intervencion`)
+    fetch(`http://api.avanzamedellin.info/obrafisica/api/intervencion`)
     .then(res=>res.json())
     .then(response=>{
        for (let index = 0; index < response.data.length; index++) {
@@ -144,7 +144,7 @@ const getObraTipo= async (req, res)=>{
 const getObraEtapas= async(req, res)=>{
     try {
        let etapa=[];
-       fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/etapas`)
+       fetch(`http://api.avanzamedellin.info/obrafisica/api/etapas`)
        .then(res=>res.json())
        .then(response=>{
            //console.log(' task ',response.data);
@@ -172,7 +172,7 @@ const getObraEtapas= async(req, res)=>{
 const getObraDep=async (req, res)=>{
     try {
         let dep=[], obra=[], ejecutada=[];
-        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/obrasdep`)
+        fetch(`http://api.avanzamedellin.info/obrafisica/api/obrasdep`)
         .then(res=>res.json())
         .then(response=>{
             for (let index = 0; index < response.data.length; index++) {
@@ -203,14 +203,14 @@ const getObraDepDetalle=async(req, res)=>{
         let alertas=[];
         let etapa=[];
         let hitos=[];
-        fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/total/dep/${dep}`)
+        fetch(`http://api.avanzamedellin.info/obrafisica/api/total/dep/${dep}`)
         .then(res=>res.json())
         .then(response=>{
             total_inversion= formatter.format(parseFloat(response.data[0].total_dep) )
             corte = response.data[0].corte
             console.log('del fetch:_',corte);
             let tipo=[];
-            fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/intervencion/dep/${dep}`)
+            fetch(`http://api.avanzamedellin.info/obrafisica/api/intervencion/dep/${dep}`)
             .then(res=>res.json())
             .then(datos=>{
                 //console.log(datos.data);
@@ -221,7 +221,7 @@ const getObraDepDetalle=async(req, res)=>{
                     })
                 }
                 tipo.sort((a,b)=>b.value-a.value)
-                fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/alerta/dep/${dep}`)
+                fetch(`http://api.avanzamedellin.info/obrafisica/api/alerta/dep/${dep}`)
                 .then(res=>res.json())
                 .then(response=>{
                     for (let index = 0; index < response.data.length; index++) {
@@ -234,7 +234,7 @@ const getObraDepDetalle=async(req, res)=>{
                         }
                     }
 
-                fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/etapa/dep/${dep}`)
+                fetch(`http://api.avanzamedellin.info/obrafisica/api/etapa/dep/${dep}`)
                 .then(res=>res.json())
                 .then(response=>{
                     for (let index = 0; index < response.data.length; index++) {
@@ -247,7 +247,7 @@ const getObraDepDetalle=async(req, res)=>{
                     }
                     // alertas.sort((a,b)=> b.value-a.value)
                     // etapa.sort((a,b)=>b.value-a.value)
-                fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/hitos/sif`)    
+                fetch(`http://api.avanzamedellin.info/obrafisica/api/hitos/sif`)    
                 .then(res=>res.json())
                 .then(response=>{
                     for (let index = 0; index < response.data.length; index++) {
@@ -278,7 +278,7 @@ const getObrasGeo= async(req, res)=>{
     try {
        // geo= await googlesheet.geo_obras()
        let geo=[];
-       fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/geo`)
+       fetch(`http://api.avanzamedellin.info/obrafisica/api/geo`)
        .then(res=>res.json())
        .then(response=>{
             for (let index = 0; index < response.data.length; index++) {

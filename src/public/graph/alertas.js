@@ -16,7 +16,7 @@ async function dateomain(){
 
 async function getCorteAvancePI(){
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
+    fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       let corteavance= new Date(response.data[0].corte) 
@@ -49,7 +49,7 @@ async function getCorteAvancePI(){
 }
 
 async function semaforo_inicial(){
-  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/total`)
+  fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte/total`)
   .then(res=> res.json())
   .then(response=>{
     document.getElementById('title-dep').innerHTML="PDM-2020-2023";
@@ -66,7 +66,7 @@ async function semaforo_inicial(){
 async function avance_linea_dep(){
   try {
     let info=[];
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/dep/api/dependencias/avance')
+    fetch('http://api.avanzamedellin.info/dep/api/dependencias/avance')
     .then(res=>res.json())
     .then(datos=>{
       let tam = datos.data.length;
@@ -161,7 +161,7 @@ async function alertasGraph(){
     let tabla='';
     let sumInd=0, sumGris=0, sumRojo=0,  sumAmarillo=0, sumVerde=0;
     document.getElementById('tabla_alerta').innerHTML="";
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/alertas`)
+    fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte/alertas`)
     .then(res=> res.json())
     .then(datos=>{
     let tam = datos.data.length;
@@ -355,7 +355,7 @@ $(document).ready(function(){
 
 async function _avancePDM(){
   try {
-    fetch('http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/total')
+    fetch('http://api.avanzamedellin.info/pi/api/total')
     .then(res=>res.json())
     .then(datos=>{
       let avance = parseFloat(datos.data[0].total_plan).toFixed(2)
@@ -371,7 +371,7 @@ async function otragrafica(data){
   let cod_dep = (data.data.link).substring(12,15)
   //console.log(cod_dep);
   try {
-    fetch(` http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/contador/dependencias/${cod_dep}`)
+    fetch(` http://api.avanzamedellin.info/pi/api/semaforo-corte/contador/dependencias/${cod_dep}`)
     .then(res=> res.json())
     .then(response=> {
  //     console.log(response.data[0].gris);
@@ -537,7 +537,7 @@ async function hola (cod_dep,nom_dep,avance){
       "cod_semaforo": 1,
       "cod_dependencia": cod_dep
     }
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/dependencia/tipo/ `,{
+    fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte/dependencia/tipo/ `,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
@@ -640,7 +640,7 @@ async function alerta_rojos(){
     swal("Reporte creado búsquelo al final de la página!");
     let valoresRojos=[]
     let avance=""
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/semaforo-corte/rojos`)
+    fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte/rojos`)
     .then(res=> res.json())
     .then(response=>{
 
@@ -771,13 +771,13 @@ async function alerta_rojos(){
 
 async function getalerta(){
   try {
-    fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/corte`)
+    fetch(`http://api.avanzamedellin.info/pa/api/alerta/corte`)
     .then(res=>res.json())
     .then(response=>{
       let cortealerta= new Date(response.data[0].corte) 
       mespa = cortealerta.getMonth(cortealerta)+1
       vigencia = cortealerta.getFullYear(cortealerta)
-      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/api/alerta/valor/${mespa}`)
+      fetch(`http://api.avanzamedellin.info/pa/api/alerta/valor/${mespa}`)
       .then(res=>res.json())
       .then(response=>{
         let rojo = response.data[0].rojo
@@ -795,7 +795,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
       let infocumple=[];
       var cump=0;
       let colorsemafcumple=''
-      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/dep/api/rank/cumplimiento`)
+      fetch(`http://api.avanzamedellin.info/dep/api/rank/cumplimiento`)
       .then(res=>res.json())
       .then(response=>{
         let tam = response.data.length;

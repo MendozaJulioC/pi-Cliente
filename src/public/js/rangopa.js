@@ -2,7 +2,7 @@
 async function getCorteAvancePA(){
     try {
       
-      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pi/api/avance/corte`)
+      fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
       .then(res=>res.json())
       .then(response=>{
         
@@ -53,7 +53,7 @@ async function getCorteAvancePA(){
         "vigencia": vigencia
       }
   
-      fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/pa/semaforo-corte/${mesavance}`)
+      fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mesavance}`)
       
      
       .then(res=> res.json())

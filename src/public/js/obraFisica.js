@@ -481,7 +481,7 @@ async function actualizabd(){
     button:false,
     timer: 1000000,
   });
-  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/update`)
+  fetch(`http://api.avanzamedellin.info/obrafisica/api/update`)
   .then(res=> res.json())
   .then(datos=>{
     swal("Listo!", "La base de datos ha sido actualizada!", "success");
@@ -528,7 +528,7 @@ if(data_index>16){
    default:break;
  }
 }
-fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/geo/territorio/${data_index}`)
+fetch(`http://api.avanzamedellin.info/obrafisica/api/geo/territorio/${data_index}`)
   .then(res=>res.json())
   .then(response=>{
     //console.log(response);
@@ -572,7 +572,7 @@ fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/
 async function alertageo (geo){
 let alerta=[];
 let cortecomuna='';
-fetch(` http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/geo/alerta/${geo}`)
+fetch(` http://api.avanzamedellin.info/obrafisica/api/geo/alerta/${geo}`)
 .then(res=>res.json())
 .then(response=>{
   if(response.length==0){
@@ -621,7 +621,7 @@ intervenciongeo(geo)
 async function intervenciongeo(geo){
 let intervencion=[];
 try {
-  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/geo/intervencion/${geo}`)
+  fetch(`http://api.avanzamedellin.info/obrafisica/api/geo/intervencion/${geo}`)
   .then(res=>res.json())
   .then(response=>{
 
@@ -667,7 +667,7 @@ try {
 async function obrascomunasdep(cod_dep){
 try {
   let geointervenciondep=[];
-  fetch(`http://ec2-18-118-211-122.us-east-2.compute.amazonaws.com/obrafisica/api/geo/dependencia/${cod_dep}`)
+  fetch(`http://api.avanzamedellin.info/obrafisica/api/geo/dependencia/${cod_dep}`)
   .then(res=> res.json())
   .then(response=>{
     //console.log(response.data);
