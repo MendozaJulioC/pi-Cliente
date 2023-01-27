@@ -11,7 +11,7 @@ body{
  background: #fbf3ff;
  background:
  
- url(/img/medellin3.jpg) no-repeat center center fixed;
+ url(/img/medellin1.jpg) no-repeat center center fixed;
 background-size: cover;
   
 }
@@ -30,7 +30,7 @@ background-size: cover;
 
 .myRigthCtn{
   position: relative;
-  background-image: linear-gradient(45deg, #f046ff, #B4358B);
+  background-image: linear-gradient(45deg, #4656ff, #523649);
   border-radius: 25px;
   height: 100%;
   padding: 25px;
@@ -53,7 +53,7 @@ background-size: cover;
 }
 
 .myLeftCtn header{
-  color: B4358B;
+
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -107,7 +107,7 @@ background-size: cover;
 }
 
 .myLeftCtn .butt{
-  background: linear-gradient(45deg, #bb36fd, #B4358B);
+  background: linear-gradient(45deg, #3d50ba, #065158);
   color: #fff;
   width: 330px;
   border: none;
@@ -128,7 +128,7 @@ background-size: cover;
 
 .myLeftCtn .fa{
   position: relative;
-  color: #B4358B;
+  color: #0d1371;
   left: 36px;
   
 }
@@ -155,7 +155,17 @@ background-size: cover;
 
 .text-intro{
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
+  text-align: left;
+  font-size: 18px;line-height: 25px;
+  font-weight: 150;color:#cce3e3;
+  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;
+}
+.text24{
+  font-size: 20px;line-height: 5px;
+  font-weight: 90;color:#042c55;
+  font-weight: 50;
+  text-shadow: 1px 1px 1px gray;
 }
 /*
 
