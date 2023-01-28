@@ -2,7 +2,7 @@
 async function getCorteAvancePA(){
     try {
       
-      fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
+      fetch(`https://api.avanzamedellin.info/pi/api/avance/corte`)
       .then(res=>res.json())
       .then(response=>{
         
@@ -53,7 +53,7 @@ async function getCorteAvancePA(){
         "vigencia": vigencia
       }
   
-      fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mesavance}`)
+      fetch(`https://api.avanzamedellin.info/pa/semaforo-corte/${mesavance}`)
       
      
       .then(res=> res.json())

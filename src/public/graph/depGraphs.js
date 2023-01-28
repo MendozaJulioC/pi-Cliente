@@ -13,7 +13,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 })
 async function getCorteAvancePI(){
   try {
-    fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
+    fetch(`https://api.avanzamedellin.info/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       let corteavance= new Date(response.data[0].corte) 
@@ -55,7 +55,7 @@ async function _main(){
 async function _detalle_ejec_financiera(dep){
   try {
  
-    fetch(`http://api.avanzamedellin.info/pa/detalle/financiero/${dep}`)
+    fetch(`https://api.avanzamedellin.info/pa/detalle/financiero/${dep}`)
     .then(res=>res.json())
     .then(datos=>{
 
@@ -108,7 +108,7 @@ async function dep_estado(cod_dep){
 async function _avancePDM(cod_dep){
     try {
       
-      fetch(`http://api.avanzamedellin.info/dep/api/avance/${cod_dep}`)
+      fetch(`https://api.avanzamedellin.info/dep/api/avance/${cod_dep}`)
       .then(res=>res.json())
       .then(datos=>{
        let avance_dep = (datos.data[0].avance/datos.data[0].peso)
@@ -215,7 +215,7 @@ fecha.setDate(dia+1)
 
 async function _avance_financiero(dep){
     try {
-      fetch(`http://api.avanzamedellin.info/pa/api/avancefinanciero/dep/${dep}`)
+      fetch(`https://api.avanzamedellin.info/pa/api/avancefinanciero/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
         porc_avance_financiero(parseFloat(parseFloat(datos.data[0].pptoejecutado)/parseFloat(datos.data[0].pptoajustado)) )
@@ -232,7 +232,7 @@ async function _PASemaf (){
   
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
+    fetch(`https://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
       valorminimo = (response.data[0].rojo)-0.01;
@@ -247,7 +247,7 @@ async function porc_avance_financiero(avance){
   
     mespa = fechaPA.getMonth(fechaPA)+1
     vigencia = fechaPA.getFullYear(fecha)
-    fetch(`http://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
+    fetch(`https://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
     .then(res=>res.json())
     .then(response=>{
         const dataSource = {
@@ -393,7 +393,7 @@ async function detallePpto(compromisos, disponible, ordenado , total){
 
 async function columnGeo(dep){
     try {
-        fetch(`http://api.avanzamedellin.info/geo/api/dependencias/territorio/${dep}`)
+        fetch(`https://api.avanzamedellin.info/geo/api/dependencias/territorio/${dep}`)
         .then(res=>res.json())
         .then(datos=>{
           const dataSource = {
@@ -540,7 +540,7 @@ async function columnGeo(dep){
 
 async function porc_avance_fisico(dep){
     try {
-      fetch(`http://api.avanzamedellin.info/pa/api/avancefisico/dep/${dep}`)
+      fetch(`https://api.avanzamedellin.info/pa/api/avancefisico/dep/${dep}`)
       .then(res=>res.json())
       .then(datos=>{
         
@@ -600,7 +600,7 @@ async function porc_avance_fisico(dep){
 
 async function tipoinversion(dep){
    try {
-     fetch(`http://api.avanzamedellin.info/geo/api/dependencias/tipo-inversion/${dep}`)
+     fetch(`https://api.avanzamedellin.info/geo/api/dependencias/tipo-inversion/${dep}`)
      .then(res=>res.json())
      .then(datos=> {
       document.getElementById('localizada').innerHTML = formatter.format(datos.data[0].localizada)
@@ -622,7 +622,7 @@ document.onkeypress = stopEnterKey;
 
 async function total_proyectos_dep(dep){
   try {
-     fetch(`http://api.avanzamedellin.info/pa/api/tipo-iniciativa/dependencias/${dep}`)
+     fetch(`https://api.avanzamedellin.info/pa/api/tipo-iniciativa/dependencias/${dep}`)
     .then(res=>res.json())
     .then(datos=>{
       document.getElementById('inst').innerHTML=  datos.data[0].ini_inst
@@ -714,7 +714,7 @@ FusionCharts.ready(function() {
 async function avance_linea_dep(dep, nom_dep){
   try {
     let valores =[];
-    fetch(`http://api.avanzamedellin.info/dep/api/avance/lineas/${dep}`)
+    fetch(`https://api.avanzamedellin.info/dep/api/avance/lineas/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
@@ -758,7 +758,7 @@ async function avance_linea_dep(dep, nom_dep){
 async function avance_componente_dep(dep , nom_dep){
   try {
     let valores =[];
-    fetch(`http://api.avanzamedellin.info/dep/api/avance/componentes/${dep}`)
+    fetch(`https://api.avanzamedellin.info/dep/api/avance/componentes/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
@@ -802,7 +802,7 @@ async function avance_componente_dep(dep , nom_dep){
 async function avance_prgs_dep(dep, nom_dep){
   try {
     let info=[];
-    fetch(`http://api.avanzamedellin.info/dep/api/avance/programas/${dep}`)
+    fetch(`https://api.avanzamedellin.info/dep/api/avance/programas/${dep}`)
     .then(res=>res.json())
     .then(datos=> {
       let tam = datos.data.length;
@@ -847,7 +847,7 @@ async function plan_accion_dep(dep){
  let valores1=[]; let valores2=[];let valores3=[];let valores4=[];let valores5=[]; let datosbubble=[];
  let seleccionado = document.getElementById('inputGroupSelectDependencia')
  let nombredep = seleccionado.options[seleccionado.selectedIndex].text;
-  fetch(`http://api.avanzamedellin.info/pa/api/plan/dependencias/${dep}`)
+  fetch(`https://api.avanzamedellin.info/pa/api/plan/dependencias/${dep}`)
   .then(res=>res.json())
   .then(datos=>{
     let tam = datos.data.length; 
@@ -1372,7 +1372,7 @@ async function buscavalstat(nomproyecto, cod, ejec){
  
 try {
 
-   fetch(`http://api.avanzamedellin.info/pa/api/proyecto/${cod}`)
+   fetch(`https://api.avanzamedellin.info/pa/api/proyecto/${cod}`)
   .then(res=>res.json())
   .then(datos=>{
     geoProyect(nomproyecto,cod)
@@ -1440,7 +1440,7 @@ jQuery.noConflict();
 
 async function geoProyect( nom, cod){
   try {
-    fetch(`http://api.avanzamedellin.info/geo/api/dependencias/proyectos/${cod}`)
+    fetch(`https://api.avanzamedellin.info/geo/api/dependencias/proyectos/${cod}`)
     .then(res=>res.json())
     .then(datos=>{
       const dataSource = {
@@ -1685,7 +1685,7 @@ async function geoProyect( nom, cod){
 
 async function contadorSemDep(cod){
   try {
-    fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte/contador/dependencias/${cod}` )
+    fetch(`https://api.avanzamedellin.info/pi/api/semaforo-corte/contador/dependencias/${cod}` )
     .then(res => res.json())
     .then(response =>{
       let cardsemaforogris ='';
@@ -1751,7 +1751,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
         "cod_semaforo":codsemaforo,
         "cod_dependencia": cod_dep
     }
-  fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte/dependencia/tipo/ `,{
+  fetch(`https://api.avanzamedellin.info/pi/api/semaforo-corte/dependencia/tipo/ `,{
     method:'POST',
     body: JSON.stringify(parametros), // data can be `string` or {object}!
     headers:{
@@ -1821,7 +1821,7 @@ async function estado_sem_dep(cod_dep,codsemaforo) {
 
 async function proyecto_fisico(cod){
   try {
-    fetch(`http://api.avanzamedellin.info/pa/api/avances/ejecucion/${cod}`)
+    fetch(`https://api.avanzamedellin.info/pa/api/avances/ejecucion/${cod}`)
     .then(res=> res.json())
     .then(response=>{
       let avanxcefisicoproject= (parseFloat(response.data[0].porc_eficacia_proyecto)*100); 
@@ -2030,7 +2030,7 @@ async function listvalstat_dep(){
   try {
     let dep = document.getElementById('inputGroupSelectDependencia').value;
     let valorlista=[];
-    fetch(`http://api.avanzamedellin.info/dep/api/valstat-dep/${dep}`)
+    fetch(`https://api.avanzamedellin.info/dep/api/valstat-dep/${dep}`)
     .then(res=> res.json())
     .then(response=>{
       let tam= response.data.length;
@@ -2161,7 +2161,7 @@ $('#ModaListVE').modal('show');
 
 async function _cumplimiento_dependencia(dep){
   try {
-    fetch(`http://api.avanzamedellin.info/dep/api/cumplimiento/${dep}`)
+    fetch(`https://api.avanzamedellin.info/dep/api/cumplimiento/${dep}`)
     .then(res=> res. json())
     .then(response=>{
       let cumplimientodep= (parseFloat(response.data[0].avancepond) /parseFloat(response.data[0].programado) )*100

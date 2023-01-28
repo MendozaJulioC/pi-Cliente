@@ -11,7 +11,7 @@ const getDependencias = async (req, res) => {
    const message = req.flash('message')[0]  ;
    //console.log(message)
     let dependencias=[];
-       fetch(`http://api.avanzamedellin.info/see/api/dependencias`)
+       fetch(`https://api.avanzamedellin.info/see/api/dependencias`)
        .then(res=>res.json())
        .then(data=>{
         for (let index = 0; index < data.data.length; index++) {

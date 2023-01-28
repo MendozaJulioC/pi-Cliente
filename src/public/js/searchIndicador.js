@@ -76,7 +76,7 @@ async function _getBuscaNombreIndicador(){
     let nom_Indicador = document.getElementById('browser').value
    
     try {
-        fetch(`http://api.avanzamedellin.info/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
+        fetch(`https://api.avanzamedellin.info/pi/api/indicador/consulta/nombre/${nom_Indicador}`)
         .then(res=>res.json())
         .then(datos=>{
   
@@ -165,7 +165,7 @@ async function _getBuscaNombreIndicador(){
     if (cod_Indicador.length>=5){
 
         try {
-            fetch(`http://api.avanzamedellin.info/pi/api/indicador/${cod_Indicador}`)
+            fetch(`https://api.avanzamedellin.info/pi/api/indicador/${cod_Indicador}`)
             .then(res => res.json())
             .then(datos => {
             

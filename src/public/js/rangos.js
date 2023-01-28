@@ -2,7 +2,7 @@
 async function getCorteAvancePI(){
   try {
     
-    fetch(`http://api.avanzamedellin.info/pi/api/avance/corte`)
+    fetch(`https://api.avanzamedellin.info/pi/api/avance/corte`)
     .then(res=>res.json())
     .then(response=>{
       
@@ -54,7 +54,7 @@ getCorteAvancePI()
       "vigencia": vigencia
     }
 
-    fetch(`http://api.avanzamedellin.info/pi/api/semaforo-corte`,{
+    fetch(`https://api.avanzamedellin.info/pi/api/semaforo-corte`,{
       method:'POST',
       body: JSON.stringify(parametros), // data can be `string` or {object}!
       headers:{
