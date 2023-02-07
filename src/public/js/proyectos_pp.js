@@ -43,6 +43,7 @@ async function getCorteAvancePI() {
                 let vigencia = corteavance.getFullYear(corteavance)
                 fecha = corteavance;
                 fechaPA = corteavance
+              
                 _PASemaf(mesavance, vigencia, corteavance)
             })
     } catch (error) {
@@ -53,7 +54,7 @@ async function getCorteAvancePI() {
 async function _PASemaf(mes, vigencia, corte) {
     try {
        
-        mespa = mes + 1 //fecha.getMonth(fecha)+1
+        mespa = mes  //fecha.getMonth(fecha)+1
         vigencia = vigencia //fecha.getFullYear(fecha)
         fetch(`https://api.avanzamedellin.info/pa/semaforo-corte/${mespa}`)
             .then(res => res.json())
