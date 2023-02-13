@@ -3,7 +3,7 @@ var mes=0, vigencia=0, minimovalue=0, maximovalue=0;
 var fecha='';
 async function dateomain(){
   corteplan()
-  _Components()
+
   contadorSemaforo()
   swal("Espere mientras cargamos la información!",{
     buttons: false,
@@ -62,6 +62,7 @@ async  function corteplan(){
       document.getElementById('minimo-corte').value= minimovalue.toFixed(2)
       document.getElementById('maximo-corte').value= maximovalue.toFixed(2)
       _avancePDM()
+      _Components()
     })
   })
 }
@@ -132,6 +133,7 @@ async function graphInicial(){
     fetch('https://api.avanzamedellin.info/pi/api/total-avance-lineas')
     .then(res=>res.json())
     .then(datos=>{
+    
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){
         if ((Math.ceil(datos.data[i].avance_linea))>=document.getElementById('maximo-corte').value){colorsemaf="#00af91"}
@@ -144,7 +146,7 @@ async function graphInicial(){
           "label" : datos.data[i].nom_linea,
           "value": Math.ceil(datos.data[i].avance_linea),
           "color": colorsemaf,
-          "link":"https://sipse.herokuapp.com/linea-"+(i+1)
+          "link":"https://avanzamedellin.info/linea-"+(i+1)
         })
       }
       const dataSource = {
@@ -184,15 +186,18 @@ async function _Components(){
     let avance_Comp1=[]; let avance_Comp3=[];
     let avance_Comp2=[]; let avance_Comp4=[]; let avance_Comp5=[];
     let tabla='', tabla2='',  tabla3='',   tabla4='',  tabla5='';let colorsemaf;
+    
+
     fetch('https://api.avanzamedellin.info/pi/api/total-componentes')
     .then(res=> res.json())
     .then(datos=>{
       document.getElementById('tbl_comp1').innerHTML="";
+ 
       let tam = datos.data.length;
       for(let i =0; i<tam;i++){   
         if ((datos.data[i].cod_linea) =="1"){
-          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=document.getElementById('maximo-corte').value){colorsemaf="#00af91"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=document.getElementById('minimo-corte').value) {colorsemaf="#f05454"}
+          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=( maximovalue.toFixed(2))) {colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<= (minimovalue.toFixed(2))) {colorsemaf="#f05454"}
           else {colorsemaf="#ffc764"}
           avance_Comp1.push({
             "label" : datos.data[i].nom_componente,
@@ -208,8 +213,8 @@ async function _Components(){
           document.getElementById('tbl_comp1').innerHTML=tabla;
        }
         if ((datos.data[i].cod_linea) =="2"){
-          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=maximovalue){colorsemaf="#00af91"}
-          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<=minimovalue) {colorsemaf="#f05454"}
+          if ((Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100))>=( maximovalue.toFixed(2))) {colorsemaf="#00af91"}
+          else if (Math.ceil((datos.data[i].peso_avance/datos.data[i].peso)*100)<= (minimovalue.toFixed(2))) {colorsemaf="#f05454"}
           else {colorsemaf="#ffc764"}
           avance_Comp2.push({
             "label" : datos.data[i].nom_componente,
