@@ -460,6 +460,7 @@ async function contadorSemaforo(){
     console.error('Error contadorSemaforo ',error)
   }
 }
+
 async function estado_sem_pordep(codsemaforo) {
   try {
     let info=[];
@@ -508,7 +509,7 @@ async function estado_sem_pordep(codsemaforo) {
 }
 
 async function triadaInicial(datos, mes){
-
+  chartComparePlanes()
  let esperado= (mes/48)*100;
 
   const dataSource = {
@@ -573,4 +574,93 @@ async function triadaInicial(datos, mes){
         dataSource
       }).render();
     });
+}
+
+
+async function chartComparePlanes(){
+
+  fetch('https://api.avanzamedellin.info/pi/api/compareplan')
+  .then(res=>res.json())
+  .then(response=>{
+
+    console.log(response.data);
+    let etiquetas =[];
+    let vigencias1=[];
+    let vigencias2=[]
+    let vigencias3=[]
+    let vigencias4=[]
+
+   let tam = response.data.length;
+        for (let i = 0; i < tam; i++) {
+          etiquetas.push({
+            "label": `${response.data[i].plan} <br> ${response.data[i].nombre_plan}<br> <strong> ${response.data[i].responsable} </strong>`
+          })
+          vigencias1.push({
+            "value": response.data[i].vigencia1
+          })
+          vigencias2.push({
+            "value": response.data[i].vigencia2
+          })
+          vigencias3.push({
+            "value": response.data[i].vigencia3
+          })
+          vigencias4.push({
+            "value": response.data[i].vigencia4
+          })
+
+        }
+      const dataSource = {
+          chart: {
+            caption: "Comparativo Avance PDM 2008-2023",
+            subcaption: "2008-2023",
+            xaxisname: "CUATRIENIOS",
+            yaxisname: "Porcentaje avance alcanzado",
+            formatnumberscale: "1",
+            showvalues: "1",
+            numbersuffix: "%",
+            plottooltext:
+              "<b>$dataValue</b> % avance <b>$seriesName</b> en $label",
+            theme: "fusion",
+            drawcrossline: "1"
+          },
+          categories: [
+            {
+              category: etiquetas
+            }
+          ],
+          dataset: [
+            {
+              seriesname: "Vigencia 1",
+              data: vigencias1
+            },
+            {
+              seriesname: "Vigencia 2",
+              data: vigencias2
+            },
+            {
+              seriesname: "Vigencia 3",
+              data: vigencias3
+            },
+            {
+              seriesname: "Vigencia 4",
+              data: vigencias4
+            }
+          ]
+        };
+        
+        FusionCharts.ready(function() {
+          var myChart = new FusionCharts({
+            type: "mscolumn2d",
+            renderAt: "chart-comparaplanes",
+            width: "100%",
+            height: "100%",
+            dataFormat: "json",
+            dataSource
+          }).render();
+        });
+
+  })
+
+ 
+  
 }

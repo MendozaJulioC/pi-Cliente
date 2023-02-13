@@ -18,230 +18,248 @@
 <body onload="dateomain()">
   <div id="container" class=" mt-5 mb-3">
     <div class="row">
-        <!--****
+      <!--****
         <div class="col-md-12 mt-4  shadow-lg p-3  mb-1 bg-white rounded">
-        <div class="card-body">
-          <div class="mt-lg-3" id="graphpdmtarget" style="height: 150px;  width:100%;"></div>
-        </div>
-      </div> 
-        
-        -->
-      
+          <div class="card-body">
+            <div class="mt-lg-3" id="graphpdmtarget" style="height: 150px;  width:100%;"></div>
+          </div>
+        </div> 
+          
+      -->
+  
       <div class="col-md-12 mt-5  shadow-lg p-3  mb-5 bg-white rounded">
         <div class="row">
           <div class="col-sm-2">
             <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Corte : </b> 
-            <span id="fecha_corte"></span>.</span>  
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> <b> Corte : </b>
+              <span id="fecha_corte"></span>.</span>
           </div>
           <div class="col-sm-3">
             <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
-                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">  Porcentajes en los Rangos de avance para este período del seguimiento del PDM 
-            </span> 
+                  font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"> Porcentajes en los Rangos de
+              avance para este período del seguimiento del PDM
+            </span>
           </div>
           <div class="col-sm-3">
             <span class="text-muted" style="text-align: center;font-size: 18px;line-height: 13px;font-weight: 150;color: #73879C;
-               font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i class="fa fa-arrow-down fa-2x" style="color: crimson;"></i>
-            </span>   
-            <input type="number" id="minimo-corte" style="font-size: medium; text-align: center; width:50%;border-color:#B4358B;" disabled> 
+                 font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><i
+                class="fa fa-arrow-down fa-2x" style="color: crimson;"></i>
+            </span>
+            <input type="number" id="minimo-corte"
+              style="font-size: medium; text-align: center; width:50%;border-color:#B4358B;" disabled>
           </div>
           <div class="col-sm-3">
-            <input type="number" id="maximo-corte" style="font-size: medium; text-align: center; width: 50%;border-color:rgb( 88,172,133);" disabled>
+            <input type="number" id="maximo-corte"
+              style="font-size: medium; text-align: center; width: 50%;border-color:rgb( 88,172,133);" disabled>
             <i class="fa fa-arrow-up fa-2x" style="color: #00af91;"></i>
           </div>
         </div>
       </div>
-      
+  
       <div class="col-md-6  mb-2 bg-white rounded mt-1">
-        <div  id="triada1" style="height: 400px;  width:100%;"></div>
+        <div id="triada1" style="height: 400px;  width:100%;"></div>
       </div>
+  
       <div class="col-md-6 mb-2 bg-white rounded mt-1">
-        <div  id="triada2" style="height: 400px;  width:100%;"></div>
+        <div id="triada2" style="height: 400px;  width:100%;"></div>
       </div>
-    
+  
       <!--****-->
       <div class="card-deck col-md-12 mt-1 mb-2 shadow-lg p-3  bg-white rounded">
-      <div class="card shadow-lg">
-        <span class="mt-1" style="text-align: center;"><img src="/img/pause.png" alt=""  width="100" height="100"></span>
-        <div class="card-body">
-          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 2px;line-height: 13px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">No programado 
-          </h3></h5>
-          <h1  id="total-gris" style="text-align: center;color:#B2B1A7"></h1>
-          <h3   id="porcentaje-gris" style="text-align: center;color:#B2B1A7"> </h3>
-        </div>
-        <div class="card-footer">
-          <div id="footer-card-gris"></div>
-        </div>
-      </div>
-      <div class="card shadow-lg">
-        <span class="mt-2" style="text-align: center;"><img src="/img/rojo.png" alt=""  width="80" height="80"></span>
-        <div class="card-body">
-          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 20px;line-height: 13px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Bajo 
-          </h3></h5>
-          <h1 id="total-rojos"  style="text-align: center;color:#B4358B"></h1>
-          <h3 id="porcentaje-rojos" style="text-align: center;color:#B4358B"></h3>
-        </div>
-        <div class="card-footer">
-          <div id="footer-card-rojo"></div>
-        </div>
-      </div>
-      <div class="card shadow-lg">
-        <span class="mt-2" style="text-align: center;"><img src="/img/amarillo.png" alt=""  width="80" height="80"></span>
-        <div class="card-body">
-          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 20px;line-height: 13px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Medio 
-          </h3></h5>
-          <h1 id="total-naranjas" style="text-align: center;color:#EE7518"></h1>
-          <h3 id="porcentaje-naranjas" style="text-align: center;color:#EE7518"></h3>
-        </div>
-        <div class="card-footer">
-          <div id="footer-card-amarillo"></div>
-        </div>
-      </div>
-      <div class="card shadow-lg">
-        <span class="mt-2" style="text-align: center;"><img src="/img/verde.png" alt=""  width="80" height="80"></span>
-        <div class="card-body">
-          <h5 class="card-title"><h3 class="text-muted" style="text-align: center;font-size: 20px;line-height: 13px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Alto 
-          </h3></h5>
-          <h1 id="total-verdes" style="text-align: center;color:#00853E"></h1>
-          <h3 id="porcentaje-verdes"  style="text-align: center;color:#00853E"></h3>
-        </div>
-        <div class="card-footer">
-          <div id="footer-card-verde"></div>
-        </div>
-    </div>
-    <!--****-->
-    <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
-      <div  id="chart-avancegeneral" style="height: 550px;  width:100%;"></div>
-    </div>
-    <!--****
-     <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
-        <div  id="chart-inicial" style="height: 550px;  width:100%;"></div>
-    </div>
-    
-    -->
-   
-
-    <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
-      <div  id="chart-avancelineas" style="height: 850px;  width:100%;"></div>
-  </div>
-  
-
-     
-      </div>
-      <!--****-->
-      <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded">
-      <h3>Avance Cuatrienial por Componentes del Plan de Desarrollo</h3>
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" 
-            style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Reactivación Económica y Valle del Software
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#l2" role="tab" aria-controls="l2" aria-selected="true"
-            style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Transformación Educativa y Cultural
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#l3" role="tab" aria-controls="l3" aria-selected="false"
-            style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Medellín me Cuida
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#l4" role="tab" aria-controls="l4" aria-selected="false"
-            style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Ecociudad
-          </a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#l5" role="tab" aria-controls="l5" aria-selected="false"
-            style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
-            font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Gobernanza y Gobernabilidad
-          </a>
-        </li>
-      </ul>
-      <div class="tab-content border-light shadow-sm  p-4 mb-4 bg-white rounded" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">  
-          <div class="" id="chart-cl1" style="height: 350px;  width:100%;"></div>
-          <div class="table-responsive-sm">
-            <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-              <thead>
-                <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
-                <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-              </thead>
-              <tbody class="table-hover" id="tbl_comp1"></tbody>
-            </table>
+        <div class="card shadow-lg">
+          <span class="mt-1" style="text-align: center;"><img src="/img/pause.png" alt="" width="100" height="100"></span>
+          <div class="card-body">
+            <h5 class="card-title">
+              <h3 class="text-muted" style="text-align: center;font-size: 2px;line-height: 13px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">No programado
+              </h3>
+            </h5>
+            <h1 id="total-gris" style="text-align: center;color:#B2B1A7"></h1>
+            <h3 id="porcentaje-gris" style="text-align: center;color:#B2B1A7"> </h3>
           </div>
-           </div>
-        <div class="tab-pane fade" id="l2" role="tabpanel" aria-labelledby="profile-tab"> 
-          <div class="" id="chart-cl2" style="height: 350px;  width:100%;"></div>
-          <div class="table-responsive-sm">
-            <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                      <thead>
-                          <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                          <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
-                          <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                          <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-                      </thead>
-                      <tbody class="table-hover" id="tbl_comp2"></tbody>
-                  </table>
-                </div> 
-              </div>
-              <div class="tab-pane fade" id="l3" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="" id="chart-cl3" style="height: 350px;  width:100%;"></div>
-                <div class="table-responsive-sm">
-                <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                  <thead>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-                  </thead>
-                  <tbody class="table-hover" id="tbl_comp3"></tbody>
-                </table>
-              </div>
-              </div>
-              <div class="tab-pane fade" id="l4" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="" id="chart-cl4" style="height: 350px;  width:100%;"></div>
-                <div class="table-responsive-sm">
-                <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                  <thead>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-                  </thead>
-                  <tbody class="table-hover" id="tbl_comp4"></tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="l5" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="" id="chart-cl5" style="height: 350px;  width:100%;"></div>
-                <div class="table-responsive-sm">
-                <table  class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
-                  <thead>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
-                    <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
-                  </thead>
-                  <tbody class="table-hover" id="tbl_comp5"></tbody>
-                </table>
-              </div>
+          <div class="card-footer">
+            <div id="footer-card-gris"></div>
+          </div>
+        </div>
+        <div class="card shadow-lg">
+          <span class="mt-2" style="text-align: center;"><img src="/img/rojo.png" alt="" width="80" height="80"></span>
+          <div class="card-body">
+            <h5 class="card-title">
+              <h3 class="text-muted" style="text-align: center;font-size: 20px;line-height: 13px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Bajo
+              </h3>
+            </h5>
+            <h1 id="total-rojos" style="text-align: center;color:#B4358B"></h1>
+            <h3 id="porcentaje-rojos" style="text-align: center;color:#B4358B"></h3>
+          </div>
+          <div class="card-footer">
+            <div id="footer-card-rojo"></div>
+          </div>
+        </div>
+        <div class="card shadow-lg">
+          <span class="mt-2" style="text-align: center;"><img src="/img/amarillo.png" alt="" width="80"
+              height="80"></span>
+          <div class="card-body">
+            <h5 class="card-title">
+              <h3 class="text-muted" style="text-align: center;font-size: 20px;line-height: 13px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Medio
+              </h3>
+            </h5>
+            <h1 id="total-naranjas" style="text-align: center;color:#EE7518"></h1>
+            <h3 id="porcentaje-naranjas" style="text-align: center;color:#EE7518"></h3>
+          </div>
+          <div class="card-footer">
+            <div id="footer-card-amarillo"></div>
+          </div>
+        </div>
+        <div class="card shadow-lg">
+          <span class="mt-2" style="text-align: center;"><img src="/img/verde.png" alt="" width="80" height="80"></span>
+          <div class="card-body">
+            <h5 class="card-title">
+              <h3 class="text-muted" style="text-align: center;font-size: 20px;line-height: 13px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Desempeño Alto
+              </h3>
+            </h5>
+            <h1 id="total-verdes" style="text-align: center;color:#00853E"></h1>
+            <h3 id="porcentaje-verdes" style="text-align: center;color:#00853E"></h3>
+          </div>
+          <div class="card-footer">
+            <div id="footer-card-verde"></div>
+          </div>
+        </div>
+        <!--****-->
+        <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-2">
+          <div id="chart-avancegeneral" style="height: 550px;  width:100%;"></div>
+        </div>
+        <!--****-->
+
+          <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
+            <div id="chart-comparaplanes" style="height: 550px;  width:100%;"> <h1>grafica comparación avances planes de Desarrollo</h1></div>
+          </div>
+       </div>
+      <!--****-->
+
+
+        <div class="col-md-12 shadow-lg p-3 mb-2 bg-white rounded mt-1">
+          <div id="chart-avancelineas" style="height: 850px;  width:100%;"></div>
+        </div>
+       </div>
+      <!--****-->
+
+
+
+
+      <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded">
+        <h3>Avance Cuatrienial por Componentes del Plan de Desarrollo</h3>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+              aria-selected="true" style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Reactivación Económica y Valle del
+              Software
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#l2" role="tab" aria-controls="l2"
+              aria-selected="true" style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Transformación Educativa y
+              Cultural
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#l3" role="tab" aria-controls="l3"
+              aria-selected="false" style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Medellín me Cuida
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#l4" role="tab" aria-controls="l4"
+              aria-selected="false" style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Ecociudad
+            </a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#l5" role="tab" aria-controls="l5"
+              aria-selected="false" style="text-align: center;font-size: 14px;line-height: 20px;font-weight: 150;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;">Gobernanza y Gobernabilidad
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content border-light shadow-sm  p-4 mb-4 bg-white rounded" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="" id="chart-cl1" style="height: 350px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                <thead>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                </thead>
+                <tbody class="table-hover" id="tbl_comp1"></tbody>
+              </table>
             </div>
+          </div>
+          <div class="tab-pane fade" id="l2" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="" id="chart-cl2" style="height: 350px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                <thead>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                </thead>
+                <tbody class="table-hover" id="tbl_comp2"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="l3" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="" id="chart-cl3" style="height: 350px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                <thead>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                </thead>
+                <tbody class="table-hover" id="tbl_comp3"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="l4" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="" id="chart-cl4" style="height: 350px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                <thead>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                </thead>
+                <tbody class="table-hover" id="tbl_comp4"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="l5" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="" id="chart-cl5" style="height: 350px;  width:100%;"></div>
+            <div class="table-responsive-sm">
+              <table class="table table-sm table-responsive-sm table-hover" width="1371" style="font-size: small;">
+                <thead>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Cod</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Componente</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">Indicadores</th>
+                  <th style="font-weight: 400; width: 44px; text-align: center;">% Avance</th>
+                </thead>
+                <tbody class="table-hover" id="tbl_comp5"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
+  
     </div>
-   
-  </div>
 
   
 
