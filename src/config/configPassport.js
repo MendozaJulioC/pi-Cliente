@@ -53,7 +53,7 @@ async function isEmail(email, pass,user,done){
 async function isMatch(password, user,done)
 {
    const match = await bcrypt.compare(password, user[0].password)
-    console.log("match ",match)
+    console.log("match ", match)
         if (match) {
             return done(null,user,{message: user[0].nom_usuario });
         }else{

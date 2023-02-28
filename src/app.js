@@ -30,9 +30,10 @@ cookieparser.parse("foo=bar");
 //middlewares
 
 app.use(session({
-    secret:"M3d3ll1n_dap",
+    secret:process.env.AWS_SECRET_PASSPORT,
     resave : false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie:{ maxAge: 7200000 }
 }));
 app.use(passport.initialize())
 app.use(passport.session())

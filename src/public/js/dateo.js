@@ -521,7 +521,7 @@ async function triadaInicial(datos, mes){
         showvalue: "1",
         valuefontsize: "25",
         numbersuffix: "%",
-        theme: "fusion"
+        theme: "gammel"
       },
       colorrange: {
         color: [
