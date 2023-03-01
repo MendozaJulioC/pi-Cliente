@@ -185,7 +185,7 @@ async function busca_proyect(){
                          <th colspan="2">Observación Seguimiento</th>
                        </tr>
                        <tr>
-                         <td colspan="2" style="text-align: left;">${datos.data[index].obs_cod_siufp}</td>
+                         <td colspan="2" style="text-align: left;">${datos.data[index].obs_cod_suifp}</td>
                          <td colspan="2" style="text-align: left;">${datos.data[index].obs_val_stat}</td>
                        </tr>
                        <tr><td colspan="4"><hr></td> </tr>  `
@@ -284,6 +284,7 @@ async function proyecto_fisicoqp(cod){
  
  
 }
+
 async function proyecto_financieroqp(avancexfinanciero){
 
   const dataSource = {
@@ -336,6 +337,7 @@ async function proyecto_financieroqp(avancexfinanciero){
   });
 
 }
+
 async function fifaponqp(ffp){
   const dataSource = {
     chart: {
