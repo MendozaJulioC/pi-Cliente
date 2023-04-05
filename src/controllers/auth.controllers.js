@@ -113,7 +113,7 @@ const getLogout = async (req, res)=>{
 const getAdminUsuarios= async (req, res)=>{
     try {
         const admin  = req.params.admin;
-        let url = `http://localhost:7001/auth/api/admin/${process.env.AWS_TKN_PRIVATE}/${admin}/gestion`
+        let url = `https://api.avanzamedellin.info/auth/api/admin/${process.env.AWS_TKN_PRIVATE}/${admin}/gestion`
 
 
         //console.log(url);
@@ -138,7 +138,7 @@ const deleteAdminUser = async(req, res)=>{
     try {
         const user   = req.params.user;
         const admin= req.params.admin;
-        let url = `http://localhost:7001/api/${process.env.AWS_TKN_PRIVATE}/auth/${admin}/${user}`
+        let url = `https://api.avanzamedellin.info/api/${process.env.AWS_TKN_PRIVATE}/auth/${admin}/${user}`
         fetch(url,{method:'DELETE'})
         .then(res=>res.json())
         .then(response=>{  
@@ -156,7 +156,7 @@ const editAdminUser= async(req, res)=>{
         const admin= req.params.admin;
 
         if(admin==1 || admin==9 || admin==87) { 
-            fetch(`http://api.avanzamedellin.info/auth/api/id/${id}`)
+            fetch(`https://api.avanzamedellin.info/auth/api/id/${id}`)
             .then(res=> res.json())
             .then(respuesta =>{
             if (respuesta.data) {
@@ -185,7 +185,7 @@ const putEditUsuario= async(req, res)=>{
             "password": hashPass,
             "fullname": fullname,
         }
-        let url = `http://localhost:7001/api/${process.env.AWS_TKN_PRIVATE}/auth/${admin}/edit/${user}`
+        let url = `https://api.avanzamedellin.info/api/${process.env.AWS_TKN_PRIVATE}/auth/${admin}/edit/${user}`
         fetch(url,{
             method: "POST",
             mode: 'cors',
