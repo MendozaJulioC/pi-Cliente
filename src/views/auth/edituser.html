@@ -1,0 +1,127 @@
+
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<%- include ('../partials/head.html') %>
+<%- include ('../partials/srciptgraph.html') %>
+<title> <%= title %> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%- include ('../partials/menuplapp.html') %>
+<div class="container mt-4">
+    <div class="row mt-4">
+      <div class="col-md-12 mt-4">
+        <div class="myLeftCtn">
+          <div class="mt-4">
+            <section class="mt-4">
+              <div class="row justify-content-md-center">
+                <h1 class="mt-4 mb-4">Administración de Usuarios</h1>
+                <div class="container mt-4 ">
+                    <section class=" mt-4 border border-light shadow-sm">
+                        <form  class="needs-validation mt-4 " action="/auth/register/edit" method="post" name="formRegister">
+                            <input type="hidden" id="admin" name="admin" value="<%= user[0].id %>">
+                            <input type="hidden" id="user" name="user" value="<%= editar[0].id %>">
+                            <div class="form-row mt-4">
+                            <div class="col-md-12 mb-3 mt-4 px-3">
+                                <label for="validationCustom01"> <b>  Nombre del usuario</b></label>
+                                <input type="text" class="form-control" id="fullname" name="fullname" value="<%= editar[0].nom_usuario %>" required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3 mt-4 px-3">
+                                <label for="validationCustom02">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" value="<%= editar[0].email  %>" disabled required>
+                                <div class="valid-feedback">
+                                Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4 px-3">
+                                <label for="validationCustom03">Password Nuevo</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <div class="invalid-feedback">
+                                Por favor provee una constraseña.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4 px-3">
+                                <label for="validationCustom05">Confirmar el passwword</label>
+                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" required>
+                                <div class="invalid-feedback">
+                                Por favor valida la contraseña.
+                                </div>
+                            </div>
+                         </div>
+                        <div class="modal-footer">
+                            <button type="button"  onclick="regresa()"  class="btn btn-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                  </svg>
+                                  Regresar
+                            </button>
+                            <button type="button"  onclick="wait()" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                    Actualizar Usuario
+                            </button>
+                            </div>
+                        </form>
+                    </section>
+                    <% errors.forEach(function(error){ %>
+                        <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                                  <%= error.message  %>
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    <% }); %>
+                </div>
+               </div>
+            </section>
+         </div>
+      </div>
+    </div>
+  </div>
+<script>
+function wait(){
+
+    let admin =  document.getElementById('admin').value  
+    let user = document.getElementById('user').value
+    let pass= document.getElementById('password').value 
+    let confirma = document.getElementById('confirmpassword').value
+    let nombre = document.getElementById('fullname').value
+    let email = document.getElementById('email').value
+
+    if(pass == confirma && pass.length>=6 && nombre.length>0 ){ 
+        
+        window.location=`/auth/${admin}/admin`
+    
+           swal({
+              title:"Editando espera un momento!!",
+              icon: "/img/d63cded9d8454a5b57ee8bef31c3ee71.gif",
+              timer: 5000000,
+              buttons: false,
+              closeOnClickOutside: false,
+            });
+         
+        }else { 
+            swal({
+                title:"Las datos del usuario no cumplen!!",
+                icon: '/img/lostcolor.avif',
+                text:"Revisa las contraseñas, el nombre de usuario y el email deben estar diligenciados",
+                timer: 2000,
+                buttons: false,
+                closeOnClickOutside: false,
+                });
+        }
+     
+}
+
+
+function regresa(){
+    let admin =  document.getElementById('admin').value  
+    window.location=`/auth/${admin}/admin`
+}
+
+</script>
+  <%- include ('../partials/scriptsHome.html')%>

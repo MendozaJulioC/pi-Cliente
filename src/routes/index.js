@@ -1,7 +1,7 @@
 const { Router} = require('express');
 const router = Router();
 
-const { isAuthenticated, notAuthenticated }= require('../helpers/auth');
+const { isAuthenticated, notAuthenticated, isAdmin }= require('../helpers/auth');
 
 const { getHome,getDash,getGeneral,getContacto, getIndicador, getEstructura, 
     getComponente, getPrograma, getAlertas, getSiem , getAlertasPA, getPlanAccion, getAlertPP} = require('../controllers/index.controllers');
@@ -57,12 +57,21 @@ router.get('/projects/estrategico/pe_1',isAuthenticated,getProject1)
     .get('/projects/estrategico/pe_16',isAuthenticated,getProject16)
     .get('/projects/estrategico/pe_17',isAuthenticated,getProject17);
 
-const {getRegister, postRegister, postLoguin, getLogout} = require ('../controllers/auth.controllers')
+const {getRegister, postRegister, postLoguin, getLogout, getAdminUsuarios, deleteAdminUser, editAdminUser, putEditUsuario} = require ('../controllers/auth.controllers')
 router.get('/auth/register', getRegister)
-.post('/auth/register',postRegister)
+        .post('/auth/register',postRegister)
+
+
 
 router.post('/auth/login',notAuthenticated,postLoguin)
 router.get('/auth/logout', getLogout)
+router.get('/auth/:admin/admin',isAuthenticated, isAdmin,  getAdminUsuarios )
+router.get(`/api/auth/admin/:admin/gestion/borrar/:user`,isAdmin,  deleteAdminUser)
+router.get(`/api/auth/actualizar/:admin/register/:user/`, editAdminUser)
+
+
+router.post('/auth/register/edit',  putEditUsuario)
+
 
 
 
@@ -79,15 +88,18 @@ router.get('/obra-fisica/dep', isAuthenticated, getObraDep)
 router.get('/obra-fisica/dep/detalle/:cod_dep', isAuthenticated, getObraDepDetalle)
 router.get('/obra-fisica/geo', isAuthenticated, getObrasGeo)
 
-
-
- const {getGeneralPI, getGeneralPI_Lineas} = require('../controllers/taskPiGoogle')
- router.get('/pi/google',isAuthenticated, getGeneralPI)
- router.get('/pi/google/lineas',isAuthenticated, getGeneralPI_Lineas)
-
+const {getGeneralPI, getGeneralPI_Lineas} = require('../controllers/taskPiGoogle')
+router.get('/pi/google',isAuthenticated, getGeneralPI)
+router.get('/pi/google/lineas',isAuthenticated, getGeneralPI_Lineas)
 
 
 
+
+
+
+
+router.get('*', function (req, res) {res.render('./partials/lost.html', {title: "Perdido"})})
+router.post('*', function (req, res) {res.render('./partials/lost.html', {title: "Perdido"})})
 
 
         

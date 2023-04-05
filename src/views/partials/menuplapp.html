@@ -61,28 +61,39 @@
   
     </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <ul class="navbar-nav mr-auto"> 
-       <li class="nav-item dropdown">
-        <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= user[0].nom_usuario%></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <div class="card  mb-2 card shadow-lg p-1 mb-3 bg-white rounded" style="max-width: 18rem; height: 20rem;">
-            <div class="card-header">Perfil</div>
-            <div class="card-body">
-              <p class="card-text">Nivel: <%= user[0].id_cargo %> </p>
-              <p class="card-text">Email: <%= user[0].email%></p>
-              <p class="card-text">Teléfono: <%= user[0].tel_contacto %> </p>
-              <p class="card-text">Dependencia: <%= user[0].cod_dependencia %> </p>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <%= user[0].nom_usuario%>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="card  mb-2 card shadow-lg p-1 mb-3 bg-white rounded" style="max-width: 18rem; height: 20rem;">
+              <div class="card-header">Perfil</div>
+              <div class="card-body">
+                <p class="card-text">Nivel: <%= user[0].id_cargo %></p>
+                <p class="card-text">Email: <%= user[0].email%></p>
+                <p class="card-text">Teléfono: <%= user[0].tel_contacto %></p>
+                <p class="card-text">Dependencia: <%= user[0].cod_dependencia %></p>
              
+    
+              </div>
+              <input type="hidden" name="data" id="data" value="<%= user[0].id %>">
+              <div>
+                <%if (user[0].id == 1||user[0].id == 9||user[0].id == 87){%>
+                  <a class="btn btn-block btn-info" href="/auth/<%= user[0].id %>/admin">Admin Usuarios</a>
+                <%}%>
+             
+              </div>
             </div>
+            <div class="dropdown-divider"></div>
+            <a class="btn btn-danger btn-block"  href="/auth/logout">Salir</a>
           </div>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/auth/logout">Salir</a>
-        </div>
-      </li>
-    </ul>
-    <a class="nav-link">  <span class="sr-only">(current)</span></a>
-    <a class="nav-link">  <span class="sr-only">(current)</span></a>
-    <a class="btn btn-outline-danger my-2 my-sm-0"  href="/auth/logout" type="submit">Salir</a>
+        </li>
+      </ul>
+      <a class="nav-link"> <span class="sr-only">(current)</span></a>
+      <a class="nav-link"> <span class="sr-only">(current)</span></a>
+      <a class="btn btn-outline-danger my-2 my-sm-0" href="/auth/logout" type="submit">Salir</a>
     </form>
   </div>
 </nav>

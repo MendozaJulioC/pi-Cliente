@@ -97,8 +97,10 @@ async function _avancePDM(){
     .then(res=>res.json())
     .then(datos=>{
         graphPDM(datos.data[0].total_plan)
-        let cumplimiento= (parseFloat(datos.data[0].avancepond/datos.data[0].programado)*100).toFixed(2)
+        let cumplimiento=   (parseFloat(datos.data[0].avancepond/datos.data[0].programado)*100).toFixed(2)
+        console.log(cumplimiento);
         graphCumplimientoPDM(cumplimiento)
+
       })
   } catch (error) {
     console.log('Error _avancePDM ',error )
@@ -748,7 +750,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
         let tam = response.data.length;
         for(let i =0; i<tam;i++){
       // if(response.data[i].avance!=0){
-         cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2022)*100)
+         cumpverde = (parseFloat(response.data[i].avance/response.data[i].programado2023)*100)
          console.log(cumpverde, parseFloat(verde)); 
         if (cumpverde>=parseFloat(verde)){colorsemafcumple="#58AC84"}
         else if (cumpverde<=parseFloat(rojo)) {colorsemafcumple="#F06764"} 
@@ -756,7 +758,7 @@ async function cumple_linea_dep(rojo, verde, vigencia){
      //  }
         infocumple.push({
               "label" : response.data[i].nombre_dep,
-              "value": (response.data[i].avance/response.data[i].programado2022)*100,
+              "value": (response.data[i].avance/response.data[i].programado2023)*100,
               "color": colorsemafcumple,
              // "link": "j-showAlert-"+response.data[i].cod_responsable_reporte
           })

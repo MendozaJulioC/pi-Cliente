@@ -23,6 +23,7 @@ const getRegister = async(req, res )=>{
        console.log('Error getRegister', error)
    }
 }
+
 const postRegister = async(req, res)=>{
     try {
         const message = req.flash('message')[0]  ;
@@ -84,7 +85,7 @@ const postRegister = async(req, res)=>{
                         }
                     }).then(res=>res.json())
                     .then(response=>{
-                         console.log(response)
+                         //console.log(response)
                         //req.session.msg = req.body.fullname;
                         req.flash('message', req.body.fullname)
                         res.redirect('/')
@@ -96,14 +97,133 @@ const postRegister = async(req, res)=>{
         console.log('Error postRegister',error)
     }
 }
+
 const postLoguin = passport.authenticate('local',{
     failureRedirect:'/',
     successRedirect:'/dash',
     failureFlash: true
 })
+
 const getLogout = async (req, res)=>{
     req.logout();
     req.flash('message', 'Has cerrado la session');
     res.redirect('/')
 }
-module.exports = {getRegister, postRegister, postLoguin, getLogout}
+
+const getAdminUsuarios= async (req, res)=>{
+    try {
+        const admin  = req.params.admin;
+        let url = `http://localhost:7001/auth/api/admin/${process.env.AWS_TKN_PRIVATE}/${admin}/gestion`
+
+
+        //console.log(url);
+        fetch(url)
+        .then(res=>res.json())
+        .then(response=>{
+     
+            res.render('./auth/admin.html', {
+             title:"Administrar Usuario",
+             registrados: response.data
+ 
+            })
+
+        })
+    } catch (error) {
+        console.error('Error getAdminUsuarios: ',error );
+    }
+}
+
+
+const deleteAdminUser = async(req, res)=>{
+    try {
+        const user   = req.params.user;
+        const admin= req.params.admin;
+        let url = `http://localhost:7001/api/${process.env.AWS_TKN_PRIVATE}/auth/${admin}/${user}`
+        fetch(url,{method:'DELETE'})
+        .then(res=>res.json())
+        .then(response=>{  
+            res.redirect(`/auth/${admin}/admin`)
+        } )
+    } catch (error) {
+        console.error('Error deleteAdminUser: ');
+    }
+}
+
+const editAdminUser= async(req, res)=>{
+    try {
+      
+        const id   = req.params.user;
+        const admin= req.params.admin;
+
+        if(admin==1 || admin==9 || admin==87) { 
+            fetch(`http://api.avanzamedellin.info/auth/api/id/${id}`)
+            .then(res=> res.json())
+            .then(respuesta =>{
+            if (respuesta.data) {
+                res.render('./auth/edituser.html', {
+                    title:"Actualizar Usuario",
+                    editar: respuesta.data,
+                    errors: []
+                })}
+            })
+        }
+    } catch (error) {
+        console.error('Error editAdminUser: ', error);
+    }
+}
+
+const putEditUsuario= async(req, res)=>{
+ 
+    try {
+      
+        const {admin,user,fullname, email, password, confirmpassword} = req.body;
+        let hashPass = await bcrypt.hash(password,10);
+        var parametros={
+            "idadmin":admin,
+            "user": user,
+            "email":email,
+            "password": hashPass,
+            "fullname": fullname,
+        }
+        let url = `http://localhost:7001/api/${process.env.AWS_TKN_PRIVATE}/auth/${admin}/edit/${user}`
+        fetch(url,{
+            method: "POST",
+            mode: 'cors',
+            body: JSON.stringify(parametros),
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }).then(res=>res.json())
+        .then(response=>{
+           //  console.log(response)
+            //req.session.msg = req.body.fullname;
+            req.flash('message', req.body.fullname)
+            res.redirect(`/auth/${admin}/admin`)
+        })
+
+     
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+    } catch (error) {
+        console.error('Error putEditUsuario: ', error);
+    }       
+    
+  
+}
+
+module.exports = {getRegister, postRegister, postLoguin, getLogout, getAdminUsuarios, deleteAdminUser, editAdminUser, putEditUsuario}
+
+
+      

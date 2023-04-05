@@ -1,0 +1,187 @@
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<%- include ('../partials/head.html') %>
+<%- include ('../partials/srciptgraph.html') %>
+
+
+<head >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <title> <%= title %> </title>
+</head>
+
+<%- include ('../partials/menuplapp.html') %>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<body >
+  <div class="container mt-4">
+    <div class="row mt-4">
+      <div class="col-md-12 mt-4">
+        <div class="myLeftCtn">
+          <div class="mt-4">
+            <section class="mt-4">
+              <div class="row justify-content-md-center">
+                <h1>Administración de Usuarios</h1>
+                <div class="col-md-12 mt-4">
+                  <p>Escriba algo en el campo de entrada para buscar en la tabla nombres, apellidos o correos electrónicos:</p>
+                  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                  <br>
+                </div>
+                <div class="col-md-6">
+                  <h3 id="total" ><%= registrados.length - 1 %> Usuarios registrados </h3>
+                </div>
+                <div class="col-md-auto" >
+                  <a class="btn btn-success btn-block" href="/auth/register">
+                    <span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
+                        <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                      </svg>
+                    </span>
+                    Registrar Nuevo Usuario</a>
+                </div>
+              </div>
+
+                <table class="table table-hover table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th style="text-align: center;">Email</th>
+                      <th style="text-align: center;">Nombre</th>
+                      <th style="text-align: center;">Teléfono</th>
+                      <th style="text-align: center;">Borrar</th>
+                      <th>Editar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTable">
+                    <% for(var i =1; i< registrados.length; i++){ %>
+                      <tr>
+                        <th scope="row"><%= i %></th>
+                        <td><%= registrados[i].email %></td>
+                        <td><%= registrados[i].nom_usuario %></td>
+                        <td><%= registrados[i].tel_contacto %></td>
+                        <td style="text-align: center;">
+                          <button class="btn btn-outline-danger "
+                            onclick="eliminaregistro('<%= user[0].id %> ', '<%= registrados[i].id %>', `${' <%= registrados[i].nom_usuario %> '}`)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#EA5455" class="bi bi-trash3-fill"
+                              viewBox="0 0 16 16">
+                              <path
+                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                            </svg>
+                            </button>
+                        </td>
+                        <td style="text-align: center;">
+                          <button type="button" class="btn  btn-outline-info" onclick="actualizaregistro('<%= user[0].id %> ', '<%= registrados[i].id %>', `${' <%= registrados[i].nom_usuario %> '}`)">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#146C94" class="bi bi-pencil-fill"
+                              viewBox="0 0 16 16">
+                              <path
+                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+                <p style="font-size: 10px;">Nota: Recuerde estar muy concentrado, para evitar borrar lo que no se debe borrar y
+                  editar y luego acordarse.</p>
+              </div>
+            </section>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+
+      function eliminaregistro(admin, user, usuario){
+        swal({
+            title: `Estas seguro?`,
+            text: `Deseas borrar a ${usuario}.!!` ,
+            buttons: true,
+            dangerMode: true,
+            icon:"error",
+            closeOnClickOutside: false,
+          })
+          .then((willUpdate) => {
+            if (willUpdate) {
+              window.location=`/api/auth/admin/${admin}/gestion/borrar/${user}`
+              swal({
+                icon: "/img/244ceb913681359956100c1de6f94101.gif",
+                timer: 20000000000,
+                buttons: false,
+                closeOnClickOutside: false,
+              });
+
+            } else {
+              swal({
+                title: "Ok",
+                text: `¡No se realiza el borrado de ${usuario}!!"` ,
+                icon: "success",
+              });
+            }
+          });
+    }
+
+      function actualizaregistro(admin, user, usuario){
+      swal({
+            title: `Estas seguro?`,
+            text: `Deseas Editar la información de ${usuario}.!!` ,
+            buttons: true,
+            dangerMode: true,
+            icon:"info",
+            closeOnClickOutside: false,
+          })
+          .then((willUpdate) => {
+            if (willUpdate) {
+              openEdit(admin, user)
+            } else {
+              swal({
+                title: "Ok",
+                text: `¡No se realizastes la edición de ${usuario}!!"` ,
+                icon: "success",
+              });
+            }
+          });
+    }
+
+      function openEdit(admin, user){
+        window.location=`/api/auth/actualizar/${admin}/register/${user}`
+      }
+  </script>
+
+ </body>
+ <%- include ('../partials/scriptsHome.html')%>
+ <script src="/js/htmltoexcel.js"></script>
+ 
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+ <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+ <script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
