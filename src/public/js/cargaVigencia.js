@@ -54,7 +54,7 @@ const vigencia= async(req,res)=>{
         buttons: false,
         timer: 4000
       });
-        vigencia.innerHTML= 2022
+        vigencia.innerHTML= 2023
         localizada.innerHTML=formatter.format(Math.round(datos.data[0].localizada))
         ciudad.innerHTML= formatter.format(Math.round(datos.data[0].ciudad))
         pp.innerHTML= formatter.format(Math.round(datos.data[0].pp))
@@ -274,7 +274,7 @@ const geojson_url = "https://api.avanzamedellin.info/geo/api/inversion/maps"
   };
 
     info.update = function () {
-      this._div.innerHTML = '<p><b>2022</b></p>';
+      this._div.innerHTML = '<p><b>2023</b></p>';
     };
 
     info.addTo(map);
