@@ -579,7 +579,7 @@ function buscavalstat(nomproyecto, cod, ejec){
       proyecto_fisico(cod)
       for (let index = 0; index < tam; index++) {
        tablaValStat += `<tr style="background-color:gray ;">
-                          <th   style="text-align: center;">Val. Est.</th>
+                          <th   style="text-align: center;">Val. Est.</th
                           <th   colspan="2" style="text-align: center;">Producto/Bien/Servicio </th>
                           <th   style="text-align: center;">SUIFP</th>
                         </tr>

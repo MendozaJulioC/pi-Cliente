@@ -258,10 +258,10 @@ const geojson_url = "https://api.avanzamedellin.info/geo/api/inversion/maps"
                 </div>
               </div>`
               
-      let tooltipconten=' <p>  <span> <strong> <em>'+ feature.properties.NOMBRE +' </em> </strong></span>'+ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.Vigencia2021))+'</p>'
-      layer.bindPopup(popupContent)
-      layer.bindTooltip( tooltipconten );
-    }
+        let tooltipconten=' <p>  <span> <strong> <em>'+ feature.properties.NOMBRE +' </em> </strong></span>'+ new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(parseInt(feature.properties.Vigencia2021))+'</p>'
+        layer.bindPopup(popupContent)
+        layer.bindTooltip( tooltipconten );
+      }
   }).addTo(map)
 
 
@@ -278,6 +278,7 @@ const geojson_url = "https://api.avanzamedellin.info/geo/api/inversion/maps"
     };
 
     info.addTo(map);
+    
       var legend = L.control({
       position: 'bottomright'
     });
@@ -311,6 +312,7 @@ const geojson_url = "https://api.avanzamedellin.info/geo/api/inversion/maps"
       }
       L.control.watermark({position: 'bottomleft'}).addTo(map);
   })
+  
 }
 
  function getColor(d ) {

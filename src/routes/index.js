@@ -65,7 +65,9 @@ router.get('/auth/register', getRegister)
 
 router.post('/auth/login',notAuthenticated,postLoguin)
 router.get('/auth/logout', getLogout)
+
 router.get('/auth/:admin/admin',isAuthenticated, isAdmin,  getAdminUsuarios )
+
 router.get(`/api/auth/admin/:admin/gestion/borrar/:user`,isAdmin,  deleteAdminUser)
 router.get(`/api/auth/actualizar/:admin/register/:user/`, editAdminUser)
 

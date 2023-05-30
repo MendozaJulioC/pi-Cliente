@@ -104,8 +104,7 @@ async function _avancePDM(){
       })
   } catch (error) {
     console.log('Error _avancePDM ',error )
-  }
-}
+  }}
 
 async function graphPDM(total){
   //aqui un fetch para consultar el porcentaje de ejecución del pdm

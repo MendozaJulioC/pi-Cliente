@@ -114,19 +114,14 @@ const getAdminUsuarios= async (req, res)=>{
     try {
         const admin  = req.params.admin;
         let url = `https://api.avanzamedellin.info/auth/api/admin/${admin}/gestion`
-
-
         //console.log(url);
         fetch(url)
         .then(res=>res.json())
         .then(response=>{
-     
             res.render('./auth/admin.html', {
              title:"Administrar Usuario",
              registrados: response.data
- 
             })
-
         })
     } catch (error) {
         console.error('Error getAdminUsuarios: ',error );
@@ -151,10 +146,8 @@ const deleteAdminUser = async(req, res)=>{
 
 const editAdminUser= async(req, res)=>{
     try {
-      
         const id   = req.params.user;
         const admin= req.params.admin;
-
         if(admin==1 || admin==9 || admin==87) { 
             fetch(`https://api.avanzamedellin.info/auth/api/id/${id}`)
             .then(res=> res.json())
@@ -173,9 +166,7 @@ const editAdminUser= async(req, res)=>{
 }
 
 const putEditUsuario= async(req, res)=>{
- 
     try {
-      
         const {admin,user,fullname, email, password, confirmpassword} = req.body;
         let hashPass = await bcrypt.hash(password,10);
         var parametros={
@@ -200,27 +191,9 @@ const putEditUsuario= async(req, res)=>{
             req.flash('message', req.body.fullname)
             res.redirect(`/auth/${admin}/admin`)
         })
-
-     
-
-
-
-
-
-
-
-
-
-      
-
-
-
-
     } catch (error) {
         console.error('Error putEditUsuario: ', error);
     }       
-    
-  
 }
 
 module.exports = {getRegister, postRegister, postLoguin, getLogout, getAdminUsuarios, deleteAdminUser, editAdminUser, putEditUsuario}
