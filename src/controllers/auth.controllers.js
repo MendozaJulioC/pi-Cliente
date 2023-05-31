@@ -113,7 +113,8 @@ const getLogout = async (req, res)=>{
 const getAdminUsuarios= async (req, res)=>{
     try {
         const admin  = req.params.admin;
-        let url = `https://api.avanzamedellin.info/auth/api/admin/${admin}/gestion`
+      
+        let url = `https://api.avanzamedellin.info/auth/api/admin/gestion/${admin}`
         //console.log(url);
         fetch(url)
         .then(res=>res.json())
