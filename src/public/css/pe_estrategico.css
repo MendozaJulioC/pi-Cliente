@@ -7,8 +7,8 @@ li{
     list-style:none;
   }
  .jum{
-  font-size: 20px;line-height: 5px;
-  font-weight: 90;color:#042c55;
+  font-size: 50px;line-height: 5px;
+  font-weight: 900;color:#042c55;
   font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;
   text-shadow: 4px 4px 5px gray;
   
@@ -51,7 +51,7 @@ li{
    td{
      font-size: 12px;
    }
-   th {background-color:#B4358B; color: white}
+   th {background-color:#0B666A; color: white}
    
    tr:nth-child(even){background-color: rgb(203, 211, 212)}
 

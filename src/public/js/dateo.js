@@ -5,6 +5,7 @@ async function dateomain(){
   corteplan()
 
   contadorSemaforo()
+  
   swal("Espere mientras cargamos la información!",{
     buttons: false,
     icon: "info",

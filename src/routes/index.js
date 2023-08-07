@@ -34,7 +34,7 @@ router.get('/territorio', isAuthenticated, getTerritorio)
 const { getProjects, getProject1, 
         getProject2, getProject3,getProject4,getProject5,getProject6,
         getProject7,getProject8,getProject9,getProject10,getProject11,
-        getProject12,getProject13,getProject14,getProject15,getProject16,getProject17,
+        getProject12,getProject13,getProject14,getProject15,getProject16,getProject17,getProjectEspecial
 } =require('../controllers/taskProjects');
 
 
@@ -55,7 +55,9 @@ router.get('/projects/estrategico/pe_1',isAuthenticated,getProject1)
     .get('/projects/estrategico/pe_14',isAuthenticated,getProject14)
     .get('/projects/estrategico/pe_15',isAuthenticated,getProject15)
     .get('/projects/estrategico/pe_16',isAuthenticated,getProject16)
-    .get('/projects/estrategico/pe_17',isAuthenticated,getProject17);
+    .get('/projects/estrategico/pe_17',isAuthenticated,getProject17)
+
+    .get('/especial/seguimiento/proyectos', isAuthenticated,getProjectEspecial)
 
 const {getRegister, postRegister, postLoguin, getLogout, getAdminUsuarios, deleteAdminUser, editAdminUser, putEditUsuario} = require ('../controllers/auth.controllers')
 router.get('/auth/register', getRegister)
@@ -93,9 +95,6 @@ router.get('/obra-fisica/geo', isAuthenticated, getObrasGeo)
 const {getGeneralPI, getGeneralPI_Lineas} = require('../controllers/taskPiGoogle')
 router.get('/pi/google',isAuthenticated, getGeneralPI)
 router.get('/pi/google/lineas',isAuthenticated, getGeneralPI_Lineas)
-
-
-
 
 
 

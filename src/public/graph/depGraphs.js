@@ -943,7 +943,7 @@ async function plan_accion_dep(dep){
   nuevatabla(valores1,valores2,valores3,valores4, valores5)
   bubblegraph(datosbubble, nombredep)
 
-})
+  })
 }
 
 async function bubblegraph(datosbubble, nombredep){

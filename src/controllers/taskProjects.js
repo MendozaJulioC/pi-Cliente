@@ -1,4 +1,5 @@
 var express = require('express');
+const { MulterError } = require('multer');
 var app = express();
 const fetch = require('node-fetch');
 
@@ -85,7 +86,17 @@ const getProject17= async(req, res)=>{
     try {res.render('./proyectos_estrategicos/proyecto/proyect_e17.html', {title: "Ciencia futuro ", subtitle:"Ciencia futuro"})} catch (error) {console.log('Error getProject17: ', error)}
 }
 
+const getProjectEspecial = async(req, res)=>{
+    try {
+        res.render('./proyectos_estrategicos/proyecto/proyect_especiales.html', 
+        {title: "Especiales ", subtitle:"Medellin futuro"})
 
+
+
+    } catch (error) {
+        console.error('Error getProjectEspecial:', MulterError);
+    }
+}
 
 
 module.exports = { 
@@ -94,5 +105,6 @@ module.exports = {
     getProject6,getProject7,getProject8,
     getProject9,getProject10,getProject11,
     getProject12,getProject13,getProject14,
-    getProject15,getProject16,getProject17 
+    getProject15,getProject16,getProject17,
+    getProjectEspecial
 }
