@@ -17,12 +17,12 @@ async function _main(){
 
 async function  tablarankespecial(){
     let valores1=[]; 
-    fetch(`'https://api.avanzamedellin.info/proyectos/admin/especial/seguimiento`)
+    fetch(`https://api.avanzamedellin.info/proyectos/admin/especial/seguimiento`)
     .then(res=>res.json())
     .then(datos=>{
-        console.log(datos.data.data)
+       
       let tam = datos.data.data.length; 
-      console.log(tam)
+    
       for(var i =0; i<(tam) ;i++){
         valores1.push([
             datos.data.data[i][0].cod_linea,
