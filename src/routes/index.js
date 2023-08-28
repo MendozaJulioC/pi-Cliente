@@ -34,7 +34,9 @@ router.get('/territorio', isAuthenticated, getTerritorio)
 const { getProjects, getProject1, 
         getProject2, getProject3,getProject4,getProject5,getProject6,
         getProject7,getProject8,getProject9,getProject10,getProject11,
-        getProject12,getProject13,getProject14,getProject15,getProject16,getProject17,getProjectEspecial
+        getProject12,getProject13,getProject14,getProject15,getProject16,getProject17,getProjectEspecial,
+        getEspecialIndicadores
+
 } =require('../controllers/taskProjects');
 
 
@@ -58,6 +60,7 @@ router.get('/projects/estrategico/pe_1',isAuthenticated,getProject1)
     .get('/projects/estrategico/pe_17',isAuthenticated,getProject17)
 
     .get('/especial/seguimiento/proyectos', isAuthenticated,getProjectEspecial)
+    .get('/especial/seguimiento/indicadores', isAuthenticated,getEspecialIndicadores)
 
 const {getRegister, postRegister, postLoguin, getLogout, getAdminUsuarios, deleteAdminUser, editAdminUser, putEditUsuario} = require ('../controllers/auth.controllers')
 router.get('/auth/register', getRegister)

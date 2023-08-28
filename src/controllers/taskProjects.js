@@ -94,10 +94,18 @@ const getProjectEspecial = async(req, res)=>{
 
 
     } catch (error) {
-        console.error('Error getProjectEspecial:', MulterError);
+        console.error('Error getProjectEspecial:', error);
     }
 }
 
+const getEspecialIndicadores = async (req, res)=>{
+    try {
+        res.render('./proyectos_estrategicos/proyecto/proyect_special_indicador.html', 
+        {title: "Indicadores Especiales ", subtitle:"Medellin futuro"})
+    } catch (error) {
+        console.error('Error getEspecialIndicadores: ', error);
+    }
+}
 
 module.exports = { 
     getProjects,getProject1,getProject2,
@@ -106,5 +114,5 @@ module.exports = {
     getProject9,getProject10,getProject11,
     getProject12,getProject13,getProject14,
     getProject15,getProject16,getProject17,
-    getProjectEspecial
+    getProjectEspecial, getEspecialIndicadores
 }

@@ -20,28 +20,29 @@ async function  tablarankespecial(){
     fetch(`https://api.avanzamedellin.info/proyectos/admin/especial/seguimiento`)
     .then(res=>res.json())
     .then(datos=>{
+ 
        
-      let tam = datos.data.data.length; 
+      let tam = datos.estadosgtoespecial.length; 
+ 
     
       for(var i =0; i<(tam) ;i++){
         valores1.push([
-            datos.data.data[i][0].cod_linea,
-            datos.data.data[i][0].cod_componente,
-            datos.data.data[i][0].cod_programa,
-            datos.data.data[i][0].cod_proyecto,
-            datos.data.data[i][0].nom_proyecto,
-            ((datos.data.data[i][0].porc_eficacia_proyecto)*100).toFixed(2),
-            ((datos.data.data[i][0].ejec_financiera)*100).toFixed(2),
-            formatter.format(datos.data.data[i][0].poai),
-            formatter.format(datos.data.data[i][0].ppto_ajustado),
-            formatter.format(datos.data.data[i][0].ejecucion)
+          datos.estadosgtoespecial[i][0].cod_linea,
+          datos.estadosgtoespecial[i][0].cod_componente,
+          datos.estadosgtoespecial[i][0].cod_programa,
+          datos.estadosgtoespecial[i][0].cod_proyecto,
+          datos.estadosgtoespecial[i][0].nom_proyecto,
+            ((datos.estadosgtoespecial[i][0].porc_eficacia_proyecto)*100).toFixed(2),
+            ((datos.estadosgtoespecial[i][0].ejec_financiera)*100).toFixed(2),
+            formatter.format(datos.estadosgtoespecial[i][0].poai),
+            formatter.format(datos.estadosgtoespecial[i][0].ppto_ajustado),
+            formatter.format(datos.estadosgtoespecial[i][0].ejecucion)
           ]
-           
           );
 
         }
       
- 
+
   
         
   document.getElementById('table_tipo1').innerHTML=""

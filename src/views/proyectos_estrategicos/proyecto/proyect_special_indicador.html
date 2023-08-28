@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head >
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+     
+        <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+        <link rel="stylesheet" href="/css/pe_estrategico.css">
+       
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css">
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js" integrity="sha512-ICHkAOXzVDEkL5xkXjAWRV/hx6Bq4ID/uhRcnj9zS7QCdCbhVtfgjwt/vTfUBtW1wzBkErImU0huK3LDVeEr8g==" crossorigin="anonymous"></script>
+        <title> <%= title %> </title>
+    
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <%- include ('../../partials/head.html') %>
+        <%- include ('../../partials/srciptgraph.html') %>
+      </head>
+      <%- include ('../../partials/menuplapp.html') %>
+
+<body onload=" _main()">
+   <div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid jumbotron-image mt-4 p-20" style="background-image: url(/img/medellinl1.jpeg);  "   >
+        <div class="container mt-4 p-2" >
+            <h3 class="display-4 jum " ><%= subtitle %> </h3>
+            <p class="lead text-white"  style="font-size:xx-large;">Indicadores Estratégicos</p>
+            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                <a href="/" type="button" class="btn btn-warning"><i class="fa fa-home"></i>Home</a>
+                <a href="/dash" type="button" class="btn btn-warning"><i class="fa fa-tachometer"></i>Dash</a>
+                <a href="/indicadores" type="button" class="btn btn-warning"><i class="fa fa-bar-chart"></i>Indicadores</a>
+            
+            </div>
+        </div>
+    </div>
+ 
+    <div class="mt-2 shadow-sm p-3 mb-3 bg-white rounded">
+        <div class="row">
+            <div class="col-md-12">
+               
+                <table id="table_tipo2" class="table table-striped table-bordered table-sm " style="font-size: small;" width="100%"></table>
+             </div>
+        </div>
+    </div>
+</div>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Modal valstat
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="modal fade bd-example-modal " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">SSE-PDM</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+         <div class="form-row">
+          <div class="col-md-2">
+            <button class="btn btn-danger btn-sm" id="download">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+              </svg>
+          </button>
+          </div>
+          <div class="row" id="invoice">
+            <div class="col-md-12">
+              <h2 class="text-muted text-center">Ficha Seguimiento Proyectos de Inversión</h2>
+              <h4 class="text-muted " style="text-align: center;font-size: 18px;line-height: 18px;font-weight: 600;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span id="cod1"></span> - <span id="nom1"></span>
+              </h4>
+              <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
+                font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="tipo_proyecto"></span>
+              </h5>
+              <h5 style="text-align: center;font-size: 16px;line-height: 14px;font-weight: 600;color: #73879C;
+              font-family: 'Helvetica Neue', Roboto, Arial, 'Droid Sans', sans-serif;"><span   id="corte1"></span>
+            </h5>
+              <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+                  <thead class="thead-inverse">
+                    <tr  style="background-color:gray ;text-align: center;">
+                      <th colspan="6" >Estructura Plan de Desarrollo</th>
+                    </tr>
+                    <tr>
+                      <th style="text-align: center;">Cod.Línea</th>
+                      <th style="text-align: center;">Línea</th>
+                      <th style="text-align: center;">Cod. Componente</th>
+                      <th style="text-align: center;">Componente</th>
+                      <th style="text-align: center;">Cod. Programa</th>
+                      <th style="text-align: center;">Programa</th>
+                    </tr>
+                    <tr>
+                      <td  style="text-align: center;" id="cod_linea1"> </td>
+                      <td  style="text-align: center;" id="nom_linea1"> </td>
+                      <td  style="text-align: center;" id="cod_componente1"> </td>
+                      <td  style="text-align: center;" id="nom_componente1"> </td>
+                      <td  style="text-align: center;" id="cod_programa1"> </td>
+                      <td  style="text-align: center;" id="nom_programa1"> </td>
+                    </tr>
+                    <tr  style="background-color:gray ;text-align: center;">
+                      <th colspan="6" >Descripción Presupuestal</th>
+                    </tr>
+                    <tr style="background-color: rgb(111, 181, 192);">
+                      <th colspan="2" style="text-align: center;">POAI </th>
+                      <th colspan="2" style="text-align: center;">Presupuesto Ajustado </th>
+                      <th colspan="2" style="text-align: center;">Ejecución </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2" style="text-align: center;" id="poai1" >  </td>
+                      <td colspan="2" style="text-align: center;" id="ppto_ajustado1"></td>
+                      <td colspan="2" style="text-align: center;"><span id="ejec1"> </span></td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
+            <div class="col-md-12"> <hr>  </div>
+            <div class="col-md-4">  <div  id="chart-1" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-4">  <div  id="chart-2" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-4"> <div  id="chart-3" style="height: 200px;  width:90%;"></div></div>
+            <div class="col-md-12"> <hr> <br> </div>
+            <div class="col-md-12">
+              <table class="table table-sm table-responsive-sm  table-bordered "  style="font-size: small;">
+                <tbody id="valStat">
+               </tbody>
+              </table>
+            </div>
+            <div class="col-md-12 html2pdf__page-break"></div>
+            <div class="col-md-12"><div   id="chart-geoproyect" style="height: 310px;  width:85%;"></div></div>
+            <div class="col-md-12">
+              <table class="table table-sm table-responsive-sm  table-bordered table-hover" width="1371" style="font-size: small;">
+                <thead class="thead-inverse" style="background: rgb(178,177,167);">
+                  <tr>
+                    <th style="text-align: center;" colspan="2">Tabla Distribución de la Inversión realizada por el Proyecto</th>
+                  </tr>
+                  <tr>
+                    <th style="text-align: center;" colspan="2"><span id="nomprodetalle"></span></th>
+                  </tr>
+                  <tr>
+                    <th  style="text-align: center;">Comuna</th>
+                    <th style="text-align: center;">Inversión</th>
+                  </tr>
+                </thead>
+              <tbody id="inv_territorio_project"> </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2" style="text-align: right; font-size: xx-small;"> Fuente: Unidad de Seguimiento al Plan de Desarrollo Municipal </th>       
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: right; font-size: xx-small;"> Departamento Administrativo de Planeación </th>
+                </tr>
+              </tfoot>
+            </table>
+           </div>
+        </div>
+      </div>
+    </div>
+    </div>
+   </div>
+ </div>
+<%- include ('../../partials/scriptsHome.html') %>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+
+<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
+
+<script src="/js/indicadorespecial.js"></script>
+
+</body>
+</html>
